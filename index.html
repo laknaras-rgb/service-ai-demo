@@ -356,6 +356,99 @@ tr:hover td{background:#fbfdff}
 @media(max-width:560px){.photo-thumb-grid{grid-template-columns:1fr}}
 </style>
 
+
+<style>
+.machine-flow-wrap{
+  margin:14px 0 18px;
+}
+.machine-flow{
+  display:flex;
+  align-items:center;
+  gap:0;
+  overflow-x:auto;
+  white-space:nowrap;
+  padding:8px 4px 10px;
+  scrollbar-width:thin;
+}
+.flow-step{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  border:0;
+  background:transparent;
+  padding:6px 2px;
+  color:#6b7280;
+  cursor:pointer;
+  font-weight:800;
+  font-size:12px;
+  text-align:left;
+}
+.flow-step small{
+  font-weight:600;
+  font-size:10px;
+  color:#9ca3af;
+}
+.flow-dot{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #d1d5db;
+  background:#fff;
+  color:#94a3b8;
+  font-size:11px;
+  font-weight:900;
+}
+.flow-line{
+  flex:0 0 34px;
+  height:2px;
+  background:#d1d5db;
+  margin:0 5px;
+}
+.flow-step.done .flow-dot{
+  border-color:#22c55e;
+  background:#ecfdf3;
+  color:#15803d;
+}
+.flow-line.done{background:#22c55e}
+.flow-step.current .flow-dot,
+.flow-step.active .flow-dot{
+  border-color:#f97316;
+  background:#fff2e8;
+  color:#d95f02;
+}
+.flow-step.current,
+.flow-step.active{color:#c45100}
+.flow-step.current small,
+.flow-step.active small{color:#d97706}
+.flow-line.current{
+  background:linear-gradient(90deg,#22c55e 0 45%,#f97316 45% 100%);
+}
+.machine-flow-tools{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  padding:2px 4px 0;
+}
+.flow-tool{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  color:#475569;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+}
+.flow-tool:hover{background:#f8fafc}
+@media(max-width:900px){
+  .flow-line{flex-basis:24px}
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -576,15 +669,56 @@ Updated 1/2026
 
 ดังนั้นจึงมีรอคอนเฟริมวันพร้อมส่ง และเรื่องเล่า(A little bit Fake) อีกทีแล้วค่อยแจ้งคุณติ๋ว</textarea></div>
 </div>
-<div class="machine-main-tabs compact-machine-tabs">
-  <button class="tab machine-main active" onclick="showMachineSection('machine-overview', this)">Overview / ภาพรวม</button>
-  <button class="tab machine-main" onclick="showMachineSection('machine-sales-order', this)">Sales & Order / การขายและคำสั่งซื้อ</button>
-  <button class="tab machine-main" onclick="showMachineSection('machine-installation', this)">Installation / ติดตั้งและส่งมอบ</button>
-  <button class="tab machine-main" onclick="showMachineSection('machine-service-jobs', this)">Service History / ประวัติงาน Service</button>
-  <button class="tab machine-main" onclick="showMachineSection('machine-pm', this)">PM / บำรุงรักษา</button>
-  <button class="tab machine-main" onclick="showMachineSection('machine-spares', this)">Spare Parts / อะไหล่</button>
-  <button class="tab machine-main" onclick="showMachineSection('machine-documents', this)">Documents / เอกสาร</button>
+
+<div class="machine-flow-wrap">
+  <div class="machine-flow">
+    <button class="flow-step done active" onclick="showMachineSection('machine-overview', this)">
+      <span class="flow-dot">✓</span><span>Overview<br><small>ภาพรวม</small></span>
+    </button>
+    <span class="flow-line done"></span>
+
+    <button class="flow-step done" onclick="showMachineSection('machine-sales-order', this)">
+      <span class="flow-dot">✓</span><span>Sales & Order<br><small>การขายและสั่งผลิต</small></span>
+    </button>
+    <span class="flow-line done"></span>
+
+    <button class="flow-step done" onclick="showMachineSection('machine-preinstall', this)">
+      <span class="flow-dot">✓</span><span>Pre-Installation<br><small>เตรียมก่อนติดตั้ง</small></span>
+    </button>
+    <span class="flow-line done"></span>
+
+    <button class="flow-step done" onclick="showMachineSection('machine-receiving', this)">
+      <span class="flow-dot">✓</span><span>Receiving & QC<br><small>ตรวจรับเครื่อง</small></span>
+    </button>
+    <span class="flow-line current"></span>
+
+    <button class="flow-step current" onclick="showMachineSection('machine-installation', this)">
+      <span class="flow-dot">5</span><span>Installation<br><small>ติดตั้งและทดสอบ</small></span>
+    </button>
+    <span class="flow-line"></span>
+
+    <button class="flow-step" onclick="showMachineSection('machine-handover', this)">
+      <span class="flow-dot">6</span><span>Handover<br><small>ส่งมอบลูกค้า</small></span>
+    </button>
+    <span class="flow-line"></span>
+
+    <button class="flow-step" onclick="showMachineSection('machine-service-jobs', this)">
+      <span class="flow-dot">7</span><span>Service<br><small>Function & Visit</small></span>
+    </button>
+    <span class="flow-line"></span>
+
+    <button class="flow-step" onclick="showMachineSection('machine-pm', this)">
+      <span class="flow-dot">8</span><span>PM / After Sales<br><small>บำรุงรักษา</small></span>
+    </button>
+  </div>
+
+  <div class="machine-flow-tools">
+    <button class="flow-tool" onclick="showMachineSection('machine-ai', this)">✦ AI Summary / AI สรุปข้อมูล</button>
+    <button class="flow-tool" onclick="showMachineSection('machine-spares', this)">Spare Parts / อะไหล่</button>
+    <button class="flow-tool" onclick="showMachineSection('machine-documents', this)">Documents / เอกสาร</button>
+  </div>
 </div>
+
 </div>
 <div class="card">
 <div class="hd"><div class="section-title"><span class="section-dot">C</span><h3>Contact</h3></div><button class="btn">Add</button></div>
@@ -1388,6 +1522,49 @@ function closePmReportDetail(){
   if(detail) detail.classList.remove('active');
   if(list) list.classList.remove('hidden');
   window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+
+<script>
+function showMachineSection(target, btn){
+  document.querySelectorAll('.flow-step').forEach(x=>x.classList.remove('active'));
+  if(btn && btn.classList && btn.classList.contains('flow-step')) btn.classList.add('active');
+
+  const labelMap = {
+    'machine-overview':['Overview / ภาพรวม','Overview'],
+    'machine-ai':['AI Summary / AI สรุปข้อมูล','AI Summary'],
+    'machine-sales-order':['Order & Delivery / สั่งผลิตและขนส่ง','Sales & Order'],
+    'machine-preinstall':['Pre-Installation / เตรียมก่อนติดตั้ง','Pre-Installation'],
+    'machine-receiving':['Receiving & QC / ตรวจรับเครื่อง','Receiving & QC'],
+    'machine-installation':['Installation / ติดตั้งและทดสอบ','Installation'],
+    'machine-handover':['Handover / ส่งมอบลูกค้า','Handover'],
+    'machine-service-jobs':['Service Jobs / Function & Visit','Service Jobs'],
+    'machine-pm':['PM & After Sales / หลังการขาย','PM & After Sales'],
+    'machine-spares':['Spare Parts / อะไหล่','Spare Parts'],
+    'machine-documents':['Documents / เอกสาร','Documents']
+  };
+
+  const candidates=[...document.querySelectorAll('button,a')].filter(el=>!el.closest('.machine-flow-wrap'));
+  const labels=labelMap[target]||[];
+  for(const lab of labels){
+    const el=candidates.find(x=>x.textContent.trim().includes(lab));
+    if(el){ el.click(); return; }
+  }
+
+  // Fallback for existing section function/ids
+  const fallback = {
+    'machine-overview':'overview',
+    'machine-ai':'ai-summary',
+    'machine-sales-order':'order-delivery',
+    'machine-preinstall':'pre-installation',
+    'machine-receiving':'receiving-qc',
+    'machine-installation':'installation',
+    'machine-handover':'handover',
+    'machine-service-jobs':'service-jobs',
+    'machine-pm':'pm-after-sales'
+  };
+  if(typeof showSection==='function' && fallback[target]) showSection(fallback[target]);
 }
 </script>
 
