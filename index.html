@@ -257,6 +257,105 @@ tr:hover td{background:#fbfdff}
 }
 </style>
 
+
+<style>
+.compact-machine-tabs{
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  gap:6px !important;
+  overflow-x:auto !important;
+  white-space:nowrap !important;
+  padding:6px 4px 8px !important;
+  background:transparent !important;
+  border:0 !important;
+  border-bottom:1px solid #e5e7eb !important;
+  border-radius:0 !important;
+  scrollbar-width:thin;
+}
+.compact-machine-tabs .tab{
+  flex:0 0 auto !important;
+  padding:7px 10px !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  border-radius:7px !important;
+}
+.pm-subtabs-clean{
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  gap:4px !important;
+  overflow-x:auto !important;
+  white-space:nowrap !important;
+  padding:4px 0 7px !important;
+  margin:6px 0 12px !important;
+}
+.pm-subtabs-clean .pm-sub{
+  flex:0 0 auto !important;
+  padding:6px 9px !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  border-radius:7px !important;
+}
+.pm-list-toolbar{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  margin-bottom:12px; flex-wrap:wrap;
+}
+.pm-round-list{
+  width:100%; border-collapse:separate; border-spacing:0;
+  border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fff;
+}
+.pm-round-list th,.pm-round-list td{
+  padding:12px 14px; border-bottom:1px solid #eef1f4; text-align:left; font-size:13px;
+}
+.pm-round-list th{background:#f8fafc;color:#475569;font-weight:800}
+.pm-round-list tr:last-child td{border-bottom:0}
+.pm-round-list .pm-link{color:#d95f02;font-weight:800;cursor:pointer}
+.pm-round-list .status{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}
+.pm-round-list .completed{background:#e9f8ef;color:#137a3c}
+.pm-round-list .progress{background:#fff2e8;color:#c75a00}
+.pm-round-list .planned{background:#eef2f7;color:#475569}
+.pm-report-detail{display:none}
+.pm-report-detail.active{display:block}
+.pm-report-list-view{display:block}
+.pm-report-list-view.hidden{display:none}
+.back-to-pm-list{
+  margin-bottom:12px;
+  border:1px solid #e5e7eb;background:#fff;padding:7px 10px;border-radius:8px;
+  font-size:12px;font-weight:700;cursor:pointer
+}
+</style>
+
+
+<style>
+.photo-evidence-section{padding:0 0 18px}
+.report-section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:22px 24px 14px}
+.report-section-head h3{margin:0;font-size:20px}
+.report-section-head p{margin:5px 0 0;color:#6b7280;font-size:13px}
+.report-chip{font-size:11px;font-weight:800;color:#c65b00;background:#fff2e8;padding:6px 9px;border-radius:999px}
+.photo-case{margin:0 24px 16px;border:1px solid #e5e7eb;border-radius:14px;background:#fff;overflow:hidden}
+.photo-case.issue-case{border-color:#fdba74}
+.photo-case-title{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;background:#fafafa;border-bottom:1px solid #eef0f2}
+.photo-case-title>div{display:flex;flex-direction:column;gap:3px}
+.case-note{font-size:12px;color:#6b7280}
+.case-status{font-size:11px;font-weight:800;padding:5px 9px;border-radius:999px}
+.case-status.fixed{background:#e9f8ef;color:#16713a}
+.case-status.replaced{background:#fff2e8;color:#c65b00}
+.case-status.evidence{background:#eef2ff;color:#4f46e5}
+.photo-ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px}
+.photo-side{min-width:0}
+.photo-side-head{display:flex;justify-content:space-between;font-weight:800;font-size:13px;margin-bottom:9px}
+.photo-side-head span{color:#6b7280;font-weight:600}
+.photo-thumb-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.photo-thumb-grid figure{margin:0;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;background:#fff}
+.photo-thumb-grid img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.photo-thumb-grid figcaption{padding:7px 9px;font-size:11px;color:#4b5563;border-top:1px solid #eef0f2}
+.photo-add{width:100%;margin-top:9px;padding:8px 10px;border:1px dashed #cbd5e1;border-radius:9px;background:#f8fafc;color:#475569;font-weight:700;font-size:12px;cursor:pointer}
+.photo-part-link{margin:0 16px 16px;padding:10px 12px;border-radius:9px;background:#fff7ed;font-size:12px;color:#6b4f32}
+.photo-part-link span{float:right;font-weight:800;color:#c65b00}
+.add-photo-case{margin:0 24px;width:calc(100% - 48px);padding:11px;border:1px dashed #f97316;border-radius:10px;background:#fffaf6;color:#d95f02;font-weight:800;cursor:pointer}
+@media(max-width:900px){.photo-ba-grid{grid-template-columns:1fr}.photo-thumb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.photo-thumb-grid{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -900,6 +999,62 @@ Updated 1/2026
 </div></div></div>
 
 <div class="pm-area" id="pm-report">
+  <div class="pm-report-list-view" id="pm-report-list-view">
+    <div class="card">
+      <div class="hd">
+        <div>
+          <h3>PM Reports / รายการใบรายงาน PM</h3>
+          <div class="subtitle">แสดงทุกครั้งที่เครื่องนี้เข้ารับ PM • กดเลขรอบเพื่อเปิดรายละเอียด</div>
+        </div>
+        <button class="btn primary" onclick="alert('Demo: สร้าง PM รอบใหม่จาก PM Schedule')">+ New PM Round / สร้างรอบ PM</button>
+      </div>
+      <div class="bd">
+        <div class="pm-list-toolbar">
+          <div style="font-weight:800">Machine OL3151 • VARIOVAC Optimus</div>
+          <div style="font-size:12px;color:#6b7280">Total 4 PM rounds</div>
+        </div>
+        <table class="pm-round-list">
+          <thead>
+            <tr>
+              <th>PM Round</th>
+              <th>Planned Date</th>
+              <th>Actual Date</th>
+              <th>Technician</th>
+              <th>Result</th>
+              <th>Status</th>
+              <th>Report</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pm-link" onclick="openPmReportDetail()">PM #1</span></td>
+              <td>20/01/2027</td><td>20/01/2027</td><td>Janeny, Jeans</td>
+              <td>31 Pass • 1 Fail • 1 N/A</td><td><span class="status completed">Completed</span></td>
+              <td><button class="btn" style="padding:6px 9px;font-size:11px" onclick="openPmReportDetail()">View</button></td>
+            </tr>
+            <tr>
+              <td><span class="pm-link">PM #2</span></td>
+              <td>20/04/2027</td><td>-</td><td>Service Team</td>
+              <td>In progress</td><td><span class="status progress">In Progress</span></td>
+              <td><button class="btn" style="padding:6px 9px;font-size:11px" onclick="openPmReportDetail()">Open</button></td>
+            </tr>
+            <tr>
+              <td>PM #3</td><td>20/07/2027</td><td>-</td><td>-</td>
+              <td>-</td><td><span class="status planned">Planned</span></td><td>-</td>
+            </tr>
+            <tr>
+              <td>PM #4</td><td>20/10/2027</td><td>-</td><td>-</td>
+              <td>-</td><td><span class="status planned">Planned</span></td><td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="pm-report-detail" id="pm-report-detail">
+    <button class="back-to-pm-list" onclick="closePmReportDetail()">← Back to PM Report List / กลับรายการ PM</button>
+    
   <div class="pm-report-shell">
     <div class="pm-report-hero">
       <div>
@@ -945,12 +1100,93 @@ Updated 1/2026
     </div>
 
     <div class="pm-section">
-      <div class="pm-section-head"><div><h3>3. Before / After Photos / รูปภาพก่อนและหลัง PM</h3><p>ใช้เทียบสภาพเครื่องและเป็นหลักฐานงาน Service</p></div><span class="pm-section-tag">Photo Evidence</span></div>
-      <div class="pm-photo-grid"><div class="pm-photo-box"><div><b>Before PM / ก่อน PM</b>+ Add Photos / เพิ่มรูป</div></div><div class="pm-photo-box"><div><b>After PM / หลัง PM</b>+ Add Photos / เพิ่มรูป</div></div></div>
+      <div class="pm-section-head">
+<div class="report-section photo-evidence-section">
+  <div class="report-section-head">
+    <div>
+      <h3>3. Photo Evidence / รูปภาพประกอบการตรวจ PM</h3>
+      <p>แนบรูปเป็น “จุดตรวจ / เคส” เพื่อให้เห็น Before → After ชัดเจน และแนบได้หลายรูปต่อข้อ</p>
     </div>
+    <span class="report-chip">Photo Evidence by Item</span>
+  </div>
 
-    <div class="pm-section">
-      <div class="pm-section-head"><div><h3>4. Parts & Materials / อะไหล่และวัสดุที่ใช้</h3><p>แยกอะไหล่ที่เปลี่ยนจริงออกจากรายการที่เพียงแนะนำให้ลูกค้า</p></div><span class="pm-section-tag">Traceable</span></div>
+  <div class="photo-case">
+    <div class="photo-case-title">
+      <div><b>3.1 Clamp / ชุดแคลมป์</b><span class="case-note">พบรอยสึกและระยะคลอน • ปรับตั้งและตรวจซ้ำ</span></div>
+      <span class="case-status fixed">Resolved</span>
+    </div>
+    <div class="photo-ba-grid">
+      <div class="photo-side">
+        <div class="photo-side-head">Before PM / ก่อน PM <span>2 รูป</span></div>
+        <div class="photo-thumb-grid">
+          <figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nI2Y5NzMxNicgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjZjk3MzE2JyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPkNsYW1wIC0gQmVmb3JlIDE8L3RleHQ+CiAgICAgIDx0ZXh0IHg9JzYyJyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz53ZWFyIC8gc3VyZmFjZSBjaGVjazwvdGV4dD4KICAgIDwvc3ZnPgogICAg"><figcaption>ภาพรวมจุด Clamp</figcaption></figure>
+          <figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nI2Y5NzMxNicgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjZjk3MzE2JyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPkNsYW1wIC0gQmVmb3JlIDI8L3RleHQ+CiAgICAgIDx0ZXh0IHg9JzYyJyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz5jbG9zZS11cDwvdGV4dD4KICAgIDwvc3ZnPgogICAg"><figcaption>Close-up จุดสึก</figcaption></figure>
+        </div>
+        <button class="photo-add">+ Add Before Photos / เพิ่มรูปก่อน PM</button>
+      </div>
+      <div class="photo-side">
+        <div class="photo-side-head">After PM / หลัง PM <span>2 รูป</span></div>
+        <div class="photo-thumb-grid">
+          <figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nIzE2YTM0YScgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjMTZhMzRhJyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPkNsYW1wIC0gQWZ0ZXIgMTwvdGV4dD4KICAgICAgPHRleHQgeD0nNjInIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPmFmdGVyIGFkanVzdG1lbnQ8L3RleHQ+CiAgICA8L3N2Zz4KICAgIA=="><figcaption>หลังปรับตั้ง</figcaption></figure>
+          <figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nIzE2YTM0YScgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjMTZhMzRhJyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPkNsYW1wIC0gQWZ0ZXIgMjwvdGV4dD4KICAgICAgPHRleHQgeD0nNjInIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPmZpbmFsIGNvbmRpdGlvbjwvdGV4dD4KICAgIDwvc3ZnPgogICAg"><figcaption>ตรวจสภาพหลังทำงาน</figcaption></figure>
+        </div>
+        <button class="photo-add">+ Add After Photos / เพิ่มรูปหลัง PM</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo-case issue-case">
+    <div class="photo-case-title">
+      <div><b>3.2 Seal Kit / ซีล</b><span class="case-note">พบอะไหล่ชำรุด • เปลี่ยน Seal Kit ใหม่</span></div>
+      <span class="case-status replaced">Part Replaced</span>
+    </div>
+    <div class="photo-ba-grid">
+      <div class="photo-side">
+        <div class="photo-side-head">Problem / จุดที่พบปัญหา <span>2 รูป</span></div>
+        <div class="photo-thumb-grid">
+          <figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nI2RjMjYyNicgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjZGMyNjI2JyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPlNlYWwgS2l0IC0gQmVmb3JlPC90ZXh0PgogICAgICA8dGV4dCB4PSc2MicgeT0nMzU1JyBmb250LWZhbWlseT0nQXJpYWwsc2Fucy1zZXJpZicgZm9udC1zaXplPScxNicgZmlsbD0nIzZiNzI4MCc+ZGFtYWdlZCBwYXJ0PC90ZXh0PgogICAgPC9zdmc+CiAgICA="><figcaption>สภาพซีลก่อนเปลี่ยน</figcaption></figure>
+          <figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nI2RjMjYyNicgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjZGMyNjI2JyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPlNlYWwgS2l0IC0gRGFtYWdlPC90ZXh0PgogICAgICA8dGV4dCB4PSc2MicgeT0nMzU1JyBmb250LWZhbWlseT0nQXJpYWwsc2Fucy1zZXJpZicgZm9udC1zaXplPScxNicgZmlsbD0nIzZiNzI4MCc+Y3JhY2sgLyB3ZWFyPC90ZXh0PgogICAgPC9zdmc+CiAgICA="><figcaption>Close-up รอยแตก/สึก</figcaption></figure>
+        </div>
+        <button class="photo-add">+ Add Problem Photos / เพิ่มรูปปัญหา</button>
+      </div>
+      <div class="photo-side">
+        <div class="photo-side-head">After Repair / หลังเปลี่ยน <span>1 รูป</span></div>
+        <div class="photo-thumb-grid">
+          <figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nIzE2YTM0YScgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjMTZhMzRhJyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPlNlYWwgS2l0IC0gQWZ0ZXI8L3RleHQ+CiAgICAgIDx0ZXh0IHg9JzYyJyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz5uZXcgcGFydCBpbnN0YWxsZWQ8L3RleHQ+CiAgICA8L3N2Zz4KICAgIA=="><figcaption>อะไหล่ใหม่หลังติดตั้ง</figcaption></figure>
+        </div>
+        <button class="photo-add">+ Add After Photos / เพิ่มรูปหลังแก้ไข</button>
+      </div>
+    </div>
+    <div class="photo-part-link">
+      <b>Linked Part:</b> VV-SEAL-01 • Seal Kit • Qty 1 set
+      <span>Action: Replaced</span>
+    </div>
+  </div>
+
+  <div class="photo-case">
+    <div class="photo-case-title">
+      <div><b>3.3 Overall Machine Condition / สภาพเครื่องโดยรวม</b><span class="case-note">ภาพประกอบสภาพก่อนเริ่มและหลังจบ PM</span></div>
+      <span class="case-status evidence">Evidence</span>
+    </div>
+    <div class="photo-ba-grid">
+      <div class="photo-side">
+        <div class="photo-side-head">Before PM / ก่อน PM <span>1 รูป</span></div>
+        <div class="photo-thumb-grid"><figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nI2Y5NzMxNicgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjZjk3MzE2JyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPk1hY2hpbmUgLSBCZWZvcmU8L3RleHQ+CiAgICAgIDx0ZXh0IHg9JzYyJyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz5vdmVyYWxsIGNvbmRpdGlvbjwvdGV4dD4KICAgIDwvc3ZnPgogICAg"><figcaption>ภาพรวมก่อนเริ่มงาน</figcaption></figure></div>
+        <button class="photo-add">+ Add Before Photos</button>
+      </div>
+      <div class="photo-side">
+        <div class="photo-side-head">After PM / หลัง PM <span>1 รูป</span></div>
+        <div class="photo-thumb-grid"><figure><img src="data:image/svg+xml;base64,CiAgICA8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzY0MCcgaGVpZ2h0PSc0MDAnPgogICAgICA8cmVjdCB3aWR0aD0nNjQwJyBoZWlnaHQ9JzQwMCcgZmlsbD0nI2YzZjRmNicvPgogICAgICA8cmVjdCB4PScyNCcgeT0nMjQnIHdpZHRoPSc1OTInIGhlaWdodD0nMzUyJyByeD0nMTgnIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkMWQ1ZGInIHN0cm9rZS13aWR0aD0nMicvPgogICAgICA8Y2lyY2xlIGN4PSc5MicgY3k9JzkyJyByPScyOCcgZmlsbD0nIzE2YTM0YScgb3BhY2l0eT0nLjE1Jy8+CiAgICAgIDxwYXRoIGQ9J002OCAyODAgTDE2MCAyMDUgTDIzMCAyNTAgTDMzMCAxNDUgTDQzMCAyMzUgTDUwNSAxODAgTDU3MiAyODAgWicgZmlsbD0nI2Q3ZGRlNScvPgogICAgICA8cmVjdCB4PSc2MicgeT0nNTUnIHdpZHRoPScxNTAnIGhlaWdodD0nMTAnIHJ4PSc1JyBmaWxsPScjMTZhMzRhJyBvcGFjaXR5PScuNjUnLz4KICAgICAgPHRleHQgeD0nNjInIHk9JzMyNScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMxZjI5MzcnPk1hY2hpbmUgLSBBZnRlcjwvdGV4dD4KICAgICAgPHRleHQgeD0nNjInIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPmNsZWFuICYgY29tcGxldGVkPC90ZXh0PgogICAgPC9zdmc+CiAgICA="><figcaption>ภาพรวมหลังจบงาน</figcaption></figure></div>
+        <button class="photo-add">+ Add After Photos</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="add-photo-case" onclick="alert('Demo: เพิ่มหัวข้อรูปภาพใหม่ เช่น Vacuum Pump, Heater, Safety Switch, Conveyor')">
+    + Add Photo Check Item / เพิ่มหัวข้อรูปภาพ
+  </button>
+</div>
+<div><h3>4. Parts & Materials / อะไหล่และวัสดุที่ใช้</h3><p>แยกอะไหล่ที่เปลี่ยนจริงออกจากรายการที่เพียงแนะนำให้ลูกค้า</p></div><span class="pm-section-tag">Traceable</span></div>
       <table><thead><tr><th>Part No.</th><th>รายการ</th><th>Qty</th><th>Action</th><th>Source</th></tr></thead><tbody><tr><td>VV-SEAL-01</td><td>Seal Kit</td><td>1 set</td><td><span class="badge b-green">Replaced</span></td><td>Service Stock</td></tr><tr><td>VV-SENSOR-02</td><td>Sensor</td><td>1 pc</td><td><span class="badge b-amber">Recommended</span></td><td>Quotation follow-up</td></tr></tbody></table>
     </div>
 
@@ -963,6 +1199,8 @@ Updated 1/2026
       <div class="pm-section-head"><div><h3>6. Sign-off / การรับรองงาน</h3><p>รองรับลายเซ็นช่างและลูกค้า พร้อมวันที่</p></div><span class="pm-section-tag">Approval</span></div>
       <div class="pm-sign-grid"><div class="signature-card"><div class="signature-line"></div><div class="signature-meta">Technician / ช่างผู้ปฏิบัติงาน • Date</div></div><div class="signature-card"><div class="signature-line"></div><div class="signature-meta">Customer Acceptance / ลูกค้าผู้รับงาน • Date</div></div></div>
     </div>
+  </div>
+
   </div>
 </div>
 
@@ -1132,6 +1370,24 @@ function showMachineSection(target, btn){
     const el=candidates.find(x=>x.textContent.trim().includes(text));
     if(el) el.click();
   }
+}
+</script>
+
+
+<script>
+function openPmReportDetail(){
+  const list=document.getElementById('pm-report-list-view');
+  const detail=document.getElementById('pm-report-detail');
+  if(list) list.classList.add('hidden');
+  if(detail) detail.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function closePmReportDetail(){
+  const list=document.getElementById('pm-report-list-view');
+  const detail=document.getElementById('pm-report-detail');
+  if(detail) detail.classList.remove('active');
+  if(list) list.classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 
