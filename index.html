@@ -108,6 +108,18 @@ tr:hover td{background:#fbfdff}
 .general-grid input,.general-grid select{min-height:44px}
 @media(max-width:1000px){.general-grid{grid-template-columns:1fr}}
 
+
+.sales-pipeline-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.sales-step{border:1px solid #e2e2e2;border-radius:10px;background:#fff;padding:12px}
+.sales-step .top{display:flex;align-items:center;gap:8px;font-weight:750;font-size:13px}
+.sales-step .field{margin-top:9px}
+.sales-step.done{background:#fffaf6;border-color:#f5c49f}
+.sales-step.done .top{color:#c65b10}
+.sales-step input[type="checkbox"]{accent-color:#f47a22}
+.section-help{font-size:12px;color:#777;margin-top:4px}
+@media(max-width:1050px){.sales-pipeline-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.sales-pipeline-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -141,9 +153,9 @@ tr:hover td{background:#fbfdff}
           <div class="opp-head">
             <div class="opp-id">
               <div class="opp-icon">▣</div>
-              <div><div class="opp-name">Opportunity: REG - OL3151</div><div class="opp-no">Opportunities No. 15602 • Type: machine</div></div>
+              <div><div class="opp-name">Opportunity: REG - OL3151</div><div class="opp-no">Opportunities No. 15602 • Type: machine</div><div class="opp-no">เมื่อ WIN แล้วจึงเริ่ม Machine Order & Delivery Timeline</div></div>
             </div>
-            <div class="right"><span class="badge b-green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">Close Sale / Start Order</button></div>
+            <div class="right"><span class="badge b-green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">WIN / Close Sale</button></div>
           </div>
           <div class="card" style="margin-top:16px">
           <div class="hd"><div class="section-title"><span class="section-dot">i</span><h3>ข้อมูลทั่วไป / General Opportunity Information</h3></div><span class="badge b-gray">Existing ERP fields</span></div>
@@ -227,10 +239,58 @@ tr:hover td{background:#fbfdff}
           <div class="bd"><div class="table-wrap"><table><thead><tr><th>Priority</th><th>Role</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Action</th></tr></thead><tbody><tr><td colspan="7"><div class="contact-empty">ยังไม่มี Contact ที่ผูกกับ Opportunity นี้</div></td></tr></tbody></table></div></div>
         </div>
 
+        
         <div class="card" style="margin-top:16px">
           <div class="hd">
-            <div class="section-title"><span class="section-dot">P</span><h3>Machine Order & Delivery Timeline</h3></div>
-            <span class="badge b-gray">หลังปิดการขาย → ส่งมอบลูกค้า</span>
+            <div>
+              <div class="section-title"><span class="section-dot">S</span><h3>Sales Pipeline / ขั้นตอนก่อนปิดการขาย</h3></div>
+              <div class="section-help">ใช้ติดตามกิจกรรมของ Sales ก่อน Opportunity เปลี่ยนเป็น WIN</div>
+            </div>
+            <span class="badge b-gray">Pre-Sales</span>
+          </div>
+          <div class="bd">
+            <div class="sales-pipeline-grid">
+              <div class="sales-step done">
+                <div class="top"><input type="checkbox" checked> แนะนำสินค้า</div>
+                <div class="field"><label>Due Date</label><input type="date"></div>
+              </div>
+              <div class="sales-step done">
+                <div class="top"><input type="checkbox" checked> ส่งใบเสนอราคา</div>
+                <div class="field"><label>Due Date</label><input type="date"></div>
+              </div>
+              <div class="sales-step">
+                <div class="top"><input type="checkbox"> ส่งสเป็ค</div>
+                <div class="field"><label>Due Date</label><input type="date"></div>
+              </div>
+              <div class="sales-step">
+                <div class="top"><input type="checkbox"> รอลูกค้าพิจารณา</div>
+                <div class="field"><label>Due Date</label><input type="date"></div>
+              </div>
+
+              <div class="sales-step">
+                <div class="top"><input type="checkbox"> ติดตามลูกค้า</div>
+                <div class="field"><label>Due Date</label><input type="date"></div>
+              </div>
+              <div class="sales-step">
+                <div class="top"><input type="checkbox"> นำเสนอ</div>
+                <div class="field"><label>Due Date</label><input type="date"></div>
+              </div>
+              <div class="sales-step">
+                <div class="top"><input type="checkbox"> เข้าไปนำเสนอ</div>
+                <div class="field"><label>Due Date</label><input type="date"></div>
+              </div>
+              <div class="sales-step">
+                <div class="top"><input type="checkbox"> เจรจา / ปรับเงื่อนไข</div>
+                <div class="field"><label>Due Date</label><input type="date"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<div class="card" style="margin-top:16px">
+          <div class="hd">
+            <div class="section-title"><span class="section-dot">P</span><h3>Machine Order & Delivery Timeline / หลังปิดการขาย</h3></div>
+            <span class="badge b-gray">แสดงเมื่อ Status = WIN</span>
           </div>
           <div class="bd">
             <div class="phase-bar">
