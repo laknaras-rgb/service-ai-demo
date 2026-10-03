@@ -449,6 +449,25 @@ tr:hover td{background:#fbfdff}
 }
 </style>
 
+
+<style>
+.machine-flow-nav{margin:14px 0 18px;border:1px solid #e5e7eb;background:#fff;border-radius:12px;padding:10px 12px 8px}
+.flow-scroll{display:flex;align-items:center;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;padding:2px 0 6px;scrollbar-width:thin}
+.flow-node.machine-tab{flex:0 0 auto;border:0!important;background:transparent!important;box-shadow:none!important;padding:2px!important;margin:0!important;display:flex;align-items:center;gap:7px;color:#64748b;font-size:12px;font-weight:800;cursor:pointer}
+.flow-node .node-dot{width:24px;height:24px;border-radius:999px;border:2px solid #cbd5e1;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#94a3b8}
+.flow-node .node-text{display:flex;flex-direction:column;line-height:1.05;text-align:left}
+.flow-node .node-text small{font-size:9px;color:#94a3b8;font-weight:600;margin-top:3px}
+.node-line{flex:0 0 28px;height:2px;background:#d7dde5;margin:0 6px}
+.node-line.done{background:#22c55e}.node-line.current{background:linear-gradient(90deg,#22c55e 0 50%,#f97316 50% 100%)}
+.flow-node.done .node-dot{border-color:#22c55e;background:#ecfdf3;color:#15803d}
+.flow-node.current .node-dot,.flow-node.active .node-dot{border-color:#f97316;background:#fff2e8;color:#c45100}
+.flow-node.current,.flow-node.active{color:#c45100}
+.flow-node.current .node-text small,.flow-node.active .node-text small{color:#d97706}
+.flow-utilities{display:flex;gap:6px;border-top:1px solid #eef1f4;padding-top:7px;margin-top:3px}
+.utility-tab.machine-tab{border:1px solid #e5e7eb!important;background:#f8fafc!important;border-radius:999px!important;padding:5px 9px!important;font-size:10px!important;font-weight:700!important;color:#64748b!important;box-shadow:none!important}
+.utility-tab.machine-tab.active{border-color:#fdba74!important;background:#fff2e8!important;color:#c45100!important}
+@media(max-width:1000px){.node-line{flex-basis:20px}.flow-node .node-text{font-size:11px}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -670,54 +689,7 @@ Updated 1/2026
 ดังนั้นจึงมีรอคอนเฟริมวันพร้อมส่ง และเรื่องเล่า(A little bit Fake) อีกทีแล้วค่อยแจ้งคุณติ๋ว</textarea></div>
 </div>
 
-<div class="machine-flow-wrap">
-  <div class="machine-flow">
-    <button class="flow-step done active" onclick="showMachineSection('machine-overview', this)">
-      <span class="flow-dot">✓</span><span>Overview<br><small>ภาพรวม</small></span>
-    </button>
-    <span class="flow-line done"></span>
 
-    <button class="flow-step done" onclick="showMachineSection('machine-sales-order', this)">
-      <span class="flow-dot">✓</span><span>Sales & Order<br><small>การขายและสั่งผลิต</small></span>
-    </button>
-    <span class="flow-line done"></span>
-
-    <button class="flow-step done" onclick="showMachineSection('machine-preinstall', this)">
-      <span class="flow-dot">✓</span><span>Pre-Installation<br><small>เตรียมก่อนติดตั้ง</small></span>
-    </button>
-    <span class="flow-line done"></span>
-
-    <button class="flow-step done" onclick="showMachineSection('machine-receiving', this)">
-      <span class="flow-dot">✓</span><span>Receiving & QC<br><small>ตรวจรับเครื่อง</small></span>
-    </button>
-    <span class="flow-line current"></span>
-
-    <button class="flow-step current" onclick="showMachineSection('machine-installation', this)">
-      <span class="flow-dot">5</span><span>Installation<br><small>ติดตั้งและทดสอบ</small></span>
-    </button>
-    <span class="flow-line"></span>
-
-    <button class="flow-step" onclick="showMachineSection('machine-handover', this)">
-      <span class="flow-dot">6</span><span>Handover<br><small>ส่งมอบลูกค้า</small></span>
-    </button>
-    <span class="flow-line"></span>
-
-    <button class="flow-step" onclick="showMachineSection('machine-service-jobs', this)">
-      <span class="flow-dot">7</span><span>Service<br><small>Function & Visit</small></span>
-    </button>
-    <span class="flow-line"></span>
-
-    <button class="flow-step" onclick="showMachineSection('machine-pm', this)">
-      <span class="flow-dot">8</span><span>PM / After Sales<br><small>บำรุงรักษา</small></span>
-    </button>
-  </div>
-
-  <div class="machine-flow-tools">
-    <button class="flow-tool" onclick="showMachineSection('machine-ai', this)">✦ AI Summary / AI สรุปข้อมูล</button>
-    <button class="flow-tool" onclick="showMachineSection('machine-spares', this)">Spare Parts / อะไหล่</button>
-    <button class="flow-tool" onclick="showMachineSection('machine-documents', this)">Documents / เอกสาร</button>
-  </div>
-</div>
 
 </div>
 <div class="card">
@@ -812,16 +784,50 @@ Updated 1/2026
 </div>
 </div>
 </div>
-<div class="machine-tabs-v2">
-<button class="machine-tab active" data-mtab="m-overview">Overview / ภาพรวม</button>
-<button class="machine-tab" data-mtab="m-ai">AI Summary / AI สรุปข้อมูล</button>
-<button class="machine-tab" data-mtab="m-order">Order &amp; Delivery / สั่งผลิตและขนส่ง</button>
-<button class="machine-tab" data-mtab="m-pre">Pre-Installation / เตรียมก่อนติดตั้ง</button>
-<button class="machine-tab" data-mtab="m-qc">Receiving &amp; QC / ตรวจรับเครื่อง</button>
-<button class="machine-tab" data-mtab="m-install">Installation / ติดตั้งและทดสอบ</button>
-<button class="machine-tab" data-mtab="m-handover">Handover / ส่งมอบลูกค้า</button>
-<button class="machine-tab" data-mtab="m-service">Service Jobs / Function &amp; Visit</button>
-<button class="machine-tab" data-mtab="m-after">PM &amp; After Sales / หลังการขาย</button>
+<div class="machine-flow-nav" aria-label="Machine lifecycle flow">
+  <div class="flow-scroll">
+    <button class="machine-tab flow-node done active" data-mtab="m-overview">
+      <span class="node-dot">✓</span><span class="node-text">Overview<small>ภาพรวม</small></span>
+    </button>
+    <span class="node-line done"></span>
+
+    <button class="machine-tab flow-node done" data-mtab="m-order">
+      <span class="node-dot">✓</span><span class="node-text">Order &amp; Delivery<small>สั่งผลิตและขนส่ง</small></span>
+    </button>
+    <span class="node-line done"></span>
+
+    <button class="machine-tab flow-node done" data-mtab="m-pre">
+      <span class="node-dot">✓</span><span class="node-text">Pre-Installation<small>เตรียมก่อนติดตั้ง</small></span>
+    </button>
+    <span class="node-line done"></span>
+
+    <button class="machine-tab flow-node done" data-mtab="m-qc">
+      <span class="node-dot">✓</span><span class="node-text">Receiving &amp; QC<small>ตรวจรับเครื่อง</small></span>
+    </button>
+    <span class="node-line current"></span>
+
+    <button class="machine-tab flow-node current" data-mtab="m-install">
+      <span class="node-dot">5</span><span class="node-text">Installation<small>ติดตั้งและทดสอบ</small></span>
+    </button>
+    <span class="node-line"></span>
+
+    <button class="machine-tab flow-node" data-mtab="m-handover">
+      <span class="node-dot">6</span><span class="node-text">Handover<small>ส่งมอบลูกค้า</small></span>
+    </button>
+    <span class="node-line"></span>
+
+    <button class="machine-tab flow-node" data-mtab="m-service">
+      <span class="node-dot">7</span><span class="node-text">Service<small>Function &amp; Visit</small></span>
+    </button>
+    <span class="node-line"></span>
+
+    <button class="machine-tab flow-node" data-mtab="m-after">
+      <span class="node-dot">8</span><span class="node-text">PM / After Sales<small>บำรุงรักษา</small></span>
+    </button>
+  </div>
+  <div class="flow-utilities">
+    <button class="machine-tab utility-tab" data-mtab="m-ai">✦ AI Summary</button>
+  </div>
 </div>
 <div class="machine-panel active" id="m-overview">
 <div class="grid g2">
