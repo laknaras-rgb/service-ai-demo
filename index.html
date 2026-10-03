@@ -163,6 +163,8 @@ tr:hover td{background:#fbfdff}
 @media(max-width:900px){.app{grid-template-columns:230px 1fr}}
 
 .linked-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.linked-box{border:1px solid #e5e7eb;border-radius:12px;padding:14px;background:#fff}.linked-box b{display:block;margin:6px 0;color:#1f2937}.linked-box small{display:block;color:#6b7280;min-height:34px}.linked-label{font-size:12px;font-weight:800;color:#c85d13;text-transform:uppercase}.mini-link{border:0;background:transparent;color:#2563eb;padding:6px 0;font-weight:700;cursor:pointer}.service-flow-strip{display:flex;align-items:center;gap:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:14px 16px;overflow:auto}.service-flow-strip>div{min-width:150px}.service-flow-strip b,.service-flow-strip small{display:block}.service-flow-strip small{color:#6b7280;margin-top:3px}.service-flow-strip>span{font-size:20px;color:#f97316}.service-table th,.service-table td{white-space:nowrap}.visit-card{display:flex;justify-content:space-between;align-items:center;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:10px}.visit-card b,.visit-card small{display:block}.visit-card small{color:#6b7280;margin-top:3px}.history-list{display:grid;gap:10px}.history-list>div{display:grid;grid-template-columns:180px 1fr;padding:10px 0;border-bottom:1px dashed #e5e7eb}.history-list span{color:#6b7280}.pm-subtabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}.pm-sub{border:1px solid #ddd;background:#fff;border-radius:9px;padding:9px 12px;font-weight:750;color:#555;cursor:pointer}.pm-sub.active{background:#fff0e4;border-color:#f4b184;color:#c85d13}.pm-area{display:none}.pm-area.active{display:block}.pm-plan-head{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.pm-plan-head span{background:#f3f4f6;padding:5px 9px;border-radius:999px;color:#6b7280;font-size:12px}.checklist.compact{grid-template-columns:repeat(2,1fr)}.survey-table input{width:100%;min-width:90px;padding:8px;border:1px solid #d1d5db;border-radius:7px}.survey-note{margin-top:12px;background:#eff6ff;border-left:4px solid #60a5fa;padding:10px 12px;border-radius:8px;color:#4b5563}@media(max-width:1100px){.linked-grid{grid-template-columns:repeat(2,1fr)}.checklist.compact{grid-template-columns:1fr}}
+
+.statnum{font-size:30px;font-weight:800;color:#4f6bdc}.machine-table-wrap{overflow:auto}.machine-table{width:100%;border-collapse:collapse;min-width:1050px}.machine-table th,.machine-table td{padding:13px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.machine-table th{font-size:13px;color:#666;background:#fafafa;position:sticky;top:0}.machine-table td small{display:block;color:var(--muted);margin-top:4px}.machine-link{border:0;background:none;color:#4169e1;font-weight:800;padding:0;cursor:pointer;font-size:inherit}.machine-link:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -221,7 +223,7 @@ tr:hover td{background:#fbfdff}
 <div class="erp-group open">
 <button class="erp-item erp-toggle"><span>⚙</span><span>Machine Register</span><span class="chev">⌄</span></button>
 <div class="erp-sub">
-<button class="active" data-page="register">Machine List</button>
+<button class="active" data-page="machine-list">Machine List</button>
 <button data-placeholder="งาน PM ของฉัน">งาน PM ของฉัน</button>
 <button data-placeholder="แผน PM กลาง">แผน PM กลาง</button>
 </div>
@@ -438,7 +440,33 @@ Updated 1/2026
 </div>
 </div>
 </section>
-<section class="active page" id="register">
+<section class="active page" id="machine-list">
+<div class="page-title">
+  <div><h1>Machine Register / ทะเบียนเครื่อง</h1><div class="subtitle">รายการเครื่องจักรทั้งหมด • กด Machine No. เพื่อเปิดรายละเอียดแต่ละเครื่อง</div></div>
+  <div class="right"><button class="btn">↻ Refresh</button><button class="btn primary">＋ Add Machine / เพิ่มเครื่อง</button></div>
+</div>
+<div class="grid g4" style="margin-bottom:16px">
+  <div class="card"><div class="bd"><div class="statnum">156</div><div class="subtitle">เครื่องจักรทั้งหมด</div></div></div>
+  <div class="card"><div class="bd"><div class="statnum" style="color:#78a818">149</div><div class="subtitle">Active</div></div></div>
+  <div class="card"><div class="bd"><div class="statnum" style="color:#e0a300">4</div><div class="subtitle">Installation / Handover</div></div></div>
+  <div class="card"><div class="bd"><div class="statnum" style="color:#d96b16">3</div><div class="subtitle">ต้องติดตาม Service</div></div></div>
+</div>
+<div class="card">
+ <div class="hd"><h3>รายการเครื่องจักร / Machine List</h3><div class="right"><input id="machineSearch" placeholder="ค้นหา Machine No. / Serial / ลูกค้า..." style="min-width:320px" oninput="filterMachines()"/></div></div>
+ <div class="bd" style="padding-top:8px">
+  <div class="machine-table-wrap"><table class="machine-table">
+   <thead><tr><th>Machine No.</th><th>Serial No.</th><th>ชื่อเครื่องจักร</th><th>ลูกค้า / ที่ตั้ง</th><th>สถานะงาน</th><th>PM ล่าสุด</th><th>PM ถัดไป</th><th>สถานะ</th></tr></thead>
+   <tbody id="machineRows">
+    <tr><td><button class="machine-link" onclick="openMachineDetail('OL3151')">OL3151</button></td><td>OL3151</td><td><b>VARIOVAC Optimus</b><small>Thermoform + Labeler EF + CAB Printer</small></td><td>บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด<small>ปทุมธานี</small></td><td><span class="badge b-amber">Order Confirmation</span></td><td>-</td><td>-</td><td><span class="badge b-green">Active</span></td></tr>
+    <tr><td><button class="machine-link" onclick="alert('Demo: เปิดเครื่อง 1010-004')">1010-004</button></td><td>OL0123</td><td><b>VARIOVAC Thermoform</b><small>Production machine</small></td><td>บริษัท ร่วมพัฒน์ จำกัด (สีลม)<small>-</small></td><td><span class="badge b-gray">After Sales</span></td><td>2026-07-11</td><td>2026-10-11</td><td><span class="badge b-green">Active</span></td></tr>
+    <tr><td><button class="machine-link" onclick="alert('Demo: เปิดเครื่อง 1010-003')">1010-003</button></td><td>OL0123</td><td><b>VARIOVAC Thermoform</b><small>Production machine</small></td><td>บริษัท ร่วมพัฒน์ จำกัด (สีลม)<small>-</small></td><td><span class="badge b-gray">After Sales</span></td><td>2026-06-25</td><td>2026-09-25</td><td><span class="badge b-green">Active</span></td></tr>
+    <tr><td><button class="machine-link" onclick="alert('Demo: เปิดเครื่อง 1211-003')">1211-003</button></td><td>22370</td><td><b>LASKA Grinder WW 130</b><small>Grinder</small></td><td>บริษัท ไทย อินมาย ฟู้ดส์ จำกัด<small>-</small></td><td><span class="badge b-blue">Service</span></td><td>2026-08-20</td><td>2026-11-20</td><td><span class="badge b-green">Active</span></td></tr>
+   </tbody>
+  </table></div>
+ </div>
+</div>
+</section>
+<section class="page" id="register">
 <div class="machine-hero">
 <div class="machine-hero-top">
 <div>
@@ -753,7 +781,8 @@ Updated 1/2026
 <script>
 const titles={
   opp:"Opportunity / โอกาสการขาย",
-  register:"Machine Register / ทะเบียนเครื่อง",
+  "machine-list":"Machine Register / รายการเครื่องจักร",
+  register:"Machine Detail / ข้อมูลเครื่อง",
   placeholder:""
 };
 
@@ -770,7 +799,7 @@ function go(id, clicked){
   const crumb=document.querySelector(".crumb");
   if(crumb){
     document.getElementById("crumb").textContent=titles[id]||id;
-    crumb.childNodes[0].nodeValue=(id==="opp"?"Sales":id==="register"?"Machine Register":"ERP")+" / ";
+    crumb.childNodes[0].nodeValue=(id==="opp"?"Sales":(id==="register"||id==="machine-list")?"Machine Register":"ERP")+" / ";
   }
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -817,12 +846,23 @@ function aiCheckOpp(){
 }
 function finalizeOpp(){
   alert("Sales กด WIN แล้ว\nระบบสร้าง Machine Register OL3151 และส่งข้อมูลที่ยืนยันจาก OPP ไปยังเครื่อง");
-  const btn=[...document.querySelectorAll("[data-page='register']")][0];
-  go("register",btn); setTimeout(()=>machineTab("m-ai"),250);
+  const btn=[...document.querySelectorAll("[data-page='machine-list']")][0];
+  go("machine-list",btn);
 }
 function completeHandover(){
   alert("ส่งมอบเสร็จแล้ว เครื่อง OL3151 เข้าสู่ PM / After Sales");
   machineTab("m-after");
+}
+
+function openMachineDetail(machineNo){
+  const btn=[...document.querySelectorAll("[data-page='machine-list']")][0];
+  go('register',btn);
+  document.querySelector('.machine-hero h1').textContent='Machine Register — '+machineNo;
+  setTimeout(()=>machineTab('m-overview'),50);
+}
+function filterMachines(){
+  const q=(document.getElementById('machineSearch').value||'').toLowerCase();
+  document.querySelectorAll('#machineRows tr').forEach(tr=>{tr.style.display=tr.innerText.toLowerCase().includes(q)?'':'none';});
 }
 
 function openMachineTab(id){
