@@ -102,6 +102,12 @@ tr:hover td{background:#fbfdff}
 .timeline-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .timeline-actions .btn{padding:6px 9px;font-size:12px}
 
+
+.general-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 18px}
+.general-grid .field label{min-height:18px;display:block;margin-bottom:6px}
+.general-grid input,.general-grid select{min-height:44px}
+@media(max-width:1000px){.general-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -137,12 +143,12 @@ tr:hover td{background:#fbfdff}
               <div class="opp-icon">▣</div>
               <div><div class="opp-name">Opportunity: REG - OL3151</div><div class="opp-no">Opportunities No. 15602 • Type: machine</div></div>
             </div>
-            <div class="right"><span class="badge b-green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">Done / Final</button></div>
+            <div class="right"><span class="badge b-green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">Close Sale / Start Order</button></div>
           </div>
           <div class="card" style="margin-top:16px">
-          <div class="hd"><div class="section-title"><span class="section-dot">i</span><h3>ข้อมูลทั่วไป / General Opportunity Information</h3></div><span class="badge b-gray">Existing ERP fields</span></div><span class="badge b-blue">Existing ERP fields</span></div>
+          <div class="hd"><div class="section-title"><span class="section-dot">i</span><h3>ข้อมูลทั่วไป / General Opportunity Information</h3></div><span class="badge b-gray">Existing ERP fields</span></div>
           <div class="bd">
-            <div class="form-grid">
+            <div class="form-grid general-grid">
               <div class="field"><label>Opportunities No.</label><input value="15602"></div>
               <div class="field"><label>Name Opportunities / หัวข้อโอกาส</label><input value="REG - OL3151"></div>
               <div class="field"><label>Type Of Service / ประเภทของบริการ</label><select><option>machine</option></select></div>
@@ -600,6 +606,8 @@ function go(id){
   const btn=[...document.querySelectorAll(".nav button")].find(b=>b.dataset.page===id);
   if(btn) btn.classList.add("active");
   document.getElementById("crumb").textContent=titles[id];
+  const crumb=document.querySelector(".crumb");
+  if(crumb){const group=id==="opp"?"Sales":(id==="register"?"Machine":"Service Installation"); crumb.childNodes[0].nodeValue=group+" / ";}
   window.scrollTo({top:0,behavior:"smooth"});
 }
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
@@ -612,10 +620,12 @@ function aiCheckOpp(){
     : "AI Check: ข้อมูลหลักครบแล้ว");
 }
 function finalizeOpp(){
-  go("handover");
+  alert("ปิดการขายแล้ว: เริ่ม Machine Order & Delivery Process\nขั้นถัดไป: Place Order to Supplier → Order Confirmation");
+  const tl=document.querySelector(".machine-timeline");
+  if(tl) tl.scrollIntoView({behavior:"smooth",block:"start"});
 }
 function approveHandover(){
-  alert("Approved: สร้าง Installation Job Draft และส่งงานให้ Service แล้ว");
+  alert("Approved: ข้อมูล Order / OC / Final Specification พร้อมสำหรับ Service แล้ว\nสร้าง Installation Preparation Job Draft แล้ว");
   go("preinstall");
 }
 function toggleClaim(){
