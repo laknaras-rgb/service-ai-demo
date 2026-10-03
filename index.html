@@ -186,6 +186,77 @@ tr:hover td{background:#fbfdff}
 @media print{body{background:#fff}.sidebar,.topbar,.machine-hero,.machine-tabs-v2,.pm-subtabs,.page-title{display:none!important}.app{display:block}.content{padding:0;background:#fff}.pm-report-shell{border:0}.pm-report-actions{display:none}.pm-section{break-inside:avoid}.pm-check-table tr{break-inside:avoid}}
 
 </style>
+
+<style>
+.pm-plan-card .hd{align-items:flex-start}
+.pm-program-summary{border:1px solid #f1d7c5;background:linear-gradient(135deg,#fffaf6,#fff);border-radius:14px;padding:18px;margin-bottom:14px}
+.pm-program-title{font-size:20px;font-weight:800;color:#222}
+.pm-program-desc{margin-top:5px;color:#6b7280;font-size:13px}
+.pm-program-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pm-program-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:10px}
+.pm-program-stat{border:1px solid #e5e7eb;border-radius:12px;padding:15px;background:#fff;display:flex;flex-direction:column;gap:5px}
+.pm-program-stat small{font-size:12px;color:#6b7280}
+.pm-program-stat b{font-size:18px;color:#222}
+.pm-program-stat span{font-size:12px;color:#8a8f98;line-height:1.35}
+.pm-plan-note{margin-top:14px;border-left:4px solid #f97316;background:#fff7ed;border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.pm-plan-note div{display:flex;flex-direction:column;gap:4px}
+.pm-plan-note span{font-size:13px;color:#6b7280;line-height:1.4}
+@media(max-width:1000px){.pm-program-grid{grid-template-columns:repeat(2,1fr)}.pm-plan-note{align-items:flex-start;flex-direction:column}}
+@media(max-width:650px){.pm-program-grid{grid-template-columns:1fr}}
+</style>
+
+
+<style>
+.compact-machine-tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:14px 0 18px;
+  padding:8px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+}
+.compact-machine-tabs .tab{
+  border:0;
+  background:transparent;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:14px;
+  color:#4b5563;
+  box-shadow:none;
+}
+.compact-machine-tabs .tab:hover{background:#f8fafc}
+.compact-machine-tabs .tab.active{
+  background:#fff2e8;
+  color:#d95f02;
+  box-shadow:inset 0 0 0 1px #fdba74;
+}
+.pm-subtabs-clean{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin:10px 0 16px;
+  border-bottom:1px solid #e5e7eb;
+  padding-bottom:10px;
+}
+.pm-subtabs-clean .pm-sub{
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  padding:8px 10px !important;
+  border-radius:8px !important;
+  font-size:13px !important;
+  font-weight:700 !important;
+  color:#6b7280 !important;
+}
+.pm-subtabs-clean .pm-sub.active{
+  background:#fff2e8 !important;
+  color:#d95f02 !important;
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -406,8 +477,14 @@ Updated 1/2026
 
 ดังนั้นจึงมีรอคอนเฟริมวันพร้อมส่ง และเรื่องเล่า(A little bit Fake) อีกทีแล้วค่อยแจ้งคุณติ๋ว</textarea></div>
 </div>
-<div class="erp-tabs">
-<button class="erp-tab active">Overview / ภาพรวม</button><button class="erp-tab">Related Items / รายการที่เกี่ยวข้อง</button><button class="erp-tab">Activities / กิจกรรม</button><button class="erp-tab">Sales Documents / เอกสารการขาย</button><button class="erp-tab">Attachments / ไฟล์แนบ</button><button class="erp-tab">Conversation / การสนทนา</button><button class="erp-tab">Feed / ความเคลื่อนไหว</button><button class="erp-tab">ใบฟังก์ชั่น</button>
+<div class="machine-main-tabs compact-machine-tabs">
+  <button class="tab machine-main active" onclick="showMachineSection('machine-overview', this)">Overview / ภาพรวม</button>
+  <button class="tab machine-main" onclick="showMachineSection('machine-sales-order', this)">Sales & Order / การขายและคำสั่งซื้อ</button>
+  <button class="tab machine-main" onclick="showMachineSection('machine-installation', this)">Installation / ติดตั้งและส่งมอบ</button>
+  <button class="tab machine-main" onclick="showMachineSection('machine-service-jobs', this)">Service History / ประวัติงาน Service</button>
+  <button class="tab machine-main" onclick="showMachineSection('machine-pm', this)">PM / บำรุงรักษา</button>
+  <button class="tab machine-main" onclick="showMachineSection('machine-spares', this)">Spare Parts / อะไหล่</button>
+  <button class="tab machine-main" onclick="showMachineSection('machine-documents', this)">Documents / เอกสาร</button>
 </div>
 </div>
 <div class="card">
@@ -749,7 +826,7 @@ Updated 1/2026
 </div>
 <div class="machine-panel" id="m-after">
 <div class="page-title"><div><h1>PM &amp; After Sales / PM และหลังการขาย</h1><div class="subtitle">PM Program + PM Schedule + Machine Survey + Parts + Maintenance History อยู่ภายใต้ Machine เดียวกัน</div></div></div>
-<div class="pm-subtabs">
+<div class="pm-subtabs pm-subtabs-clean">
   <button class="pm-sub active" onclick="showPmArea('pm-program',this)">PM Program / แผน PM</button>
   <button class="pm-sub" onclick="showPmArea('pm-schedule',this)">PM Schedule / รอบ PM</button>
   <button class="pm-sub" onclick="showPmArea('pm-survey',this)">Machine Survey / ค่ามิเตอร์</button>
@@ -757,10 +834,48 @@ Updated 1/2026
   <button class="pm-sub" onclick="showPmArea('pm-history',this)">Maintenance History / ประวัติ</button>
 </div>
 <div class="pm-area active" id="pm-program">
-<div class="card"><div class="hd"><h3>PM Program / แผนตรวจประจำเครื่อง</h3><button class="btn">Copy PM Plan / คัดลอกแผน</button></div><div class="bd">
-<div class="pm-plan-head"><b>VARIOVAC THERMOFORM CHECKLISTS</b><span>ทุก 3 เดือน</span><span>33 Checklist Items</span></div>
-<div class="checklist compact"><label class="check"><input checked type="checkbox"/><span>สภาพโครงสร้างเครื่องจักรโดยรวม</span></label><label class="check"><input checked type="checkbox"/><span>ความตึงของโซ่</span></label><label class="check"><input checked type="checkbox"/><span>Clamp สภาพของตัวจับยึด</span></label><label class="check"><input checked type="checkbox"/><span>ระบบ Safety / Emergency Stop</span></label></div>
-</div></div></div>
+  <div class="card pm-plan-card">
+    <div class="hd">
+      <div>
+        <h3>PM Program / แผน PM ประจำเครื่อง</h3>
+        <div class="subtitle">ส่วนนี้เก็บ “แผนและความถี่” เท่านั้น • ผลการติ๊ก Checklist จริงจะเก็บใน PM Report ของแต่ละรอบ</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="alert('Demo: เปิด Checklist Template 33 รายการ')">View Checklist Template / ดูแบบตรวจ</button>
+        <button class="btn" onclick="alert('Demo: แก้ไขแผน PM')">Edit Plan / แก้ไขแผน</button>
+        <button class="btn">Copy PM Plan / คัดลอกแผน</button>
+      </div>
+    </div>
+    <div class="bd">
+      <div class="pm-program-summary">
+        <div class="pm-program-main">
+          <div class="pm-program-title">VARIOVAC THERMOFORM CHECKLISTS</div>
+          <div class="pm-program-desc">Checklist Template สำหรับเครื่อง Thermoform • ใช้ Template เดียวกันได้ แต่กำหนดความถี่รายเครื่อง</div>
+          <div class="pm-program-badges">
+            <span class="badge b-green">Active</span>
+            <span class="badge b-blue">33 Checklist Items</span>
+            <span class="badge b-amber">PM Every 3 Months / ทุก 3 เดือน</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pm-program-grid">
+        <div class="pm-program-stat"><small>Frequency / ความถี่</small><b>ทุก 3 เดือน</b><span>แก้เป็น 1 / 2 / 3 / 6 เดือนได้ตามลูกค้า</span></div>
+        <div class="pm-program-stat"><small>Last PM / PM ล่าสุด</small><b>20/01/2027</b><span>PM Round #1</span></div>
+        <div class="pm-program-stat"><small>Next PM / PM ถัดไป</small><b>20/04/2027</b><span>สร้างจาก Interval ของแผน</span></div>
+        <div class="pm-program-stat"><small>Checklist Template</small><b>33 รายการ</b><span>เป็นแบบตรวจ ไม่ใช่ผลตรวจรอบจริง</span></div>
+      </div>
+
+      <div class="pm-plan-note">
+        <div>
+          <b>ผล PM แต่ละรอบจะไม่เก็บในหน้านี้</b>
+          <span>เมื่อเริ่ม PM ระบบจะสร้าง PM Report แยกสำหรับรอบนั้น ซึ่งมี Machine Survey ก่อน/หลัง + Checklist 33 ข้อ + รูป + Parts + Summary + Customer Sign</span>
+        </div>
+        <button class="btn primary" onclick="showPmArea('pm-report', document.querySelectorAll('.pm-sub')[3])">Open Latest PM Report / เปิดใบ PM ล่าสุด</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="pm-area" id="pm-schedule">
 <div class="card"><div class="hd"><h3>PM Schedule / รอบ PM</h3><button class="btn primary">+ Create PM Round</button></div><div class="bd">
 <table><thead><tr><th>Round</th><th>Plan</th><th>Technician</th><th>Due Date</th><th>Actual</th><th>Function</th><th>Status</th></tr></thead><tbody>
@@ -985,5 +1100,40 @@ function updatePmSummary(){
 }
 
 </script>
+
+<script>
+function showMachineSection(target, btn){
+  document.querySelectorAll('.machine-main').forEach(x=>x.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  const map = {
+    'machine-overview':'overview',
+    'machine-sales-order':'ai-summary',
+    'machine-installation':'installation',
+    'machine-service-jobs':'service-jobs',
+    'machine-pm':'pm-after-sales',
+    'machine-spares':'pm-after-sales',
+    'machine-documents':'pm-after-sales'
+  };
+  const id = map[target];
+  if(typeof showSection === 'function' && id){ showSection(id); return; }
+
+  // fallback: click the old hidden/remaining controls if available
+  const labels = {
+    'machine-overview':'Overview / ภาพรวม',
+    'machine-sales-order':'AI Summary / AI สรุปข้อมูล',
+    'machine-installation':'Installation / ติดตั้งและทดสอบ',
+    'machine-service-jobs':'Service Jobs / Function & Visit',
+    'machine-pm':'PM & After Sales / หลังการขาย'
+  };
+  const text = labels[target];
+  if(text){
+    const candidates=[...document.querySelectorAll('button,a')];
+    const el=candidates.find(x=>x.textContent.trim().includes(text));
+    if(el) el.click();
+  }
+}
+</script>
+
 </body>
 </html>
