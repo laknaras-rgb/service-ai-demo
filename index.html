@@ -120,6 +120,10 @@ tr:hover td{background:#fbfdff}
 @media(max-width:1050px){.sales-pipeline-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.sales-pipeline-grid{grid-template-columns:1fr}}
 
+
+.note-section-card{border-left:4px solid #f47a22}
+.note-section-card .bd{background:#fffdfb}
+
 </style>
 </head>
 <body>
@@ -127,22 +131,22 @@ tr:hover td{background:#fbfdff}
   <aside class="sidebar">
     <div class="logo">RUAMPAT ERP<small>Service AI Prototype</small></div>
     <div class="nav">
-      <div class="group">Sales</div>
-      <button data-page="opp" data-short="OPP" class="active">Opportunity</button>
-      <div class="group">Service Installation</div>
-      <button data-page="handover" data-short="AI">AI Handover Review</button>
-      <button data-page="preinstall" data-short="PRE">Pre-Installation</button>
-      <button data-page="receiving" data-short="QC">Receiving & QC</button>
-      <button data-page="install" data-short="INS">Installation</button>
-      <button data-page="delivery" data-short="H/O">Customer Handover</button>
-      <div class="group">Machine</div>
-      <button data-page="register" data-short="REG">Machine Register</button>
+      <div class="group">Sales / ฝ่ายขาย</div>
+      <button data-page="opp" data-short="OPP" class="active">Opportunity / โอกาสการขาย</button>
+      <div class="group">Service Installation / งานติดตั้ง</div>
+      <button data-page="handover" data-short="AI">AI Handover Review / ตรวจส่งต่องานด้วย AI</button>
+      <button data-page="preinstall" data-short="PRE">Pre-Installation / เตรียมก่อนติดตั้ง</button>
+      <button data-page="receiving" data-short="QC">Receiving & QC / ตรวจรับเครื่องและ QC</button>
+      <button data-page="install" data-short="INS">Installation / ติดตั้งเครื่อง</button>
+      <button data-page="delivery" data-short="H/O">Customer Handover / ส่งมอบลูกค้า</button>
+      <div class="group">Machine / เครื่องจักร</div>
+      <button data-page="register" data-short="REG">Machine Register / ทะเบียนเครื่อง</button>
     </div>
   </aside>
 
   <main class="main">
     <div class="topbar">
-      <div class="crumb">Sales / <b id="crumb">Opportunity</b></div>
+      <div class="crumb">Sales / <b id="crumb">Opportunity / โอกาสการขาย</b></div>
       <div class="user"><span class="muted">Demo User</span><div class="avatar">RP</div></div>
     </div>
 
@@ -155,7 +159,7 @@ tr:hover td{background:#fbfdff}
               <div class="opp-icon">▣</div>
               <div><div class="opp-name">Opportunity: REG - OL3151</div><div class="opp-no">Opportunities No. 15602 • Type: machine</div><div class="opp-no">เมื่อ WIN แล้วจึงเริ่ม Machine Order & Delivery Timeline</div></div>
             </div>
-            <div class="right"><span class="badge b-green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">WIN / Close Sale</button></div>
+            <div class="right"><span class="badge b-green">WIN</span><button class="btn">Save / บันทึก</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">WIN / Close Sale</button></div>
           </div>
           <div class="card" style="margin-top:16px">
           <div class="hd"><div class="section-title"><span class="section-dot">i</span><h3>ข้อมูลทั่วไป / General Opportunity Information</h3></div><span class="badge b-gray">Existing ERP fields</span></div>
@@ -228,8 +232,17 @@ tr:hover td{background:#fbfdff}
           </div>
         </div>
 
-        <div class="erp-tabs">
-            <button class="erp-tab active">Overview</button><button class="erp-tab">Related Items</button><button class="erp-tab">Activities</button><button class="erp-tab">Sales Documents</button><button class="erp-tab">Attachments</button><button class="erp-tab">Conversation</button><button class="erp-tab">Feed</button><button class="erp-tab">ใบฟังก์ชั่น</button>
+        
+
+        
+
+        <div class="card note-section-card" style="margin-top:16px">
+          <div class="hd"><div class="section-title"><span class="section-dot">N</span><h3>Opportunity Note / Description</h3></div><span class="badge b-gray">Sales Note / บันทึกฝ่ายขาย</span></div>
+          <div class="bd"><textarea style="width:100%;min-height:160px;border:1px solid #cfd6df;border-radius:8px;padding:12px">Customer confirmed VARIOVAC Thermoform line with Labeler EF and CAB printer. Please coordinate installation plan and confirm final utility documents with supplier. Additional commercial follow-up can continue here.</textarea></div>
+        </div>
+
+          <div class="erp-tabs">
+            <button class="erp-tab active">Overview / ภาพรวม</button><button class="erp-tab">Related Items / รายการที่เกี่ยวข้อง</button><button class="erp-tab">Activities / กิจกรรม</button><button class="erp-tab">Sales Documents / เอกสารการขาย</button><button class="erp-tab">Attachments / ไฟล์แนบ</button><button class="erp-tab">Conversation / การสนทนา</button><button class="erp-tab">Feed / ความเคลื่อนไหว</button><button class="erp-tab">ใบฟังก์ชั่น</button>
           </div>
         </div>
 
@@ -300,8 +313,8 @@ tr:hover td{background:#fbfdff}
               <span class="phase-chip">Thailand / Customs</span>
               <span class="phase-chip">Modification</span>
               <span class="phase-chip">Delivery</span>
-              <span class="phase-chip">Installation</span>
-              <span class="phase-chip">Handover</span>
+              <span class="phase-chip">Installation / ติดตั้งเครื่อง</span>
+              <span class="phase-chip">Handover / ส่งมอบ</span>
             </div>
 
             <div class="machine-timeline">
@@ -441,20 +454,15 @@ tr:hover td{background:#fbfdff}
             </div>
           </div>
         </div>
-
-        <div class="card" style="margin-top:16px">
-          <div class="hd"><div class="section-title"><span class="section-dot">N</span><h3>Opportunity Note / Description</h3></div><span class="badge b-gray">Keep as-is</span></div>
-          <div class="bd"><textarea style="width:100%;min-height:160px;border:1px solid #cfd6df;border-radius:8px;padding:12px">Customer confirmed VARIOVAC Thermoform line with Labeler EF and CAB printer. Please coordinate installation plan and confirm final utility documents with supplier. Additional commercial follow-up can continue here.</textarea></div>
-        </div>
       </section>
 
       <section class="page" id="handover">
         <div class="page-title">
-          <div><h1>AI Handover Review</h1><div class="subtitle">AI รวมข้อมูลจาก OPP ให้ Service ตรวจ ก่อนสร้าง Installation Job / Machine Register</div></div>
-          <div class="right"><button class="btn" onclick="go('opp')">Back to OPP</button><button class="btn primary" onclick="approveHandover()">Approve for Service</button></div>
+          <div><h1>AI Handover Review / ตรวจส่งต่องานด้วย AI</h1><div class="subtitle">AI รวมข้อมูลจาก OPP ให้ Service ตรวจ ก่อนสร้าง Installation Job / Machine Register</div></div>
+          <div class="right"><button class="btn" onclick="go('opp')">Back to OPP / กลับหน้า OPP</button><button class="btn primary" onclick="approveHandover()">Approve for Service / อนุมัติส่งต่อ Service</button></div>
         </div>
 
-        <div class="steps"><span class="step done">OPP Final</span><span class="step current">AI Review</span><span class="step">Pre-Installation</span><span class="step">Receiving/QC</span><span class="step">Installation</span><span class="step">Handover</span></div>
+        <div class="steps"><span class="step done">OPP Final / ปิด OPP</span><span class="step current">AI Review / AI ตรวจข้อมูล</span><span class="step">Pre-Installation / เตรียมก่อนติดตั้ง</span><span class="step">Receiving/QC / ตรวจรับและ QC</span><span class="step">Installation / ติดตั้งเครื่อง</span><span class="step">Handover / ส่งมอบ</span></div>
 
         <div class="grid g3">
           <div class="card kpi"><div class="v" id="foundCount">8</div><div class="l">Fields found</div></div>
@@ -483,10 +491,10 @@ tr:hover td{background:#fbfdff}
 
       <section class="page" id="preinstall">
         <div class="page-title">
-          <div><h1>Pre-Installation</h1><div class="subtitle">Service เตรียม Site, Utility และเอกสารก่อนช่างเข้าติดตั้ง</div></div>
-          <div class="right"><button class="btn">Save</button><button class="btn primary" onclick="go('receiving')">Mark Ready → Receiving</button></div>
+          <div><h1>Pre-Installation / เตรียมก่อนติดตั้ง</h1><div class="subtitle">Service เตรียม Site, Utility และเอกสารก่อนช่างเข้าติดตั้ง</div></div>
+          <div class="right"><button class="btn">Save / บันทึก</button><button class="btn primary" onclick="go('receiving')">Mark Ready → Receiving</button></div>
         </div>
-        <div class="steps"><span class="step done">OPP Final</span><span class="step done">AI Review</span><span class="step current">Pre-Installation</span><span class="step">Receiving/QC</span><span class="step">Installation</span><span class="step">Handover</span></div>
+        <div class="steps"><span class="step done">OPP Final / ปิด OPP</span><span class="step done">AI Review / AI ตรวจข้อมูล</span><span class="step current">Pre-Installation / เตรียมก่อนติดตั้ง</span><span class="step">Receiving/QC / ตรวจรับและ QC</span><span class="step">Installation / ติดตั้งเครื่อง</span><span class="step">Handover / ส่งมอบ</span></div>
 
         <div class="grid g2">
           <div class="card">
@@ -517,9 +525,9 @@ tr:hover td{background:#fbfdff}
       <section class="page" id="receiving">
         <div class="page-title">
           <div><h1>Machine Receiving & QC</h1><div class="subtitle">ตรวจรับเครื่องก่อนติดตั้ง: รุ่น/สเปค/จำนวน/สภาพ/ของขาด/ความเสียหาย</div></div>
-          <div class="right"><button class="btn">Save QC</button><button class="btn primary" onclick="go('install')">QC Pass → Installation</button></div>
+          <div class="right"><button class="btn">Save QC / บันทึก QC</button><button class="btn primary" onclick="go('install')">QC Pass → Installation</button></div>
         </div>
-        <div class="steps"><span class="step done">OPP Final</span><span class="step done">AI Review</span><span class="step done">Pre-Installation</span><span class="step current">Receiving/QC</span><span class="step">Installation</span><span class="step">Handover</span></div>
+        <div class="steps"><span class="step done">OPP Final / ปิด OPP</span><span class="step done">AI Review / AI ตรวจข้อมูล</span><span class="step done">Pre-Installation / เตรียมก่อนติดตั้ง</span><span class="step current">Receiving/QC / ตรวจรับและ QC</span><span class="step">Installation / ติดตั้งเครื่อง</span><span class="step">Handover / ส่งมอบ</span></div>
         <div class="grid g2">
           <div class="card">
             <div class="hd"><h3>Machine Identity</h3></div>
@@ -549,7 +557,7 @@ tr:hover td{background:#fbfdff}
       <section class="page" id="install">
         <div class="page-title">
           <div><h1>Installation & Commissioning</h1><div class="subtitle">ช่างเห็นสิ่งที่ Sales ขายไว้ เทียบกับค่าจริงหน้างาน และบันทึกผลติดตั้ง</div></div>
-          <div class="right"><button class="btn">Save Progress</button><button class="btn primary" onclick="go('delivery')">Complete Installation</button></div>
+          <div class="right"><button class="btn">Save Progress / บันทึกความคืบหน้า</button><button class="btn primary" onclick="go('delivery')">Complete Installation</button></div>
         </div>
         <div class="grid g2">
           <div class="card">
@@ -580,8 +588,8 @@ tr:hover td{background:#fbfdff}
 
       <section class="page" id="delivery">
         <div class="page-title">
-          <div><h1>Customer Handover</h1><div class="subtitle">ส่งมอบเครื่องและเอกสารให้ลูกค้าอย่างถูกต้อง ก่อนปิดงานและ Register เครื่อง</div></div>
-          <div class="right"><button class="btn">Save Draft</button><button class="btn primary" onclick="completeHandover()">Customer Accepted & Register Machine</button></div>
+          <div><h1>Customer Handover / ส่งมอบลูกค้า</h1><div class="subtitle">ส่งมอบเครื่องและเอกสารให้ลูกค้าอย่างถูกต้อง ก่อนปิดงานและ Register เครื่อง</div></div>
+          <div class="right"><button class="btn">Save Draft / บันทึกร่าง</button><button class="btn primary" onclick="completeHandover()">Customer Accepted & Register Machine</button></div>
         </div>
         <div class="grid g2">
           <div class="card">
@@ -609,18 +617,18 @@ tr:hover td{background:#fbfdff}
       <section class="page" id="register">
         <div class="page-title">
           <div><h1>Machine Register — OL3151</h1><div class="subtitle">ข้อมูลที่ผ่านการตรวจจาก OPP + QC + Installation + Handover แล้ว จึงมาเป็น Machine Master</div></div>
-          <div class="right"><button class="btn">Edit</button><button class="btn primary">Save Machine</button></div>
+          <div class="right"><button class="btn">Edit / แก้ไข</button><button class="btn primary">Save Machine / บันทึกเครื่อง</button></div>
         </div>
 
         <div class="tabs">
-          <button class="tab active">Overview</button>
-          <button class="tab">Installation</button>
-          <button class="tab">PM Program</button>
-          <button class="tab">PM Schedule</button>
-          <button class="tab">Spare Parts</button>
-          <button class="tab">Maintenance History</button>
-          <button class="tab">Attachments</button>
-          <button class="tab">Machine Health</button>
+          <button class="tab active">Overview / ภาพรวม</button>
+          <button class="tab">Installation / ติดตั้งเครื่อง</button>
+          <button class="tab">PM Program / โปรแกรม PM</button>
+          <button class="tab">PM Schedule / ตาราง PM</button>
+          <button class="tab">Spare Parts / อะไหล่</button>
+          <button class="tab">Maintenance History / ประวัติซ่อมบำรุง</button>
+          <button class="tab">Attachments / ไฟล์แนบ</button>
+          <button class="tab">Machine Health / สุขภาพเครื่อง</button>
         </div>
 
         <div class="grid g2">
@@ -638,9 +646,9 @@ tr:hover td{background:#fbfdff}
           <div class="card">
             <div class="hd"><h3>Installation Summary</h3><span class="badge b-blue">New tab</span></div>
             <div class="bd timeline">
-              <div class="tl"><div class="dot"></div><div class="txt"><b>OPP Final</b><small>REG - OL3151 • Sales confirmed</small></div></div>
+              <div class="tl"><div class="dot"></div><div class="txt"><b>OPP Final / ปิด OPP</b><small>REG - OL3151 • Sales confirmed</small></div></div>
               <div class="tl"><div class="dot"></div><div class="txt"><b>AI Handover Approved</b><small>Service reviewed machine requirements</small></div></div>
-              <div class="tl"><div class="dot"></div><div class="txt"><b>Receiving & QC</b><small>Waiting for machine arrival</small></div></div>
+              <div class="tl"><div class="dot"></div><div class="txt"><b>Receiving & QC / ตรวจรับเครื่องและ QC</b><small>Waiting for machine arrival</small></div></div>
               <div class="tl"><div class="dot"></div><div class="txt"><b>Installation & Handover</b><small>Pending</small></div></div>
             </div>
           </div>
@@ -653,8 +661,8 @@ tr:hover td{background:#fbfdff}
 
 <script>
 const titles={
-  opp:"Opportunity", handover:"AI Handover Review", preinstall:"Pre-Installation",
-  receiving:"Receiving & QC", install:"Installation", delivery:"Customer Handover", register:"Machine Register"
+  opp:"Opportunity / โอกาสการขาย", handover:"AI Handover Review / ตรวจส่งต่องานด้วย AI", preinstall:"Pre-Installation / เตรียมก่อนติดตั้ง",
+  receiving:"Receiving & QC / ตรวจรับเครื่องและ QC", install:"Installation / ติดตั้งเครื่อง", delivery:"Customer Handover / ส่งมอบลูกค้า", register:"Machine Register / ทะเบียนเครื่อง"
 };
 function go(id){
   document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
