@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="th">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>RuamPat ERP - Service AI Installation Prototype</title>
 <style>
 :root{
@@ -125,735 +126,546 @@ tr:hover td{background:#fbfdff}
 .note-section-card .bd{background:#fffdfb}
 
 
-.handover-hero{background:linear-gradient(135deg,#fff7f0,#ffffff);border:1px solid #f3d2bb;border-radius:14px;padding:20px;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:16px;box-shadow:var(--shadow)}
-.handover-hero h1{margin:0 0 5px;font-size:25px}.handover-hero .sub{color:#777;font-size:13px}
-.handover-status{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.premium-section{border-top:3px solid #f47a22}
-.section-caption{font-size:12px;color:#777;margin-top:3px}
-.summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.summary-box{background:#fafafa;border:1px solid #e5e5e5;border-radius:10px;padding:12px}
-.summary-box .k{font-size:11px;color:#777}.summary-box .v{font-weight:800;margin-top:4px}
-.qc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.qc-row{border:1px solid #e3e3e3;border-radius:9px;padding:11px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff}
-.qc-row .name{font-weight:700}.qc-row .opt{display:flex;gap:6px;flex-wrap:wrap}
-.choice{border:1px solid #ddd;border-radius:999px;padding:5px 9px;font-size:11px;background:#fafafa}
-.choice input{accent-color:#f47a22}
-.doc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.doc-item{border:1px solid #e4e4e4;border-radius:9px;padding:10px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.sign-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.sign-card{border:1px solid #ddd;border-radius:12px;padding:14px;background:#fff}
-.sign-box{height:95px;border:1px dashed #ccc;border-radius:8px;background:#fafafa;display:flex;align-items:center;justify-content:center;color:#aaa;margin:10px 0}
-.photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.photo-slot{height:125px;border:1px dashed #cfcfcf;border-radius:10px;background:#fafafa;display:flex;align-items:center;justify-content:center;color:#999;text-align:center;padding:10px}
-.warranty-box{background:#fffaf6;border:1px solid #f4d3bb;border-radius:10px;padding:14px;font-size:13px;line-height:1.65}
-@media(max-width:1100px){.summary-grid{grid-template-columns:repeat(2,1fr)}.sign-grid,.photo-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){.summary-grid,.qc-grid,.doc-grid,.sign-grid,.photo-grid{grid-template-columns:1fr}.handover-hero{flex-direction:column}.handover-status{justify-content:flex-start}}
+.machine-hero{background:linear-gradient(135deg,#fff,#fff7f0);border:1px solid #eadfd7;border-radius:16px;padding:20px 22px;box-shadow:0 7px 22px rgba(0,0,0,.045)}
+.machine-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.machine-kicker{font-size:11px;font-weight:800;letter-spacing:.08em;color:#df6a18}.machine-hero h1{margin:4px 0 0;font-size:25px}.machine-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.machine-tabs-v2{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 16px}.machine-tab{border:1px solid #ddd;background:#fff;border-radius:9px;padding:9px 12px;font-weight:750;color:#555;cursor:pointer}.machine-tab.active{background:#fff0e4;border-color:#f4b184;color:#c85d13}
+.machine-panel{display:none}.machine-panel.active{display:block}
+.source-chip{display:inline-flex;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}.source-opp{background:#eef7ff;color:#28638f}.source-note{background:#fff1e6;color:#b85a16}.source-email{background:#f2edff;color:#6547a8}
+.ai-summary-card{border:1px solid #ecd8c7;border-radius:14px;background:linear-gradient(135deg,#fff9f4,#fff);padding:16px}.ai-summary-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px}.ai-summary-block{border:1px solid #eee;border-radius:11px;background:#fff;padding:13px}.ai-summary-block h4{margin:0 0 8px}.ai-summary-block ul{margin:0 0 10px;padding-left:18px;font-size:12px;line-height:1.6}
+.data-review{display:grid;grid-template-columns:1.1fr 1fr .55fr .55fr;border:1px solid #e7e7e7;border-radius:12px;overflow:hidden}.data-review>div{padding:11px 12px;border-bottom:1px solid #eee;background:#fff;font-size:12px}.data-review .head{font-weight:800;background:#f7f7f7}.data-review .missing{background:#fff8ee}
+.machine-docs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.machine-doc{border:1px solid #e4e4e4;border-radius:11px;padding:12px;background:#fff}.machine-doc .name{font-weight:800}.machine-doc .meta{font-size:11px;color:#777;margin:5px 0}
+.machine-stage-wrap{display:grid;grid-template-columns:240px 1fr;gap:14px}.machine-stage-nav{display:grid;gap:8px;align-content:start}.machine-stage-btn{border:1px solid #e2e2e2;background:#fff;border-radius:10px;padding:10px 11px;text-align:left;font-size:12px;font-weight:750}.machine-stage-btn.active{border-color:#f2b386;background:#fff4eb;color:#c85e15}.machine-stage-content{border:1px solid #e4e4e4;border-radius:14px;background:#fff;padding:16px}
+@media(max-width:1000px){.ai-summary-grid{grid-template-columns:1fr}.machine-docs{grid-template-columns:1fr 1fr}.machine-stage-wrap{grid-template-columns:1fr}}
+@media(max-width:720px){.machine-docs{grid-template-columns:1fr}.data-review{grid-template-columns:1fr}.machine-hero-top{display:block}.machine-actions{justify-content:flex-start;margin-top:10px}}
 
+/* ERP shell approximation */
+.app{grid-template-columns:278px 1fr;background:#edf4fb}
+.sidebar{background:#fff;color:#555;padding:0;position:sticky;top:0;height:100vh;overflow:auto;border-right:1px solid #d9dfe6}
+.erp-logo{height:96px;display:flex;align-items:center;gap:12px;padding:0 24px;border-bottom:1px solid #e6ebf0;background:#eef5ff}
+.erp-mark{font-size:24px;font-weight:900;color:#f26f21;letter-spacing:-2px}
+.erp-name{font-size:24px;font-weight:500;color:#e51e16}
+.erp-menu{padding:8px 0 22px}
+.erp-item{width:100%;height:42px;display:grid;grid-template-columns:26px 1fr 20px;align-items:center;gap:8px;border:0;background:#fff;color:#555;text-align:left;padding:0 16px;font-size:15px;cursor:pointer}
+.erp-item:hover{background:#f4f7fb}
+.erp-item .chev{text-align:right;color:#777}
+.erp-sub{display:none;padding:0 10px 4px;background:#fff}
+.erp-group.open>.erp-sub{display:block}
+.erp-sub button{width:100%;border:0;background:#fff;color:#5f5f5f;text-align:left;padding:10px 34px;border-radius:2px;font-size:14px;cursor:pointer}
+.erp-sub button:hover{background:#eef4fb}
+.erp-sub button.active{background:#dff2fb;color:#4b4b4b}
+.topbar{height:88px;background:#eef5ff;border-bottom:1px solid #dbe3ec;padding:0 28px}
+.content{padding:16px 22px 28px;background:#eef4fb}
+.card,.opp-shell,.machine-hero{border-radius:4px;box-shadow:none}
+.placeholder-page{display:none}
+.placeholder-card{background:#fff;border:1px solid #e5e9ee;border-radius:4px;padding:26px;min-height:220px}
+.placeholder-title{font-size:22px;font-weight:700;color:#555;margin-bottom:8px}
+.placeholder-sub{color:#8a8a8a}
+@media(max-width:900px){.app{grid-template-columns:230px 1fr}}
 </style>
 </head>
 <body>
 <div class="app">
-  <aside class="sidebar">
-    <div class="logo">RUAMPAT ERP<small>Service AI Prototype</small></div>
-    <div class="nav">
-      <div class="group">Sales / ฝ่ายขาย</div>
-      <button data-page="opp" data-short="OPP" class="active">Opportunity / โอกาสการขาย</button>
-      <div class="group">Service Installation / งานติดตั้ง</div>
-      <button data-page="handover" data-short="AI">AI Handover Review / ตรวจส่งต่องานด้วย AI</button>
-      <button data-page="preinstall" data-short="PRE">Pre-Installation / เตรียมก่อนติดตั้ง</button>
-      <button data-page="receiving" data-short="QC">Receiving & QC / ตรวจรับเครื่องและ QC</button>
-      <button data-page="install" data-short="INS">Installation / ติดตั้งเครื่อง</button>
-      <button data-page="delivery" data-short="H/O">Customer Handover / ส่งมอบลูกค้า</button>
-      <div class="group">Machine / เครื่องจักร</div>
-      <button data-page="register" data-short="REG">Machine Register / ทะเบียนเครื่อง</button>
-    </div>
-  </aside>
-
-  <main class="main">
-    <div class="topbar">
-      <div class="crumb">Sales / <b id="crumb">Opportunity / โอกาสการขาย</b></div>
-      <div class="user"><span class="muted">Demo User</span><div class="avatar">RP</div></div>
-    </div>
-
-    <div class="content">
-
-      <section class="page active" id="opp">
-        <div class="opp-shell">
-          <div class="opp-head">
-            <div class="opp-id">
-              <div class="opp-icon">▣</div>
-              <div><div class="opp-name">Opportunity: REG - OL3151</div><div class="opp-no">Opportunities No. 15602 • Type: machine</div><div class="opp-no">เมื่อ WIN แล้วจึงเริ่ม Machine Order & Delivery Timeline</div></div>
-            </div>
-            <div class="right"><span class="badge b-green">WIN</span><button class="btn">Save / บันทึก</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">WIN / Close Sale</button></div>
-          </div>
-          <div class="card" style="margin-top:16px">
-          <div class="hd"><div class="section-title"><span class="section-dot">i</span><h3>ข้อมูลทั่วไป / General Opportunity Information</h3></div><span class="badge b-gray">Existing ERP fields</span></div>
-          <div class="bd">
-            <div class="form-grid general-grid">
-              <div class="field"><label>Opportunities No.</label><input value="15602"></div>
-              <div class="field"><label>Name Opportunities / หัวข้อโอกาส</label><input value="REG - OL3151"></div>
-              <div class="field"><label>Type Of Service / ประเภทของบริการ</label><select><option>machine</option></select></div>
-
-              <div class="field"><label>Budget / งบประมาณ</label><input value="5,000,000-10,000,000"></div>
-              <div class="field"><label>ความสำเร็จ</label><input value="100%"></div>
-              <div class="field"><label>Urgency / ความเร่งด่วน</label><select><option>ด่วน</option><option>ปกติ</option></select></div>
-
-              <div class="field"><label>Pipeline Status</label><input value="Registered"></div>
-              <div class="field"><label>Account / Target</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"></div>
-              <div class="field"><label>Lead / Main Customer</label><input value="วีณา -"></div>
-
-              <div class="field"><label>Owner / เจ้าของ</label><input value="Darat Charansirirungkarn"></div>
-              <div class="field"><label>Assistant 1</label><input value="Sawanya Rungrodrasamee"></div>
-              <div class="field"><label>Assistant 2</label><input value="Arunwalee Jedeeya"></div>
-
-              <div class="field"><label>Operator / ผู้รับผิดชอบ</label><input value="Darat Charansirirungkarn"></div>
-              <div class="field"><label>Start Date/Time วันที่เริ่มงาน</label><input value="24/11/68 13:01"></div>
-              <div class="field"><label>Due Date/Time วันเวลาที่จบงาน</label><input value="31/03/69 17:30"></div>
-
-              <div class="field"><label>Notification Date/Time วันเวลาที่แจ้งเตือน</label><input value="31/03/69 09:00"></div>
-              <div class="field"><label>Location</label><input value="-"></div>
-              <div class="field"><label>Status</label><select><option>WIN</option></select></div>
-
-              <div class="field"><label>Reason</label><input value="ราคา"></div>
-              <div class="field"><label>Reason Note</label><input value="-"></div>
-              <div class="field"><label>แหล่งที่มาลูกค้า</label><input value="ลูกค้าที่เคยซื้อสินค้าหรือบริการ"></div>
-
-              <div class="field"><label>ปัญหาของลูกค้า</label><input value="การแพ็ค"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <div class="hd"><div class="section-title"><span class="section-dot">⚙</span><h3>Machine & Installation Requirements / ข้อมูลเครื่องและข้อกำหนดการติดตั้ง</h3></div><span class="badge b-purple">Service handover</span></div>
-          <div class="bd">
-            <div class="form-grid">
-              <div class="field"><label>Machine / เครื่องจักร</label><input value="Thermoform"></div>
-              <div class="field"><label>Brand / Manufacturer</label><select><option>VARIOVAC</option></select></div>
-              <div class="field"><label>Model</label><input value="Optimus"></div>
-
-              <div class="field"><label>Serial Number / S/N</label><input value="-"></div>
-              <div class="field"><label>Product / สินค้าที่ใช้กับเครื่อง</label><input id="fProduct" value=""></div>
-              <div class="field"><label>Target Capacity / กำลังผลิตที่ต้องการ</label><input id="fCapacity" placeholder="เช่น kg/hr, pcs/hr"></div>
-              <div class="field"><label>Final Speed ที่ตกลง</label><input id="fSpeed" placeholder="เช่น 12 packs/min"></div>
-
-              <div class="field"><label>Pack / รูปแบบบรรจุ</label><input id="fPack" placeholder="ลักษณะ pack / ขนาด pack"></div>
-              <div class="field"><label>Forming Depth</label><input id="fDepth" placeholder="เช่น 80 mm"></div>
-              <div class="field"><label>Final Vacuum</label><input id="fVacuum" placeholder="ค่าที่ตกลง"></div>
-
-              <div class="field"><label>มี Printer / Labeler หรือไม่</label><select id="fPrinter"><option>มี</option><option>ไม่มี</option><option>ยังไม่ระบุ</option></select></div>
-              <div class="field"><label>Printer / Labeler Detail</label><input id="fPrinterDetail" value="Labeler EF + CAB printer"></div>
-              <div class="field"><label>Printing Position / พิมพ์ตรงไหน</label><input id="fPrintPos" placeholder="เช่น Top film / Label"></div>
-
-              <div class="field span2"><label>Printing Requirement / พิมพ์อย่างไร / ข้อมูลที่ต้องพิมพ์</label><textarea placeholder="เช่น Lot, MFG, EXP, Barcode และรูปแบบตำแหน่งพิมพ์"></textarea></div>
-
-              <div class="field span3"><label>Options / Accessories ที่ขายพร้อมเครื่อง</label><textarea id="fOptions" placeholder="อุปกรณ์เสริม / Option ที่รวมในการขาย">Labeler EF, CAB printer</textarea></div>
-              <div class="field span3"><label>Special Installation Requirement / ข้อกำหนดพิเศษที่ Service ต้องรู้</label><textarea placeholder="ข้อจำกัดหน้างาน, การเชื่อมต่อกับเครื่องเดิม, เงื่อนไขพิเศษที่ตกลงกับลูกค้า"></textarea></div>
-            </div>
-            <div class="note" style="margin-top:14px">
-              <b>แยกข้อมูลให้ชัด:</b> ส่วนนี้เก็บเฉพาะข้อมูลที่ Service ต้องนำไปใช้ต่อในการตรวจรับและติดตั้งเครื่อง
+<aside class="sidebar">
+<div class="logo erp-logo">
+<div class="erp-mark">RP</div>
+<div class="erp-name">RuamPat ERP</div>
+</div>
+<div class="erp-menu">
+<button class="erp-item" data-placeholder="Dashboard"><span>⌂</span><span>Dashboard</span></button>
+<div class="erp-group">
+<button class="erp-item erp-toggle"><span>▣</span><span>Calendar</span><span class="chev">⌄</span></button>
+<div class="erp-sub">
+<button data-placeholder="Calendar">Calendar</button>
+</div>
+</div>
+<button class="erp-item" data-placeholder="Feed"><span>▥</span><span>Feed</span></button>
+<div class="erp-group">
+<button class="erp-item erp-toggle"><span>▣</span><span>Activities</span><span class="chev">⌄</span></button>
+<div class="erp-sub">
+<button data-placeholder="Appointments">Appointments</button>
+<button data-placeholder="Tasks">Tasks</button>
+<button data-placeholder="Phone Calls">Phone Calls</button>
+<button data-placeholder="E-Mails">E-Mails</button>
+<button data-placeholder="Visit">Visit</button>
+</div>
+</div>
+<div class="erp-group">
+<button class="erp-item erp-toggle"><span>$</span><span>Sales</span><span class="chev">⌄</span></button>
+<div class="erp-sub">
+<button data-placeholder="Target">Target</button>
+<button data-placeholder="Leads">Leads</button>
+<button data-placeholder="Customers">Customers</button>
+<button data-placeholder="Accounts">Accounts</button>
+<button data-page="opp">Opportunities</button>
+<button data-placeholder="Sales Quotes">Sales Quotes</button>
+</div>
+</div>
+<div class="erp-group">
+<button class="erp-item erp-toggle"><span>⌘</span><span>Products</span><span class="chev">⌄</span></button>
+<div class="erp-sub">
+<button data-placeholder="Product Package">Product Package</button>
+<button data-placeholder="Product Set">Product Set</button>
+<button data-placeholder="Product List">Product List</button>
+</div>
+</div>
+<button class="erp-item" data-placeholder="Reports"><span>▤</span><span>Reports</span></button>
+<div class="erp-group">
+<button class="erp-item erp-toggle"><span>▤</span><span>Stock Management</span><span class="chev">⌄</span></button>
+<div class="erp-sub">
+<button data-placeholder="Stock Overview">Stock Overview</button>
+</div>
+</div>
+<button class="erp-item" data-placeholder="Functions"><span>⇥</span><span>Functions</span></button>
+<div class="erp-group open">
+<button class="erp-item erp-toggle"><span>⚙</span><span>Machine Register</span><span class="chev">⌄</span></button>
+<div class="erp-sub">
+<button class="active" data-page="register">Machine List</button>
+<button data-placeholder="งาน PM ของฉัน">งาน PM ของฉัน</button>
+<button data-placeholder="แผน PM กลาง">แผน PM กลาง</button>
+</div>
+</div>
+<button class="erp-item" data-placeholder="Profile"><span>⌁</span><span>Profile</span></button>
+<div class="erp-group">
+<button class="erp-item erp-toggle"><span>◫</span><span>Meta Data</span><span class="chev">⌄</span></button>
+<div class="erp-sub">
+<button data-placeholder="Meta Data">Meta Data</button>
+</div>
+</div>
+<button class="erp-item" data-placeholder="Manage Users"><span>♙</span><span>Manage Users</span></button>
+<button class="erp-item" data-placeholder="Warehouse"><span>⊞</span><span>Warehouse</span></button>
+<button class="erp-item" data-placeholder="Configs"><span>⚙</span><span>Configs</span></button>
+</div>
+</aside>
+<main class="main">
+<div class="topbar">
+<div class="crumb">Machine Register / <b id="crumb">Machine Register / ทะเบียนเครื่อง</b></div>
+<div class="user"><span class="muted">Demo User</span><div class="avatar">RP</div></div>
+</div>
+<div class="content">
+<section class="page" id="opp">
+<div class="opp-shell">
+<div class="opp-head">
+<div class="opp-id">
+<div class="opp-icon">▣</div>
+<div><div class="opp-name">Opportunity: REG - OL3151</div><div class="opp-no">Opportunities No. 15602 • Type: machine</div><div class="opp-no">เมื่อ WIN ระบบจะสร้าง Machine Register และส่งข้อมูลที่ Sales ยืนยันแล้วไปยังเครื่องนั้น</div></div>
+</div>
+<div class="right"><span class="badge b-green">WIN</span><button class="btn">Save / บันทึก</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">WIN / สร้าง Machine</button></div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><div class="section-title"><span class="section-dot">i</span><h3>ข้อมูลทั่วไป / General Opportunity Information</h3></div><span class="badge b-gray">Existing ERP fields</span></div>
+<div class="bd">
+<div class="form-grid general-grid">
+<div class="field"><label>Opportunities No.</label><input value="15602"/></div>
+<div class="field"><label>Name Opportunities / หัวข้อโอกาส</label><input value="REG - OL3151"/></div>
+<div class="field"><label>Type Of Service / ประเภทของบริการ</label><select><option>machine</option></select></div>
+<div class="field"><label>Budget / งบประมาณ</label><input value="5,000,000-10,000,000"/></div>
+<div class="field"><label>ความสำเร็จ</label><input value="100%"/></div>
+<div class="field"><label>Urgency / ความเร่งด่วน</label><select><option>ด่วน</option><option>ปกติ</option></select></div>
+<div class="field"><label>Pipeline Status</label><input value="Registered"/></div>
+<div class="field"><label>Account / Target</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"/></div>
+<div class="field"><label>Lead / Main Customer</label><input value="วีณา -"/></div>
+<div class="field"><label>Owner / เจ้าของ</label><input value="Darat Charansirirungkarn"/></div>
+<div class="field"><label>Assistant 1</label><input value="Sawanya Rungrodrasamee"/></div>
+<div class="field"><label>Assistant 2</label><input value="Arunwalee Jedeeya"/></div>
+<div class="field"><label>Operator / ผู้รับผิดชอบ</label><input value="Darat Charansirirungkarn"/></div>
+<div class="field"><label>Start Date/Time วันที่เริ่มงาน</label><input value="24/11/68 13:01"/></div>
+<div class="field"><label>Due Date/Time วันเวลาที่จบงาน</label><input value="31/03/69 17:30"/></div>
+<div class="field"><label>Notification Date/Time วันเวลาที่แจ้งเตือน</label><input value="31/03/69 09:00"/></div>
+<div class="field"><label>Location</label><input value="-"/></div>
+<div class="field"><label>Status</label><select><option>WIN</option></select></div>
+<div class="field"><label>Reason</label><input value="ราคา"/></div>
+<div class="field"><label>Reason Note</label><input value="-"/></div>
+<div class="field"><label>แหล่งที่มาลูกค้า</label><input value="ลูกค้าที่เคยซื้อสินค้าหรือบริการ"/></div>
+<div class="field"><label>ปัญหาของลูกค้า</label><input value="การแพ็ค"/></div>
+</div>
+</div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><div class="section-title"><span class="section-dot">⚙</span><h3>Machine &amp; Installation Requirements / ข้อมูลเครื่องและข้อกำหนดการติดตั้ง</h3></div><span class="badge b-purple">Service handover</span></div>
+<div class="bd">
+<div class="form-grid">
+<div class="field"><label>Machine / เครื่องจักร</label><input value="Thermoform"/></div>
+<div class="field"><label>Brand / Manufacturer</label><select><option>VARIOVAC</option></select></div>
+<div class="field"><label>Model</label><input value="Optimus"/></div>
+<div class="field"><label>Serial Number / S/N</label><input value="-"/></div>
+<div class="field"><label>Product / สินค้าที่ใช้กับเครื่อง</label><input id="fProduct" value=""/></div>
+<div class="field"><label>Target Capacity / กำลังผลิตที่ต้องการ</label><input id="fCapacity" placeholder="เช่น kg/hr, pcs/hr"/></div>
+<div class="field"><label>Final Speed ที่ตกลง</label><input id="fSpeed" placeholder="เช่น 12 packs/min"/></div>
+<div class="field"><label>Pack / รูปแบบบรรจุ</label><input id="fPack" placeholder="ลักษณะ pack / ขนาด pack"/></div>
+<div class="field"><label>Forming Depth</label><input id="fDepth" placeholder="เช่น 80 mm"/></div>
+<div class="field"><label>Final Vacuum</label><input id="fVacuum" placeholder="ค่าที่ตกลง"/></div>
+<div class="field"><label>มี Printer / Labeler หรือไม่</label><select id="fPrinter"><option>มี</option><option>ไม่มี</option><option>ยังไม่ระบุ</option></select></div>
+<div class="field"><label>Printer / Labeler Detail</label><input id="fPrinterDetail" value="Labeler EF + CAB printer"/></div>
+<div class="field"><label>Printing Position / พิมพ์ตรงไหน</label><input id="fPrintPos" placeholder="เช่น Top film / Label"/></div>
+<div class="field span2"><label>Printing Requirement / พิมพ์อย่างไร / ข้อมูลที่ต้องพิมพ์</label><textarea placeholder="เช่น Lot, MFG, EXP, Barcode และรูปแบบตำแหน่งพิมพ์"></textarea></div>
+<div class="field span3"><label>Options / Accessories ที่ขายพร้อมเครื่อง</label><textarea id="fOptions" placeholder="อุปกรณ์เสริม / Option ที่รวมในการขาย">Labeler EF, CAB printer</textarea></div>
+<div class="field span3"><label>Special Installation Requirement / ข้อกำหนดพิเศษที่ Service ต้องรู้</label><textarea placeholder="ข้อจำกัดหน้างาน, การเชื่อมต่อกับเครื่องเดิม, เงื่อนไขพิเศษที่ตกลงกับลูกค้า"></textarea></div>
+</div>
+<div class="note" style="margin-top:14px">
+<b>แยกข้อมูลให้ชัด:</b> ส่วนนี้เก็บเฉพาะข้อมูลที่ Service ต้องนำไปใช้ต่อในการตรวจรับและติดตั้งเครื่อง
               ส่วน Utility ทางเทคนิค เช่น kW, Voltage, Air pressure, Water requirement และเอกสาร Manual / Drawing / Packing List
               จะอยู่ในขั้น Pre-Installation และมาจาก Supplier documents ไม่บังคับ Sales กรอกใน OPP
             </div>
-          </div>
-        </div>
-
-        
-
-        
-
-        <div class="card note-section-card" style="margin-top:16px">
-          <div class="hd"><div class="section-title"><span class="section-dot">N</span><h3>Opportunity Note / Description</h3></div><span class="badge b-gray">Sales Note / บันทึกฝ่ายขาย</span></div>
-          <div class="bd"><textarea style="width:100%;min-height:160px;border:1px solid #cfd6df;border-radius:8px;padding:12px">Customer confirmed VARIOVAC Thermoform line with Labeler EF and CAB printer. Please coordinate installation plan and confirm final utility documents with supplier. Additional commercial follow-up can continue here.</textarea></div>
-        </div>
-
-          <div class="erp-tabs">
-            <button class="erp-tab active">Overview / ภาพรวม</button><button class="erp-tab">Related Items / รายการที่เกี่ยวข้อง</button><button class="erp-tab">Activities / กิจกรรม</button><button class="erp-tab">Sales Documents / เอกสารการขาย</button><button class="erp-tab">Attachments / ไฟล์แนบ</button><button class="erp-tab">Conversation / การสนทนา</button><button class="erp-tab">Feed / ความเคลื่อนไหว</button><button class="erp-tab">ใบฟังก์ชั่น</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="hd"><div class="section-title"><span class="section-dot">C</span><h3>Contact</h3></div><button class="btn">Add</button></div>
-          <div class="bd"><div class="table-wrap"><table><thead><tr><th>Priority</th><th>Role</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Action</th></tr></thead><tbody><tr><td colspan="7"><div class="contact-empty">ยังไม่มี Contact ที่ผูกกับ Opportunity นี้</div></td></tr></tbody></table></div></div>
-        </div>
-
-        
-        <div class="card" style="margin-top:16px">
-          <div class="hd">
-            <div>
-              <div class="section-title"><span class="section-dot">S</span><h3>Sales Pipeline / ขั้นตอนก่อนปิดการขาย</h3></div>
-              <div class="section-help">ใช้ติดตามกิจกรรมของ Sales ก่อน Opportunity เปลี่ยนเป็น WIN</div>
-            </div>
-            <span class="badge b-gray">Pre-Sales</span>
-          </div>
-          <div class="bd">
-            <div class="sales-pipeline-grid">
-              <div class="sales-step done">
-                <div class="top"><input type="checkbox" checked> แนะนำสินค้า</div>
-                <div class="field"><label>Due Date</label><input type="date"></div>
-              </div>
-              <div class="sales-step done">
-                <div class="top"><input type="checkbox" checked> ส่งใบเสนอราคา</div>
-                <div class="field"><label>Due Date</label><input type="date"></div>
-              </div>
-              <div class="sales-step">
-                <div class="top"><input type="checkbox"> ส่งสเป็ค</div>
-                <div class="field"><label>Due Date</label><input type="date"></div>
-              </div>
-              <div class="sales-step">
-                <div class="top"><input type="checkbox"> รอลูกค้าพิจารณา</div>
-                <div class="field"><label>Due Date</label><input type="date"></div>
-              </div>
-
-              <div class="sales-step">
-                <div class="top"><input type="checkbox"> ติดตามลูกค้า</div>
-                <div class="field"><label>Due Date</label><input type="date"></div>
-              </div>
-              <div class="sales-step">
-                <div class="top"><input type="checkbox"> นำเสนอ</div>
-                <div class="field"><label>Due Date</label><input type="date"></div>
-              </div>
-              <div class="sales-step">
-                <div class="top"><input type="checkbox"> เข้าไปนำเสนอ</div>
-                <div class="field"><label>Due Date</label><input type="date"></div>
-              </div>
-              <div class="sales-step">
-                <div class="top"><input type="checkbox"> เจรจา / ปรับเงื่อนไข</div>
-                <div class="field"><label>Due Date</label><input type="date"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-<div class="card" style="margin-top:16px">
-          <div class="hd">
-            <div class="section-title"><span class="section-dot">P</span><h3>Machine Order & Delivery Timeline / หลังปิดการขาย</h3></div>
-            <span class="badge b-gray">แสดงเมื่อ Status = WIN</span>
-          </div>
-          <div class="bd">
-            <div class="phase-bar">
-              <span class="phase-chip active">Sales Close</span>
-              <span class="phase-chip">Order</span>
-              <span class="phase-chip">Production</span>
-              <span class="phase-chip">Shipment</span>
-              <span class="phase-chip">Thailand / Customs</span>
-              <span class="phase-chip">Modification</span>
-              <span class="phase-chip">Delivery</span>
-              <span class="phase-chip">Installation / ติดตั้งเครื่อง</span>
-              <span class="phase-chip">Handover / ส่งมอบ</span>
-            </div>
-
-            <div class="machine-timeline">
-              <div class="timeline-stage done">
-                <div class="timeline-node">1</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>WIN / ปิดการขาย</span><span class="badge b-green">Done</span></div>
-                  <div class="timeline-meta"><span>Sales</span><span>•</span><span>Customer PO confirmed</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage done">
-                <div class="timeline-node">2</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Place Order to Supplier / สั่งผลิตเครื่อง</span><span class="badge b-green">Done</span></div>
-                  <div class="timeline-meta"><span>Purchasing / Sales</span><span>•</span><span>PO to supplier</span></div>
-                  <div class="timeline-note">เริ่มติดตามข้อมูลรุ่น เครื่อง Option และ requirement ที่ยืนยันกับลูกค้า</div>
-                </div>
-              </div>
-
-              <div class="timeline-stage current">
-                <div class="timeline-node">3</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Order Confirmation (OC)</span><span class="badge b-amber">Current</span></div>
-                  <div class="timeline-meta"><span>Supplier</span><span>•</span><span>รอ/ตรวจ OC และ Final Specification</span></div>
-                  <div class="timeline-note">AI สามารถช่วยเทียบ OC กับข้อมูลจาก OPP เพื่อแจ้งค่าที่ไม่ตรงหรือข้อมูลที่ยังขาด</div>
-                  <div class="timeline-actions"><button class="btn ai">AI Compare</button><button class="btn">View OC</button></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">4</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Engineering / Final Specification</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Supplier + Sales + Service</span></div>
-                  <div class="timeline-note">ยืนยัน Final Speed, Capacity, Pack, Forming Depth, Vacuum, Printer/Labeler และ Options</div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">5</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Machine in Production / อยู่ระหว่างผลิต</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Supplier</span><span>•</span><span>Production progress</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage optional">
-                <div class="timeline-node">6</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>FAT / Factory Acceptance Test</span><span class="badge b-gray">Optional</span></div>
-                  <div class="timeline-meta"><span>Supplier / Customer / Service</span></div>
-                  <div class="timeline-note">ใช้เฉพาะเครื่องที่ต้องมี FAT ก่อนส่ง</div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">7</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Machine Completed / Ready for Shipment</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Supplier</span><span>•</span><span>ตรวจ readiness และ shipping documents</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">8</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Shipped / In Transit</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Shipment</span><span>•</span><span>ETD / ETA / AWB or B/L</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">9</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Arrived Thailand</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Logistics</span><span>•</span><span>เครื่องถึงไทย</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">10</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Customs Clearance / เคลียร์เครื่อง</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Import / Customs</span><span>•</span><span>อาจมี สมอ. / เอกสารนำเข้า</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage optional">
-                <div class="timeline-node">11</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Modify in Thailand / ปรับแต่งเครื่อง</span><span class="badge b-gray">Optional</span></div>
-                  <div class="timeline-meta"><span>Service / Workshop</span></div>
-                  <div class="timeline-note">เช่น ติด Labeler / Printer, ปรับไฟ, เพิ่มอุปกรณ์, แก้ไขตาม requirement ก่อนส่งลูกค้า</div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">12</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Ready for Delivery / พร้อมส่งลูกค้า</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Service + Logistics</span><span>•</span><span>เช็ก Site readiness ก่อนส่ง</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">13</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Deliver to Customer / ส่งเครื่องถึงลูกค้า</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Delivery</span><span>•</span><span>ตรวจสภาพและของครบก่อน/หลังขนส่ง</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">14</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Installation & Commissioning</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Service</span><span>•</span><span>ติดตั้ง / Test run / Actual result</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">15</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Training & Customer Acceptance</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Service + Customer</span><span>•</span><span>อบรมและเซ็นรับ</span></div>
-                </div>
-              </div>
-
-              <div class="timeline-stage">
-                <div class="timeline-node">16</div>
-                <div class="timeline-card">
-                  <div class="timeline-title"><span>Handover Completed / Machine Register</span><span class="badge b-gray">Pending</span></div>
-                  <div class="timeline-meta"><span>Service</span><span>•</span><span>เปิดใช้งาน Machine Master / PM / History</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="page" id="handover">
-        <div class="page-title">
-          <div><h1>AI Handover Review / ตรวจส่งต่องานด้วย AI</h1><div class="subtitle">AI รวมข้อมูลจาก OPP ให้ Service ตรวจ ก่อนสร้าง Installation Job / Machine Register</div></div>
-          <div class="right"><button class="btn" onclick="go('opp')">Back to OPP / กลับหน้า OPP</button><button class="btn primary" onclick="approveHandover()">Approve for Service / อนุมัติส่งต่อ Service</button></div>
-        </div>
-
-        <div class="steps"><span class="step done">OPP Final / ปิด OPP</span><span class="step current">AI Review / AI ตรวจข้อมูล</span><span class="step">Pre-Installation / เตรียมก่อนติดตั้ง</span><span class="step">Receiving/QC / ตรวจรับและ QC</span><span class="step">Installation / ติดตั้งเครื่อง</span><span class="step">Handover / ส่งมอบ</span></div>
-
-        <div class="grid g3">
-          <div class="card kpi"><div class="v" id="foundCount">8</div><div class="l">Fields found</div></div>
-          <div class="card kpi"><div class="v" id="missingCount">3</div><div class="l">Missing / need confirmation</div></div>
-          <div class="card kpi"><div class="v">OPP</div><div class="l">Primary source</div></div>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <div class="hd"><h3>Review extracted data</h3><span class="badge b-purple">AI assisted</span></div>
-          <div class="bd">
-            <div class="review-row"><div><b>Product</b><div class="source">Source: structured OPP field</div></div><div>Ready meal / sausage</div><div><span class="badge b-green">High confidence</span></div><div><button class="btn success">Confirmed</button></div></div>
-            <div class="review-row"><div><b>Final Speed</b><div class="source">Source: structured OPP field</div></div><div>12 packs/min</div><div><span class="badge b-green">High confidence</span></div><div><button class="btn success">Confirmed</button></div></div>
-            <div class="review-row"><div><b>Forming Depth</b><div class="source">Source: structured OPP field</div></div><div>80 mm</div><div><span class="badge b-green">High confidence</span></div><div><button class="btn success">Confirmed</button></div></div>
-            <div class="review-row"><div><b>Printer / Labeler</b><div class="source">Source: OPP field + Note</div></div><div>Labeler EF + CAB printer</div><div><span class="badge b-green">High confidence</span></div><div><button class="btn success">Confirmed</button></div></div>
-            <div class="review-row"><div><b>Target Capacity</b><div class="source">Source: not found</div></div><div class="muted">—</div><div><span class="badge b-amber">Missing</span></div><div><button class="btn">Add value</button></div></div>
-            <div class="review-row"><div><b>Final Vacuum</b><div class="source">Source: not found</div></div><div class="muted">—</div><div><span class="badge b-amber">Missing</span></div><div><button class="btn">Add value</button></div></div>
-            <div class="review-row"><div><b>Printing Position</b><div class="source">Source: not found</div></div><div class="muted">—</div><div><span class="badge b-amber">Missing</span></div><div><button class="btn">Add value</button></div></div>
-          </div>
-        </div>
-
-        <div class="ai-box" style="margin-top:16px">
-          <div class="ai-head"><div class="ai-title">AI recommendation</div><span class="badge b-purple">Human approval required</span></div>
-          <div>ข้อมูลที่ map จาก ERP โดยตรงให้ใช้เป็นค่าหลัก ส่วนค่าที่ AI พบจาก Note ให้แสดงเป็น Draft และต้องให้ Sales/Service ยืนยันก่อนนำไปใช้ในขั้นติดตั้งหรือ Register เครื่อง</div>
-        </div>
-      </section>
-
-      <section class="page" id="preinstall">
-        <div class="page-title">
-          <div><h1>Pre-Installation / เตรียมก่อนติดตั้ง</h1><div class="subtitle">Service เตรียม Site, Utility และเอกสารก่อนช่างเข้าติดตั้ง</div></div>
-          <div class="right"><button class="btn">Save / บันทึก</button><button class="btn primary" onclick="go('receiving')">Mark Ready → Receiving</button></div>
-        </div>
-        <div class="steps"><span class="step done">OPP Final / ปิด OPP</span><span class="step done">AI Review / AI ตรวจข้อมูล</span><span class="step current">Pre-Installation / เตรียมก่อนติดตั้ง</span><span class="step">Receiving/QC / ตรวจรับและ QC</span><span class="step">Installation / ติดตั้งเครื่อง</span><span class="step">Handover / ส่งมอบ</span></div>
-
-        <div class="grid g2">
-          <div class="card">
-            <div class="hd"><h3>Site & Utility Checklist</h3><span class="badge b-blue">Service</span></div>
-            <div class="bd checklist">
-              <label class="check"><input type="checkbox" checked><span><b>Electrical power / ไฟ</b><small>ค่าไฟจริงควรมาจาก Supplier document และให้ช่างยืนยันก่อนใช้งาน</small></span></label>
-              <label class="check"><input type="checkbox"><span><b>Compressed air / ลม</b><small>Pressure / consumption</small></span></label>
-              <label class="check"><input type="checkbox"><span><b>Water / น้ำ</b><small>Requirement / connection point</small></span></label>
-              <label class="check"><input type="checkbox"><span><b>Drain / ระบายน้ำ</b><small>ถ้ามี</small></span></label>
-              <label class="check"><input type="checkbox" checked><span><b>Installation area / พื้นที่ติดตั้ง</b><small>พื้นที่พร้อม, ทางเข้าเครื่อง, unloading plan</small></span></label>
-            </div>
-          </div>
-          <div class="card">
-            <div class="hd"><h3>Supplier Documents</h3><span class="badge b-purple">Email + AI later</span></div>
-            <div class="bd">
-              <div class="callout">เอกสารส่วนนี้ <b>ไม่ดึงจาก OPP</b> แต่จะมาจาก Email/Attachment ที่ Supplier ส่งมา และ AI ช่วยจำแนก/สรุปให้ Service ตรวจ</div>
-              <div class="checklist" style="margin-top:12px">
-                <div class="check"><span>📄</span><span><b>Utility document</b><small>Pending — document master ยังไม่ final</small></span></div>
-                <div class="check"><span>📄</span><span><b>Manual / Drawing</b><small>Pending</small></span></div>
-                <div class="check"><span>📄</span><span><b>Packing List</b><small>Pending</small></span></div>
-                <div class="check"><span>📄</span><span><b>Other supplier files</b><small>AI classify → human confirm</small></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="page" id="receiving">
-        <div class="page-title">
-          <div><h1>Machine Receiving & QC</h1><div class="subtitle">ตรวจรับเครื่องก่อนติดตั้ง: รุ่น/สเปค/จำนวน/สภาพ/ของขาด/ความเสียหาย</div></div>
-          <div class="right"><button class="btn">Save QC / บันทึก QC</button><button class="btn primary" onclick="go('install')">QC Pass → Installation</button></div>
-        </div>
-        <div class="steps"><span class="step done">OPP Final / ปิด OPP</span><span class="step done">AI Review / AI ตรวจข้อมูล</span><span class="step done">Pre-Installation / เตรียมก่อนติดตั้ง</span><span class="step current">Receiving/QC / ตรวจรับและ QC</span><span class="step">Installation / ติดตั้งเครื่อง</span><span class="step">Handover / ส่งมอบ</span></div>
-        <div class="grid g2">
-          <div class="card">
-            <div class="hd"><h3>Machine Identity</h3></div>
-            <div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
-              <div class="field"><label>Brand</label><input value="VARIOVAC"></div>
-              <div class="field"><label>Model</label><input value="Optimus"></div>
-              <div class="field"><label>Serial No.</label><input placeholder="Scan / enter serial"></div>
-              <div class="field"><label>Nameplate photo</label><input type="file"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="hd"><h3>QC Result</h3></div>
-            <div class="bd checklist">
-              <label class="check"><input type="checkbox"><span><b>Machine matches ordered specification</b><small>เทียบกับข้อมูล OPP ที่ผ่านการยืนยัน</small></span></label>
-              <label class="check"><input type="checkbox"><span><b>Items complete per Packing List</b><small>ตรวจจำนวนและ accessories</small></span></label>
-              <label class="check"><input type="checkbox"><span><b>No visible damage</b><small>ตรวจรอยกระแทก / ชำรุด</small></span></label>
-              <label class="check"><input id="claimBox" type="checkbox" onchange="toggleClaim()"><span><b>Claim required</b><small>ถ้ามีของขาด/เสียหาย ให้เปิด Claim case</small></span></label>
-            </div>
-            <div id="claimPanel" class="hidden" style="margin-top:12px">
-              <div class="field"><label>Claim reason</label><textarea placeholder="Missing part / damaged cover / transport damage..."></textarea></div>
-              <button class="btn danger" style="margin-top:8px">Create Claim Draft</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="page" id="install">
-        <div class="page-title">
-          <div><h1>Installation & Commissioning</h1><div class="subtitle">ช่างเห็นสิ่งที่ Sales ขายไว้ เทียบกับค่าจริงหน้างาน และบันทึกผลติดตั้ง</div></div>
-          <div class="right"><button class="btn">Save Progress / บันทึกความคืบหน้า</button><button class="btn primary" onclick="go('delivery')">Complete Installation</button></div>
-        </div>
-        <div class="grid g2">
-          <div class="card">
-            <div class="hd"><h3>Sold Requirement vs Actual</h3><span class="badge b-purple">AI/OPP handover</span></div>
-            <div class="bd table-wrap">
-              <table>
-                <thead><tr><th>Item</th><th>Sold / Confirmed</th><th>Actual</th><th>Status</th></tr></thead>
-                <tbody>
-                  <tr><td>Final Speed</td><td>12 packs/min</td><td><input value="12 packs/min"></td><td><span class="badge b-green">Match</span></td></tr>
-                  <tr><td>Forming Depth</td><td>80 mm</td><td><input value="80 mm"></td><td><span class="badge b-green">Match</span></td></tr>
-                  <tr><td>Printer / Labeler</td><td>Labeler EF + CAB</td><td><input value="Installed"></td><td><span class="badge b-green">OK</span></td></tr>
-                  <tr><td>Final Vacuum</td><td>Not confirmed</td><td><input placeholder="Enter actual"></td><td><span class="badge b-amber">Review</span></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="card">
-            <div class="hd"><h3>Installation Record</h3></div>
-            <div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
-              <div class="field"><label>Installation date</label><input type="date"></div>
-              <div class="field"><label>Service engineer</label><input value="Service Team"></div>
-              <div class="field span2"><label>Test run / Commissioning result</label><textarea placeholder="บันทึกผลทดสอบเครื่อง..."></textarea></div>
-              <div class="field span2"><label>Installation photos</label><input type="file" multiple></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="page" id="delivery">
-        <div class="handover-hero">
-          <div>
-            <h1>Machine Handover / ส่งมอบเครื่องจักร</h1>
-            <div class="sub">แบบฟอร์มส่งมอบเครื่องฉบับดิจิทัล • ตรวจครบก่อนลูกค้าเซ็นรับและเปิด Machine Register</div>
-          </div>
-          <div class="handover-status">
-            <span class="badge b-green">Installation Complete</span>
-            <span class="badge b-amber">Waiting Customer Acceptance</span>
-            <button class="btn">Save Draft / บันทึกร่าง</button>
-            <button class="btn primary" onclick="completeHandover()">Complete Handover / ปิดงานส่งมอบ</button>
-          </div>
-        </div>
-
-        <div class="card premium-section">
-          <div class="hd">
-            <div><h3>Machine & Delivery Summary / ข้อมูลเครื่องและการส่งมอบ</h3><div class="section-caption">สรุปข้อมูลหลักจาก OPP + QC + Installation โดยไม่ต้องกรอกซ้ำ</div></div>
-            <span class="badge b-purple">Auto-filled from ERP</span>
-          </div>
-          <div class="bd">
-            <div class="summary-grid">
-              <div class="summary-box"><div class="k">Customer / ลูกค้า</div><div class="v">Demo Food Co., Ltd.</div></div>
-              <div class="summary-box"><div class="k">Opportunity</div><div class="v">REG - OL3151</div></div>
-              <div class="summary-box"><div class="k">Machine / เครื่อง</div><div class="v">Thermoform</div></div>
-              <div class="summary-box"><div class="k">Brand / ผู้ผลิต</div><div class="v">VARIOVAC</div></div>
-              <div class="summary-box"><div class="k">Model</div><div class="v">Optimus</div></div>
-              <div class="summary-box"><div class="k">Serial No.</div><div class="v">OL3151</div></div>
-              <div class="summary-box"><div class="k">Installation completed</div><div class="v">—</div></div>
-              <div class="summary-box"><div class="k">Location / สถานที่ติดตั้ง</div><div class="v">Customer Site</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid g2" style="margin-top:16px">
-          <div class="card premium-section">
-            <div class="hd"><div><h3>Utility Verification / ตรวจสอบ Utility</h3><div class="section-caption">อ้างอิง requirement ของ Supplier และค่าจริงหน้างาน</div></div></div>
-            <div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
-              <div class="field"><label>Power Supply / ไฟฟ้า</label><input value="400 V / 3 Phase / 50 Hz"></div>
-              <div class="field"><label>Measured Voltage / แรงดันวัดจริง</label><input placeholder="L1-L2 / L2-L3 / L3-L1"></div>
-              <div class="field"><label>Ground / กราวด์</label><input placeholder="ค่าที่วัดได้"></div>
-              <div class="field"><label>Air Pressure Supply / แรงดันลม</label><input placeholder="bar / MPa"></div>
-              <div class="field"><label>Vacuum Pump / ปั๊มสุญญากาศ</label><input placeholder="kW / status"></div>
-              <div class="field"><label>Sealing Air / ลมซีล</label><input placeholder="bar / MPa"></div>
-            </div>
-          </div>
-
-          <div class="card premium-section">
-            <div class="hd"><div><h3>Overall Quality Check / ตรวจสอบคุณภาพรวม</h3><div class="section-caption">ใช้แทนการเขียน Pass ทีละบรรทัดบนกระดาษ</div></div></div>
-            <div class="bd qc-grid">
-              <div class="qc-row"><span class="name">Machine condition / สภาพเครื่อง</span><span class="opt"><label class="choice"><input type="radio" name="q1"> Pass</label><label class="choice"><input type="radio" name="q1"> Fail</label></span></div>
-              <div class="qc-row"><span class="name">Safety system / ระบบความปลอดภัย</span><span class="opt"><label class="choice"><input type="radio" name="q2"> Pass</label><label class="choice"><input type="radio" name="q2"> Fail</label></span></div>
-              <div class="qc-row"><span class="name">Clamp / ชุดแคลมป์</span><span class="opt"><label class="choice"><input type="radio" name="q3"> Pass</label><label class="choice"><input type="radio" name="q3"> Fail</label></span></div>
-              <div class="qc-row"><span class="name">Sealing / ระบบซีล</span><span class="opt"><label class="choice"><input type="radio" name="q4"> Pass</label><label class="choice"><input type="radio" name="q4"> Fail</label></span></div>
-              <div class="qc-row"><span class="name">Vacuum system / ระบบสุญญากาศ</span><span class="opt"><label class="choice"><input type="radio" name="q5"> Pass</label><label class="choice"><input type="radio" name="q5"> Fail</label></span></div>
-              <div class="qc-row"><span class="name">Emergency stop / E-Stop</span><span class="opt"><label class="choice"><input type="radio" name="q6"> Pass</label><label class="choice"><input type="radio" name="q6"> Fail</label></span></div>
-              <div class="qc-row"><span class="name">Cooling system / ระบบหล่อเย็น</span><span class="opt"><label class="choice"><input type="radio" name="q7"> Pass</label><label class="choice"><input type="radio" name="q7"> Fail</label></span></div>
-              <div class="qc-row"><span class="name">Other / อื่น ๆ</span><span class="opt"><label class="choice"><input type="radio" name="q8"> Pass</label><label class="choice"><input type="radio" name="q8"> N/A</label></span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid g2" style="margin-top:16px">
-          <div class="card premium-section">
-            <div class="hd"><div><h3>Test Run & Product Setting / ทดสอบเดินเครื่อง</h3><div class="section-caption">บันทึกค่าที่ทดลองจริงและเงื่อนไขการผลิตที่ลูกค้ายอมรับ</div></div></div>
-            <div class="bd">
-              <div class="form-grid" style="grid-template-columns:repeat(2,1fr)">
-                <div class="field"><label>Product / สินค้าที่ทดสอบ</label><input placeholder="ชื่อสินค้า"></div>
-                <div class="field"><label>Film / วัสดุ</label><input placeholder="ชนิด / ขนาด"></div>
-                <div class="field"><label>Final Speed</label><input value="12 packs/min"></div>
-                <div class="field"><label>Final Vacuum</label><input placeholder="ค่าจริง"></div>
-                <div class="field"><label>Forming Depth</label><input value="80 mm"></div>
-                <div class="field"><label>Test Result / ผลทดสอบ</label><select><option>Pass / ผ่าน</option><option>Conditional / ผ่านแบบมีเงื่อนไข</option><option>Fail / ไม่ผ่าน</option></select></div>
-                <div class="field span2"><label>Test Note / หมายเหตุการทดสอบ</label><textarea placeholder="บันทึก parameter, product result, pending item..."></textarea></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card premium-section">
-            <div class="hd"><div><h3>Training Record / บันทึกการอบรม</h3><div class="section-caption">เก็บรายชื่อผู้เข้าอบรมและหัวข้อที่ส่งมอบ</div></div><button class="btn">+ Add Attendee / เพิ่มผู้เข้าอบรม</button></div>
-            <div class="bd">
-              <div class="table-wrap">
-                <table>
-                  <thead><tr><th>#</th><th>Name / ชื่อ</th><th>Department / แผนก</th><th>Topic / หัวข้อ</th><th>Signature / ลงชื่อ</th></tr></thead>
-                  <tbody>
-                    <tr><td>1</td><td><input placeholder="ชื่อผู้เข้าอบรม"></td><td><input placeholder="แผนก"></td><td>Operation / การใช้งาน</td><td><button class="btn">Sign</button></td></tr>
-                    <tr><td>2</td><td><input placeholder="ชื่อผู้เข้าอบรม"></td><td><input placeholder="แผนก"></td><td>Cleaning & Safety</td><td><button class="btn">Sign</button></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card premium-section" style="margin-top:16px">
-          <div class="hd"><div><h3>Document Handover / เอกสารที่ส่งมอบ</h3><div class="section-caption">อ้างอิงจาก Supplier Documents / Document Master และเช็กว่าลูกค้าได้รับครบ</div></div><span class="badge b-purple">AI can classify files</span></div>
-          <div class="bd doc-grid">
-            <label class="doc-item"><span>Manual / คู่มือ</span><input type="checkbox"></label>
-            <label class="doc-item"><span>Electrical Drawing / แบบไฟฟ้า</span><input type="checkbox"></label>
-            <label class="doc-item"><span>Pneumatic Drawing / แบบลม</span><input type="checkbox"></label>
-            <label class="doc-item"><span>Utility Requirement / ข้อกำหนด Utility</span><input type="checkbox"></label>
-            <label class="doc-item"><span>Packing List / รายการบรรจุ</span><input type="checkbox"></label>
-            <label class="doc-item"><span>Service / Warranty Document / เอกสารบริการและประกัน</span><input type="checkbox"></label>
-          </div>
-        </div>
-
-        <div class="card premium-section" style="margin-top:16px">
-          <div class="hd"><div><h3>Installation Evidence / หลักฐานการติดตั้งและสภาพเครื่อง</h3><div class="section-caption">แนบรูปเพื่อยืนยันสภาพเครื่อง จุดติดตั้ง และงานที่ส่งมอบ</div></div><button class="btn">Upload Photos / อัปโหลดรูป</button></div>
-          <div class="bd photo-grid">
-            <div class="photo-slot">Machine overview<br>ภาพเครื่องโดยรวม</div>
-            <div class="photo-slot">Nameplate / Serial<br>ป้ายเครื่องและ Serial</div>
-            <div class="photo-slot">Installation area<br>พื้นที่ติดตั้ง</div>
-            <div class="photo-slot">Control panel<br>หน้าจอ/ตู้ควบคุม</div>
-            <div class="photo-slot">Product test<br>ผลทดสอบสินค้า</div>
-            <div class="photo-slot">Other evidence<br>รูปเพิ่มเติม</div>
-          </div>
-        </div>
-
-        <div class="grid g2" style="margin-top:16px">
-          <div class="card premium-section">
-            <div class="hd"><h3>Warranty & Service / การรับประกันและบริการ</h3></div>
-            <div class="bd">
-              <div class="warranty-box">
-                <b>Warranty period / ระยะเวลารับประกัน</b><br>
-                <div class="field" style="margin-top:8px"><input placeholder="เช่น 12 เดือนหลังติดตั้งและ Commissioning"></div>
-                <div style="margin-top:10px">เงื่อนไขการรับประกันและขอบเขตบริการควรดึงจากเงื่อนไขของงานขาย/สัญญาที่ผ่านการยืนยันแล้ว เพื่อป้องกันข้อความในใบส่งมอบไม่ตรงกับข้อตกลงจริง</div>
-              </div>
-              <div class="field" style="margin-top:12px"><label>Pending / Remark / หมายเหตุ</label><textarea placeholder="รายการคงค้าง งานแก้ไข นัดติดตาม หรือข้อยกเว้นในการส่งมอบ"></textarea></div>
-            </div>
-          </div>
-
-          <div class="card premium-section">
-            <div class="hd"><h3>Final Acceptance / ยืนยันการส่งมอบ</h3></div>
-            <div class="bd checklist">
-              <label class="check"><input type="checkbox"><span><b>Installation completed / ติดตั้งเครื่องเรียบร้อย</b></span></label>
-              <label class="check"><input type="checkbox"><span><b>Test run accepted / ยอมรับผลการทดสอบ</b></span></label>
-              <label class="check"><input type="checkbox"><span><b>Training completed / อบรมเรียบร้อย</b></span></label>
-              <label class="check"><input type="checkbox"><span><b>Documents received / รับเอกสารครบ</b></span></label>
-              <label class="check"><input type="checkbox"><span><b>Machine condition accepted / ยอมรับสภาพเครื่อง</b></span></label>
-            </div>
-          </div>
-        </div>
-
-        <div class="card premium-section" style="margin-top:16px">
-          <div class="hd"><div><h3>Sign-off / ลงนามรับรอง</h3><div class="section-caption">รองรับลายเซ็นดิจิทัลหรือแนบเอกสารที่เซ็นแล้ว</div></div></div>
-          <div class="bd sign-grid">
-            <div class="sign-card"><b>Customer / ลูกค้า</b><div class="sign-box">Digital Signature</div><div class="field"><label>Name / ชื่อ</label><input placeholder="ชื่อผู้รับมอบ"></div><div class="field"><label>Date / วันที่</label><input type="date"></div></div>
-            <div class="sign-card"><b>Service Manager / ผู้จัดการ Service</b><div class="sign-box">Digital Signature</div><div class="field"><label>Name / ชื่อ</label><input placeholder="ชื่อผู้ตรวจ/ผู้ส่งมอบ"></div><div class="field"><label>Date / วันที่</label><input type="date"></div></div>
-            <div class="sign-card"><b>Sales Representative / ฝ่ายขาย</b><div class="sign-box">Digital Signature</div><div class="field"><label>Name / ชื่อ</label><input placeholder="ชื่อฝ่ายขาย"></div><div class="field"><label>Date / วันที่</label><input type="date"></div></div>
-          </div>
-        </div>
-
-        <div class="right" style="margin-top:16px">
-          <button class="btn">Preview PDF / ดูตัวอย่างเอกสาร</button>
-          <button class="btn">Save Draft / บันทึกร่าง</button>
-          <button class="btn primary" onclick="completeHandover()">Customer Accepted & Register Machine / ลูกค้ารับมอบและลงทะเบียนเครื่อง</button>
-        </div>
-      </section>
-
-      <section class="page" id="register">
-        <div class="page-title">
-          <div><h1>Machine Register — OL3151</h1><div class="subtitle">ข้อมูลที่ผ่านการตรวจจาก OPP + QC + Installation + Handover แล้ว จึงมาเป็น Machine Master</div></div>
-          <div class="right"><button class="btn">Edit / แก้ไข</button><button class="btn primary">Save Machine / บันทึกเครื่อง</button></div>
-        </div>
-
-        <div class="tabs">
-          <button class="tab active">Overview / ภาพรวม</button>
-          <button class="tab">Installation / ติดตั้งเครื่อง</button>
-          <button class="tab">PM Program / โปรแกรม PM</button>
-          <button class="tab">PM Schedule / ตาราง PM</button>
-          <button class="tab">Spare Parts / อะไหล่</button>
-          <button class="tab">Maintenance History / ประวัติซ่อมบำรุง</button>
-          <button class="tab">Attachments / ไฟล์แนบ</button>
-          <button class="tab">Machine Health / สุขภาพเครื่อง</button>
-        </div>
-
-        <div class="grid g2">
-          <div class="card">
-            <div class="hd"><h3>General Information</h3><span class="badge b-green">Verified</span></div>
-            <div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
-              <div class="field"><label>Customer</label><input value="Demo Food Co., Ltd."></div>
-              <div class="field"><label>Machine Code</label><input value="OL3151"></div>
-              <div class="field"><label>Brand</label><input value="VARIOVAC"></div>
-              <div class="field"><label>Model</label><input value="Optimus"></div>
-              <div class="field"><label>Serial No.</label><input value="Pending"></div>
-              <div class="field"><label>Installation Date</label><input value="Pending"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="hd"><h3>Installation Summary</h3><span class="badge b-blue">New tab</span></div>
-            <div class="bd timeline">
-              <div class="tl"><div class="dot"></div><div class="txt"><b>OPP Final / ปิด OPP</b><small>REG - OL3151 • Sales confirmed</small></div></div>
-              <div class="tl"><div class="dot"></div><div class="txt"><b>AI Handover Approved</b><small>Service reviewed machine requirements</small></div></div>
-              <div class="tl"><div class="dot"></div><div class="txt"><b>Receiving & QC / ตรวจรับเครื่องและ QC</b><small>Waiting for machine arrival</small></div></div>
-              <div class="tl"><div class="dot"></div><div class="txt"><b>Installation & Handover</b><small>Pending</small></div></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div>
-  </main>
 </div>
-
+</div>
+<div class="card note-section-card" style="margin-top:16px">
+<div class="hd"><div class="section-title"><span class="section-dot">N</span><h3>Opportunity Note / Description</h3></div><span class="badge b-gray">Sales Note / บันทึกฝ่ายขาย</span></div>
+<div class="bd"><textarea style="width:100%;min-height:160px;border:1px solid #cfd6df;border-radius:8px;padding:12px">Customer confirmed VARIOVAC Thermoform line with Labeler EF and CAB printer. Please coordinate installation plan and confirm final utility documents with supplier. Additional commercial follow-up can continue here.</textarea></div>
+</div>
+<div class="erp-tabs">
+<button class="erp-tab active">Overview / ภาพรวม</button><button class="erp-tab">Related Items / รายการที่เกี่ยวข้อง</button><button class="erp-tab">Activities / กิจกรรม</button><button class="erp-tab">Sales Documents / เอกสารการขาย</button><button class="erp-tab">Attachments / ไฟล์แนบ</button><button class="erp-tab">Conversation / การสนทนา</button><button class="erp-tab">Feed / ความเคลื่อนไหว</button><button class="erp-tab">ใบฟังก์ชั่น</button>
+</div>
+</div>
+<div class="card">
+<div class="hd"><div class="section-title"><span class="section-dot">C</span><h3>Contact</h3></div><button class="btn">Add</button></div>
+<div class="bd"><div class="table-wrap"><table><thead><tr><th>Priority</th><th>Role</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Action</th></tr></thead><tbody><tr><td colspan="7"><div class="contact-empty">ยังไม่มี Contact ที่ผูกกับ Opportunity นี้</div></td></tr></tbody></table></div></div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd">
+<div>
+<div class="section-title"><span class="section-dot">S</span><h3>Sales Pipeline / ขั้นตอนก่อนปิดการขาย</h3></div>
+<div class="section-help">ใช้ติดตามกิจกรรมของ Sales ก่อน Opportunity เปลี่ยนเป็น WIN</div>
+</div>
+<span class="badge b-gray">Pre-Sales</span>
+</div>
+<div class="bd">
+<div class="sales-pipeline-grid">
+<div class="sales-step done">
+<div class="top"><input checked="" type="checkbox"/> แนะนำสินค้า</div>
+<div class="field"><label>Due Date</label><input type="date"/></div>
+</div>
+<div class="sales-step done">
+<div class="top"><input checked="" type="checkbox"/> ส่งใบเสนอราคา</div>
+<div class="field"><label>Due Date</label><input type="date"/></div>
+</div>
+<div class="sales-step">
+<div class="top"><input type="checkbox"/> ส่งสเป็ค</div>
+<div class="field"><label>Due Date</label><input type="date"/></div>
+</div>
+<div class="sales-step">
+<div class="top"><input type="checkbox"/> รอลูกค้าพิจารณา</div>
+<div class="field"><label>Due Date</label><input type="date"/></div>
+</div>
+<div class="sales-step">
+<div class="top"><input type="checkbox"/> ติดตามลูกค้า</div>
+<div class="field"><label>Due Date</label><input type="date"/></div>
+</div>
+<div class="sales-step">
+<div class="top"><input type="checkbox"/> นำเสนอ</div>
+<div class="field"><label>Due Date</label><input type="date"/></div>
+</div>
+<div class="sales-step">
+<div class="top"><input type="checkbox"/> เข้าไปนำเสนอ</div>
+<div class="field"><label>Due Date</label><input type="date"/></div>
+</div>
+<div class="sales-step">
+<div class="top"><input type="checkbox"/> เจรจา / ปรับเงื่อนไข</div>
+<div class="field"><label>Due Date</label><input type="date"/></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="active page" id="register">
+<div class="machine-hero">
+<div class="machine-hero-top">
+<div>
+<div class="machine-kicker">MACHINE MASTER</div>
+<h1>Machine Register — OL3151</h1>
+<div class="subtitle">สร้างจาก Opportunity เมื่อ Sales กด WIN • งานหลังการขายทั้งหมดอยู่ภายใต้เครื่องนี้</div>
+</div>
+<div class="machine-actions">
+<span class="badge b-green">Created from WIN</span>
+<span class="badge b-amber">Waiting Order Confirmation</span>
+<button class="btn">Edit / แก้ไข</button>
+<button class="btn primary">Save Machine / บันทึกเครื่อง</button>
+</div>
+</div>
+</div>
+<div class="machine-tabs-v2">
+<button class="machine-tab active" data-mtab="m-overview">Overview / ภาพรวม</button>
+<button class="machine-tab" data-mtab="m-ai">AI Summary / AI สรุปข้อมูล</button>
+<button class="machine-tab" data-mtab="m-order">Order &amp; Delivery / สั่งผลิตและขนส่ง</button>
+<button class="machine-tab" data-mtab="m-pre">Pre-Installation / เตรียมก่อนติดตั้ง</button>
+<button class="machine-tab" data-mtab="m-qc">Receiving &amp; QC / ตรวจรับเครื่อง</button>
+<button class="machine-tab" data-mtab="m-install">Installation / ติดตั้งและทดสอบ</button>
+<button class="machine-tab" data-mtab="m-handover">Handover / ส่งมอบลูกค้า</button>
+<button class="machine-tab" data-mtab="m-after">PM &amp; After Sales / หลังการขาย</button>
+</div>
+<div class="machine-panel active" id="m-overview">
+<div class="grid g2">
+<div class="card">
+<div class="hd"><h3>General Information / ข้อมูลเครื่อง</h3><span class="badge b-blue">จาก OPP</span></div>
+<div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
+<div class="field"><label>Customer / ลูกค้า</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"/></div>
+<div class="field"><label>Machine Code / รหัสเครื่อง</label><input value="OL3151"/></div>
+<div class="field"><label>Brand / ผู้ผลิต</label><input value="VARIOVAC"/></div>
+<div class="field"><label>Model / รุ่น</label><input value="Optimus"/></div>
+<div class="field"><label>Serial No.</label><input placeholder="Pending"/></div>
+<div class="field"><label>Current Status / สถานะปัจจุบัน</label><input value="Order Confirmation"/></div>
+</div>
+</div>
+<div class="card">
+<div class="hd"><h3>Sales Confirmed Requirement / ข้อมูลที่ Sales ส่งมา</h3><span class="badge b-green">Auto transferred</span></div>
+<div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
+<div class="field"><label>Final Speed</label><input value="12 packs/min"/></div>
+<div class="field"><label>Target Capacity / กำลังผลิต</label><input placeholder="Pending confirmation"/></div>
+<div class="field"><label>Pack / รูปแบบแพ็ก</label><input value="Ready meal / sausage"/></div>
+<div class="field"><label>Forming Depth</label><input value="80 mm"/></div>
+<div class="field"><label>Final Vacuum</label><input placeholder="Pending confirmation"/></div>
+<div class="field"><label>Printer / Labeler</label><input value="Labeler EF + CAB printer"/></div>
+<div class="field span2"><label>Printing Position &amp; Requirement / ตำแหน่งและรายละเอียดการพิมพ์</label><textarea placeholder="Top film / Lot / MFG / EXP / Barcode"></textarea></div>
+</div>
+</div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><h3>Machine Progress / ความคืบหน้าเครื่อง</h3><span class="badge b-gray">Current: Order Confirmation</span></div>
+<div class="bd timeline">
+<div class="tl"><div class="dot"></div><div class="txt"><b>WIN / ปิดการขาย</b><small>Sales กด WIN → สร้าง Machine Record</small></div></div>
+<div class="tl"><div class="dot"></div><div class="txt"><b>Order Confirmation</b><small>รอ/ตรวจ OC จาก Supplier</small></div></div>
+<div class="tl"><div class="dot"></div><div class="txt"><b>Production → Shipment → Thailand</b><small>ติดตามการผลิตและขนส่ง</small></div></div>
+<div class="tl"><div class="dot"></div><div class="txt"><b>Installation → Handover</b><small>Service ทำงานต่อภายใต้ Machine นี้</small></div></div>
+</div>
+</div>
+</div>
+<div class="machine-panel" id="m-ai">
+<div class="page-title">
+<div><h1>AI Machine Summary / AI สรุปข้อมูลเครื่อง</h1><div class="subtitle">AI อ่าน OPP Fields + Opportunity Note + Supplier Email แล้วสรุปให้ Service ตรวจ</div></div>
+<div class="right"><button class="btn ai">Run AI Review / ให้ AI ตรวจใหม่</button><button class="btn primary">Confirm / ยืนยัน</button></div>
+</div>
+<div class="ai-summary-card">
+<div class="ai-summary-grid">
+<div class="ai-summary-block">
+<h4>ข้อมูลจาก OPP / Structured Fields</h4>
+<ul><li>VARIOVAC Thermoform รุ่น Optimus</li><li>Final Speed 12 packs/min</li><li>Forming Depth 80 mm</li><li>Labeler EF + CAB printer</li></ul>
+<span class="source-chip source-opp">OPP Fields</span>
+</div>
+<div class="ai-summary-block">
+<h4>AI สรุปจาก Opportunity Note</h4>
+<ul><li>ลูกค้ายืนยัน Thermoform line พร้อม Labeler EF และ CAB printer</li><li>ต้องประสานแผนติดตั้ง</li><li>ต้องยืนยัน Final Utility Document กับ Supplier</li></ul>
+<span class="source-chip source-note">Opportunity Note</span>
+</div>
+<div class="ai-summary-block">
+<h4>Service ต้องติดตาม</h4>
+<ul><li>Target Capacity ยังไม่มีข้อมูล</li><li>Final Vacuum ยังไม่ยืนยัน</li><li>Printing Position ยังไม่ระบุ</li><li>Final Utility Document ยังต้องตรวจ</li></ul>
+</div>
+</div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><h3>Data Review / ตรวจข้อมูลและแหล่งที่มา</h3><span class="badge b-gray">คนยืนยันก่อนใช้งาน</span></div>
+<div class="bd data-review">
+<div class="head">Field</div><div class="head">Value</div><div class="head">Source</div><div class="head">Status</div>
+<div>Final Speed</div><div>12 packs/min</div><div><span class="source-chip source-opp">OPP</span></div><div><span class="badge b-green">Confirmed</span></div>
+<div>Forming Depth</div><div>80 mm</div><div><span class="source-chip source-opp">OPP</span></div><div><span class="badge b-green">Confirmed</span></div>
+<div>Printer / Labeler</div><div>Labeler EF + CAB printer</div><div><span class="source-chip source-note">OPP + Note</span></div><div><span class="badge b-green">Confirmed</span></div>
+<div class="missing">Target Capacity</div><div class="missing">—</div><div class="missing"><span class="source-chip source-opp">OPP</span></div><div class="missing"><span class="badge b-amber">Missing</span></div>
+<div class="missing">Final Vacuum</div><div class="missing">—</div><div class="missing"><span class="source-chip source-opp">OPP</span></div><div class="missing"><span class="badge b-amber">Missing</span></div>
+</div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><h3>Supplier Documents / เอกสารจากอีเมล Supplier</h3><span class="source-chip source-email">Email + AI</span></div>
+<div class="bd machine-docs">
+<div class="machine-doc"><div class="name">Order Confirmation</div><div class="meta">AI จับคู่กับ OL3151</div><span class="badge b-green">Matched</span></div>
+<div class="machine-doc"><div class="name">Manual</div><div class="meta">พบจาก Supplier Email</div><span class="badge b-green">Matched</span></div>
+<div class="machine-doc"><div class="name">Utility Document</div><div class="meta">พบ Draft แต่ยังไม่ใช่ Final</div><span class="badge b-amber">Review</span></div>
+<div class="machine-doc"><div class="name">Packing List</div><div class="meta">รอช่วง Shipment</div><span class="badge b-gray">Pending</span></div>
+<div class="machine-doc"><div class="name">Electrical Drawing</div><div class="meta">Supplier attachment</div><span class="badge b-green">Matched</span></div>
+<div class="machine-doc"><div class="name">Other Attachments</div><div class="meta">AI พบไฟล์ที่อาจเกี่ยวข้อง 2 ไฟล์</div><button class="btn">Review</button></div>
+</div>
+</div>
+</div>
+<div class="machine-panel" id="m-order">
+<div class="page-title"><div><h1>Order &amp; Delivery / สั่งผลิตและขนส่ง</h1><div class="subtitle">ติดตามเครื่องตั้งแต่ OC จนพร้อมส่งลูกค้า</div></div></div>
+<div class="machine-stage-wrap">
+<div class="machine-stage-nav">
+<button class="machine-stage-btn active">1. Order Confirmation</button>
+<button class="machine-stage-btn">2. Final Specification</button>
+<button class="machine-stage-btn">3. Production</button>
+<button class="machine-stage-btn">4. FAT (ถ้ามี)</button>
+<button class="machine-stage-btn">5. Ready for Shipment</button>
+<button class="machine-stage-btn">6. Shipped / In Transit</button>
+<button class="machine-stage-btn">7. Arrived Thailand</button>
+<button class="machine-stage-btn">8. Customs Clearance</button>
+<button class="machine-stage-btn">9. Modify in Thailand (ถ้ามี)</button>
+<button class="machine-stage-btn">10. Ready for Delivery</button>
+</div>
+<div class="machine-stage-content">
+<h3>Order Confirmation / ยืนยันคำสั่งซื้อ</h3>
+<div class="subtitle">Supplier ส่ง OC มา → AI จับคู่กับ OL3151 → คนตรวจเทียบกับ OPP</div>
+<div class="form-grid" style="grid-template-columns:repeat(2,1fr);margin-top:14px">
+<div class="field"><label>OC No.</label><input placeholder="Supplier OC number"/></div>
+<div class="field"><label>OC Date</label><input type="date"/></div>
+<div class="field"><label>Expected Ready Date</label><input type="date"/></div>
+<div class="field"><label>Status</label><select><option>Waiting Review</option><option>Confirmed</option></select></div>
+<div class="field span2"><label>AI Compare Result / ผลเทียบ OPP</label><textarea>AI compares model, options, speed, capacity, pack, forming depth, vacuum and printer requirements.</textarea></div>
+</div>
+</div>
+</div>
+</div>
+<div class="machine-panel" id="m-pre">
+<div class="page-title"><div><h1>Pre-Installation / เตรียมก่อนติดตั้ง</h1><div class="subtitle">Site &amp; Utility ของเครื่อง OL3151</div></div></div>
+<div class="grid g2">
+<div class="card"><div class="hd"><h3>Site &amp; Utility Checklist</h3></div><div class="bd checklist">
+<label class="check"><input type="checkbox"/><span><b>Electrical power / ไฟ</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Compressed air / ลม</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Water / น้ำ</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Drain / ระบายน้ำ</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Space &amp; Access / พื้นที่และทางเข้า</b></span></label>
+</div></div>
+<div class="card"><div class="hd"><h3>Required Documents / เอกสารก่อนติดตั้ง</h3></div><div class="bd checklist">
+<label class="check"><input type="checkbox"/><span><b>Final Utility Document</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Electrical Drawing</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Pneumatic Drawing</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Installation Manual</b></span></label>
+</div></div>
+</div>
+</div>
+<div class="machine-panel" id="m-qc">
+<div class="page-title"><div><h1>Receiving &amp; QC / ตรวจรับเครื่อง</h1><div class="subtitle">ตรวจเครื่องจริงเทียบ Order + Packing List</div></div></div>
+<div class="grid g2">
+<div class="card"><div class="hd"><h3>Machine Identity</h3></div><div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
+<div class="field"><label>Brand</label><input value="VARIOVAC"/></div>
+<div class="field"><label>Model</label><input value="Optimus"/></div>
+<div class="field"><label>Serial No.</label><input placeholder="Scan / enter serial"/></div>
+<div class="field"><label>Nameplate Photo</label><input type="file"/></div>
+</div></div>
+<div class="card"><div class="hd"><h3>QC Result / ผลตรวจรับ</h3></div><div class="bd checklist">
+<label class="check"><input type="checkbox"/><span><b>Machine matches ordered specification</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Items complete per Packing List</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>No visible damage</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Claim required / ต้องเคลม</b></span></label>
+</div></div>
+</div>
+</div>
+<div class="machine-panel" id="m-install">
+<div class="page-title"><div><h1>Installation &amp; Commissioning / ติดตั้งและทดสอบ</h1><div class="subtitle">เทียบสิ่งที่ Sales ขายกับค่าจริงหลังติดตั้ง</div></div></div>
+<div class="grid g2">
+<div class="card"><div class="hd"><h3>Sold Requirement vs Actual</h3><span class="badge b-purple">AI compare</span></div><div class="bd">
+<table><thead><tr><th>Item</th><th>Sold</th><th>Actual</th><th>Status</th></tr></thead><tbody>
+<tr><td>Final Speed</td><td>12 packs/min</td><td><input value="12 packs/min"/></td><td><span class="badge b-green">Match</span></td></tr>
+<tr><td>Forming Depth</td><td>80 mm</td><td><input value="80 mm"/></td><td><span class="badge b-green">Match</span></td></tr>
+<tr><td>Printer / Labeler</td><td>Labeler EF + CAB</td><td><input value="Installed"/></td><td><span class="badge b-green">OK</span></td></tr>
+<tr><td>Final Vacuum</td><td>Pending</td><td><input placeholder="Actual"/></td><td><span class="badge b-amber">Review</span></td></tr>
+</tbody></table>
+</div></div>
+<div class="card"><div class="hd"><h3>Installation Record</h3></div><div class="bd form-grid" style="grid-template-columns:1fr">
+<div class="field"><label>Installation Date</label><input type="date"/></div>
+<div class="field"><label>Service Engineer</label><input value="Service Team"/></div>
+<div class="field"><label>Commissioning Result</label><textarea placeholder="บันทึกผลทดสอบ"></textarea></div>
+<div class="field"><label>Installation Photos</label><input type="file"/></div>
+</div></div>
+</div>
+</div>
+<div class="machine-panel" id="m-handover">
+<div class="page-title"><div><h1>Customer Handover / ส่งมอบลูกค้า</h1><div class="subtitle">ส่งมอบเครื่อง เอกสาร การอบรม และการรับรอง</div></div><div class="right"><button class="btn">Preview PDF</button><button class="btn primary" onclick="completeHandover()">Complete / ปิดงาน</button></div></div>
+<div class="grid g2">
+<div class="card"><div class="hd"><h3>Final Acceptance</h3></div><div class="bd checklist">
+<label class="check"><input type="checkbox"/><span><b>Installation completed / ติดตั้งเรียบร้อย</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Test run accepted / ยอมรับผลทดสอบ</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Training completed / อบรมเรียบร้อย</b></span></label>
+<label class="check"><input type="checkbox"/><span><b>Documents received / รับเอกสารครบ</b></span></label>
+</div></div>
+<div class="card"><div class="hd"><h3>Customer Sign-off</h3></div><div class="bd form-grid" style="grid-template-columns:1fr">
+<div class="field"><label>Customer Representative</label><input placeholder="ชื่อผู้รับมอบ"/></div>
+<div class="field"><label>Acceptance Date</label><input type="date"/></div>
+<div class="field"><label>Remark</label><textarea placeholder="งานคงค้าง / นัดติดตาม"></textarea></div>
+<div class="field"><label>Signed Document</label><input type="file"/></div>
+</div></div>
+</div>
+</div>
+<div class="machine-panel" id="m-after">
+<div class="page-title"><div><h1>PM &amp; After Sales / PM และหลังการขาย</h1><div class="subtitle">หลังส่งมอบ เครื่องเข้าสู่การดูแลระยะยาว</div></div></div>
+<div class="tabs">
+<button class="tab active">PM Program / โปรแกรม PM</button>
+<button class="tab">PM Schedule / ตาราง PM</button>
+<button class="tab">Spare Parts / อะไหล่</button>
+<button class="tab">Maintenance History / ประวัติซ่อมบำรุง</button>
+<button class="tab">Attachments / ไฟล์แนบ</button>
+<button class="tab">Machine Health / สุขภาพเครื่อง</button>
+</div>
+</div>
+</section>
+<section class="page" id="placeholder">
+<div class="placeholder-card">
+<div class="placeholder-title" id="placeholderTitle">Page</div>
+<div class="placeholder-sub">Prototype placeholder — หน้านี้จะค่อยออกแบบรายละเอียดเพิ่มภายหลัง</div>
+</div>
+</section></div>
+</main>
+</div>
 <script>
 const titles={
-  opp:"Opportunity / โอกาสการขาย", handover:"AI Handover Review / ตรวจส่งต่องานด้วย AI", preinstall:"Pre-Installation / เตรียมก่อนติดตั้ง",
-  receiving:"Receiving & QC / ตรวจรับเครื่องและ QC", install:"Installation / ติดตั้งเครื่อง", delivery:"Customer Handover / ส่งมอบลูกค้า", register:"Machine Register / ทะเบียนเครื่อง"
+  opp:"Opportunity / โอกาสการขาย",
+  register:"Machine Register / ทะเบียนเครื่อง",
+  placeholder:""
 };
-function go(id){
+
+function setActiveNav(target){
+  document.querySelectorAll(".erp-sub button,.erp-item").forEach(x=>x.classList.remove("active"));
+  if(target) target.classList.add("active");
+}
+
+function go(id, clicked){
   document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-  document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  const btn=[...document.querySelectorAll(".nav button")].find(b=>b.dataset.page===id);
-  if(btn) btn.classList.add("active");
-  document.getElementById("crumb").textContent=titles[id];
+  const page=document.getElementById(id);
+  if(page) page.classList.add("active");
+  if(clicked) setActiveNav(clicked);
   const crumb=document.querySelector(".crumb");
-  if(crumb){const group=id==="opp"?"Sales":(id==="register"?"Machine":"Service Installation"); crumb.childNodes[0].nodeValue=group+" / ";}
+  if(crumb){
+    document.getElementById("crumb").textContent=titles[id]||id;
+    crumb.childNodes[0].nodeValue=(id==="opp"?"Sales":id==="register"?"Machine Register":"ERP")+" / ";
+  }
   window.scrollTo({top:0,behavior:"smooth"});
 }
-document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+
+document.querySelectorAll(".erp-toggle").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const group=btn.closest(".erp-group");
+    group.classList.toggle("open");
+  });
+});
+
+document.querySelectorAll("[data-page]").forEach(btn=>{
+  btn.addEventListener("click",()=>go(btn.dataset.page,btn));
+});
+
+document.querySelectorAll("[data-placeholder]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+    document.getElementById("placeholder").classList.add("active");
+    document.getElementById("placeholderTitle").textContent=btn.dataset.placeholder;
+    setActiveNav(btn);
+    const crumb=document.querySelector(".crumb");
+    if(crumb){
+      crumb.childNodes[0].nodeValue="ERP / ";
+      document.getElementById("crumb").textContent=btn.dataset.placeholder;
+    }
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+});
+
+function machineTab(id){
+  document.querySelectorAll(".machine-panel").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".machine-tab").forEach(x=>x.classList.remove("active"));
+  const p=document.getElementById(id); if(p) p.classList.add("active");
+  const b=[...document.querySelectorAll(".machine-tab")].find(x=>x.dataset.mtab===id); if(b) b.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".machine-tab").forEach(b=>b.addEventListener("click",()=>machineTab(b.dataset.mtab)));
 
 function aiCheckOpp(){
   const ids=["fProduct","fCapacity","fSpeed","fPack","fDepth","fVacuum","fPrinterDetail","fPrintPos"];
-  const missing=ids.filter(id=>!document.getElementById(id).value.trim());
-  alert(missing.length
-    ? "AI Check: พบข้อมูลที่ยังขาด "+missing.length+" ช่อง\\nระบบจะส่งต่อเป็น Missing / Need confirmation"
-    : "AI Check: ข้อมูลหลักครบแล้ว");
+  const missing=ids.filter(id=>document.getElementById(id)&&!document.getElementById(id).value.trim());
+  alert(missing.length?"AI Check: พบข้อมูลที่ยังขาด "+missing.length+" ช่อง\nMachine ยังสร้างได้ แต่ Service จะเห็นรายการ Missing":"AI Check: ข้อมูลหลักครบแล้ว");
 }
 function finalizeOpp(){
-  alert("ปิดการขายแล้ว: เริ่ม Machine Order & Delivery Process\nขั้นถัดไป: Place Order to Supplier → Order Confirmation");
-  const tl=document.querySelector(".machine-timeline");
-  if(tl) tl.scrollIntoView({behavior:"smooth",block:"start"});
-}
-function approveHandover(){
-  alert("Approved: ข้อมูล Order / OC / Final Specification พร้อมสำหรับ Service แล้ว\nสร้าง Installation Preparation Job Draft แล้ว");
-  go("preinstall");
-}
-function toggleClaim(){
-  document.getElementById("claimPanel").classList.toggle("hidden",!document.getElementById("claimBox").checked);
+  alert("Sales กด WIN แล้ว\nระบบสร้าง Machine Register OL3151 และส่งข้อมูลที่ยืนยันจาก OPP ไปยังเครื่อง");
+  const btn=[...document.querySelectorAll("[data-page='register']")][0];
+  go("register",btn); setTimeout(()=>machineTab("m-ai"),250);
 }
 function completeHandover(){
-  alert("Customer handover completed. Machine Register draft updated.");
-  go("register");
+  alert("ส่งมอบเสร็จแล้ว เครื่อง OL3151 เข้าสู่ PM / After Sales");
+  machineTab("m-after");
 }
 </script>
 </body>
