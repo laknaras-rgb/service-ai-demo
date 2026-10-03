@@ -83,6 +83,25 @@ tr:hover td{background:#fbfdff}
 @media(max-width:1050px){.pipeline-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.pipeline-grid{grid-template-columns:1fr}.opp-head{align-items:flex-start;flex-direction:column}}
 
+
+.machine-timeline{position:relative;padding:8px 4px 4px}
+.machine-timeline:before{content:"";position:absolute;left:28px;top:18px;bottom:20px;width:3px;background:#e5e7eb;border-radius:99px}
+.timeline-stage{position:relative;display:grid;grid-template-columns:58px minmax(0,1fr);gap:12px;padding:0 0 16px}
+.timeline-node{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;margin-left:15px;margin-top:3px;background:#fff;border:3px solid #d1d5db;z-index:1;font-size:11px;font-weight:900;color:#777}
+.timeline-stage.done .timeline-node{border-color:#f47a22;background:#fff5ed;color:#d95f10}
+.timeline-stage.current .timeline-node{border-color:#f47a22;background:#f47a22;color:#fff;box-shadow:0 0 0 5px #fff0e4}
+.timeline-stage.optional .timeline-node{border-style:dashed}
+.timeline-card{border:1px solid #e2e2e2;border-radius:10px;background:#fff;padding:13px 14px}
+.timeline-stage.current .timeline-card{border-color:#f3b181;background:#fffaf6}
+.timeline-title{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:800}
+.timeline-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:7px;font-size:12px;color:#777}
+.timeline-note{margin-top:7px;font-size:12px;color:#666}
+.phase-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.phase-chip{padding:6px 10px;border-radius:999px;background:#f2f2f2;color:#666;font-size:11px;font-weight:800}
+.phase-chip.active{background:#fff0e4;color:#c75e12}
+.timeline-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.timeline-actions .btn{padding:6px 9px;font-size:12px}
+
 </style>
 </head>
 <body>
@@ -120,31 +139,7 @@ tr:hover td{background:#fbfdff}
             </div>
             <div class="right"><span class="badge b-green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">Done / Final</button></div>
           </div>
-          <div class="erp-tabs">
-            <button class="erp-tab active">Overview</button><button class="erp-tab">Related Items</button><button class="erp-tab">Activities</button><button class="erp-tab">Sales Documents</button><button class="erp-tab">Attachments</button><button class="erp-tab">Conversation</button><button class="erp-tab">Feed</button><button class="erp-tab">ใบฟังก์ชั่น</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="hd"><div class="section-title"><span class="section-dot">C</span><h3>Contact</h3></div><button class="btn">Add</button></div>
-          <div class="bd"><div class="table-wrap"><table><thead><tr><th>Priority</th><th>Role</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Action</th></tr></thead><tbody><tr><td colspan="7"><div class="contact-empty">ยังไม่มี Contact ที่ผูกกับ Opportunity นี้</div></td></tr></tbody></table></div></div>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <div class="hd"><div class="section-title"><span class="section-dot">P</span><h3>Pipeline</h3></div><span class="badge b-gray">Existing sales process</span></div>
-          <div class="bd"><div class="pipeline-grid">
-            <div class="pipeline-item"><div class="p-top"><input class="orange-check" type="checkbox" checked> แนะนำสินค้า</div><div class="field"><label>Due Date</label><input type="date"></div></div>
-            <div class="pipeline-item"><div class="p-top"><input class="orange-check" type="checkbox" checked> ส่งใบเสนอราคา</div><div class="field"><label>Due Date</label><input type="date"></div></div>
-            <div class="pipeline-item"><div class="p-top"><input class="orange-check" type="checkbox"> ส่งสเป็ค</div><div class="field"><label>Due Date</label><input type="date"></div></div>
-            <div class="pipeline-item"><div class="p-top"><input class="orange-check" type="checkbox"> รอลูกค้าพิจารณา</div><div class="field"><label>Due Date</label><input type="date"></div></div>
-            <div class="pipeline-item"><div class="p-top"><input class="orange-check" type="checkbox"> ติดตามลูกค้า</div><div class="field"><label>Due Date</label><input type="date"></div></div>
-            <div class="pipeline-item"><div class="p-top"><input class="orange-check" type="checkbox"> นำเสนอ</div><div class="field"><label>Due Date</label><input type="date"></div></div>
-            <div class="pipeline-item"><div class="p-top"><input class="orange-check" type="checkbox"> เข้าไปนำเสนอ</div><div class="field"><label>Due Date</label><input type="date"></div></div>
-            <div class="pipeline-item"><div class="p-top"><input class="orange-check" type="checkbox"> ปิดการขาย / WIN</div><div class="field"><label>Completed</label><input value="Yes"></div></div>
-          </div></div>
-        </div>
-
-        <div class="card" style="margin-top:16px">
+          <div class="card" style="margin-top:16px">
           <div class="hd"><div class="section-title"><span class="section-dot">i</span><h3>ข้อมูลทั่วไป / General Opportunity Information</h3></div><span class="badge b-gray">Existing ERP fields</span></div><span class="badge b-blue">Existing ERP fields</span></div>
           <div class="bd">
             <div class="form-grid">
@@ -216,6 +211,174 @@ tr:hover td{background:#fbfdff}
           </div>
         </div>
 
+        <div class="erp-tabs">
+            <button class="erp-tab active">Overview</button><button class="erp-tab">Related Items</button><button class="erp-tab">Activities</button><button class="erp-tab">Sales Documents</button><button class="erp-tab">Attachments</button><button class="erp-tab">Conversation</button><button class="erp-tab">Feed</button><button class="erp-tab">ใบฟังก์ชั่น</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="hd"><div class="section-title"><span class="section-dot">C</span><h3>Contact</h3></div><button class="btn">Add</button></div>
+          <div class="bd"><div class="table-wrap"><table><thead><tr><th>Priority</th><th>Role</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Action</th></tr></thead><tbody><tr><td colspan="7"><div class="contact-empty">ยังไม่มี Contact ที่ผูกกับ Opportunity นี้</div></td></tr></tbody></table></div></div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="hd">
+            <div class="section-title"><span class="section-dot">P</span><h3>Machine Order & Delivery Timeline</h3></div>
+            <span class="badge b-gray">หลังปิดการขาย → ส่งมอบลูกค้า</span>
+          </div>
+          <div class="bd">
+            <div class="phase-bar">
+              <span class="phase-chip active">Sales Close</span>
+              <span class="phase-chip">Order</span>
+              <span class="phase-chip">Production</span>
+              <span class="phase-chip">Shipment</span>
+              <span class="phase-chip">Thailand / Customs</span>
+              <span class="phase-chip">Modification</span>
+              <span class="phase-chip">Delivery</span>
+              <span class="phase-chip">Installation</span>
+              <span class="phase-chip">Handover</span>
+            </div>
+
+            <div class="machine-timeline">
+              <div class="timeline-stage done">
+                <div class="timeline-node">1</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>WIN / ปิดการขาย</span><span class="badge b-green">Done</span></div>
+                  <div class="timeline-meta"><span>Sales</span><span>•</span><span>Customer PO confirmed</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage done">
+                <div class="timeline-node">2</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Place Order to Supplier / สั่งผลิตเครื่อง</span><span class="badge b-green">Done</span></div>
+                  <div class="timeline-meta"><span>Purchasing / Sales</span><span>•</span><span>PO to supplier</span></div>
+                  <div class="timeline-note">เริ่มติดตามข้อมูลรุ่น เครื่อง Option และ requirement ที่ยืนยันกับลูกค้า</div>
+                </div>
+              </div>
+
+              <div class="timeline-stage current">
+                <div class="timeline-node">3</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Order Confirmation (OC)</span><span class="badge b-amber">Current</span></div>
+                  <div class="timeline-meta"><span>Supplier</span><span>•</span><span>รอ/ตรวจ OC และ Final Specification</span></div>
+                  <div class="timeline-note">AI สามารถช่วยเทียบ OC กับข้อมูลจาก OPP เพื่อแจ้งค่าที่ไม่ตรงหรือข้อมูลที่ยังขาด</div>
+                  <div class="timeline-actions"><button class="btn ai">AI Compare</button><button class="btn">View OC</button></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">4</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Engineering / Final Specification</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Supplier + Sales + Service</span></div>
+                  <div class="timeline-note">ยืนยัน Final Speed, Capacity, Pack, Forming Depth, Vacuum, Printer/Labeler และ Options</div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">5</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Machine in Production / อยู่ระหว่างผลิต</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Supplier</span><span>•</span><span>Production progress</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage optional">
+                <div class="timeline-node">6</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>FAT / Factory Acceptance Test</span><span class="badge b-gray">Optional</span></div>
+                  <div class="timeline-meta"><span>Supplier / Customer / Service</span></div>
+                  <div class="timeline-note">ใช้เฉพาะเครื่องที่ต้องมี FAT ก่อนส่ง</div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">7</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Machine Completed / Ready for Shipment</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Supplier</span><span>•</span><span>ตรวจ readiness และ shipping documents</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">8</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Shipped / In Transit</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Shipment</span><span>•</span><span>ETD / ETA / AWB or B/L</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">9</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Arrived Thailand</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Logistics</span><span>•</span><span>เครื่องถึงไทย</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">10</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Customs Clearance / เคลียร์เครื่อง</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Import / Customs</span><span>•</span><span>อาจมี สมอ. / เอกสารนำเข้า</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage optional">
+                <div class="timeline-node">11</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Modify in Thailand / ปรับแต่งเครื่อง</span><span class="badge b-gray">Optional</span></div>
+                  <div class="timeline-meta"><span>Service / Workshop</span></div>
+                  <div class="timeline-note">เช่น ติด Labeler / Printer, ปรับไฟ, เพิ่มอุปกรณ์, แก้ไขตาม requirement ก่อนส่งลูกค้า</div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">12</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Ready for Delivery / พร้อมส่งลูกค้า</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Service + Logistics</span><span>•</span><span>เช็ก Site readiness ก่อนส่ง</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">13</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Deliver to Customer / ส่งเครื่องถึงลูกค้า</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Delivery</span><span>•</span><span>ตรวจสภาพและของครบก่อน/หลังขนส่ง</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">14</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Installation & Commissioning</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Service</span><span>•</span><span>ติดตั้ง / Test run / Actual result</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">15</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Training & Customer Acceptance</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Service + Customer</span><span>•</span><span>อบรมและเซ็นรับ</span></div>
+                </div>
+              </div>
+
+              <div class="timeline-stage">
+                <div class="timeline-node">16</div>
+                <div class="timeline-card">
+                  <div class="timeline-title"><span>Handover Completed / Machine Register</span><span class="badge b-gray">Pending</span></div>
+                  <div class="timeline-meta"><span>Service</span><span>•</span><span>เปิดใช้งาน Machine Master / PM / History</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div></div>
+        </div>
+
+        
         <div class="card" style="margin-top:16px">
           <div class="hd"><div class="section-title"><span class="section-dot">N</span><h3>Opportunity Note / Description</h3></div><span class="badge b-gray">Keep as-is</span></div>
           <div class="bd"><textarea style="width:100%;min-height:160px;border:1px solid #cfd6df;border-radius:8px;padding:12px">Customer confirmed VARIOVAC Thermoform line with Labeler EF and CAB printer. Please coordinate installation plan and confirm final utility documents with supplier. Additional commercial follow-up can continue here.</textarea></div>
