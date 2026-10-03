@@ -161,6 +161,8 @@ tr:hover td{background:#fbfdff}
 .placeholder-title{font-size:22px;font-weight:700;color:#555;margin-bottom:8px}
 .placeholder-sub{color:#8a8a8a}
 @media(max-width:900px){.app{grid-template-columns:230px 1fr}}
+
+.linked-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.linked-box{border:1px solid #e5e7eb;border-radius:12px;padding:14px;background:#fff}.linked-box b{display:block;margin:6px 0;color:#1f2937}.linked-box small{display:block;color:#6b7280;min-height:34px}.linked-label{font-size:12px;font-weight:800;color:#c85d13;text-transform:uppercase}.mini-link{border:0;background:transparent;color:#2563eb;padding:6px 0;font-weight:700;cursor:pointer}.service-flow-strip{display:flex;align-items:center;gap:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:14px 16px;overflow:auto}.service-flow-strip>div{min-width:150px}.service-flow-strip b,.service-flow-strip small{display:block}.service-flow-strip small{color:#6b7280;margin-top:3px}.service-flow-strip>span{font-size:20px;color:#f97316}.service-table th,.service-table td{white-space:nowrap}.visit-card{display:flex;justify-content:space-between;align-items:center;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:10px}.visit-card b,.visit-card small{display:block}.visit-card small{color:#6b7280;margin-top:3px}.history-list{display:grid;gap:10px}.history-list>div{display:grid;grid-template-columns:180px 1fr;padding:10px 0;border-bottom:1px dashed #e5e7eb}.history-list span{color:#6b7280}.pm-subtabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}.pm-sub{border:1px solid #ddd;background:#fff;border-radius:9px;padding:9px 12px;font-weight:750;color:#555;cursor:pointer}.pm-sub.active{background:#fff0e4;border-color:#f4b184;color:#c85d13}.pm-area{display:none}.pm-area.active{display:block}.pm-plan-head{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.pm-plan-head span{background:#f3f4f6;padding:5px 9px;border-radius:999px;color:#6b7280;font-size:12px}.checklist.compact{grid-template-columns:repeat(2,1fr)}.survey-table input{width:100%;min-width:90px;padding:8px;border:1px solid #d1d5db;border-radius:7px}.survey-note{margin-top:12px;background:#eff6ff;border-left:4px solid #60a5fa;padding:10px 12px;border-radius:8px;color:#4b5563}@media(max-width:1100px){.linked-grid{grid-template-columns:repeat(2,1fr)}.checklist.compact{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -460,6 +462,7 @@ Updated 1/2026
 <button class="machine-tab" data-mtab="m-qc">Receiving &amp; QC / ตรวจรับเครื่อง</button>
 <button class="machine-tab" data-mtab="m-install">Installation / ติดตั้งและทดสอบ</button>
 <button class="machine-tab" data-mtab="m-handover">Handover / ส่งมอบลูกค้า</button>
+<button class="machine-tab" data-mtab="m-service">Service Jobs / Function &amp; Visit</button>
 <button class="machine-tab" data-mtab="m-after">PM &amp; After Sales / หลังการขาย</button>
 </div>
 <div class="machine-panel active" id="m-overview">
@@ -471,7 +474,7 @@ Updated 1/2026
 <div class="field"><label>Machine Code / รหัสเครื่อง</label><input value="OL3151"/></div>
 <div class="field"><label>Brand / ผู้ผลิต</label><input value="VARIOVAC"/></div>
 <div class="field"><label>Model / รุ่น</label><input value="Optimus"/></div>
-<div class="field"><label>Serial No.</label><input placeholder="Pending"/></div>
+<div class="field"><label>Serial No.</label><input value="OL3151"/></div>
 <div class="field"><label>Current Status / สถานะปัจจุบัน</label><input value="Order Confirmation"/></div>
 </div>
 </div>
@@ -479,13 +482,22 @@ Updated 1/2026
 <div class="hd"><h3>Sales Confirmed Requirement / ข้อมูลที่ Sales ส่งมา</h3><span class="badge b-green">Auto transferred</span></div>
 <div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
 <div class="field"><label>Final Speed</label><input value="12 packs/min"/></div>
-<div class="field"><label>Target Capacity / กำลังผลิต</label><input placeholder="Pending confirmation"/></div>
+<div class="field"><label>Target Capacity / กำลังผลิต</label><input value="ประมาณ 500 kg/hr"/></div>
 <div class="field"><label>Pack / รูปแบบแพ็ก</label><input value="Ready meal / sausage"/></div>
 <div class="field"><label>Forming Depth</label><input value="80 mm"/></div>
-<div class="field"><label>Final Vacuum</label><input placeholder="Pending confirmation"/></div>
+<div class="field"><label>Final Vacuum</label><input value="≤ 10 mbar"/></div>
 <div class="field"><label>Printer / Labeler</label><input value="Labeler EF + CAB printer"/></div>
-<div class="field span2"><label>Printing Position &amp; Requirement / ตำแหน่งและรายละเอียดการพิมพ์</label><textarea placeholder="Top film / Lot / MFG / EXP / Barcode"></textarea></div>
+<div class="field span2"><label>Printing Position &amp; Requirement / ตำแหน่งและรายละเอียดการพิมพ์</label><textarea>Top film / ด้านบนแพ็ก • พิมพ์ Lot, MFG, EXP และ Barcode ตามตำแหน่งที่ลูกค้ากำหนด</textarea></div>
 </div>
+</div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><h3>Linked Records / รายการที่เชื่อมกับเครื่องนี้</h3><span class="badge b-green">Machine ID linked</span></div>
+<div class="bd linked-grid">
+<div class="linked-box"><span class="linked-label">Sales OPP</span><b>REG - OL3151 (#15602)</b><small>ต้นทางการขาย • เปิดดู Note / Quotation ได้</small><button class="mini-link" onclick="go('opp')">Open OPP</button></div>
+<div class="linked-box"><span class="linked-label">Winning Quote</span><b>Quotation #2095</b><small>Final quotation ที่ผูกกับเครื่องนี้</small><button class="mini-link" onclick="alert('Demo: เปิด Sales Quote #2095')">Open Quote</button></div>
+<div class="linked-box"><span class="linked-label">Service Functions</span><b>3 Jobs</b><small>Installation 1 • PM 1 • Repair 1</small><button class="mini-link" onclick="openMachineTab('m-service')">View Jobs</button></div>
+<div class="linked-box"><span class="linked-label">Visits</span><b>4 Visits</b><small>Check-in / Check-out ถูกผูกกับ Function และ Machine</small><button class="mini-link" onclick="openMachineTab('m-service')">View Visits</button></div>
 </div>
 </div>
 <div class="card" style="margin-top:16px">
@@ -643,16 +655,91 @@ Updated 1/2026
 </div></div>
 </div>
 </div>
-<div class="machine-panel" id="m-after">
-<div class="page-title"><div><h1>PM &amp; After Sales / PM และหลังการขาย</h1><div class="subtitle">หลังส่งมอบ เครื่องเข้าสู่การดูแลระยะยาว</div></div></div>
-<div class="tabs">
-<button class="tab active">PM Program / โปรแกรม PM</button>
-<button class="tab">PM Schedule / ตาราง PM</button>
-<button class="tab">Spare Parts / อะไหล่</button>
-<button class="tab">Maintenance History / ประวัติซ่อมบำรุง</button>
-<button class="tab">Attachments / ไฟล์แนบ</button>
-<button class="tab">Machine Health / สุขภาพเครื่อง</button>
+<div class="machine-panel" id="m-service">
+<div class="page-title">
+  <div><h1>Service Jobs / งาน Service ของเครื่อง OL3151</h1><div class="subtitle">Function เป็นใบงานหลัก • Visit อยู่ใต้ Function • ทุกงานผูก Machine ID เดียวกันและย้อนกลับมาเป็นประวัติเครื่องอัตโนมัติ</div></div>
+  <div class="right"><button class="btn primary" onclick="alert('Demo: สร้าง Function ใหม่โดย Auto-fill Machine OL3151 / Serial OL3151 / Customer / OPP')">+ Create Service Job / สร้างงาน</button></div>
 </div>
+<div class="service-flow-strip">
+  <div><b>Machine Register</b><small>OL3151</small></div><span>→</span>
+  <div><b>Function</b><small>ใบงาน Service</small></div><span>→</span>
+  <div><b>Visit</b><small>Check-in / Check-out</small></div><span>→</span>
+  <div><b>Work Result</b><small>ใบงาน / Parts / Summary</small></div><span>→</span>
+  <div><b>Machine History</b><small>บันทึกกลับอัตโนมัติ</small></div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><h3>Service Job History / ประวัติ Function และ Visit</h3><span class="badge b-blue">Linked by Machine ID</span></div>
+<div class="bd">
+<table class="service-table"><thead><tr><th>Date</th><th>Job Type</th><th>Function</th><th>Linked Record</th><th>Visit</th><th>Technician</th><th>Status</th><th></th></tr></thead><tbody>
+<tr><td>15/10/2026</td><td><span class="badge b-blue">Installation</span></td><td><b>FN-INS-OL3151-01</b></td><td>OPP #15602</td><td>Visit #1</td><td>Service Team</td><td><span class="badge b-green">Completed</span></td><td><button class="mini-link" onclick="showServiceDetail('install')">View</button></td></tr>
+<tr><td>20/01/2027</td><td><span class="badge b-purple">PM</span></td><td><b>FN-PM-OL3151-01</b></td><td>PM Round #1</td><td>Visit #1</td><td>Janeny, Jeans</td><td><span class="badge b-amber">In Progress</span></td><td><button class="mini-link" onclick="showServiceDetail('pm')">View</button></td></tr>
+<tr><td>08/03/2027</td><td><span class="badge b-amber">Repair / CM</span></td><td><b>FN-CM-OL3151-01</b></td><td>Breakdown Case</td><td>Visit #1, #2</td><td>Service Team</td><td><span class="badge b-green">Completed</span></td><td><button class="mini-link" onclick="showServiceDetail('repair')">View</button></td></tr>
+</tbody></table>
+</div></div>
+<div class="grid g2" style="margin-top:16px">
+<div class="card"><div class="hd"><h3>Selected Function / ใบงานที่เลือก</h3><span id="svcTypeBadge" class="badge b-purple">PM</span></div><div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
+<div class="field"><label>Function No.</label><input id="svcFunction" value="FN-PM-OL3151-01" readonly/></div>
+<div class="field"><label>Job Type</label><input id="svcJobType" value="PM" readonly/></div>
+<div class="field"><label>Machine Reference</label><input value="OL3151 | Serial OL3151" readonly/></div>
+<div class="field"><label>Customer</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด" readonly/></div>
+<div class="field"><label>Linked PM / Case</label><input id="svcLinked" value="PM Round #1" readonly/></div>
+<div class="field"><label>Original OPP</label><input value="REG - OL3151 (#15602)" readonly/></div>
+<div class="field span2"><label>Work Summary / สรุปงาน</label><textarea id="svcSummary">ตรวจ PM ตามแผน + Machine Survey Before/After + Checklist + บันทึกอะไหล่ที่ใช้</textarea></div>
+<div class="field span2"><button class="btn" onclick="alert('Demo: เปิดหน้า Function เดิมของ ERP')">Open Function / เปิดใบงาน</button></div>
+</div></div>
+<div class="card"><div class="hd"><h3>Visits under Function / Visit ใต้ใบงาน</h3><button class="btn" onclick="alert('Demo: สร้าง Visit ใต้ Function นี้ โดย inherit Machine ID อัตโนมัติ')">+ Add Visit</button></div><div class="bd">
+<div class="visit-card"><div><b>Visit #1</b><small>20/01/2027 • 09:05–16:40</small></div><div><span class="badge b-green">Checked out</span><button class="mini-link" onclick="alert('Demo: เปิด Visit #1 / Check-in / Check-out / Location')">Open</button></div></div>
+<div class="visit-card"><div><b>Job Document / ใบงาน</b><small>FM-ENG-010 • ผูกกับ Function และ Visit</small></div><div><span class="badge b-gray">Draft</span><button class="mini-link" onclick="alert('Demo: เปิดใบงาน FM-ENG-010 ในระบบ')">Open</button></div></div>
+</div></div>
+</div>
+<div class="card" style="margin-top:16px"><div class="hd"><h3>How data returns to Machine / ข้อมูลที่กลับเข้า Machine History</h3></div><div class="bd history-list">
+<div><b>PM Result</b><span>Checklist + Survey + Summary + Customer Sign</span></div>
+<div><b>Repair Result</b><span>Problem / Cause / Solution / Parts replaced</span></div>
+<div><b>Visit</b><span>Date / Technician / Check-in / Check-out</span></div>
+<div><b>Parts</b><span>Used / Replaced / Recommended / Customer purchased</span></div>
+</div></div>
+</div>
+<div class="machine-panel" id="m-after">
+<div class="page-title"><div><h1>PM &amp; After Sales / PM และหลังการขาย</h1><div class="subtitle">PM Program + PM Schedule + Machine Survey + Parts + Maintenance History อยู่ภายใต้ Machine เดียวกัน</div></div></div>
+<div class="pm-subtabs">
+  <button class="pm-sub active" onclick="showPmArea('pm-program',this)">PM Program / แผน PM</button>
+  <button class="pm-sub" onclick="showPmArea('pm-schedule',this)">PM Schedule / รอบ PM</button>
+  <button class="pm-sub" onclick="showPmArea('pm-survey',this)">Machine Survey / ค่ามิเตอร์</button>
+  <button class="pm-sub" onclick="showPmArea('pm-history',this)">Maintenance History / ประวัติ</button>
+</div>
+<div class="pm-area active" id="pm-program">
+<div class="card"><div class="hd"><h3>PM Program / แผนตรวจประจำเครื่อง</h3><button class="btn">Copy PM Plan / คัดลอกแผน</button></div><div class="bd">
+<div class="pm-plan-head"><b>VARIOVAC THERMOFORM CHECKLISTS</b><span>ทุก 3 เดือน</span><span>33 Checklist Items</span></div>
+<div class="checklist compact"><label class="check"><input checked type="checkbox"/><span>สภาพโครงสร้างเครื่องจักรโดยรวม</span></label><label class="check"><input checked type="checkbox"/><span>ความตึงของโซ่</span></label><label class="check"><input checked type="checkbox"/><span>Clamp สภาพของตัวจับยึด</span></label><label class="check"><input checked type="checkbox"/><span>ระบบ Safety / Emergency Stop</span></label></div>
+</div></div></div>
+<div class="pm-area" id="pm-schedule">
+<div class="card"><div class="hd"><h3>PM Schedule / รอบ PM</h3><button class="btn primary">+ Create PM Round</button></div><div class="bd">
+<table><thead><tr><th>Round</th><th>Plan</th><th>Technician</th><th>Due Date</th><th>Actual</th><th>Function</th><th>Status</th></tr></thead><tbody>
+<tr><td><b>#1</b></td><td>VARIOVAC THERMOFORM</td><td>Janeny, Jeans</td><td>20/01/2027</td><td>20/01/2027</td><td><button class="mini-link" onclick="openMachineTab('m-service')">FN-PM-OL3151-01</button></td><td><span class="badge b-amber">In Progress</span></td></tr>
+<tr><td><b>#2</b></td><td>VARIOVAC THERMOFORM</td><td>—</td><td>20/04/2027</td><td>—</td><td>Auto-create when started</td><td><span class="badge b-gray">Planned</span></td></tr>
+</tbody></table>
+</div></div></div>
+<div class="pm-area" id="pm-survey">
+<div class="card"><div class="hd"><div><h3>Machine Survey / สำรวจค่าการทำงานของเครื่อง</h3><div class="subtitle">แยกจาก PM Checklist • เก็บเป็นค่าจริงเพื่อใช้ Trend / Calculation ในอนาคต</div></div><span class="badge b-blue">PM Round #1</span></div><div class="bd">
+<table class="survey-table"><thead><tr><th>#</th><th>Parameter</th><th>Before PM</th><th>After PM</th><th>Unit / Detail</th><th>Previous</th><th>Trend</th></tr></thead><tbody>
+<tr><td>1</td><td><b>Power Supply Spec</b></td><td><input value="400"/></td><td><input value="400"/></td><td>V / 3 Phase / 50 Hz</td><td>400 V</td><td><span class="badge b-green">Stable</span></td></tr>
+<tr><td>2</td><td><b>R-S / S-T / R-T / Ground</b></td><td><input placeholder="เช่น 401/399/400"/></td><td><input placeholder="เช่น 400/400/400"/></td><td>V</td><td>—</td><td><span class="badge b-gray">—</span></td></tr>
+<tr><td>3</td><td><b>Program No. / Product</b></td><td><input value="P01"/></td><td><input value="P01"/></td><td>Ready meal / sausage</td><td>P01</td><td><span class="badge b-green">Same</span></td></tr>
+<tr><td>4</td><td><b>Alarm during Observe</b></td><td><input value="None"/></td><td><input value="None"/></td><td>Text / Code</td><td>None</td><td><span class="badge b-green">OK</span></td></tr>
+<tr><td>5</td><td><b>Noise / Vibration</b></td><td><input value="Normal"/></td><td><input value="Normal"/></td><td>Observation</td><td>Normal</td><td><span class="badge b-green">OK</span></td></tr>
+<tr><td>6</td><td><b>Operator Report / Alarm History</b></td><td><input placeholder="อาการที่แจ้ง"/></td><td><input placeholder="ผลหลังดำเนินการ"/></td><td>Text</td><td>—</td><td><span class="badge b-gray">Review</span></td></tr>
+<tr><td>7</td><td><b>Heating Element - Forming</b></td><td><input value="12"/></td><td><input value="5"/></td><td>ΔT °C</td><td>8</td><td><span class="badge b-green">Improved</span></td></tr>
+<tr><td>8</td><td><b>Final Vacuum</b></td><td><input value="8.2"/></td><td><input value="6.4"/></td><td>sec</td><td>7.1</td><td><span class="badge b-green">Improved</span></td></tr>
+<tr><td>9</td><td><b>Heating Element - Sealing</b></td><td><input value="10"/></td><td><input value="6"/></td><td>ΔT °C</td><td>7</td><td><span class="badge b-green">Improved</span></td></tr>
+</tbody></table>
+<div class="survey-note">ค่าทุกครั้งจะบันทึกตาม PM Round เพื่อให้ Machine Health สามารถทำกราฟแนวโน้มย้อนหลังได้ในอนาคต</div>
+</div></div></div>
+<div class="pm-area" id="pm-history">
+<div class="card"><div class="hd"><h3>Maintenance History / ประวัติเครื่องรวม</h3><span class="badge b-green">Auto from linked records</span></div><div class="bd timeline">
+<div class="tl"><div class="dot"></div><div class="txt"><b>20/01/2027 • PM Round #1</b><small>Function FN-PM-OL3151-01 • Survey + Checklist • In Progress</small></div></div>
+<div class="tl"><div class="dot"></div><div class="txt"><b>08/03/2027 • Repair / CM</b><small>Vacuum issue • 2 Visits • เปลี่ยน Seal kit • Completed</small></div></div>
+<div class="tl"><div class="dot"></div><div class="txt"><b>15/10/2026 • Installation</b><small>Installation Function + Visit + Commissioning • Completed</small></div></div>
+</div></div></div>
 </div>
 </section>
 <section class="page" id="placeholder">
@@ -736,6 +823,23 @@ function finalizeOpp(){
 function completeHandover(){
   alert("ส่งมอบเสร็จแล้ว เครื่อง OL3151 เข้าสู่ PM / After Sales");
   machineTab("m-after");
+}
+
+function openMachineTab(id){
+  document.querySelectorAll('.machine-panel').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.machine-tab').forEach(x=>x.classList.toggle('active',x.dataset.mtab===id));
+  const p=document.getElementById(id); if(p){p.classList.add('active');p.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function showPmArea(id,btn){
+  document.querySelectorAll('.pm-area').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.pm-sub').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active'); btn.classList.add('active');
+}
+function showServiceDetail(kind){
+  const f=document.getElementById('svcFunction'),t=document.getElementById('svcJobType'),l=document.getElementById('svcLinked'),s=document.getElementById('svcSummary'),b=document.getElementById('svcTypeBadge');
+  if(kind==='install'){f.value='FN-INS-OL3151-01';t.value='Installation';l.value='OPP #15602 / Quote #2095';s.value='ติดตั้งและ Commissioning เครื่องตาม Sales Confirmed Requirement พร้อม Visit และ Customer Handover';b.textContent='Installation';}
+  if(kind==='pm'){f.value='FN-PM-OL3151-01';t.value='PM';l.value='PM Round #1';s.value='ตรวจ PM ตามแผน + Machine Survey Before/After + Checklist + บันทึกอะไหล่ที่ใช้';b.textContent='PM';}
+  if(kind==='repair'){f.value='FN-CM-OL3151-01';t.value='Repair / CM';l.value='Breakdown Case';s.value='ตรวจปัญหา Vacuum, เข้าหน้างาน 2 Visits, เปลี่ยน Seal kit และทดสอบหลังซ่อม';b.textContent='Repair / CM';}
 }
 </script>
 </body>
