@@ -76,6 +76,12 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 .sales-flow-strip{display:flex;align-items:center;gap:8px;overflow:auto;white-space:nowrap}
 .sales-flow-strip span{border:1px solid #dbe3eb;border-radius:999px;padding:7px 10px;background:#fff;font-size:11px;font-weight:800;color:#4b5563}
 .sales-flow-strip b{color:#f97316}
+
+button.btn:active{transform:translateY(1px)}
+.link:hover{text-decoration:underline}
+.clickable-row:hover{background:#fafcff}
+.page-transition{animation:fadeIn .16s ease-out}
+@keyframes fadeIn{from{opacity:.45;transform:translateY(2px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -101,7 +107,6 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 <main class="main">
 <div class="topbar"><div class="crumb" id="crumb">Sales / Opportunities</div><div class="user">Jeans • ERP Prototype</div></div>
 <div class="content">
-
 <section class="page active" id="opp">
 <div class="page-title">
 <div>
@@ -673,8 +678,8 @@ RuamPat Sales Team</textarea></div>
 </div>
 <div class="card" style="margin-top:14px"><div class="hd"><h3>Machine List</h3><input id="machineSearch" oninput="filterMachines()" placeholder="ค้นหา Machine No. / Serial / ลูกค้า..." style="min-width:320px;border:1px solid #cfd8e3;border-radius:8px;padding:8px 10px"/></div>
 <div class="bd"><table><thead><tr><th>Machine No.</th><th>Serial</th><th>Machine</th><th>Customer</th><th>Lifecycle</th><th>Next PM</th><th>Status</th></tr></thead><tbody id="machineRows">
-<tr><td><span class="link" onclick="openMachine('OL3151')">1011-007</span></td><td>OL3151</td><td><b>VARIOVAC Optimus</b><br/><small>Thermoform + Labeler EF</small></td><td>บริษัท จีเอสวีฯ<br/><small>ปทุมธานี</small></td><td>Order Confirmation</td><td>20/04/2027</td><td><span class="badge green">Active</span></td></tr>
-<tr><td><span class="link" onclick="openMachine('OL2875')">1008-002</span></td><td>OL2875</td><td><b>VARIOVAC Thermoform</b></td><td>บริษัท จีเอสวีฯ</td><td>After Sales</td><td>12/12/2026</td><td><span class="badge green">Active</span></td></tr>
+<tr onclick="openMachine('OL3151')" style="cursor:pointer"><td><span class="link" onclick="openMachine('OL3151')">1011-007</span></td><td>OL3151</td><td><b>VARIOVAC Optimus</b><br/><small>Thermoform + Labeler EF</small></td><td>บริษัท จีเอสวีฯ<br/><small>ปทุมธานี</small></td><td>Order Confirmation</td><td>20/04/2027</td><td><span class="badge green">Active</span></td></tr>
+<tr onclick="openMachine('OL2875')" style="cursor:pointer"><td><span class="link" onclick="openMachine('OL2875')">1008-002</span></td><td>OL2875</td><td><b>VARIOVAC Thermoform</b></td><td>บริษัท จีเอสวีฯ</td><td>After Sales</td><td>12/12/2026</td><td><span class="badge green">Active</span></td></tr>
 </tbody></table></div></div>
 </section>
 <section class="page" id="register">
@@ -1109,8 +1114,8 @@ RuamPat Sales Team</textarea></div>
 <section class="page" id="functions">
 <div class="page-title"><div><h1>Function / ใบงาน</h1><div class="subtitle">ช่างสามารถสร้างงานจากเมนู Function ได้โดยตรง และผูกหลาย Machine ได้</div></div><button class="btn primary" onclick="openFunctionModal()">+ New Function</button></div>
 <div class="card"><div class="bd"><table><thead><tr><th>Function</th><th>Customer</th><th>Type</th><th>Machines</th><th>Visits</th><th>Status</th></tr></thead><tbody>
-<tr><td><b>FN-PM-OL3151-01</b></td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>OL3151, OL2875</td><td>3</td><td><span class="badge green">Completed</span></td></tr>
-<tr><td><b>FN-CM-0815</b></td><td>บริษัท จีเอสวีฯ</td><td>CM / Repair</td><td>OL3151</td><td>2</td><td><span class="badge green">Completed</span></td></tr>
+<tr style="cursor:pointer"><td><span class="link" onclick="openFunctionDetail('FN-PM-OL3151-01')">FN-PM-OL3151-01</span></td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>OL3151, OL2875</td><td>3</td><td><span class="badge green">Completed</span></td></tr>
+<tr style="cursor:pointer"><td><span class="link" onclick="openFunctionDetail('FN-CM-0815')">FN-CM-0815</span></td><td>บริษัท จีเอสวีฯ</td><td>CM / Repair</td><td>OL3151</td><td>2</td><td><span class="badge green">Completed</span></td></tr>
 </tbody></table></div></div>
 </section>
 <section class="page" id="visits">
@@ -1126,9 +1131,9 @@ RuamPat Sales Team</textarea></div>
 <tr><th>Date</th><th>Customer</th><th>Type</th><th>Technician</th><th>Function</th><th>Machines</th><th>Check-in / out</th><th>Status</th><th></th></tr>
 </thead>
 <tbody>
-<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Janeny</td><td>FN-PM-OL3151-01</td><td>OL3151, OL2875</td><td>09:05 / 16:40</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn">Open</button></td></tr>
-<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Jeans</td><td>FN-PM-OL3151-01</td><td>OL3151, OL2875</td><td>09:08 / 16:35</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn">Open</button></td></tr>
-<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Technician C</td><td>FN-PM-OL3151-01</td><td>OL3151</td><td>09:12 / 16:42</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn">Open</button></td></tr>
+<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Janeny</td><td><span class="link" onclick="openFunctionDetail('FN-PM-OL3151-01')">FN-PM-OL3151-01</span></td><td>OL3151, OL2875</td><td>09:05 / 16:40</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn" onclick="openVisitDetail(1,'Janeny','09:05','16:40')">Open</button></td></tr>
+<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Jeans</td><td><span class="link" onclick="openFunctionDetail('FN-PM-OL3151-01')">FN-PM-OL3151-01</span></td><td>OL3151, OL2875</td><td>09:08 / 16:35</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn" onclick="openVisitDetail(2,'Jeans','09:08','16:35')">Open</button></td></tr>
+<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Technician C</td><td><span class="link" onclick="openFunctionDetail('FN-PM-OL3151-01')">FN-PM-OL3151-01</span></td><td>OL3151</td><td>09:12 / 16:42</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn" onclick="openVisitDetail(3,'Technician C','09:12','16:42')">Open</button></td></tr>
 </tbody>
 </table>
 </div>
@@ -1152,7 +1157,130 @@ RuamPat Sales Team</textarea></div>
 <tr><td>2กค-5678</td><td>Pickup</td><td>Pickup 1</td><td><span class="badge green">Active</span></td><td><button class="btn">Edit</button></td></tr>
 </tbody></table></div></div>
 </section>
-<section class="page" id="pm-my"><div class="page-title"><div><h1>งาน PM ของฉัน</h1><div class="subtitle">เพิ่ม Serial Number ให้ช่างเห็นชัดเจน</div></div></div><div class="card"><div class="bd"><table><thead><tr><th>Due</th><th>Machine No.</th><th>Serial</th><th>Customer</th><th>Plan</th><th>Status</th></tr></thead><tbody><tr><td>20/04/2027</td><td>1011-007</td><td><b>OL3151</b></td><td>บริษัท จีเอสวีฯ</td><td>VARIOVAC THERMOFORM</td><td><span class="badge gray">Planned</span></td></tr></tbody></table></div></div></section>
+<section class="page" id="pm-my"><div class="page-title"><div><h1>งาน PM ของฉัน</h1><div class="subtitle">เพิ่ม Serial Number ให้ช่างเห็นชัดเจน</div></div></div><div class="card"><div class="bd"><table><thead><tr><th>Due</th><th>Machine No.</th><th>Serial</th><th>Customer</th><th>Plan</th><th>Status</th></tr></thead><tbody><tr><td>20/04/2027</td><td>1011-007</td><td><span class="link" onclick="openMachine('OL3151')">OL3151</span></td><td>บริษัท จีเอสวีฯ</td><td>VARIOVAC THERMOFORM</td><td><span class="badge gray">Planned</span></td></tr></tbody></table></div></div></section>
+
+<section class="page" id="visit-detail">
+<div class="page-title">
+<div>
+<button class="btn" onclick="go('visits')">← Back to Visit List</button>
+<h1 style="margin-top:10px">Visit Detail / รายละเอียด Visit</h1>
+<div class="subtitle" id="visitDetailSubtitle">Visit #1 • 20/01/2027 • Janeny</div>
+</div>
+<div class="right">
+<span class="badge green" id="visitDetailStatus">Checked out</span>
+<button class="btn" onclick="editVisitDemo()">Edit</button>
+</div>
+</div>
+<div class="grid3">
+<div class="stat"><small>Customer</small><b style="font-size:14px">บริษัท จีเอสวีฯ</b></div>
+<div class="stat"><small>Function</small><b style="font-size:14px"><span class="link" onclick="openFunctionDetail('FN-PM-OL3151-01')">FN-PM-OL3151-01</span></b></div>
+<div class="stat"><small>Job Type</small><b style="font-size:14px">PM</b></div>
+</div>
+<div class="card" style="margin-top:14px">
+<div class="hd"><h3>Visit Information / ข้อมูล Visit</h3></div>
+<div class="bd form-grid">
+<div class="field"><label>Technician</label><input id="vdTech" readonly="" value="Janeny"/></div>
+<div class="field"><label>Date</label><input readonly="" value="20/01/2027"/></div>
+<div class="field span2"><label>Location</label><input readonly="" value="Customer Site, Pathum Thani"/></div>
+<div class="field span2"><label>Machines / เครื่องที่ทำงาน</label>
+<div class="attachment-chips">
+<span class="link" onclick="openMachine('OL3151')">OL3151 • 1011-007</span>
+<span class="link" onclick="openMachine('OL2875')">OL2875 • 1008-002</span>
+</div>
+</div>
+<div class="field"><label>Check-in</label><input id="vdCheckin" readonly="" value="09:05"/></div>
+<div class="field"><label>Check-out</label><input id="vdCheckout" readonly="" value="16:40"/></div>
+</div>
+</div>
+<div class="card">
+<div class="hd">
+<div>
+<h3>Check-in / Check-out</h3>
+<div class="subtitle">แต่ละช่างมีเวลาและ Location ของตัวเอง</div>
+</div>
+<div class="right">
+<button class="btn" id="checkinBtn" onclick="demoCheckIn()">Check-in</button>
+<button class="btn primary" id="checkoutBtn" onclick="demoCheckOut()">Check-out</button>
+</div>
+</div>
+<div class="bd grid2">
+<div class="note"><b>Check-in</b><br/><span id="checkinInfo">09:05 • Customer Site • Location captured</span></div>
+<div class="note"><b>Check-out</b><br/><span id="checkoutInfo">16:40 • Customer Site • Location captured</span></div>
+</div>
+</div>
+<div class="card">
+<div class="hd">
+<div>
+<h3>Service Trip / การเดินทางร่วมกัน</h3>
+<div class="subtitle">ข้อมูลรถกรอกครั้งเดียวและแชร์กับ Visit ของทีมที่เดินทางด้วยกัน</div>
+</div>
+<span class="badge blue">Same Team Trip</span>
+</div>
+<div class="bd">
+<div class="vehicle-row">
+<div class="field"><label>Vehicle</label><input readonly="" value="1กข-1234 • Service Van"/></div>
+<div class="field"><label>Odometer Start</label><input readonly="" value="125,000 km"/></div>
+<div class="field"><label>Odometer End</label><input readonly="" value="125,180 km"/></div>
+<div class="field"><label>Distance</label><input readonly="" value="180 km"/></div>
+<div class="field"><label>Expense</label><input readonly="" value="1,360 THB"/></div>
+</div>
+<div class="note" style="margin-top:10px">ร่วม Trip เดียวกับ Janeny, Jeans และ Technician C • ระบบนับระยะทาง/ค่าใช้จ่ายเพียง 1 ครั้ง</div>
+</div>
+</div>
+<div class="card">
+<div class="hd"><h3>Work Result / ผลงาน</h3></div>
+<div class="bd grid2">
+<div class="field"><label>Work Summary</label><textarea>PM ตามแผน + Machine Survey Before/After + Checklist + บันทึกอะไหล่ที่ใช้</textarea></div>
+<div class="field"><label>Job Document</label>
+<div class="note"><b>FM-ENG-010</b><br/>Linked with Function and Visit</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="page" id="function-detail">
+<div class="page-title">
+<div>
+<button class="btn" onclick="go('functions')">← Back to Function List</button>
+<h1 style="margin-top:10px">Function Detail / รายละเอียดใบงาน</h1>
+<div class="subtitle" id="functionDetailSubtitle">FN-PM-OL3151-01 • PM</div>
+</div>
+<div class="right"><span class="badge green">Completed</span><button class="btn">Edit</button></div>
+</div>
+<div class="card">
+<div class="hd"><h3>Function Information</h3></div>
+<div class="bd form-grid">
+<div class="field"><label>Function No.</label><input readonly="" value="FN-PM-OL3151-01"/></div>
+<div class="field"><label>Job Type</label><input readonly="" value="PM"/></div>
+<div class="field span2"><label>Customer</label><input readonly="" value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"/></div>
+<div class="field span2"><label>Machines</label>
+<div class="attachment-chips">
+<span class="link" onclick="openMachine('OL3151')">OL3151</span>
+<span class="link" onclick="openMachine('OL2875')">OL2875</span>
+</div>
+</div>
+<div class="field"><label>Linked PM</label><input readonly="" value="PM Round #1"/></div>
+<div class="field"><label>Original OPP</label><input readonly="" value="REG - OL3151 (#15602)"/></div>
+<div class="field span4"><label>Work Summary</label><textarea>PM ตามแผนและตรวจ Machine Survey / Checklist / Parts</textarea></div>
+</div>
+</div>
+<div class="card">
+<div class="hd">
+<div><h3>Visits under Function / Visit ใต้ใบงาน</h3><div class="subtitle">1 Function มีหลาย Visit ได้</div></div>
+<button class="btn primary" onclick="openVisitModal()">+ Add Visit</button>
+</div>
+<div class="bd">
+<table>
+<thead><tr><th>Visit</th><th>Technician</th><th>Machines</th><th>Check-in</th><th>Check-out</th><th>Status</th><th></th></tr></thead>
+<tbody>
+<tr><td>Visit #1</td><td>Janeny</td><td>OL3151, OL2875</td><td>09:05</td><td>16:40</td><td><span class="badge green">Checked out</span></td><td><button class="btn" onclick="openVisitDetail(1,'Janeny','09:05','16:40')">Open</button></td></tr>
+<tr><td>Visit #2</td><td>Jeans</td><td>OL3151, OL2875</td><td>09:08</td><td>16:35</td><td><span class="badge green">Checked out</span></td><td><button class="btn" onclick="openVisitDetail(2,'Jeans','09:08','16:35')">Open</button></td></tr>
+<tr><td>Visit #3</td><td>Technician C</td><td>OL3151</td><td>09:12</td><td>16:42</td><td><span class="badge green">Checked out</span></td><td><button class="btn" onclick="openVisitDetail(3,'Technician C','09:12','16:42')">Open</button></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
 </div>
 </main>
 </div>
@@ -1301,8 +1429,8 @@ RuamPat Sales Team</textarea></div>
 </div>
 </div>
 <script>
-const titles={opp:'Sales / Opportunities','opp-detail':'Sales / Opportunity Detail',quotes:'Sales / Sales Quotes','machine-list':'Machine Register / Machine List',register:'Machine Register / Detail',functions:'Operations / Function',visits:'Activities / Visit','service-report':'Reports / Service Trip','vehicle-master':'Meta / Vehicle Master','pm-my':'Machine / My PM',rfq:'Sales / Supplier RFQ'};
-function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id)?.classList.add('active');document.querySelectorAll('.subbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.getElementById('crumb').textContent=titles[id]||id;window.scrollTo(0,0)}
+const titles={opp:'Sales / Opportunities','opp-detail':'Sales / Opportunity Detail',quotes:'Sales / Sales Quotes','machine-list':'Machine Register / Machine List',register:'Machine Register / Detail',functions:'Operations / Function',visits:'Activities / Visit','service-report':'Reports / Service Trip','vehicle-master':'Meta / Vehicle Master','pm-my':'Machine / My PM','visit-detail':'Activities / Visit Detail','function-detail':'Operations / Function Detail',rfq:'Sales / Supplier RFQ'};
+function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id)?.classList.add('active');document.getElementById(id)?.classList.add('page-transition');setTimeout(()=>document.getElementById(id)?.classList.remove('page-transition'),220);document.querySelectorAll('.subbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.getElementById('crumb').textContent=titles[id]||id;window.scrollTo(0,0)}
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
 function openMachine(sn){go('register');document.getElementById('machineTitle').textContent='Machine Register — '+sn;machinePanel('overview')}
 function machinePanel(id,btn){document.querySelectorAll('#register .panel').forEach(x=>x.classList.remove('active'));document.getElementById('p-'+id)?.classList.add('active');if(btn){document.querySelectorAll('.step').forEach(x=>x.classList.remove('current'));btn.classList.add('current')}window.scrollTo(0,0)}
@@ -1494,6 +1622,37 @@ function filterOpps(){
   document.querySelectorAll('#oppRows tr').forEach(r=>{
     r.style.display=r.innerText.toLowerCase().includes(q)?'':'none';
   });
+}
+
+function openVisitDetail(no,tech,cin,cout){
+  go('visit-detail');
+  document.getElementById('visitDetailSubtitle').textContent='Visit #'+no+' • 20/01/2027 • '+tech;
+  document.getElementById('vdTech').value=tech;
+  document.getElementById('vdCheckin').value=cin;
+  document.getElementById('vdCheckout').value=cout;
+  document.getElementById('checkinInfo').textContent=cin+' • Customer Site • Location captured';
+  document.getElementById('checkoutInfo').textContent=cout+' • Customer Site • Location captured';
+  document.getElementById('crumb').textContent='Activities / Visit / Visit #'+no;
+}
+function openFunctionDetail(fn){
+  go('function-detail');
+  document.getElementById('functionDetailSubtitle').textContent=fn+' • PM';
+  document.getElementById('crumb').textContent='Operations / Function / '+fn;
+}
+function editVisitDemo(){
+  alert('Prototype: Edit Visit mode');
+}
+function demoCheckIn(){
+  document.getElementById('visitDetailStatus').textContent='Checked in';
+  document.getElementById('visitDetailStatus').className='badge amber';
+  document.getElementById('checkinInfo').textContent='Now • Current location captured';
+  document.getElementById('vdCheckin').value='Now';
+}
+function demoCheckOut(){
+  document.getElementById('visitDetailStatus').textContent='Checked out';
+  document.getElementById('visitDetailStatus').className='badge green';
+  document.getElementById('checkoutInfo').textContent='Now • Current location captured';
+  document.getElementById('vdCheckout').value='Now';
 }
 </script>
 </body></html>
