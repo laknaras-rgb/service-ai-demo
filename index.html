@@ -201,20 +201,6 @@ tr:hover td{background:#fbfdff}
 .pf-step.active b{color:#c2410c}
 .pf-line{height:2px;min-width:34px;background:#d7dee7;margin-top:14px}
 .pf-line.done{background:#22c55e}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
 <style>
 .pm-plan-card .hd{align-items:flex-start}
@@ -572,7 +558,171 @@ tr:hover td{background:#fbfdff}
 <div class="content">
 <section class="page" id="opp">
 
+<div class="opp-shell">
+<div class="opp-head">
+<div class="opp-id">
+<div class="opp-icon">▣</div>
+<div><div class="opp-name">Opportunity: REG - OL3151</div><div class="opp-no">Opportunities No. 15602 • Type: machine</div><div class="opp-no">เมื่อ WIN ระบบจะสร้าง Machine Register และส่งข้อมูลที่ Sales ยืนยันแล้วไปยังเครื่องนั้น</div></div>
+</div>
+<div class="right"><span class="badge b-gray">Prototype Data</span><span class="badge b-green">WIN</span><button class="btn">Save / บันทึก</button><button class="btn ai" onclick="aiCheckOpp()">AI Check</button><button class="btn primary" onclick="finalizeOpp()">WIN / สร้าง Machine</button></div>
+</div>
+<div class="sales-flow-card">
+<div class="sales-flow-head"><div><b>Sales Flow / ภาพรวมขั้นตอนของ OPP</b><small>OPP #15602 • OL3151</small></div><span class="badge b-green">WIN</span></div>
+<div class="sales-flow-row">
+<span class="sf-step done">✓<small>Opportunity</small></span><i></i>
+<span class="sf-step done">✓<small>Requirements</small></span><i></i>
+<span class="sf-step done">✓<small>Supplier RFQ</small></span><i></i>
+<span class="sf-step done">✓<small>Supplier Reply</small></span><i></i>
+<span class="sf-step done">✓<small>Sales Quote</small></span><i></i>
+<span class="sf-step done">✓<small>Final Quote</small></span><i></i>
+<span class="sf-step current">7<small>WIN</small></span><i></i>
+<span class="sf-step">8<small>Machine Register</small></span>
+</div>
+</div>
+<div class="card project-control-card" style="margin-top:16px">
+<div class="hd"><div class="section-title"><span class="section-dot">P</span><h3>Project Control / ติดตามงานหลัง WIN</h3></div><div class="right"><span class="badge b-blue">Pilot OL3151</span><button class="btn">+ Add Milestone</button></div></div>
+<div class="bd">
+<div class="note" style="margin-bottom:12px"><b>Jeans ดูแลโครงสร้างข้อมูล ไม่ได้แปลว่าต้องเป็น Owner ทุกงาน</b> • หน้านี้ใช้เลข OPP เดิมเป็น Project Reference และให้แต่ละงานมี Owner, Due Date, Status และ Evidence ของตัวเอง</div>
+<div class="project-meta"><div><small>Opportunity ID</small><b>15602</b></div><div><small>Project Reference</small><b>REG - OL3151</b></div><div><small>Machine</small><b>OL3151</b></div><div><small>Project Status</small><b>Installation Preparation</b></div></div>
+<table class="project-table"><thead><tr><th>Milestone / งาน</th><th>Owner</th><th>Due Date</th><th>Status</th><th>Evidence / Document Link</th></tr></thead><tbody>
+<tr><td><b>Machine Installation Complete</b><small>ติดตั้งเครื่องหลัก</small></td><td><span class="badge b-amber">Owner รอยืนยัน</span></td><td>11 Oct 2026 <small>รอยืนยัน</small></td><td><span class="badge b-amber">Preparing</span></td><td><button class="btn">Machine Attachment</button></td></tr>
+<tr><td><b>Full System Ready</b><small>Labeller / Printer / Utility พร้อม</small></td><td><span class="badge b-amber">Owner รอยืนยัน</span></td><td>รอยืนยัน</td><td><span class="badge b-gray">Pending</span></td><td><button class="btn">Add Evidence</button></td></tr>
+<tr><td><b>Customer Acceptance &amp; Handover</b><small>ทดสอบ ตรวจรับ และส่งมอบ</small></td><td><span class="badge b-amber">Owner รอยืนยัน</span></td><td>รอยืนยัน</td><td><span class="badge b-gray">Pending</span></td><td><button class="btn">Add Evidence</button></td></tr>
+</tbody></table>
+</div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><div class="section-title"><span class="section-dot">i</span><h3>ข้อมูลทั่วไป / General Opportunity Information</h3></div><span class="badge b-gray">Existing ERP fields</span></div>
+<div class="bd">
+<div class="form-grid general-grid">
+<div class="field"><label>Opportunities No.</label><input value="15602"/></div>
+<div class="field"><label>Name Opportunities / หัวข้อโอกาส</label><input value="REG - OL3151"/></div>
+<div class="field"><label>Type Of Service / ประเภทของบริการ</label><select><option>machine</option></select></div>
+<div class="field"><label>Budget / งบประมาณ</label><input value="5,000,000-10,000,000"/></div>
+<div class="field"><label>ความสำเร็จ</label><input value="100%"/></div>
+<div class="field"><label>Urgency / ความเร่งด่วน</label><select><option>ด่วน</option><option>ปกติ</option></select></div>
+<div class="field"><label>Pipeline Status</label><input value="Registered"/></div>
+<div class="field"><label>Account / Target</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"/></div>
+<div class="field"><label>Lead / Main Customer</label><input value="วีณา -"/></div>
+<div class="field"><label>Owner / เจ้าของ</label><input value="Darat Charansirirungkarn"/></div>
+<div class="field"><label>Assistant 1</label><input value="Sawanya Rungrodrasamee"/></div>
+<div class="field"><label>Assistant 2</label><input value="Arunwalee Jedeeya"/></div>
+<div class="field"><label>Operator / ผู้รับผิดชอบ</label><input value="Darat Charansirirungkarn"/></div>
+<div class="field"><label>Start Date/Time วันที่เริ่มงาน</label><input value="24/11/68 13:01"/></div>
+<div class="field"><label>Due Date/Time วันเวลาที่จบงาน</label><input value="31/03/69 17:30"/></div>
+<div class="field"><label>Notification Date/Time วันเวลาที่แจ้งเตือน</label><input value="31/03/69 09:00"/></div>
+<div class="field"><label>Location</label><input value="ปทุมธานี"/></div>
+<div class="field"><label>Status</label><select><option>WIN</option></select></div>
+<div class="field"><label>Reason</label><input value="ราคา"/></div>
+<div class="field"><label>Reason Note</label><input value="ลูกค้ายอมรับราคาและเงื่อนไขตามใบเสนอราคา Rev. ล่าสุด เลขที่ 2095"/></div>
+<div class="field"><label>แหล่งที่มาลูกค้า</label><input value="ลูกค้าที่เคยซื้อสินค้าหรือบริการ"/></div>
+<div class="field"><label>ปัญหาของลูกค้า</label><input value="การแพ็ค"/></div>
+<div class="field"><label>สินค้าของลูกค้า</label><input value="อาหารพร้อมทาน / ไส้กรอก"/></div><div class="field"><label>Supplier / ผู้ผลิต</label><input value="VARIOVAC"/></div><div class="field"><label>Capacity ของลูกค้า</label><input value="ต้องการเพิ่มกำลังการผลิตจากไลน์เดิม"/></div><div class="field"><label>S/N</label><input value="OL3151"/></div></div>
+</div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="hd"><div class="section-title"><span class="section-dot">⚙</span><h3>Machine &amp; Installation Requirements / ข้อมูลเครื่องและข้อกำหนดการติดตั้ง</h3></div><span class="badge b-purple">Service handover</span></div>
+<div class="bd">
+<div class="form-grid">
+<div class="field"><label>Machine / เครื่องจักร</label><input value="Thermoform"/></div>
+<div class="field"><label>Brand / Manufacturer</label><select><option selected="selected">VARIOVAC</option></select></div>
+<div class="field"><label>Model</label><input value="Optimus"/></div>
+<div class="field"><label>Serial Number / S/N</label><input value="OL3151"/></div>
+<div class="field"><label>Product / สินค้าที่ใช้กับเครื่อง</label><input id="fProduct" value="Ready meal / sausage"/></div>
+<div class="field"><label>Target Capacity / กำลังผลิตที่ต้องการ</label><input id="fCapacity" placeholder="เช่น kg/hr, pcs/hr" value="ประมาณ 500 kg/hr"/></div>
+<div class="field"><label>Final Speed ที่ตกลง</label><input id="fSpeed" placeholder="เช่น 12 packs/min" value="12 packs/min"/></div>
+<div class="field"><label>Pack / รูปแบบบรรจุ</label><input id="fPack" placeholder="ลักษณะ pack / ขนาด pack" value="Vacuum pack / Thermoform pack"/></div>
+<div class="field"><label>Forming Depth</label><input id="fDepth" placeholder="เช่น 80 mm" value="80 mm"/></div>
+<div class="field"><label>Final Vacuum</label><input id="fVacuum" placeholder="ค่าที่ตกลง" value="≤ 10 mbar"/></div>
+<div class="field"><label>มี Printer / Labeler หรือไม่</label><select id="fPrinter"><option selected="selected">มี</option><option>ไม่มี</option><option>ยังไม่ระบุ</option></select></div>
+<div class="field"><label>Printer / Labeler Detail</label><input id="fPrinterDetail" value="Labeler EF + CAB printer 1 set"/></div>
+<div class="field"><label>Printing Position / พิมพ์ตรงไหน</label><input id="fPrintPos" placeholder="เช่น Top film / Label" value="Top film / ด้านบนแพ็ก"/></div>
+<div class="field span2"><label>Printing Requirement / พิมพ์อย่างไร / ข้อมูลที่ต้องพิมพ์</label><textarea placeholder="เช่น Lot, MFG, EXP, Barcode และรูปแบบตำแหน่งพิมพ์">พิมพ์ Lot, MFG, EXP และ Barcode บน Top film โดยตำแหน่งพิมพ์ต้องตรงกับพื้นที่ที่ลูกค้ากำหนด</textarea></div>
+<div class="field span3"><label>Options / Accessories ที่ขายพร้อมเครื่อง</label><textarea id="fOptions" placeholder="อุปกรณ์เสริม / Option ที่รวมในการขาย">Labeler EF 1 ชุด, CAB printer 1 set, อุปกรณ์ติดตั้งที่เกี่ยวข้องตามใบเสนอราคา</textarea></div>
+<div class="field span3"><label>Special Installation Requirement / ข้อกำหนดพิเศษที่ Service ต้องรู้</label><textarea placeholder="ข้อจำกัดหน้างาน, การเชื่อมต่อกับเครื่องเดิม, เงื่อนไขพิเศษที่ตกลงกับลูกค้า">ตรวจสอบพื้นที่ติดตั้ง, ไฟ, ลม, น้ำ และ Final Utility Document จาก Supplier ก่อนนัดติดตั้งจริง</textarea></div>
+</div>
+<div class="note" style="margin-top:14px">
+<b>แยกข้อมูลให้ชัด:</b> ส่วนนี้เก็บเฉพาะข้อมูลที่ Service ต้องนำไปใช้ต่อในการตรวจรับและติดตั้งเครื่อง
+              ส่วน Utility ทางเทคนิค เช่น kW, Voltage, Air pressure, Water requirement และเอกสาร Manual / Drawing / Packing List
+              จะอยู่ในขั้น Pre-Installation และมาจาก Supplier documents ไม่บังคับ Sales กรอกใน OPP
+            </div>
+</div>
+</div>
+<div class="card note-section-card" style="margin-top:16px">
+<div class="hd"><div class="section-title"><span class="section-dot">N</span><h3>Opportunity Note / Description</h3></div><span class="badge b-gray">Sales Note / บันทึกฝ่ายขาย</span></div>
+<div class="bd"><textarea style="width:100%;min-height:620px;border:1px solid #cfd6df;border-radius:8px;padding:12px;line-height:1.65">9/11/2025
 
+Customer would like to order new machine same spec. as OL2875 and they need return it with the old one OL0203.
+
+24/11/2025
+
+VV are checking what they can do by the old machine photo from us.
+
+25/11/2025
+
+Send photo that VV need.
+
+22/12/2025
+
+image
+
+Updated 1/2026
+
+เสนอราคาไปแล้วลูกค้ามีขอราคาเพิ่มเติมมา
+
+รบกวนช่วยแยกราคา ตามรายละเอียดราคาให้ด้วยคะ
+
+1. ราคาเครื่อง Thermoform
+
+2. ราเครื่องเครื่องติดสติกเกอร์
+
+3. ราคาเครื่องพิมพ์ Label
+
+4. ราคา เครื่องตัวเก่า 500 กรัม ที่เทรินกลับไป ตามที่ได้ตกลงกับทางคุณไอค์ ไว้
+
+5. อื่นๆ
+
+*สรุปคือ ต้องการซื้อ 2 เครื่อง แต่ขอเทรินเครื่องตัวเก่ากลับไป 1 เครื่อง คุณไอค์แจ้งว่าทางร่วมพัฒน์ เข้ามาประเมินเครื่องแล้วค่ะ
+
+24/2/2026
+
+ได้มีการรีไวซ์ราคาเป็นใบเสนอราคาเลขที่ 1906
+
+12/3/2026
+
+ได้มีอัพเดตราคาใหม่หลังประชุมกับลูกค้าโดยมีรายละเอียดดังนี้
+
+อัพเดตใบเสนอราคาเครื่อง Thermoform with labeler EF ค่ะ
+
+รายละเอียด:
+
+เครื่อง Thermoform 1 เครื่อง กับ Labeler EF with CAB printer 1 set
+
+และ เครื่อง Labeler EF สำหรับติดตั้งกับเครื่องเก่าอีก 1 เครื่องค่ะ
+
+เป็นใบเสนอราคาเลขที่ 1949
+
+7/5/2026
+
+ได้มีการแก้ไขราคาโดยส่งใบเสนอราคารีไวซ์ใบเสนอราคาเลขที่ 1949 เป็นใบเสนอราคาเลขที่ 2095
+
+28/5/2026
+
+ได้ติดตาม feedback ใบเสนอราคามาเรื่อยๆ
+
+โดยล่าสุดนี้ลูกค้าแจ้งว่า ปีนี้คุณไก่ (เจ้าของ) กลัวเรื่องสงคราม และเศรษฐกิจ เลยสั่งให้ชลอการลงทุนเครื่องจักรทุกตัว
+
+แต่ทางคุณติ๋วยังคงพยายามดันเรื่องสั่งซื้อให้สำหรับเครื่องนี้เพราะโรงงานมีกำลังการผลิตไม่เพียงพออยู่
+
+ซึ่งจำเป็นต้องเพิ่มเครื่องจักรอย่างแน่นอน
+
+2/9/2026
+
+ก่อนห้านี้มีแจ้งลูกค้าไปคร่าวๆแล้วว่าเครื่องน่าจะพร้อมส่งเป็น Week ที่38 แต่ตอนนี้มีปัญหาเรื่องที่เครื่ง EF อาจจะเสร็จไม่ทัน
+
+ดังนั้นจึงมีรอคอนเฟริมวันพร้อมส่ง และเรื่องเล่า(A little bit Fake) อีกทีแล้วค่อยแจ้งคุณติ๋ว</textarea></div>
+</div>
+</div>
 <div class="card">
 <div class="hd"><div class="section-title"><span class="section-dot">C</span><h3>Contact</h3></div><button class="btn">Add</button></div>
 <div class="bd"><div class="table-wrap"><table><thead><tr><th>Priority</th><th>Role</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Action</th></tr></thead><tbody><tr><td>1</td><td>Main Contact</td><td>วีณา</td><td>08X-XXX-XXXX</td><td>contact@customer.co.th</td><td>Customer Site</td><td>View</td></tr><tr><td>2</td><td>Technical / Engineering</td><td>ฝ่ายวิศวกรรม</td><td>08X-XXX-XXXX</td><td>engineering@customer.co.th</td><td>Customer Site</td><td>View</td></tr></tbody></table></div></div>
