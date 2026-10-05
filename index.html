@@ -201,6 +201,20 @@ tr:hover td{background:#fbfdff}
 .pf-step.active b{color:#c2410c}
 .pf-line{height:2px;min-width:34px;background:#d7dee7;margin-top:14px}
 .pf-line.done{background:#22c55e}
+
+.opp-timeline{display:flex;align-items:flex-start;overflow-x:auto;padding:8px 2px 4px}
+.ot-step{min-width:100px;text-align:center;color:#7b8794}
+.ot-step span{display:inline-flex;width:28px;height:28px;border:2px solid #d4dce6;border-radius:50%;align-items:center;justify-content:center;background:#fff;font-size:11px;font-weight:800}
+.ot-step b{display:block;font-size:10px;margin-top:5px;color:#475569;white-space:nowrap}
+.ot-step small{display:block;font-size:8px;margin-top:2px;white-space:nowrap}
+.ot-step.done span{border-color:#22c55e;color:#15803d;background:#ecfdf5}
+.ot-step.done b{color:#166534}
+.ot-step.active span{border-color:#f97316;color:#c2410c;background:#fff7ed}
+.ot-step.active b{color:#c2410c}
+.ot-line{height:2px;min-width:24px;flex:1;background:#d7dee7;margin-top:14px}
+.ot-line.done{background:#22c55e}
+.timeline-foot{margin-top:12px;padding-top:10px;border-top:1px solid #edf0f4;display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:11px}
+.timeline-foot .btn{margin-left:auto}
 </style>
 <style>
 .pm-plan-card .hd{align-items:flex-start}
@@ -557,129 +571,35 @@ tr:hover td{background:#fbfdff}
 </div>
 <div class="content">
 <section class="page" id="opp">
-<div class="card" id="project-control" style="margin-top:14px">
+<div class="card" id="opp-project-timeline" style="margin-top:14px">
 <div class="hd">
 <div>
-<h3>Project Control / ภาพรวมควบคุมโครงการ</h3>
-<div class="subtitle">Pilot: GSB – VARIOVAC OL3151 • ใช้ OPP เป็นจุดเริ่มต้นและติดตามต่อถึง Installation / Acceptance / Handover</div>
+<h3>Sales &amp; Project Timeline / ภาพรวมขั้นตอน</h3>
+<div class="subtitle">OPP #15602 • OL3151 • แสดงภาพรวมจากโอกาสขายจนถึงส่งมอบ โดยรายละเอียดงานอยู่ในหน้าที่เกี่ยวข้อง</div>
 </div>
-<div class="right">
-<span class="badge blue">Pilot Workflow</span>
-<button class="btn" onclick="alert('Prototype: Edit project milestone')">Edit Milestones</button>
-</div>
+<span class="badge blue">OL3151 Pilot</span>
 </div>
 <div class="bd">
-<div class="grid4" style="margin-bottom:12px">
-<div class="stat"><small>Opportunity</small><b>#15602</b></div>
-<div class="stat"><small>Machine</small><b>OL3151</b></div>
-<div class="stat"><small>Current Phase</small><b style="font-size:14px">Installation Preparation</b></div>
-<div class="stat"><small>Project Owner</small><b style="font-size:14px">Ike</b></div>
+<div class="opp-timeline">
+<div class="ot-step done"><span>✓</span><b>Opportunity</b><small>Scope / Requirement</small></div><div class="ot-line done"></div>
+<div class="ot-step done"><span>✓</span><b>Supplier RFQ</b><small>Supplier Scope</small></div><div class="ot-line done"></div>
+<div class="ot-step done"><span>✓</span><b>Sales Quote</b><small>Quotation</small></div><div class="ot-line done"></div>
+<div class="ot-step done"><span>✓</span><b>WIN</b><small>Machine Register</small></div><div class="ot-line done"></div>
+<div class="ot-step done"><span>✓</span><b>Order</b><small>Order &amp; Delivery</small></div><div class="ot-line done"></div>
+<div class="ot-step active"><span>6</span><b>Installation</b><small>Preparing</small></div><div class="ot-line"></div>
+<div class="ot-step"><span>7</span><b>Commissioning</b><small>Test Run</small></div><div class="ot-line"></div>
+<div class="ot-step"><span>8</span><b>Acceptance</b><small>Customer Test</small></div><div class="ot-line"></div>
+<div class="ot-step"><span>9</span><b>Handover</b><small>Customer Sign-off</small></div>
 </div>
-<div class="note" style="margin-bottom:12px">
-<b>หลักการ:</b> Owner ที่ยังไม่ยืนยันจะแสดงเป็น <b>Proposed / TBD</b> ไม่ถือว่า Assign แล้ว •
-      วันที่ที่ยังไม่ยืนยันจะแสดงเป็น <b>Pending Confirmation</b>
-</div>
-<div class="project-milestone-flow">
-<div class="pf-step done"><span>1</span><b>Sales Scope</b><small>OPP / Requirement</small></div>
-<div class="pf-line done"></div>
-<div class="pf-step active"><span>2</span><b>Installation Prep</b><small>Utility / Crane / Docs</small></div>
-<div class="pf-line"></div>
-<div class="pf-step"><span>3</span><b>Machine Installation</b><small>Target 11 Oct*</small></div>
-<div class="pf-line"></div>
-<div class="pf-step"><span>4</span><b>Full System Ready</b><small>Labeller / Printer</small></div>
-<div class="pf-line"></div>
-<div class="pf-step"><span>5</span><b>Acceptance</b><small>Test Plan / Result</small></div>
-<div class="pf-line"></div>
-<div class="pf-step"><span>6</span><b>Handover</b><small>Customer Sign-off</small></div>
-</div>
-<table style="margin-top:14px">
-<thead>
-<tr>
-<th>Milestone / Task</th>
-<th>Owner</th>
-<th>Due / Target</th>
-<th>Status</th>
-<th>Evidence / Close-out</th>
-<th>System Link</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><b>Confirm Product &amp; Film Scope</b><br/><small>สินค้า / ฟิล์ม / Reference OL2875</small></td>
-<td>Ike</td>
-<td>Pending Confirmation</td>
-<td><span class="badge amber">Waiting</span></td>
-<td>Product list, Film spec, Sample pack, Acceptance criteria</td>
-<td><span class="link" onclick="alert('Prototype: open OPP requirement')">OPP Requirement</span></td>
-</tr>
-<tr>
-<td><b>Transport / Crane Readiness</b><br/><small>นำ OL3151 เข้า GSB</small></td>
-<td>สร (Coordinator)<br/><small>Logistics Owner: Proposed</small></td>
-<td>Before 11 Oct*</td>
-<td><span class="badge amber">Preparing</span></td>
-<td>Crane booking, Transport plan, Route / Access check</td>
-<td><span class="link" onclick="go('machine-detail')">Machine / Pre-Install</span></td>
-</tr>
-<tr>
-<td><b>Machine Installation Complete</b></td>
-<td>TBD / Proposed Technical Owner</td>
-<td>11 Oct 2026*</td>
-<td><span class="badge blue">Planned</span></td>
-<td>Installation report, Before/During/After photos</td>
-<td><span class="link" onclick="go('machine-detail')">Installation &amp; Commissioning</span></td>
-</tr>
-<tr>
-<td><b>Printer Installation</b></td>
-<td>TBD (Plantec / Actual Installer)</td>
-<td>13–15 Oct 2026*</td>
-<td><span class="badge gray">Pending</span></td>
-<td>Printer model, Scope, Installation report, Photos</td>
-<td><span class="link" onclick="go('machine-detail')">Installation &amp; Commissioning</span></td>
-</tr>
-<tr>
-<td><b>Full System Ready</b><br/><small>Machine + Labeller + Printer + Utility</small></td>
-<td>TBD</td>
-<td>Pending Confirmation</td>
-<td><span class="badge gray">Pending</span></td>
-<td>Readiness checklist, Utility confirmation</td>
-<td><span class="link" onclick="go('machine-detail')">Readiness / Documents</span></td>
-</tr>
-<tr>
-<td><b>Customer Acceptance Test</b><br/><small>Target 10 cycles/min = Project Target from Ike</small></td>
-<td>Proposed: Bob + Ike</td>
-<td>After Full System Ready</td>
-<td><span class="badge gray">Not Started</span></td>
-<td>Test protocol, Product/Film, Pack quality, Leak test, Speed, Actual result</td>
-<td><span class="link" onclick="go('machine-detail')">Commissioning / Test Run</span></td>
-</tr>
-<tr>
-<td><b>Customer Handover Complete</b></td>
-<td>TBD</td>
-<td>After Acceptance</td>
-<td><span class="badge gray">Not Started</span></td>
-<td>Signed Handover Form, Training record, Final documents</td>
-<td><span class="link" onclick="go('machine-detail')">Handover</span></td>
-</tr>
-</tbody>
-</table>
-<div class="grid3" style="margin-top:14px">
-<div class="note">
-<b>Technical Track / Bob</b><br/>
-        Installation Readiness Checklist<br/>
-        พื้นที่ • Utility • Crane • Drawing • เครื่อง • อุปกรณ์ร่วม
-      </div>
-<div class="note">
-<b>Acceptance Track / Bob + Ike</b><br/>
-        Product • Film • Pack Quality • Leak Test • Speed • Customer Acceptance
-      </div>
-<div class="note">
-<b>System / Data Structure / Jeans</b><br/>
-        Opportunity ID • Timeline • Owner • Due Date • Status • Evidence / Document Link
-      </div>
-</div>
-<div class="subtitle" style="margin-top:8px">* วันที่ยังรอยืนยัน ไม่ถือเป็น Commitment จนกว่าจะ Confirm</div>
+<div class="timeline-foot">
+<span><b>Current:</b> Installation Preparation</span>
+<span><b>Machine:</b> OL3151</span>
+<span><b>Next:</b> Installation &amp; Commissioning</span>
+<button class="btn" onclick="go('machine-detail')">Open Machine Register</button>
 </div>
 </div>
+</div>
+
 
 <div class="opp-shell">
 <div class="opp-head">
