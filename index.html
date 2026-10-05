@@ -69,6 +69,13 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 .ai-summary-box{border:1px solid #ddd6fe;background:#faf8ff;border-radius:10px;padding:12px;font-size:12px}
 .ai-summary-box p{margin:7px 0 0;line-height:1.55}
 .attachment-chips{display:flex;gap:7px;flex-wrap:wrap}.attachment-chips span{background:#f3f6f9;border:1px solid #dde4eb;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:700}
+
+.opp-stage{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.stage-dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:#cbd5e1}
+.stage-dot.done{background:#22c55e}.stage-dot.current{background:#f59e0b}
+.sales-flow-strip{display:flex;align-items:center;gap:8px;overflow:auto;white-space:nowrap}
+.sales-flow-strip span{border:1px solid #dbe3eb;border-radius:999px;padding:7px 10px;background:#fff;font-size:11px;font-weight:800;color:#4b5563}
+.sales-flow-strip b{color:#f97316}
 </style>
 </head>
 <body>
@@ -94,7 +101,161 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 <main class="main">
 <div class="topbar"><div class="crumb" id="crumb">Sales / Opportunities</div><div class="user">Jeans • ERP Prototype</div></div>
 <div class="content">
+
 <section class="page active" id="opp">
+<div class="page-title">
+<div>
+<h1>Opportunities / โอกาสการขาย</h1>
+<div class="subtitle">หน้ารวม OPP ก่อนเข้าแต่ละรายการ • ดูสถานะ Sales → RFQ → Quotation → WIN → Machine Handover</div>
+</div>
+<div class="right">
+<button class="btn">Refresh</button>
+<button class="btn primary">+ New Opportunity</button>
+</div>
+</div>
+<div class="grid4">
+<div class="stat"><small>Open Opportunities</small><b>18</b></div>
+<div class="stat"><small>Waiting Supplier RFQ</small><b>4</b></div>
+<div class="stat"><small>Quotation Sent</small><b>7</b></div>
+<div class="stat"><small>WIN This Month</small><b>3</b></div>
+</div>
+<div class="card" style="margin-top:14px">
+<div class="hd">
+<div>
+<h3>Opportunity List / รายการโอกาสการขาย</h3>
+<div class="subtitle">กด OPP เพื่อเข้า Detail • ใช้หน้า Detail สำหรับ Requirement, Supplier RFQ และ Final Quotation</div>
+</div>
+<div class="right">
+<select style="border:1px solid #cfd8e3;border-radius:8px;padding:8px 10px">
+<option>All Status</option>
+<option>Open</option>
+<option>RFQ</option>
+<option>Quotation</option>
+<option>WIN</option>
+</select>
+<input id="oppSearch" oninput="filterOpps()" placeholder="ค้นหา OPP / ลูกค้า / Sales / Supplier..." style="min-width:330px;border:1px solid #cfd8e3;border-radius:8px;padding:8px 10px"/>
+</div>
+</div>
+<div class="bd">
+<table>
+<thead>
+<tr>
+<th>OPP No.</th>
+<th>Opportunity</th>
+<th>Customer</th>
+<th>Sales Owner</th>
+<th>Supplier</th>
+<th>Stage</th>
+<th>RFQ</th>
+<th>Quotation</th>
+<th>Status</th>
+<th>Last Update</th>
+</tr>
+</thead>
+<tbody id="oppRows">
+<tr onclick="openOppDetail('REG - OL3151')" style="cursor:pointer">
+<td><span class="link">#15602</span></td>
+<td>
+<b>REG - OL3151</b>
+<br/><small>Thermoform + Labeler EF + CAB printer</small>
+</td>
+<td>บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด</td>
+<td>Darat Charansirirungkarn</td>
+<td>VARIOVAC</td>
+<td>
+<div class="opp-stage">
+<span class="stage-dot done"></span>
+<span>WIN / Handover</span>
+</div>
+</td>
+<td><span class="badge green">RFQ Approved</span></td>
+<td><span class="badge green">Final #2095</span></td>
+<td><span class="badge green">WIN</span></td>
+<td>05/10/2026 08:30</td>
+</tr>
+<tr onclick="alert('Prototype: เปิด Opportunity #15644')" style="cursor:pointer">
+<td><span class="link">#15644</span></td>
+<td>
+<b>THERMOFORM - ABC FOODS</b>
+<br/><small>New line for sausage</small>
+</td>
+<td>บริษัท ABC Foods จำกัด</td>
+<td>Sales Team A</td>
+<td>VARIOVAC</td>
+<td>
+<div class="opp-stage">
+<span class="stage-dot current"></span>
+<span>Supplier RFQ</span>
+</div>
+</td>
+<td><span class="badge amber">78% Ready</span></td>
+<td><span class="badge gray">Not yet</span></td>
+<td><span class="badge blue">Open</span></td>
+<td>05/10/2026 09:20</td>
+</tr>
+<tr onclick="alert('Prototype: เปิด Opportunity #15598')" style="cursor:pointer">
+<td><span class="link">#15598</span></td>
+<td>
+<b>GRINDER WW130 - THAI INNOCENT</b>
+<br/><small>2 machines</small>
+</td>
+<td>บริษัท ไทย อินโนเซนท์ ฟู้ดส์ จำกัด</td>
+<td>Darat Charansirirungkarn</td>
+<td>LASKA</td>
+<td>
+<div class="opp-stage">
+<span class="stage-dot current"></span>
+<span>Quotation Sent</span>
+</div>
+</td>
+<td><span class="badge green">Completed</span></td>
+<td><span class="badge blue">Quote #2036</span></td>
+<td><span class="badge amber">Follow-up</span></td>
+<td>03/10/2026 15:10</td>
+</tr>
+<tr onclick="alert('Prototype: เปิด Opportunity #15521')" style="cursor:pointer">
+<td><span class="link">#15521</span></td>
+<td>
+<b>SPARE PARTS - OL2406</b>
+<br/><small>Seal kit + sensor</small>
+</td>
+<td>บริษัท อาหารเบทเทอร์ จำกัด</td>
+<td>Sales Team B</td>
+<td>VARIOVAC</td>
+<td>
+<div class="opp-stage">
+<span class="stage-dot current"></span>
+<span>Customer Review</span>
+</div>
+</td>
+<td><span class="badge gray">N/A</span></td>
+<td><span class="badge blue">Quote #2078</span></td>
+<td><span class="badge blue">Open</span></td>
+<td>02/10/2026 11:45</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="card">
+<div class="hd"><h3>Sales Flow / ภาพรวมขั้นตอนของ OPP</h3></div>
+<div class="bd">
+<div class="sales-flow-strip">
+<span>1. Opportunity</span><b>→</b>
+<span>2. Requirements</span><b>→</b>
+<span>3. Supplier RFQ</span><b>→</b>
+<span>4. Sales Quote</span><b>→</b>
+<span>5. Final Quote</span><b>→</b>
+<span>6. WIN</span><b>→</b>
+<span>7. Machine Register</span>
+</div>
+<div class="note" style="margin-top:10px">
+        ถ้าเป็นเครื่อง: หลัง Final/WIN ส่ง Requirement Snapshot ไป Machine Register • ถ้าเป็นอะไหล่: เลือกเครื่องที่เกี่ยวข้องตอน Final เพื่อบันทึกเข้า Machine History
+      </div>
+</div>
+</div>
+</section>
+<section class="page" id="opp-detail">
 <div class="page-title">
 <div><h1>Opportunity: REG - OL3151</h1><div class="subtitle">OPP #15602 • Machine • Sales information + Service handover fields</div></div>
 <div class="right"><span class="badge green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="runAiOpp()">AI Check</button><button class="btn primary" onclick="openFinalModal()">Final Quotation</button></div>
@@ -151,7 +312,6 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 <div class="note" style="margin-top:12px"><b>Rule:</b> หลัง Final ค่าใน Machine จะไม่ sync ตาม OPP อัตโนมัติ หาก OPP เปลี่ยนให้ใช้ Compare with latest OPP แล้วเลือกอัปเดตเฉพาะ field</div>
 </div>
 </div>
-
 <div class="card" id="opp-rfq-card">
 <div class="hd">
 <div>
@@ -498,7 +658,6 @@ RuamPat Sales Team</textarea></div>
 </div>
 </div>
 </section>
-
 <section class="page" id="machine-list">
 <div class="page-title"><div><h1>Machine Register / ทะเบียนเครื่อง</h1><div class="subtitle">รายการเครื่องทั้งหมด • Machine Register เป็นศูนย์รวมประวัติ ไม่ใช่ทางเดียวในการสร้างงาน</div></div><div class="right"><button class="btn">Refresh</button><button class="btn primary">+ Add Machine</button></div></div>
 <div class="grid4">
@@ -534,7 +693,7 @@ RuamPat Sales Team</textarea></div>
 <div class="field"><label>Final Speed</label><input value="12 packs/min"/></div><div class="field"><label>Capacity</label><input value="500 kg/hr"/></div><div class="field"><label>Pack</label><input value="Vacuum pack"/></div><div class="field"><label>Forming Depth</label><input value="80 mm"/></div><div class="field"><label>Final Vacuum</label><input value="≤ 10 mbar"/></div><div class="field"><label>Printer</label><input value="Labeler EF + CAB"/></div>
 </div></div></div>
 <div class="card"><div class="hd"><h3>Linked Records</h3></div><div class="bd grid4">
-<div class="stat"><small>Opportunity</small><b style="font-size:14px">REG - OL3151</b><button class="btn" onclick="go('opp')">Open OPP</button></div>
+<div class="stat"><small>Opportunity</small><b style="font-size:14px">REG - OL3151</b><button class="btn" onclick="openOppDetail('REG - OL3151')">Open OPP</button></div>
 <div class="stat"><small>Final Quote</small><b style="font-size:14px">#2095</b><button class="btn" onclick="go('quotes')">Open Quote</button></div>
 <div class="stat"><small>Functions</small><b>5</b><button class="btn" onclick="machinePanel('service')">View</button></div>
 <div class="stat"><small>Visits</small><b>9</b><button class="btn" onclick="machinePanel('service')">View</button></div>
@@ -1134,7 +1293,7 @@ RuamPat Sales Team</textarea></div>
 </div>
 </div>
 <script>
-const titles={opp:'Sales / Opportunities',quotes:'Sales / Sales Quotes','machine-list':'Machine Register / Machine List',register:'Machine Register / Detail',functions:'Operations / Function',visits:'Activities / Visit','service-report':'Reports / Service Trip','vehicle-master':'Meta / Vehicle Master','pm-my':'Machine / My PM',rfq:'Sales / Supplier RFQ'};
+const titles={opp:'Sales / Opportunities','opp-detail':'Sales / Opportunity Detail',quotes:'Sales / Sales Quotes','machine-list':'Machine Register / Machine List',register:'Machine Register / Detail',functions:'Operations / Function',visits:'Activities / Visit','service-report':'Reports / Service Trip','vehicle-master':'Meta / Vehicle Master','pm-my':'Machine / My PM',rfq:'Sales / Supplier RFQ'};
 function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id)?.classList.add('active');document.querySelectorAll('.subbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.getElementById('crumb').textContent=titles[id]||id;window.scrollTo(0,0)}
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
 function openMachine(sn){go('register');document.getElementById('machineTitle').textContent='Machine Register — '+sn;machinePanel('overview')}
@@ -1316,6 +1475,17 @@ function simulateSupplierReply(){
   '<tr><td>Machine Drawing</td><td>Yes</td><td>Optimus_GA_OL3151.pdf</td><td>96%</td><td><button class="btn primary">Confirm</button></td></tr>'+
   '<tr><td>Utility Requirement</td><td>Yes</td><td>OL3151_Final_Utility.pdf</td><td>95%</td><td><button class="btn primary">Confirm</button></td></tr>'+
   '<tr><td>Brochure</td><td>No</td><td>—</td><td>—</td><td><span class="badge amber">Missing</span></td></tr>';
+}
+
+function openOppDetail(name){
+  go('opp-detail');
+  document.getElementById('crumb').textContent='Sales / Opportunities / '+name;
+}
+function filterOpps(){
+  const q=(document.getElementById('oppSearch')?.value||'').toLowerCase();
+  document.querySelectorAll('#oppRows tr').forEach(r=>{
+    r.style.display=r.innerText.toLowerCase().includes(q)?'':'none';
+  });
 }
 </script>
 </body></html>
