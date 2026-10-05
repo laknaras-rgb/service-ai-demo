@@ -1099,10 +1099,36 @@ RuamPat Sales Team</textarea></div>
 <div class="history-item"><div>15/08/2027</div><div>CM</div><div>Vacuum issue • Function FN-CM-0815 • Sensor adjusted</div><div><span class="badge green">Completed</span></div></div>
 </div></div></div>
 </div>
-<div class="panel" id="p-parts"><div class="card"><div class="hd"><h3>Spare Parts History</h3></div><div class="bd"><table><thead><tr><th>Date</th><th>Quote</th><th>Part</th><th>Status</th><th>Actual Usage</th></tr></thead><tbody>
-<tr><td>10/01/2027</td><td>SPQ-0192</td><td>Seal Kit VV-SEAL-01</td><td><span class="badge green">Purchased</span></td><td>Replaced PM #1 20/01/2027</td></tr>
-<tr><td>02/09/2027</td><td>SPQ-0210</td><td>Vacuum Valve</td><td><span class="badge amber">Quoted - Not Purchased</span></td><td>-</td></tr>
-</tbody></table></div></div></div>
+<div class="panel" id="p-parts">
+<div class="card">
+  <div class="hd"><div><h3>Spare Parts / อะไหล่ของเครื่อง</h3><div class="subtitle">ต่อยอดจาก ERP ปัจจุบัน: อะไหล่ประจำเครื่อง + การใช้จริง + ประวัติการเสนอราคา/ซื้อ</div></div><button class="btn primary" onclick="alert('Prototype: เพิ่มอะไหล่ประจำเครื่อง')">+ เพิ่มอะไหล่</button></div>
+  <div class="bd">
+    <h4 style="margin-top:0">1. Machine Parts / อะไหล่ประจำเครื่อง</h4>
+    <div class="note" style="margin-bottom:10px">ตั้งต้นจากชุดสินค้า / Product Set และสามารถเพิ่มหรือแก้ไขได้ — ส่วนนี้คือรายการอะไหล่ที่ใช้กับเครื่อง ไม่ใช่ประวัติการซื้อ</div>
+    <table><thead><tr><th>Barcode / Part No.</th><th>ชื่อรายการ</th><th>จำนวน</th><th>ชม./วันที่ใช้จริง</th><th>อายุคงเหลือ</th><th>แหล่งที่มา</th><th></th></tr></thead><tbody>
+      <tr><td>VV-SEAL-01</td><td><b>Seal Kit</b></td><td>1 set</td><td>1,250 hr</td><td><span class="badge amber">ประมาณ 250 hr</span></td><td>Product Set</td><td><button class="btn" onclick="alert('Prototype: แก้ไขอะไหล่ VV-SEAL-01')">Edit</button></td></tr>
+      <tr><td>VV-SEN-04</td><td><b>Vacuum Sensor</b></td><td>1 pc</td><td>820 hr</td><td><span class="badge green">ปกติ</span></td><td>เพิ่มภายหลัง</td><td><button class="btn" onclick="alert('Prototype: แก้ไขอะไหล่ VV-SEN-04')">Edit</button></td></tr>
+    </tbody></table>
+  </div>
+</div>
+<div class="card">
+  <div class="hd"><div><h3>2. Parts Used / Replaced History</h3><div class="subtitle">ขยายจาก “ประวัติการเบิกใช้ตอน PM” ของระบบเดิม ให้รองรับ PM / CM / Repair / Installation</div></div></div>
+  <div class="bd"><table><thead><tr><th>Date</th><th>Work Type</th><th>Part</th><th>Qty</th><th>Action</th><th>Function / PM</th><th>Technician</th><th></th></tr></thead><tbody>
+    <tr><td>20/01/2027</td><td><span class="badge blue">PM</span></td><td>VV-SEAL-01 • Seal Kit</td><td>1 set</td><td><span class="badge green">Replaced</span></td><td><span class="link" onclick="openFunctionDetail('FN-PM-OL3151-01')">FN-PM-OL3151-01</span><br><small>PM Round #1</small></td><td>Janeny</td><td><button class="btn" onclick="machinePanel('pm')">PM Report</button></td></tr>
+    <tr><td>15/08/2027</td><td><span class="badge amber">CM</span></td><td>VV-SEN-04 • Vacuum Sensor</td><td>1 pc</td><td><span class="badge blue">Adjusted</span></td><td><span class="link" onclick="openFunctionDetail('FN-CM-0815')">FN-CM-0815</span></td><td>Service Team</td><td><button class="btn" onclick="openFunctionDetail('FN-CM-0815')">Open</button></td></tr>
+  </tbody></table></div>
+</div>
+<div class="card">
+  <div class="hd"><div><h3>3. Quotation & Purchase History</h3><div class="subtitle">ประวัติการเสนอราคาอะไหล่ที่ผูกกับเครื่องนี้ — Purchased ไม่ได้แปลว่าเปลี่ยนเข้าเครื่องแล้ว</div></div></div>
+  <div class="bd"><table><thead><tr><th>Date</th><th>Quote</th><th>Part</th><th>Qty</th><th>Sales Status</th><th>Purpose</th><th>Actual Usage</th><th></th></tr></thead><tbody>
+    <tr><td>10/01/2027</td><td><span class="link" onclick="go('quotes')">SPQ-0192</span></td><td>VV-SEAL-01 • Seal Kit</td><td>1 set</td><td><span class="badge green">Purchased</span></td><td>For OL3151</td><td><span class="badge green">Replaced 20/01/2027</span></td><td><button class="btn" onclick="go('quotes')">Open Quote</button></td></tr>
+    <tr><td>02/09/2027</td><td><span class="link" onclick="go('quotes')">SPQ-0210</span></td><td>Vacuum Valve</td><td>1 pc</td><td><span class="badge amber">Quoted - Not Purchased</span></td><td>Recommended for OL3151</td><td>—</td><td><button class="btn" onclick="go('quotes')">Open Quote</button></td></tr>
+    <tr><td>18/09/2027</td><td><span class="link" onclick="go('quotes')">SPQ-0225</span></td><td>Heating Element</td><td>2 pcs</td><td><span class="badge green">Purchased</span></td><td>Customer Stock</td><td><span class="badge gray">Not installed</span></td><td><button class="btn" onclick="go('quotes')">Open Quote</button></td></tr>
+  </tbody></table>
+  <div class="note" style="margin-top:12px"><b>Rule:</b> Quoted → Purchased เป็นข้อมูลฝ่ายขาย ส่วน Used / Replaced จะเกิดเมื่อช่างบันทึกจาก PM / CM / Function เท่านั้น เพื่อไม่ให้ระบบตีความว่า “ซื้อแล้ว = เปลี่ยนแล้ว”</div>
+  </div>
+</div>
+</div>
 <div class="panel" id="p-docs"><div class="card"><div class="hd"><div><h3>AI Email Document Inbox</h3><div class="subtitle">Supplier Email → AI Match → Human Confirm → ERP/Supabase Attachment</div></div><button class="btn ai">Scan Supplier Email</button></div><div class="bd">
 <div class="doc-row" id="doc1"><div><b>VV_OL3151_OrderConfirmation.pdf</b><br/><small>supplier@variovac.com • 03/10/2026</small></div><div><span class="badge blue">OL3151</span> Order Confirmation</div><div><b>98%</b></div><div class="right"><button class="btn primary" onclick="confirmDoc('doc1')">Confirm</button><button class="btn">Change Machine</button><button class="btn">Ignore</button></div></div>
 <div class="doc-row" id="doc2"><div><b>OL3151_Final_Utility_RevB.pdf</b><br/><small>technical@variovac.com • 04/10/2026</small></div><div><span class="badge blue">OL3151</span> Utility Requirement</div><div><b>96%</b></div><div class="right"><button class="btn primary" onclick="confirmDoc('doc2')">Confirm</button><button class="btn">Change Type</button><button class="btn">Ignore</button></div></div>
