@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="th">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>RuamPat ERP - Service AI Prototype</title>
 <style>
 *{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Tahoma,sans-serif;background:#eef4fb;color:#263238}
@@ -45,96 +46,101 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 .history-item{display:grid;grid-template-columns:120px 110px 1fr 130px;gap:10px;padding:10px 0;border-bottom:1px solid #edf1f5} .history-item:last-child{border-bottom:0}
 @media(max-width:1100px){.form-grid{grid-template-columns:repeat(2,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.vehicle-row{grid-template-columns:repeat(2,1fr)}.doc-row{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.app{grid-template-columns:1fr}.sidebar{display:none}.grid2,.grid3,.grid4,.form-grid,.photos{grid-template-columns:1fr}.span2{grid-column:span 1}.vehicle-row{grid-template-columns:1fr}.survey-grid{grid-template-columns:1fr}}
+
+.multi-box{min-height:44px;border:1px solid #cfd8e3;border-radius:8px;padding:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;background:#fff}
+.multi-box input{border:0!important;outline:0;min-width:180px;flex:1;padding:6px!important}
+.tag{display:inline-flex;align-items:center;gap:5px;background:#eef4ff;border:1px solid #d9e5ff;color:#274c77;padding:5px 7px;border-radius:999px;font-size:11px;font-weight:800}
+.tag small{font-weight:600;color:#607089}.tag button{border:0;background:transparent;color:#6b7280;font-weight:900;padding:0}
+.typeahead-menu{display:none;position:absolute;z-index:120;background:#fff;border:1px solid #d5dde7;border-radius:8px;box-shadow:0 12px 30px rgba(15,23,42,.15);max-height:210px;overflow:auto;min-width:360px;margin-top:4px}
+.typeahead-menu.show{display:block}.typeahead-menu>div{padding:9px 10px;font-size:12px;border-bottom:1px solid #edf1f5;cursor:pointer}.typeahead-menu>div:hover{background:#f7fafc}.typeahead-menu small{display:block;color:#7b8794;margin-top:2px}
+.travel-choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.travel-option{display:flex;gap:10px;border:1px solid #dbe3eb;border-radius:10px;padding:12px;cursor:pointer;background:#fff}.travel-option:has(input:checked){border-color:#f97316;background:#fff7ed}.travel-option span{display:flex;flex-direction:column;gap:3px}.travel-option small{color:#6b7280}
+.visit-preview{margin-top:14px;border:1px dashed #cbd5e1;border-radius:10px;padding:12px;background:#fbfdff;font-size:12px}.visit-preview div{padding:2px 0}.visit-preview small{display:block;margin-top:6px;color:#667085}
+@media(max-width:760px){.travel-choice{grid-template-columns:1fr}.typeahead-menu{min-width:260px;max-width:90vw}}
 </style>
 </head>
 <body>
 <div class="app">
 <aside class="sidebar">
-  <div class="brand"><div class="rp">RP</div><div class="name">RuamPat ERP</div></div>
-  <div class="menu">
-    <div class="group-label">Sales</div>
-    <button class="subbtn active" data-page="opp">Opportunities</button>
-    <button class="subbtn" data-page="quotes">Sales Quotes</button>
-    <div class="group-label">Activities</div>
-    <button class="subbtn" data-page="visits">Visit</button>
-    <div class="group-label">Operations</div>
-    <button class="subbtn" data-page="functions">Function</button>
-    <div class="group-label">Machine</div>
-    <button class="subbtn" data-page="machine-list">Machine List</button>
-    <button class="subbtn" data-page="pm-my">งาน PM ของฉัน</button>
-    <div class="group-label">Reports / Meta</div>
-    <button class="subbtn" data-page="service-report">Service Report</button>
-    <button class="subbtn" data-page="vehicle-master">Vehicle Master</button>
-  </div>
+<div class="brand"><div class="rp">RP</div><div class="name">RuamPat ERP</div></div>
+<div class="menu">
+<div class="group-label">Sales</div>
+<button class="subbtn active" data-page="opp">Opportunities</button>
+<button class="subbtn" data-page="quotes">Sales Quotes</button>
+<div class="group-label">Activities</div>
+<button class="subbtn" data-page="visits">Visit</button>
+<div class="group-label">Operations</div>
+<button class="subbtn" data-page="functions">Function</button>
+<div class="group-label">Machine</div>
+<button class="subbtn" data-page="machine-list">Machine List</button>
+<button class="subbtn" data-page="pm-my">งาน PM ของฉัน</button>
+<div class="group-label">Reports / Meta</div>
+<button class="subbtn" data-page="service-report">Service Report</button>
+<button class="subbtn" data-page="vehicle-master">Vehicle Master</button>
+</div>
 </aside>
 <main class="main">
-  <div class="topbar"><div class="crumb" id="crumb">Sales / Opportunities</div><div class="user">Jeans • ERP Prototype</div></div>
-  <div class="content">
-
+<div class="topbar"><div class="crumb" id="crumb">Sales / Opportunities</div><div class="user">Jeans • ERP Prototype</div></div>
+<div class="content">
 <section class="page active" id="opp">
 <div class="page-title">
-  <div><h1>Opportunity: REG - OL3151</h1><div class="subtitle">OPP #15602 • Machine • Sales information + Service handover fields</div></div>
-  <div class="right"><span class="badge green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="runAiOpp()">AI Check</button><button class="btn primary" onclick="openFinalModal()">Final Quotation</button></div>
+<div><h1>Opportunity: REG - OL3151</h1><div class="subtitle">OPP #15602 • Machine • Sales information + Service handover fields</div></div>
+<div class="right"><span class="badge green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="runAiOpp()">AI Check</button><button class="btn primary" onclick="openFinalModal()">Final Quotation</button></div>
 </div>
-
 <div class="card">
-  <div class="hd"><h3>ข้อมูลทั่วไป / General Opportunity Information</h3><span class="badge gray">ERP fields</span></div>
-  <div class="bd form-grid">
-    <div class="field"><label>Opportunities No.</label><input value="15602"></div>
-    <div class="field"><label>Name Opportunities</label><input value="REG - OL3151"></div>
-    <div class="field"><label>Account / Target</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"></div>
-    <div class="field"><label>Owner</label><input value="Darat Charansirirungkarn"></div>
-    <div class="field"><label>Location</label><input value="ปทุมธานี"></div>
-    <div class="field"><label>Status</label><select><option>WIN</option></select></div>
-    <div class="field"><label>Reason</label><input value="ราคา"></div>
-    <div class="field"><label>Reason Note</label><input value="ลูกค้ายอมรับราคาและเงื่อนไขตามใบเสนอราคา Rev. ล่าสุด เลขที่ 2095"></div>
-    <div class="field"><label>สินค้าของลูกค้า</label><input value="อาหารพร้อมทาน / ไส้กรอก"></div>
-    <div class="field"><label>Supplier</label><input value="VARIOVAC"></div>
-    <div class="field"><label>Capacity ของลูกค้า</label><input value="ต้องการเพิ่มกำลังการผลิตจากไลน์เดิม"></div>
-    <div class="field"><label>S/N</label><input value="OL3151"></div>
-  </div>
+<div class="hd"><h3>ข้อมูลทั่วไป / General Opportunity Information</h3><span class="badge gray">ERP fields</span></div>
+<div class="bd form-grid">
+<div class="field"><label>Opportunities No.</label><input value="15602"/></div>
+<div class="field"><label>Name Opportunities</label><input value="REG - OL3151"/></div>
+<div class="field"><label>Account / Target</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"/></div>
+<div class="field"><label>Owner</label><input value="Darat Charansirirungkarn"/></div>
+<div class="field"><label>Location</label><input value="ปทุมธานี"/></div>
+<div class="field"><label>Status</label><select><option>WIN</option></select></div>
+<div class="field"><label>Reason</label><input value="ราคา"/></div>
+<div class="field"><label>Reason Note</label><input value="ลูกค้ายอมรับราคาและเงื่อนไขตามใบเสนอราคา Rev. ล่าสุด เลขที่ 2095"/></div>
+<div class="field"><label>สินค้าของลูกค้า</label><input value="อาหารพร้อมทาน / ไส้กรอก"/></div>
+<div class="field"><label>Supplier</label><input value="VARIOVAC"/></div>
+<div class="field"><label>Capacity ของลูกค้า</label><input value="ต้องการเพิ่มกำลังการผลิตจากไลน์เดิม"/></div>
+<div class="field"><label>S/N</label><input value="OL3151"/></div>
 </div>
-
+</div>
 <div class="card">
-  <div class="hd"><h3>Machine & Installation Requirements / ข้อมูลที่ Sales ยืนยันเพื่อส่ง Service</h3><span class="badge purple">Service handover</span></div>
-  <div class="bd form-grid">
-    <div class="field"><label>Machine</label><input value="Thermoform"></div>
-    <div class="field"><label>Brand / Manufacturer</label><input value="VARIOVAC"></div>
-    <div class="field"><label>Model</label><input value="Optimus"></div>
-    <div class="field"><label>Serial Number / S/N</label><input value="OL3151"></div>
-    <div class="field"><label>Product</label><input id="oppProduct" value="Ready meal / sausage"></div>
-    <div class="field"><label>Target Capacity</label><input id="oppCapacity" value="ประมาณ 500 kg/hr"></div>
-    <div class="field"><label>Final Speed</label><input id="oppSpeed" value="12 packs/min"></div>
-    <div class="field"><label>Pack</label><input id="oppPack" value="Vacuum pack / Thermoform pack"></div>
-    <div class="field"><label>Forming Depth</label><input id="oppDepth" value="80 mm"></div>
-    <div class="field"><label>Final Vacuum</label><input id="oppVacuum" value="≤ 10 mbar"></div>
-    <div class="field"><label>Printer / Labeler</label><input id="oppPrinter" value="Labeler EF + CAB printer 1 set"></div>
-    <div class="field"><label>Printing Position</label><input id="oppPrintPos" value="Top film / ด้านบนแพ็ก"></div>
-    <div class="field span2"><label>Printing Requirement</label><textarea>พิมพ์ Lot, MFG, EXP และ Barcode บน Top film ตามตำแหน่งที่ลูกค้ากำหนด</textarea></div>
-    <div class="field span2"><label>Options / Accessories</label><textarea>Labeler EF 1 ชุด, CAB printer 1 set, อุปกรณ์ติดตั้งที่เกี่ยวข้องตามใบเสนอราคา</textarea></div>
-  </div>
+<div class="hd"><h3>Machine &amp; Installation Requirements / ข้อมูลที่ Sales ยืนยันเพื่อส่ง Service</h3><span class="badge purple">Service handover</span></div>
+<div class="bd form-grid">
+<div class="field"><label>Machine</label><input value="Thermoform"/></div>
+<div class="field"><label>Brand / Manufacturer</label><input value="VARIOVAC"/></div>
+<div class="field"><label>Model</label><input value="Optimus"/></div>
+<div class="field"><label>Serial Number / S/N</label><input value="OL3151"/></div>
+<div class="field"><label>Product</label><input id="oppProduct" value="Ready meal / sausage"/></div>
+<div class="field"><label>Target Capacity</label><input id="oppCapacity" value="ประมาณ 500 kg/hr"/></div>
+<div class="field"><label>Final Speed</label><input id="oppSpeed" value="12 packs/min"/></div>
+<div class="field"><label>Pack</label><input id="oppPack" value="Vacuum pack / Thermoform pack"/></div>
+<div class="field"><label>Forming Depth</label><input id="oppDepth" value="80 mm"/></div>
+<div class="field"><label>Final Vacuum</label><input id="oppVacuum" value="≤ 10 mbar"/></div>
+<div class="field"><label>Printer / Labeler</label><input id="oppPrinter" value="Labeler EF + CAB printer 1 set"/></div>
+<div class="field"><label>Printing Position</label><input id="oppPrintPos" value="Top film / ด้านบนแพ็ก"/></div>
+<div class="field span2"><label>Printing Requirement</label><textarea>พิมพ์ Lot, MFG, EXP และ Barcode บน Top film ตามตำแหน่งที่ลูกค้ากำหนด</textarea></div>
+<div class="field span2"><label>Options / Accessories</label><textarea>Labeler EF 1 ชุด, CAB printer 1 set, อุปกรณ์ติดตั้งที่เกี่ยวข้องตามใบเสนอราคา</textarea></div>
 </div>
-
+</div>
 <div class="card readiness">
-  <div class="hd"><div><h3>Final Readiness Check / ตรวจข้อมูลก่อน Final Quotation</h3><div class="subtitle">Final แล้ว Machine Register จะเก็บ Sales Requirement Snapshot ณ เวลานั้น</div></div><span class="badge green">Ready 8/8</span></div>
-  <div class="bd">
-    <div class="grid4">
-      <div class="ready-item"><b>Machine</b><span>VARIOVAC Optimus</span><small>Required</small></div>
-      <div class="ready-item"><b>Product / Pack</b><span>Ready meal / Vacuum pack</span><small>Required</small></div>
-      <div class="ready-item"><b>Final Speed</b><span>12 packs/min</span><small>Required</small></div>
-      <div class="ready-item"><b>Capacity</b><span>500 kg/hr</span><small>Required</small></div>
-      <div class="ready-item"><b>Forming Depth</b><span>80 mm</span><small>Confirmed</small></div>
-      <div class="ready-item"><b>Final Vacuum</b><span>≤ 10 mbar</span><small>Confirmed</small></div>
-      <div class="ready-item"><b>Printer</b><span>Labeler EF + CAB</span><small>Confirmed</small></div>
-      <div class="ready-item"><b>Printing Position</b><span>Top film</span><small>Confirmed</small></div>
-    </div>
-    <div class="note" style="margin-top:12px"><b>Rule:</b> หลัง Final ค่าใน Machine จะไม่ sync ตาม OPP อัตโนมัติ หาก OPP เปลี่ยนให้ใช้ Compare with latest OPP แล้วเลือกอัปเดตเฉพาะ field</div>
-  </div>
+<div class="hd"><div><h3>Final Readiness Check / ตรวจข้อมูลก่อน Final Quotation</h3><div class="subtitle">Final แล้ว Machine Register จะเก็บ Sales Requirement Snapshot ณ เวลานั้น</div></div><span class="badge green">Ready 8/8</span></div>
+<div class="bd">
+<div class="grid4">
+<div class="ready-item"><b>Machine</b><span>VARIOVAC Optimus</span><small>Required</small></div>
+<div class="ready-item"><b>Product / Pack</b><span>Ready meal / Vacuum pack</span><small>Required</small></div>
+<div class="ready-item"><b>Final Speed</b><span>12 packs/min</span><small>Required</small></div>
+<div class="ready-item"><b>Capacity</b><span>500 kg/hr</span><small>Required</small></div>
+<div class="ready-item"><b>Forming Depth</b><span>80 mm</span><small>Confirmed</small></div>
+<div class="ready-item"><b>Final Vacuum</b><span>≤ 10 mbar</span><small>Confirmed</small></div>
+<div class="ready-item"><b>Printer</b><span>Labeler EF + CAB</span><small>Confirmed</small></div>
+<div class="ready-item"><b>Printing Position</b><span>Top film</span><small>Confirmed</small></div>
 </div>
-
+<div class="note" style="margin-top:12px"><b>Rule:</b> หลัง Final ค่าใน Machine จะไม่ sync ตาม OPP อัตโนมัติ หาก OPP เปลี่ยนให้ใช้ Compare with latest OPP แล้วเลือกอัปเดตเฉพาะ field</div>
+</div>
+</div>
 <div class="card">
-  <div class="hd"><h3>Opportunity Note / Description</h3><span class="badge gray">Sales Note</span></div>
-  <div class="bd"><textarea style="width:100%;min-height:560px">9/11/2025
+<div class="hd"><h3>Opportunity Note / Description</h3><span class="badge gray">Sales Note</span></div>
+<div class="bd"><textarea style="width:100%;min-height:560px">9/11/2025
 
 Customer would like to order new machine same spec. as OL2875 and they need return it with the old one OL0203.
 
@@ -185,50 +191,45 @@ Updated 1/2026
 ดังนั้นจึงมีรอคอนเฟริมวันพร้อมส่ง และเรื่องเล่า(A little bit Fake) อีกทีแล้วค่อยแจ้งคุณติ๋ว</textarea></div>
 </div>
 </section>
-
 <section class="page" id="quotes">
 <div class="page-title"><div><h1>Sales Quotes</h1><div class="subtitle">Final quote ยังคงเป็น trigger เดิมในการสร้าง Function + Task + Machine Register</div></div></div>
 <div class="card"><div class="bd"><table><thead><tr><th>Quote No.</th><th>OPP</th><th>Customer</th><th>Status</th><th></th></tr></thead><tbody>
 <tr><td><b>#2095</b></td><td>REG - OL3151</td><td>บริษัท จีเอสวีฯ</td><td><span class="badge green">Final</span></td><td><button class="btn" onclick="go('machine-list')">View Machine Created</button></td></tr>
 </tbody></table></div></div>
 </section>
-
 <section class="page" id="machine-list">
 <div class="page-title"><div><h1>Machine Register / ทะเบียนเครื่อง</h1><div class="subtitle">รายการเครื่องทั้งหมด • Machine Register เป็นศูนย์รวมประวัติ ไม่ใช่ทางเดียวในการสร้างงาน</div></div><div class="right"><button class="btn">Refresh</button><button class="btn primary">+ Add Machine</button></div></div>
 <div class="grid4">
-  <div class="stat"><small>Total Machines</small><b>128</b></div><div class="stat"><small>Active</small><b>119</b></div><div class="stat"><small>Installation / Handover</small><b>7</b></div><div class="stat"><small>Need Service Follow-up</small><b>12</b></div>
+<div class="stat"><small>Total Machines</small><b>128</b></div><div class="stat"><small>Active</small><b>119</b></div><div class="stat"><small>Installation / Handover</small><b>7</b></div><div class="stat"><small>Need Service Follow-up</small><b>12</b></div>
 </div>
-<div class="card" style="margin-top:14px"><div class="hd"><h3>Machine List</h3><input id="machineSearch" placeholder="ค้นหา Machine No. / Serial / ลูกค้า..." oninput="filterMachines()" style="min-width:320px;border:1px solid #cfd8e3;border-radius:8px;padding:8px 10px"></div>
+<div class="card" style="margin-top:14px"><div class="hd"><h3>Machine List</h3><input id="machineSearch" oninput="filterMachines()" placeholder="ค้นหา Machine No. / Serial / ลูกค้า..." style="min-width:320px;border:1px solid #cfd8e3;border-radius:8px;padding:8px 10px"/></div>
 <div class="bd"><table><thead><tr><th>Machine No.</th><th>Serial</th><th>Machine</th><th>Customer</th><th>Lifecycle</th><th>Next PM</th><th>Status</th></tr></thead><tbody id="machineRows">
-<tr><td><span class="link" onclick="openMachine('OL3151')">1011-007</span></td><td>OL3151</td><td><b>VARIOVAC Optimus</b><br><small>Thermoform + Labeler EF</small></td><td>บริษัท จีเอสวีฯ<br><small>ปทุมธานี</small></td><td>Order Confirmation</td><td>20/04/2027</td><td><span class="badge green">Active</span></td></tr>
+<tr><td><span class="link" onclick="openMachine('OL3151')">1011-007</span></td><td>OL3151</td><td><b>VARIOVAC Optimus</b><br/><small>Thermoform + Labeler EF</small></td><td>บริษัท จีเอสวีฯ<br/><small>ปทุมธานี</small></td><td>Order Confirmation</td><td>20/04/2027</td><td><span class="badge green">Active</span></td></tr>
 <tr><td><span class="link" onclick="openMachine('OL2875')">1008-002</span></td><td>OL2875</td><td><b>VARIOVAC Thermoform</b></td><td>บริษัท จีเอสวีฯ</td><td>After Sales</td><td>12/12/2026</td><td><span class="badge green">Active</span></td></tr>
 </tbody></table></div></div>
 </section>
-
 <section class="page" id="register">
 <div class="page-title"><div><h1 id="machineTitle">Machine Register — OL3151</h1><div class="subtitle">Machine history center • OPP ↔ Function ↔ Visit ↔ PM ↔ Parts ↔ Documents</div></div><div class="right"><button class="btn">Edit</button><button class="btn primary">Save Machine</button></div></div>
-
 <div class="flow">
 <button class="step done" onclick="machinePanel('overview',this)"><span class="dot">✓</span>Overview</button><span class="line done"></span>
-<button class="step done" onclick="machinePanel('order',this)"><span class="dot">✓</span>Order & Delivery</button><span class="line done"></span>
+<button class="step done" onclick="machinePanel('order',this)"><span class="dot">✓</span>Order &amp; Delivery</button><span class="line done"></span>
 <button class="step done" onclick="machinePanel('pre',this)"><span class="dot">✓</span>Pre-Install</button><span class="line done"></span>
-<button class="step done" onclick="machinePanel('qc',this)"><span class="dot">✓</span>Receiving & QC</button><span class="line"></span>
+<button class="step done" onclick="machinePanel('qc',this)"><span class="dot">✓</span>Receiving &amp; QC</button><span class="line"></span>
 <button class="step current" onclick="machinePanel('install',this)"><span class="dot">5</span>Installation</button><span class="line"></span>
 <button class="step" onclick="machinePanel('handover',this)"><span class="dot">6</span>Handover</button><span class="line"></span>
 <button class="step" onclick="machinePanel('service',this)"><span class="dot">7</span>Service</button><span class="line"></span>
 <button class="step" onclick="machinePanel('pm',this)"><span class="dot">8</span>PM / After Sales</button>
 </div>
 <div class="utility-tabs"><button class="btn ai" onclick="machinePanel('ai')">✦ AI Summary</button><button class="btn" onclick="machinePanel('parts')">Spare Parts</button><button class="btn" onclick="machinePanel('docs')">Documents / Email AI</button></div>
-
 <div class="panel active" id="p-overview">
 <div class="snapshot"><div><b>Sales Requirement Snapshot</b><small>OPP #15602 • Final Quote #2095 • Captured 05/10/2026 08:30</small></div><button class="btn" onclick="document.getElementById('compareBox').style.display='block'">Compare with latest OPP</button></div>
-<div id="compareBox" class="note" style="display:none;margin-bottom:12px"><b>AI Compare:</b> Structured fields unchanged. พบ Note ใหม่เรื่องกำหนดส่ง Labeler EF หลัง Final เท่านั้น</div>
+<div class="note" id="compareBox" style="display:none;margin-bottom:12px"><b>AI Compare:</b> Structured fields unchanged. พบ Note ใหม่เรื่องกำหนดส่ง Labeler EF หลัง Final เท่านั้น</div>
 <div class="grid2">
 <div class="card"><div class="hd"><h3>General Information</h3></div><div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
-<div class="field"><label>Customer</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"></div><div class="field"><label>Machine No.</label><input value="1011-007"></div><div class="field"><label>Serial No.</label><input value="OL3151"></div><div class="field"><label>Model</label><input value="Optimus"></div>
+<div class="field"><label>Customer</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด"/></div><div class="field"><label>Machine No.</label><input value="1011-007"/></div><div class="field"><label>Serial No.</label><input value="OL3151"/></div><div class="field"><label>Model</label><input value="Optimus"/></div>
 </div></div>
 <div class="card"><div class="hd"><h3>Sales Confirmed Requirement</h3></div><div class="bd form-grid" style="grid-template-columns:repeat(2,1fr)">
-<div class="field"><label>Final Speed</label><input value="12 packs/min"></div><div class="field"><label>Capacity</label><input value="500 kg/hr"></div><div class="field"><label>Pack</label><input value="Vacuum pack"></div><div class="field"><label>Forming Depth</label><input value="80 mm"></div><div class="field"><label>Final Vacuum</label><input value="≤ 10 mbar"></div><div class="field"><label>Printer</label><input value="Labeler EF + CAB"></div>
+<div class="field"><label>Final Speed</label><input value="12 packs/min"/></div><div class="field"><label>Capacity</label><input value="500 kg/hr"/></div><div class="field"><label>Pack</label><input value="Vacuum pack"/></div><div class="field"><label>Forming Depth</label><input value="80 mm"/></div><div class="field"><label>Final Vacuum</label><input value="≤ 10 mbar"/></div><div class="field"><label>Printer</label><input value="Labeler EF + CAB"/></div>
 </div></div></div>
 <div class="card"><div class="hd"><h3>Linked Records</h3></div><div class="bd grid4">
 <div class="stat"><small>Opportunity</small><b style="font-size:14px">REG - OL3151</b><button class="btn" onclick="go('opp')">Open OPP</button></div>
@@ -237,69 +238,58 @@ Updated 1/2026
 <div class="stat"><small>Visits</small><b>9</b><button class="btn" onclick="machinePanel('service')">View</button></div>
 </div></div>
 </div>
-
 <div class="panel" id="p-ai"><div class="card"><div class="hd"><h3>AI Machine Summary</h3><span class="badge purple">OPP + Note + Email</span></div><div class="bd grid3">
-<div class="note"><b>Sold Machine</b><br>VARIOVAC Optimus<br>Speed 12 packs/min<br>Depth 80 mm<br>Labeler EF + CAB</div>
-<div class="note"><b>AI Summary from Sales Note</b><br>ซื้อ Thermoform 1 เครื่อง พร้อม Labeler EF + CAB และมี Labeler EF สำหรับติดตั้งกับเครื่องเก่าอีก 1 เครื่อง</div>
-<div class="note"><b>Follow-up</b><br>ติดตามกำหนดส่ง EF และ Final Utility Document ก่อนติดตั้ง</div>
+<div class="note"><b>Sold Machine</b><br/>VARIOVAC Optimus<br/>Speed 12 packs/min<br/>Depth 80 mm<br/>Labeler EF + CAB</div>
+<div class="note"><b>AI Summary from Sales Note</b><br/>ซื้อ Thermoform 1 เครื่อง พร้อม Labeler EF + CAB และมี Labeler EF สำหรับติดตั้งกับเครื่องเก่าอีก 1 เครื่อง</div>
+<div class="note"><b>Follow-up</b><br/>ติดตามกำหนดส่ง EF และ Final Utility Document ก่อนติดตั้ง</div>
 </div></div></div>
-
-<div class="panel" id="p-order"><div class="card"><div class="hd"><h3>Order & Delivery Timeline</h3></div><div class="bd"><table><thead><tr><th>Step</th><th>Status</th><th>Date / Ref</th><th>Remark</th></tr></thead><tbody>
+<div class="panel" id="p-order"><div class="card"><div class="hd"><h3>Order &amp; Delivery Timeline</h3></div><div class="bd"><table><thead><tr><th>Step</th><th>Status</th><th>Date / Ref</th><th>Remark</th></tr></thead><tbody>
 <tr><td>Order Confirmation</td><td><span class="badge green">Confirmed</span></td><td>OC-OL3151</td><td>AI matched supplier document</td></tr><tr><td>Production</td><td><span class="badge green">Completed</span></td><td>Week 38</td><td>-</td></tr><tr><td>Shipment</td><td><span class="badge amber">In Transit</span></td><td>AWB pending</td><td>Labeler EF delayed</td></tr><tr><td>Thailand / Customs</td><td><span class="badge gray">Pending</span></td><td>-</td><td>-</td></tr>
 </tbody></table></div></div></div>
-
-<div class="panel" id="p-pre"><div class="grid2"><div class="card"><div class="hd"><h3>Site & Utility</h3></div><div class="bd">
-<label><input type="checkbox" checked> Electrical / ไฟ</label><br><label><input type="checkbox" checked> Air / ลม</label><br><label><input type="checkbox"> Water / น้ำ</label><br><label><input type="checkbox"> Space & Access</label>
+<div class="panel" id="p-pre"><div class="grid2"><div class="card"><div class="hd"><h3>Site &amp; Utility</h3></div><div class="bd">
+<label><input checked="" type="checkbox"/> Electrical / ไฟ</label><br/><label><input checked="" type="checkbox"/> Air / ลม</label><br/><label><input type="checkbox"/> Water / น้ำ</label><br/><label><input type="checkbox"/> Space &amp; Access</label>
 </div></div><div class="card"><div class="hd"><h3>Required Documents</h3></div><div class="bd">Final Utility • Electrical Drawing • Pneumatic Drawing • Installation Manual</div></div></div></div>
-
-<div class="panel" id="p-qc"><div class="grid2"><div class="card"><div class="hd"><h3>Receiving & QC</h3></div><div class="bd">
-<label><input type="checkbox" checked> Machine matches ordered specification</label><br><label><input type="checkbox" checked> Items complete per Packing List</label><br><label><input type="checkbox" checked> No visible damage</label><br><label><input type="checkbox"> Claim required</label>
-</div></div><div class="card"><div class="hd"><h3>Identity</h3></div><div class="bd form-grid" style="grid-template-columns:1fr 1fr"><div class="field"><label>Model</label><input value="Optimus"></div><div class="field"><label>Serial</label><input value="OL3151"></div></div></div></div></div>
-
-<div class="panel" id="p-install"><div class="card"><div class="hd"><h3>Installation & Commissioning</h3><button class="btn primary" onclick="newFunctionFromMachine()">+ Create Function</button></div><div class="bd">
+<div class="panel" id="p-qc"><div class="grid2"><div class="card"><div class="hd"><h3>Receiving &amp; QC</h3></div><div class="bd">
+<label><input checked="" type="checkbox"/> Machine matches ordered specification</label><br/><label><input checked="" type="checkbox"/> Items complete per Packing List</label><br/><label><input checked="" type="checkbox"/> No visible damage</label><br/><label><input type="checkbox"/> Claim required</label>
+</div></div><div class="card"><div class="hd"><h3>Identity</h3></div><div class="bd form-grid" style="grid-template-columns:1fr 1fr"><div class="field"><label>Model</label><input value="Optimus"/></div><div class="field"><label>Serial</label><input value="OL3151"/></div></div></div></div></div>
+<div class="panel" id="p-install"><div class="card"><div class="hd"><h3>Installation &amp; Commissioning</h3><button class="btn primary" onclick="newFunctionFromMachine()">+ Create Function</button></div><div class="bd">
 <div class="note">Function/Visit สามารถสร้างจากหน้า Machine หรือจากเมนู Function/Visit แยกก็ได้ ทุกทางต้องผูกกลับ Machine ผ่าน Machine ID โดยให้ผู้ใช้ค้นด้วย Serial/Machine No.</div>
 <table style="margin-top:12px"><thead><tr><th>Item</th><th>Sold Requirement</th><th>Actual</th><th>Status</th></tr></thead><tbody><tr><td>Final Speed</td><td>12 packs/min</td><td>12 packs/min</td><td><span class="badge green">Match</span></td></tr><tr><td>Forming Depth</td><td>80 mm</td><td>80 mm</td><td><span class="badge green">Match</span></td></tr><tr><td>Printer</td><td>Labeler EF + CAB</td><td>Installed</td><td><span class="badge green">OK</span></td></tr></tbody></table>
 </div></div></div>
-
 <div class="panel" id="p-handover"><div class="card"><div class="hd"><h3>Customer Handover</h3></div><div class="bd grid2"><div>
-<label><input type="checkbox" checked> Installation completed</label><br><label><input type="checkbox" checked> Test run accepted</label><br><label><input type="checkbox"> Training completed</label><br><label><input type="checkbox"> Documents received</label>
+<label><input checked="" type="checkbox"/> Installation completed</label><br/><label><input checked="" type="checkbox"/> Test run accepted</label><br/><label><input type="checkbox"/> Training completed</label><br/><label><input type="checkbox"/> Documents received</label>
 </div><div class="field"><label>Customer Sign-off / Remark</label><textarea></textarea></div></div></div></div>
-
 <div class="panel" id="p-service">
-<div class="page-title"><div><h1 style="font-size:19px">Service History / Function & Visit</h1><div class="subtitle">Machine Register รวมประวัติจากทุกเมนู ไม่ได้บังคับให้ช่างเริ่มงานที่ Machine Register</div></div><div class="right"><button class="btn" onclick="go('functions')">Open Function Menu</button><button class="btn" onclick="go('visits')">Open Visit Menu</button></div></div>
+<div class="page-title"><div><h1 style="font-size:19px">Service History / Function &amp; Visit</h1><div class="subtitle">Machine Register รวมประวัติจากทุกเมนู ไม่ได้บังคับให้ช่างเริ่มงานที่ Machine Register</div></div><div class="right"><button class="btn" onclick="go('functions')">Open Function Menu</button><button class="btn" onclick="go('visits')">Open Visit Menu</button></div></div>
 <div class="card"><div class="hd"><h3>Service Jobs linked to OL3151</h3></div><div class="bd"><table><thead><tr><th>Date</th><th>Type</th><th>Function</th><th>Machines</th><th>Visits</th><th>Status</th></tr></thead><tbody>
 <tr onclick="selectServiceJob('FN-PM-OL3151-01')" style="cursor:pointer"><td>20/01/2027</td><td>PM</td><td><span class="link">FN-PM-OL3151-01</span></td><td>OL3151, OL2875</td><td>3 technicians / 3 visits</td><td><span class="badge green">Completed</span></td></tr>
 <tr><td>15/08/2027</td><td>CM / Repair</td><td><span class="link">FN-CM-0815</span></td><td>OL3151</td><td>2 visits</td><td><span class="badge green">Completed</span></td></tr>
 </tbody></table></div></div>
 <div class="card" id="serviceJobDetail"><div class="hd"><h3>Function FN-PM-OL3151-01</h3><span class="badge blue">PM Round #1</span></div><div class="bd">
-<div class="grid3"><div class="note"><b>Machines</b><br>OL3151 • OL2875</div><div class="note"><b>Customer</b><br>บริษัท จีเอสวีฯ</div><div class="note"><b>Job Document</b><br>FM-ENG-010 • Completed</div></div>
+<div class="grid3"><div class="note"><b>Machines</b><br/>OL3151 • OL2875</div><div class="note"><b>Customer</b><br/>บริษัท จีเอสวีฯ</div><div class="note"><b>Job Document</b><br/>FM-ENG-010 • Completed</div></div>
 <h4>Visits under this Function</h4>
 <table><thead><tr><th>Technician</th><th>Visit</th><th>Check-in</th><th>Check-out</th><th>Location</th><th>Trip</th></tr></thead><tbody>
-<tr><td>Janeny</td><td>Visit #1</td><td>09:05</td><td>16:40</td><td>Customer Site</td><td rowspan="3"><span class="link" onclick="showTrip()">TRIP-20270120-01</span><br><small>รถคันเดียวกัน</small></td></tr>
+<tr><td>Janeny</td><td>Visit #1</td><td>09:05</td><td>16:40</td><td>Customer Site</td><td rowspan="3"><span class="link" onclick="showTrip()">TRIP-20270120-01</span><br/><small>รถคันเดียวกัน</small></td></tr>
 <tr><td>Jeans</td><td>Visit #2</td><td>09:08</td><td>16:35</td><td>Customer Site</td></tr>
 <tr><td>Technician C</td><td>Visit #3</td><td>09:12</td><td>16:42</td><td>Customer Site</td></tr>
 </tbody></table>
-<div id="tripBox" class="service-trip" style="display:none;margin-top:12px"><b>Shared Service Trip: TRIP-20270120-01</b><div class="vehicle-row" style="margin-top:10px"><div><small>Vehicle</small><br><b>1กข-1234</b></div><div><small>Odometer Start</small><br><b>125,000 km</b></div><div><small>Odometer End</small><br><b>125,180 km</b></div><div><small>Distance</small><br><b>180 km</b></div><div><small>Expense</small><br><b>1,360 THB</b></div></div></div>
+<div class="service-trip" id="tripBox" style="display:none;margin-top:12px"><b>Shared Service Trip: TRIP-20270120-01</b><div class="vehicle-row" style="margin-top:10px"><div><small>Vehicle</small><br/><b>1กข-1234</b></div><div><small>Odometer Start</small><br/><b>125,000 km</b></div><div><small>Odometer End</small><br/><b>125,180 km</b></div><div><small>Distance</small><br/><b>180 km</b></div><div><small>Expense</small><br/><b>1,360 THB</b></div></div></div>
 </div></div>
 </div>
-
 <div class="panel" id="p-pm">
 <div class="tabs">
 <button class="tab active" onclick="pmArea('program',this)">PM Program</button><button class="tab" onclick="pmArea('schedule',this)">PM Schedule</button><button class="tab" onclick="pmArea('survey',this)">Machine Survey</button><button class="tab" onclick="pmArea('report',this)">PM Reports</button><button class="tab" onclick="pmArea('history',this)">Maintenance History</button>
 </div>
-
 <div class="pm-area active" id="pm-program"><div class="card"><div class="hd"><h3>PM Program / แผน PM ประจำเครื่อง</h3><div class="right"><button class="btn">View Checklist Template</button><button class="btn">Edit Plan</button><button class="btn">Copy PM Plan</button></div></div><div class="bd">
 <div class="grid4"><div class="stat"><small>Plan</small><b style="font-size:14px">VARIOVAC THERMOFORM</b></div><div class="stat"><small>Frequency</small><b>3 เดือน</b></div><div class="stat"><small>Last PM</small><b style="font-size:16px">20/01/2027</b></div><div class="stat"><small>Next PM</small><b style="font-size:16px">20/04/2027</b></div></div><div class="note" style="margin-top:12px">PM Program เก็บ Template + ความถี่เท่านั้น ผล Checklist จริงจะอยู่ใน PM Report ของแต่ละรอบ</div>
 </div></div></div>
-
 <div class="pm-area" id="pm-schedule"><div class="card"><div class="hd"><h3>PM Schedule / รอบ PM</h3><button class="btn primary">+ Create PM Round</button></div><div class="bd"><div class="subtitle" style="margin-bottom:10px">สร้าง PM Round ก่อน • เมื่อพร้อมลงงานค่อย Create Function • Visit อยู่ใต้ Function</div>
 <table><thead><tr><th>Round</th><th>Plan</th><th>Due Date</th><th>Technician</th><th>Function / Visits</th><th>Status</th><th></th></tr></thead><tbody>
-<tr><td>#1</td><td>VARIOVAC THERMOFORM</td><td>20/01/2027</td><td>Janeny, Jeans, Tech C</td><td><span class="link">FN-PM-OL3151-01</span><br><small>3 visits</small></td><td><span class="badge green">Completed</span></td><td><button class="btn" onclick="pmArea('report',document.querySelectorAll('#p-pm .tab')[3])">View</button></td></tr>
+<tr><td>#1</td><td>VARIOVAC THERMOFORM</td><td>20/01/2027</td><td>Janeny, Jeans, Tech C</td><td><span class="link">FN-PM-OL3151-01</span><br/><small>3 visits</small></td><td><span class="badge green">Completed</span></td><td><button class="btn" onclick="pmArea('report',document.querySelectorAll('#p-pm .tab')[3])">View</button></td></tr>
 <tr><td>#2</td><td>VARIOVAC THERMOFORM</td><td>20/04/2027</td><td>-</td><td><button class="btn" onclick="createPmFunction(this)">+ Create Function</button></td><td><span class="badge gray">Planned</span></td><td><button class="btn">View</button></td></tr>
 <tr><td>#3</td><td>VARIOVAC THERMOFORM</td><td>20/07/2027</td><td>-</td><td>-</td><td><span class="badge gray">Planned</span></td><td>-</td></tr>
 </tbody></table>
 </div></div></div>
-
 <div class="pm-area" id="pm-survey"><div class="card"><div class="hd"><h3>Machine Survey / ค่ามิเตอร์และข้อมูลสำรวจ</h3><span class="badge purple">Structured Data</span></div><div class="bd">
 <div class="survey-grid">
 <div class="h">Survey Item</div><div class="h">Before</div><div class="h">After</div><div class="h">Unit</div><div class="h">Previous</div><div class="h">Trend</div>
@@ -313,7 +303,6 @@ Updated 1/2026
 <div>8. Final Vacuum</div><div>8.2</div><div>6.4</div><div>sec</div><div>7.1</div><div>↓</div>
 <div>9. Sealing Heating ΔT</div><div>10</div><div>4</div><div>°C</div><div>8</div><div>↓</div>
 </div></div></div></div>
-
 <div class="pm-area" id="pm-report"><div class="card"><div class="hd"><h3>PM Reports / รายการใบรายงาน PM</h3><button class="btn">+ New PM Round</button></div><div class="bd"><table><thead><tr><th>PM Round</th><th>Planned</th><th>Actual</th><th>Technicians</th><th>Result</th><th>Status</th><th></th></tr></thead><tbody>
 <tr><td><span class="link" onclick="document.getElementById('pmDetail').style.display='block';document.getElementById('pmList').style.display='none'">PM #1</span></td><td>20/01/2027</td><td>20/01/2027</td><td>3 technicians</td><td>31 Pass • 1 Fail • 1 N/A</td><td><span class="badge green">Completed</span></td><td><button class="btn" onclick="openPmDetail()">Open</button></td></tr>
 <tr><td>PM #2</td><td>20/04/2027</td><td>-</td><td>-</td><td>-</td><td><span class="badge gray">Planned</span></td><td>-</td></tr>
@@ -326,364 +315,328 @@ Updated 1/2026
 <h4>1. Machine Survey</h4><div class="note">ใช้ข้อมูลจาก Machine Survey 1-9 ด้านบนและเก็บเป็น structured data เพื่อทำ trend ในอนาคต</div>
 <h4>2. PM Checklist — 33 Items</h4>
 <div style="overflow:auto"><table><thead><tr><th>#</th><th>Inspection Item</th><th>Result</th><th>Remark</th></tr></thead><tbody>
-    <tr>
-      <td class="no">01</td><td>สภาพโครงสร้างเครื่องจักรโดยรวม</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c1" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c1" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c1" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">02</td><td>ความตึงของโซ่</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c2" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c2" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c2" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">03</td><td>Clamp สภาพของตัวจับยึด</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c3" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c3" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c3" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">04</td><td>สภาพของเพลาใบมีด</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c4" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c4" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c4" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">05</td><td>สภาพใบมีดตัดขวาง</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c5" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c5" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c5" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">06</td><td>ใบมีดตัดตามยาว</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c6" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c6" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c6" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">07</td><td>หน้าจอแสดงผล</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c7" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c7" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c7" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">08</td><td>Emergency switch ใช้งานได้ปกติทุกจุด</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c8" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c8" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c8" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">09</td><td>ระบบ Safety ใช้งานได้ปกติทุกจุด</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c9" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c9" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c9" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">10</td><td>ท่อแก๊สต่าง ๆ อยู่ในสภาพปกติ ไม่รั่ว</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c10" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c10" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c10" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">11</td><td>ตรวจสอบปริมาณน้ำมันหล่อลื่นโซ่</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c11" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c11" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c11" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">12</td><td>อัตราระบายความร้อนที่มีการเคลื่อนที่</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c12" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c12" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c12" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">13</td><td>ชุดโรลเลอร์ฟิล์มบน/ล่างหมุนได้ปกติ</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c13" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c13" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c13" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">14</td><td>ชุดต่อฟิล์มบน Top affixing ปกติ</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c14" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c14" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c14" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">15</td><td>สปริงชุดคลายฟิล์มบนและล่าง</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c15" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c15" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c15" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">16</td><td>สภาพถุงลมเบรคฟิล์ม</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c16" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c16" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c16" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">17</td><td>Air cylinder ไม่มีลมรั่ว</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c17" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c17" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c17" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">18</td><td>Air cylinder sensor ปกติ โดยการใช้ Manual</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c18" value="pass" >PASS</label>
-        <label class="pill-radio"><input type="radio" name="c18" value="fail" checked>FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c18" value="na" >N/A</label>
-      </td>
-      <td><input value="Sensor ตอบสนองช้า - ตรวจและปรับตั้งแล้ว" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">19</td><td>ความสะอาดชุดกรองคาร์บอนและชุดกรองละเอียด</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c19" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c19" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c19" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">20</td><td>Motor Vacuum ไม่มีเสียงดังผิดปกติ</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c20" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c20" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c20" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">21</td><td>ระดับน้ำมันฟิลเตอร์</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c21" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c21" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c21" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">22</td><td>ระดับ/อุณหภูมิน้ำหล่อเย็นขณะทำงาน</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c22" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c22" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c22" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">23</td><td>Lift ชุดยกแม่พิมพ์ขึ้น-ลงได้ปกติ</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c23" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c23" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c23" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">24</td><td>เช็คระบบลมและน้ำในระบบ</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c24" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c24" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c24" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">25</td><td>ตรวจเช็คและทำความสะอาด Silencer</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c25" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c25" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c25" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">26</td><td>ตรวจเช็คและทำความสะอาด Top sealing die</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c26" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c26" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c26" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">27</td><td>ตรวจเช็ค O-ring ชุด Die</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c27" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c27" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c27" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">28</td><td>ตรวจเช็คระดับน้ำของเครื่องจักร</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c28" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c28" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c28" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">29</td><td>ความสะอาดตู้คอนโทรล</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c29" value="pass" >PASS</label>
-        <label class="pill-radio"><input type="radio" name="c29" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c29" value="na" checked>N/A</label>
-      </td>
-      <td><input value="ไม่เกี่ยวข้องกับรุ่นนี้" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">30</td><td>ถังดูดสุญญากาศเก็บเศษฟิล์ม</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c30" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c30" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c30" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">31</td><td>Outfeed Conveyor สายพานลำเลียงออก</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c31" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c31" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c31" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">32</td><td>การปรับระดับ Lifting system</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c32" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c32" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c32" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr>
-
-    <tr>
-      <td class="no">33</td><td>Sound absorber อุดตัน Forming/Sealing</td>
-      <td class="center">
-        <label class="pill-radio"><input type="radio" name="c33" value="pass" checked>PASS</label>
-        <label class="pill-radio"><input type="radio" name="c33" value="fail" >FAIL</label>
-        <label class="pill-radio"><input type="radio" name="c33" value="na" >N/A</label>
-      </td>
-      <td><input value="" placeholder="หมายเหตุ"></td>
-    </tr></tbody></table></div>
+<tr>
+<td class="no">01</td><td>สภาพโครงสร้างเครื่องจักรโดยรวม</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c1" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c1" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c1" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">02</td><td>ความตึงของโซ่</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c2" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c2" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c2" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">03</td><td>Clamp สภาพของตัวจับยึด</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c3" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c3" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c3" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">04</td><td>สภาพของเพลาใบมีด</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c4" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c4" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c4" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">05</td><td>สภาพใบมีดตัดขวาง</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c5" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c5" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c5" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">06</td><td>ใบมีดตัดตามยาว</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c6" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c6" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c6" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">07</td><td>หน้าจอแสดงผล</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c7" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c7" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c7" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">08</td><td>Emergency switch ใช้งานได้ปกติทุกจุด</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c8" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c8" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c8" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">09</td><td>ระบบ Safety ใช้งานได้ปกติทุกจุด</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c9" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c9" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c9" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">10</td><td>ท่อแก๊สต่าง ๆ อยู่ในสภาพปกติ ไม่รั่ว</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c10" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c10" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c10" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">11</td><td>ตรวจสอบปริมาณน้ำมันหล่อลื่นโซ่</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c11" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c11" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c11" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">12</td><td>อัตราระบายความร้อนที่มีการเคลื่อนที่</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c12" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c12" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c12" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">13</td><td>ชุดโรลเลอร์ฟิล์มบน/ล่างหมุนได้ปกติ</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c13" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c13" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c13" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">14</td><td>ชุดต่อฟิล์มบน Top affixing ปกติ</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c14" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c14" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c14" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">15</td><td>สปริงชุดคลายฟิล์มบนและล่าง</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c15" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c15" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c15" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">16</td><td>สภาพถุงลมเบรคฟิล์ม</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c16" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c16" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c16" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">17</td><td>Air cylinder ไม่มีลมรั่ว</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c17" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c17" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c17" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">18</td><td>Air cylinder sensor ปกติ โดยการใช้ Manual</td>
+<td class="center">
+<label class="pill-radio"><input name="c18" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input checked="" name="c18" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c18" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value="Sensor ตอบสนองช้า - ตรวจและปรับตั้งแล้ว"/></td>
+</tr>
+<tr>
+<td class="no">19</td><td>ความสะอาดชุดกรองคาร์บอนและชุดกรองละเอียด</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c19" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c19" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c19" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">20</td><td>Motor Vacuum ไม่มีเสียงดังผิดปกติ</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c20" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c20" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c20" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">21</td><td>ระดับน้ำมันฟิลเตอร์</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c21" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c21" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c21" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">22</td><td>ระดับ/อุณหภูมิน้ำหล่อเย็นขณะทำงาน</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c22" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c22" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c22" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">23</td><td>Lift ชุดยกแม่พิมพ์ขึ้น-ลงได้ปกติ</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c23" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c23" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c23" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">24</td><td>เช็คระบบลมและน้ำในระบบ</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c24" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c24" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c24" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">25</td><td>ตรวจเช็คและทำความสะอาด Silencer</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c25" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c25" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c25" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">26</td><td>ตรวจเช็คและทำความสะอาด Top sealing die</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c26" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c26" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c26" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">27</td><td>ตรวจเช็ค O-ring ชุด Die</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c27" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c27" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c27" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">28</td><td>ตรวจเช็คระดับน้ำของเครื่องจักร</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c28" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c28" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c28" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">29</td><td>ความสะอาดตู้คอนโทรล</td>
+<td class="center">
+<label class="pill-radio"><input name="c29" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c29" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input checked="" name="c29" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value="ไม่เกี่ยวข้องกับรุ่นนี้"/></td>
+</tr>
+<tr>
+<td class="no">30</td><td>ถังดูดสุญญากาศเก็บเศษฟิล์ม</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c30" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c30" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c30" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">31</td><td>Outfeed Conveyor สายพานลำเลียงออก</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c31" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c31" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c31" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">32</td><td>การปรับระดับ Lifting system</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c32" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c32" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c32" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr>
+<tr>
+<td class="no">33</td><td>Sound absorber อุดตัน Forming/Sealing</td>
+<td class="center">
+<label class="pill-radio"><input checked="" name="c33" type="radio" value="pass"/>PASS</label>
+<label class="pill-radio"><input name="c33" type="radio" value="fail"/>FAIL</label>
+<label class="pill-radio"><input name="c33" type="radio" value="na"/>N/A</label>
+</td>
+<td><input placeholder="หมายเหตุ" value=""/></td>
+</tr></tbody></table></div>
 <h4>3. Photo Evidence / Before - After by Item</h4>
-<div class="card"><div class="hd"><h3>3.1 Clamp</h3><span class="badge green">Resolved</span></div><div class="bd photos"><div class="photo-side"><b>Before</b><div class="thumbs"><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyNlZjQ0NDQnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjZWY0NDQ0JyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5DbGFtcCAtIEJlZm9yZTwvdGV4dD4KICAgIDx0ZXh0IHg9JzY1JyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz53ZWFyIC8gbG9vc2VuZXNzPC90ZXh0Pjwvc3ZnPg=="><figcaption>ภาพรวมจุด Clamp</figcaption></figure><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyNlZjQ0NDQnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjZWY0NDQ0JyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5DbGFtcCAtIEJlZm9yZTwvdGV4dD4KICAgIDx0ZXh0IHg9JzY1JyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz53ZWFyIC8gbG9vc2VuZXNzPC90ZXh0Pjwvc3ZnPg=="><figcaption>Close-up จุดสึก</figcaption></figure></div></div><div class="photo-side"><b>After</b><div class="thumbs"><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyMyMmM1NWUnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjMjJjNTVlJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5DbGFtcCAtIEFmdGVyPC90ZXh0PgogICAgPHRleHQgeD0nNjUnIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPmFmdGVyIGFkanVzdG1lbnQ8L3RleHQ+PC9zdmc+"><figcaption>หลังปรับตั้ง</figcaption></figure><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyMyMmM1NWUnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjMjJjNTVlJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5DbGFtcCAtIEFmdGVyPC90ZXh0PgogICAgPHRleHQgeD0nNjUnIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPmFmdGVyIGFkanVzdG1lbnQ8L3RleHQ+PC9zdmc+"><figcaption>ตรวจสภาพหลังทำงาน</figcaption></figure></div></div></div></div>
-<div class="card"><div class="hd"><h3>3.2 Seal Kit</h3><span class="badge amber">Part Replaced</span></div><div class="bd photos"><div class="photo-side"><b>Problem</b><div class="thumbs"><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyNlZjQ0NDQnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjZWY0NDQ0JyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5TZWFsIEtpdCAtIERhbWFnZTwvdGV4dD4KICAgIDx0ZXh0IHg9JzY1JyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz5jcmFjayAvIHdvcm4gcGFydDwvdGV4dD48L3N2Zz4="><figcaption>ซีลชำรุด</figcaption></figure></div></div><div class="photo-side"><b>After Repair</b><div class="thumbs"><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyMyMmM1NWUnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjMjJjNTVlJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5TZWFsIEtpdCAtIFJlcGxhY2VkPC90ZXh0PgogICAgPHRleHQgeD0nNjUnIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPm5ldyBwYXJ0IGluc3RhbGxlZDwvdGV4dD48L3N2Zz4="><figcaption>อะไหล่ใหม่หลังติดตั้ง</figcaption></figure></div></div></div><div class="note">Linked Part: VV-SEAL-01 • Qty 1 set • Action: Replaced</div></div>
-<div class="card"><div class="hd"><h3>3.3 Overall Machine Condition</h3></div><div class="bd photos"><div class="photo-side"><b>Before</b><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyNmNTllMGInIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjZjU5ZTBiJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5NYWNoaW5lIC0gQmVmb3JlPC90ZXh0PgogICAgPHRleHQgeD0nNjUnIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPm92ZXJhbGwgY29uZGl0aW9uPC90ZXh0Pjwvc3ZnPg=="><figcaption>ก่อนเริ่ม PM</figcaption></figure></div><div class="photo-side"><b>After</b><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyMyMmM1NWUnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjMjJjNTVlJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5NYWNoaW5lIC0gQWZ0ZXI8L3RleHQ+CiAgICA8dGV4dCB4PSc2NScgeT0nMzU1JyBmb250LWZhbWlseT0nQXJpYWwsc2Fucy1zZXJpZicgZm9udC1zaXplPScxNicgZmlsbD0nIzZiNzI4MCc+Y2xlYW4gJmFtcDsgY29tcGxldGVkPC90ZXh0Pjwvc3ZnPg=="><figcaption>หลังจบ PM</figcaption></figure></div></div></div>
-<h4>4. Parts & Materials</h4><table><thead><tr><th>Part No.</th><th>Description</th><th>Qty</th><th>Action</th></tr></thead><tbody><tr><td>VV-SEAL-01</td><td>Seal Kit</td><td>1 set</td><td>Replaced</td></tr></tbody></table>
-<h4>5. Summary & Sign-off</h4><div class="grid2"><div class="field"><label>Findings / Corrective Action</label><textarea>Sensor response slow, clamp looseness, seal wear. Adjusted clamp and sensor; replaced Seal Kit.</textarea></div><div class="field"><label>Customer Sign / Technician Sign</label><textarea>Customer accepted / Service Team signed</textarea></div></div>
+<div class="card"><div class="hd"><h3>3.1 Clamp</h3><span class="badge green">Resolved</span></div><div class="bd photos"><div class="photo-side"><b>Before</b><div class="thumbs"><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyNlZjQ0NDQnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjZWY0NDQ0JyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5DbGFtcCAtIEJlZm9yZTwvdGV4dD4KICAgIDx0ZXh0IHg9JzY1JyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz53ZWFyIC8gbG9vc2VuZXNzPC90ZXh0Pjwvc3ZnPg=="/><figcaption>ภาพรวมจุด Clamp</figcaption></figure><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyNlZjQ0NDQnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjZWY0NDQ0JyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5DbGFtcCAtIEJlZm9yZTwvdGV4dD4KICAgIDx0ZXh0IHg9JzY1JyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz53ZWFyIC8gbG9vc2VuZXNzPC90ZXh0Pjwvc3ZnPg=="/><figcaption>Close-up จุดสึก</figcaption></figure></div></div><div class="photo-side"><b>After</b><div class="thumbs"><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyMyMmM1NWUnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjMjJjNTVlJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5DbGFtcCAtIEFmdGVyPC90ZXh0PgogICAgPHRleHQgeD0nNjUnIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPmFmdGVyIGFkanVzdG1lbnQ8L3RleHQ+PC9zdmc+"/><figcaption>หลังปรับตั้ง</figcaption></figure><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyMyMmM1NWUnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjMjJjNTVlJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5DbGFtcCAtIEFmdGVyPC90ZXh0PgogICAgPHRleHQgeD0nNjUnIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPmFmdGVyIGFkanVzdG1lbnQ8L3RleHQ+PC9zdmc+"/><figcaption>ตรวจสภาพหลังทำงาน</figcaption></figure></div></div></div></div>
+<div class="card"><div class="hd"><h3>3.2 Seal Kit</h3><span class="badge amber">Part Replaced</span></div><div class="bd photos"><div class="photo-side"><b>Problem</b><div class="thumbs"><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyNlZjQ0NDQnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjZWY0NDQ0JyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5TZWFsIEtpdCAtIERhbWFnZTwvdGV4dD4KICAgIDx0ZXh0IHg9JzY1JyB5PSczNTUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzE2JyBmaWxsPScjNmI3MjgwJz5jcmFjayAvIHdvcm4gcGFydDwvdGV4dD48L3N2Zz4="/><figcaption>ซีลชำรุด</figcaption></figure></div></div><div class="photo-side"><b>After Repair</b><div class="thumbs"><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyMyMmM1NWUnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjMjJjNTVlJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5TZWFsIEtpdCAtIFJlcGxhY2VkPC90ZXh0PgogICAgPHRleHQgeD0nNjUnIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPm5ldyBwYXJ0IGluc3RhbGxlZDwvdGV4dD48L3N2Zz4="/><figcaption>อะไหล่ใหม่หลังติดตั้ง</figcaption></figure></div></div></div><div class="note">Linked Part: VV-SEAL-01 • Qty 1 set • Action: Replaced</div></div>
+<div class="card"><div class="hd"><h3>3.3 Overall Machine Condition</h3></div><div class="bd photos"><div class="photo-side"><b>Before</b><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyNmNTllMGInIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjZjU5ZTBiJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5NYWNoaW5lIC0gQmVmb3JlPC90ZXh0PgogICAgPHRleHQgeD0nNjUnIHk9JzM1NScgZm9udC1mYW1pbHk9J0FyaWFsLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTYnIGZpbGw9JyM2YjcyODAnPm92ZXJhbGwgY29uZGl0aW9uPC90ZXh0Pjwvc3ZnPg=="/><figcaption>ก่อนเริ่ม PM</figcaption></figure></div><div class="photo-side"><b>After</b><figure><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJz4KICAgIDxyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDAwJyBmaWxsPScjZWVmMmY3Jy8+CiAgICA8cmVjdCB4PSczMCcgeT0nMzAnIHdpZHRoPSc1ODAnIGhlaWdodD0nMzQwJyByeD0nMjInIGZpbGw9J3doaXRlJyBzdHJva2U9JyNkOWUwZTgnIHN0cm9rZS13aWR0aD0nMicvPgogICAgPGNpcmNsZSBjeD0nOTInIGN5PSc5Micgcj0nMjgnIGZpbGw9JyMyMmM1NWUnIG9wYWNpdHk9Jy4xOCcvPgogICAgPHBhdGggZD0nTTc1IDI4MCBMMTU1IDIxNSBMMjMwIDI1MCBMMzIwIDE2MCBMNDEwIDIzOCBMNTAwIDE4NSBMNTY1IDI4MCBaJyBmaWxsPScjZDVkYmUzJy8+CiAgICA8cmVjdCB4PSc2NScgeT0nNjAnIHdpZHRoPScxNzAnIGhlaWdodD0nMTInIHJ4PSc2JyBmaWxsPScjMjJjNTVlJyBvcGFjaXR5PScuNjUnLz4KICAgIDx0ZXh0IHg9JzY1JyB5PSczMjUnIGZvbnQtZmFtaWx5PSdBcmlhbCxzYW5zLXNlcmlmJyBmb250LXNpemU9JzI0JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMWYyOTM3Jz5NYWNoaW5lIC0gQWZ0ZXI8L3RleHQ+CiAgICA8dGV4dCB4PSc2NScgeT0nMzU1JyBmb250LWZhbWlseT0nQXJpYWwsc2Fucy1zZXJpZicgZm9udC1zaXplPScxNicgZmlsbD0nIzZiNzI4MCc+Y2xlYW4gJmFtcDsgY29tcGxldGVkPC90ZXh0Pjwvc3ZnPg=="/><figcaption>หลังจบ PM</figcaption></figure></div></div></div>
+<h4>4. Parts &amp; Materials</h4><table><thead><tr><th>Part No.</th><th>Description</th><th>Qty</th><th>Action</th></tr></thead><tbody><tr><td>VV-SEAL-01</td><td>Seal Kit</td><td>1 set</td><td>Replaced</td></tr></tbody></table>
+<h4>5. Summary &amp; Sign-off</h4><div class="grid2"><div class="field"><label>Findings / Corrective Action</label><textarea>Sensor response slow, clamp looseness, seal wear. Adjusted clamp and sensor; replaced Seal Kit.</textarea></div><div class="field"><label>Customer Sign / Technician Sign</label><textarea>Customer accepted / Service Team signed</textarea></div></div>
 </div></div>
 </div></div>
-
 <div class="pm-area" id="pm-history"><div class="card"><div class="hd"><h3>Maintenance History</h3></div><div class="bd">
 <div class="history-item"><div>20/01/2027</div><div>PM</div><div>PM #1 • Function FN-PM-OL3151-01 • 3 Visits • Seal Kit replaced</div><div><span class="badge green">Completed</span></div></div>
 <div class="history-item"><div>15/08/2027</div><div>CM</div><div>Vacuum issue • Function FN-CM-0815 • Sensor adjusted</div><div><span class="badge green">Completed</span></div></div>
 </div></div></div>
 </div>
-
 <div class="panel" id="p-parts"><div class="card"><div class="hd"><h3>Spare Parts History</h3></div><div class="bd"><table><thead><tr><th>Date</th><th>Quote</th><th>Part</th><th>Status</th><th>Actual Usage</th></tr></thead><tbody>
 <tr><td>10/01/2027</td><td>SPQ-0192</td><td>Seal Kit VV-SEAL-01</td><td><span class="badge green">Purchased</span></td><td>Replaced PM #1 20/01/2027</td></tr>
 <tr><td>02/09/2027</td><td>SPQ-0210</td><td>Vacuum Valve</td><td><span class="badge amber">Quoted - Not Purchased</span></td><td>-</td></tr>
 </tbody></table></div></div></div>
-
 <div class="panel" id="p-docs"><div class="card"><div class="hd"><div><h3>AI Email Document Inbox</h3><div class="subtitle">Supplier Email → AI Match → Human Confirm → ERP/Supabase Attachment</div></div><button class="btn ai">Scan Supplier Email</button></div><div class="bd">
-<div class="doc-row" id="doc1"><div><b>VV_OL3151_OrderConfirmation.pdf</b><br><small>supplier@variovac.com • 03/10/2026</small></div><div><span class="badge blue">OL3151</span> Order Confirmation</div><div><b>98%</b></div><div class="right"><button class="btn primary" onclick="confirmDoc('doc1')">Confirm</button><button class="btn">Change Machine</button><button class="btn">Ignore</button></div></div>
-<div class="doc-row" id="doc2"><div><b>OL3151_Final_Utility_RevB.pdf</b><br><small>technical@variovac.com • 04/10/2026</small></div><div><span class="badge blue">OL3151</span> Utility Requirement</div><div><b>96%</b></div><div class="right"><button class="btn primary" onclick="confirmDoc('doc2')">Confirm</button><button class="btn">Change Type</button><button class="btn">Ignore</button></div></div>
-<div class="doc-row" id="doc3"><div><b>drawing_opt_3151.pdf</b><br><small>technical@variovac.com • 04/10/2026</small></div><div><span class="badge amber">Suggested OL3151</span> Electrical Drawing?</div><div><b>74%</b></div><div class="right"><button class="btn primary" onclick="confirmDoc('doc3')">Confirm</button><button class="btn">Review</button><button class="btn">Ignore</button></div></div>
+<div class="doc-row" id="doc1"><div><b>VV_OL3151_OrderConfirmation.pdf</b><br/><small>supplier@variovac.com • 03/10/2026</small></div><div><span class="badge blue">OL3151</span> Order Confirmation</div><div><b>98%</b></div><div class="right"><button class="btn primary" onclick="confirmDoc('doc1')">Confirm</button><button class="btn">Change Machine</button><button class="btn">Ignore</button></div></div>
+<div class="doc-row" id="doc2"><div><b>OL3151_Final_Utility_RevB.pdf</b><br/><small>technical@variovac.com • 04/10/2026</small></div><div><span class="badge blue">OL3151</span> Utility Requirement</div><div><b>96%</b></div><div class="right"><button class="btn primary" onclick="confirmDoc('doc2')">Confirm</button><button class="btn">Change Type</button><button class="btn">Ignore</button></div></div>
+<div class="doc-row" id="doc3"><div><b>drawing_opt_3151.pdf</b><br/><small>technical@variovac.com • 04/10/2026</small></div><div><span class="badge amber">Suggested OL3151</span> Electrical Drawing?</div><div><b>74%</b></div><div class="right"><button class="btn primary" onclick="confirmDoc('doc3')">Confirm</button><button class="btn">Review</button><button class="btn">Ignore</button></div></div>
 </div></div>
 <div class="card"><div class="hd"><h3>Confirmed Machine Attachments</h3></div><div class="bd"><table><thead><tr><th>Type</th><th>File</th><th>Source</th><th>Confirmed</th></tr></thead><tbody id="docConfirmed"><tr><td>Manual</td><td>VARIOVAC_Optimus_Manual.pdf</td><td>Supplier Email</td><td>Service Admin</td></tr></tbody></table></div></div>
 </div>
 </section>
-
 <section class="page" id="functions">
 <div class="page-title"><div><h1>Function / ใบงาน</h1><div class="subtitle">ช่างสามารถสร้างงานจากเมนู Function ได้โดยตรง และผูกหลาย Machine ได้</div></div><button class="btn primary" onclick="openFunctionModal()">+ New Function</button></div>
 <div class="card"><div class="bd"><table><thead><tr><th>Function</th><th>Customer</th><th>Type</th><th>Machines</th><th>Visits</th><th>Status</th></tr></thead><tbody>
@@ -691,20 +644,33 @@ Updated 1/2026
 <tr><td><b>FN-CM-0815</b></td><td>บริษัท จีเอสวีฯ</td><td>CM / Repair</td><td>OL3151</td><td>2</td><td><span class="badge green">Completed</span></td></tr>
 </tbody></table></div></div>
 </section>
-
 <section class="page" id="visits">
 <div class="page-title"><div><h1>Activities → Visit</h1><div class="subtitle">Visit สร้างได้จากหน้า Visit โดยตรง • ค้น Machine ด้วย Serial/Machine No. • เก็บ Machine ID หลังบ้าน</div></div><button class="btn primary" onclick="openVisitModal()">+ New Visit</button></div>
-<div class="card"><div class="bd"><table><thead><tr><th>Visit</th><th>Technician</th><th>Function</th><th>Machines</th><th>Check-in</th><th>Check-out</th><th>Trip</th></tr></thead><tbody>
-<tr><td>Visit #1</td><td>Janeny</td><td>FN-PM-OL3151-01</td><td>OL3151, OL2875</td><td>09:05</td><td>16:40</td><td>TRIP-20270120-01</td></tr>
-<tr><td>Visit #2</td><td>Jeans</td><td>FN-PM-OL3151-01</td><td>OL3151, OL2875</td><td>09:08</td><td>16:35</td><td>TRIP-20270120-01</td></tr>
-<tr><td>Visit #3</td><td>Technician C</td><td>FN-PM-OL3151-01</td><td>OL3151</td><td>09:12</td><td>16:42</td><td>TRIP-20270120-01</td></tr>
-</tbody></table></div></div>
-</section>
 
+<div class="card">
+<div class="hd">
+<h3>Visit List / รายการ Visit</h3>
+<div class="subtitle">แต่ละแถวคือ Visit ของช่าง 1 คน • Trip เดียวกันแปลว่าเดินทางด้วยกัน</div>
+</div>
+<div class="bd">
+<table>
+<thead>
+<tr><th>Date</th><th>Customer</th><th>Type</th><th>Technician</th><th>Function</th><th>Machines</th><th>Check-in / out</th><th>Status</th><th></th></tr>
+</thead>
+<tbody>
+<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Janeny</td><td>FN-PM-OL3151-01</td><td>OL3151, OL2875</td><td>09:05 / 16:40</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn">Open</button></td></tr>
+<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Jeans</td><td>FN-PM-OL3151-01</td><td>OL3151, OL2875</td><td>09:08 / 16:35</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn">Open</button></td></tr>
+<tr><td>20/01/2027</td><td>บริษัท จีเอสวีฯ</td><td>PM</td><td>Technician C</td><td>FN-PM-OL3151-01</td><td>OL3151</td><td>09:12 / 16:42</td><td><span class="badge green">Checked out</span><br/><small>Trip: Same team</small></td><td><button class="btn">Open</button></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</section>
 <section class="page" id="service-report">
 <div class="page-title"><div><h1>Service Trip Report</h1><div class="subtitle">Filter ตาม รถ / ลูกค้า / ช่าง / PM-CM / เครื่องจักร และ Export Excel/CSV</div></div><button class="btn primary" onclick="exportServiceCsv()">Export Excel / CSV</button></div>
 <div class="card"><div class="bd form-grid">
-<div class="field"><label>Date From</label><input type="date" value="2027-01-01"></div><div class="field"><label>Date To</label><input type="date" value="2027-01-31"></div><div class="field"><label>Vehicle</label><select><option>All</option><option>1กข-1234</option></select></div><div class="field"><label>Customer</label><select><option>All</option><option>บริษัท จีเอสวีฯ</option></select></div>
+<div class="field"><label>Date From</label><input type="date" value="2027-01-01"/></div><div class="field"><label>Date To</label><input type="date" value="2027-01-31"/></div><div class="field"><label>Vehicle</label><select><option>All</option><option>1กข-1234</option></select></div><div class="field"><label>Customer</label><select><option>All</option><option>บริษัท จีเอสวีฯ</option></select></div>
 <div class="field"><label>Technician</label><select><option>All</option><option>Janeny</option><option>Jeans</option></select></div><div class="field"><label>Job Type</label><select><option>All</option><option>PM</option><option>CM</option></select></div><div class="field"><label>Machine</label><select><option>All</option><option>OL3151</option><option>OL2875</option></select></div>
 </div></div>
 <div class="grid4" style="margin:14px 0"><div class="stat"><small>Service Visits</small><b>12</b></div><div class="stat"><small>Total Distance</small><b>680 km</b></div><div class="stat"><small>Service Hours</small><b>84.5 h</b></div><div class="stat"><small>Travel Expense</small><b>6,820 ฿</b></div></div>
@@ -712,7 +678,6 @@ Updated 1/2026
 <tr><td>20/01/2027</td><td>TRIP-20270120-01</td><td>1กข-1234</td><td>บริษัท จีเอสวีฯ</td><td>Janeny, Jeans, Tech C</td><td>OL3151, OL2875</td><td>PM</td><td>180</td><td>1,200</td><td>160</td><td>0</td><td>22.5</td></tr>
 </tbody></table></div></div>
 </section>
-
 <section class="page" id="vehicle-master">
 <div class="page-title"><div><h1>Vehicle Master / ทะเบียนรถ Service</h1><div class="subtitle">เพิ่ม/แก้ไขรถบริษัทที่ใช้ใน Service Trip • Dropdown มี “อื่น ๆ” สำหรับรถนอก Master</div></div><button class="btn primary">+ Add Vehicle</button></div>
 <div class="card"><div class="bd"><table><thead><tr><th>ทะเบียน</th><th>ประเภท</th><th>ชื่อเรียก</th><th>Status</th><th></th></tr></thead><tbody>
@@ -720,42 +685,155 @@ Updated 1/2026
 <tr><td>2กค-5678</td><td>Pickup</td><td>Pickup 1</td><td><span class="badge green">Active</span></td><td><button class="btn">Edit</button></td></tr>
 </tbody></table></div></div>
 </section>
-
 <section class="page" id="pm-my"><div class="page-title"><div><h1>งาน PM ของฉัน</h1><div class="subtitle">เพิ่ม Serial Number ให้ช่างเห็นชัดเจน</div></div></div><div class="card"><div class="bd"><table><thead><tr><th>Due</th><th>Machine No.</th><th>Serial</th><th>Customer</th><th>Plan</th><th>Status</th></tr></thead><tbody><tr><td>20/04/2027</td><td>1011-007</td><td><b>OL3151</b></td><td>บริษัท จีเอสวีฯ</td><td>VARIOVAC THERMOFORM</td><td><span class="badge gray">Planned</span></td></tr></tbody></table></div></div></section>
-
-  </div>
+</div>
 </main>
 </div>
-
 <div class="modal" id="finalModal"><div class="modal-card"><div class="modal-head"><div><b>Final Quotation Readiness</b><div class="subtitle">Quote #2095 • OPP #15602</div></div><button class="btn" onclick="closeModal('finalModal')">×</button></div><div class="modal-body">
 <div class="grid4"><div class="ready-item"><b>Machine</b><span>VARIOVAC Optimus</span><small>OK</small></div><div class="ready-item"><b>Final Speed</b><span>12 packs/min</span><small>OK</small></div><div class="ready-item"><b>Capacity</b><span>500 kg/hr</span><small>OK</small></div><div class="ready-item"><b>Printer</b><span>Labeler EF + CAB</span><small>OK</small></div></div>
 <div class="note" style="margin-top:12px"><b>After Final:</b> Final Sales Quote → Function → Task/Assign → Machine Register → Default PM Plan / Spare Parts BOM → OPP Snapshot</div>
-<label style="display:block;margin-top:12px"><input type="checkbox" checked> ยืนยัน Sales Requirement Snapshot ชุดนี้</label>
-</div><div class="modal-foot"><button class="btn" onclick="closeModal('finalModal')">Back</button><button class="btn primary" onclick="confirmFinal()">Confirm Final & Create Machine</button></div></div></div>
-
+<label style="display:block;margin-top:12px"><input checked="" type="checkbox"/> ยืนยัน Sales Requirement Snapshot ชุดนี้</label>
+</div><div class="modal-foot"><button class="btn" onclick="closeModal('finalModal')">Back</button><button class="btn primary" onclick="confirmFinal()">Confirm Final &amp; Create Machine</button></div></div></div>
 <div class="modal" id="functionModal"><div class="modal-card"><div class="modal-head"><b>New Function / ใบงาน</b><button class="btn" onclick="closeModal('functionModal')">×</button></div><div class="modal-body">
-<div class="form-grid"><div class="field"><label>Customer</label><select><option>บริษัท จีเอสวีฯ</option></select></div><div class="field"><label>Job Type</label><select><option>PM</option><option>CM / Repair</option><option>Installation</option></select></div><div class="field span2"><label>Machines (เลือกได้หลายเครื่อง)</label><select multiple size="3"><option selected>OL3151 | 1011-007 | VARIOVAC Optimus</option><option selected>OL2875 | 1008-002 | VARIOVAC Thermoform</option><option>OL0203 | Old Machine</option></select></div><div class="field span4"><label>Problem / Job Description</label><textarea>PM รอบเดียวกันที่ลูกค้าเดียวกัน ทำ 2 เครื่อง</textarea></div></div>
+<div class="form-grid"><div class="field"><label>Customer</label><select><option>บริษัท จีเอสวีฯ</option></select></div><div class="field"><label>Job Type</label><select><option>PM</option><option>CM / Repair</option><option>Installation</option></select></div><div class="field span2"><label>Machines (เลือกได้หลายเครื่อง)</label><select multiple="" size="3"><option selected="">OL3151 | 1011-007 | VARIOVAC Optimus</option><option selected="">OL2875 | 1008-002 | VARIOVAC Thermoform</option><option>OL0203 | Old Machine</option></select></div><div class="field span4"><label>Problem / Job Description</label><textarea>PM รอบเดียวกันที่ลูกค้าเดียวกัน ทำ 2 เครื่อง</textarea></div></div>
 <div class="note" style="margin-top:12px">หน้าจอค้นด้วย Serial / Machine No. แต่หลังบ้านเก็บ Machine IDs แบบ many-to-many</div>
 </div><div class="modal-foot"><button class="btn primary" onclick="closeModal('functionModal');alert('Demo: Function created and linked to 2 machines')">Create Function</button></div></div></div>
 
-<div class="modal" id="visitModal"><div class="modal-card"><div class="modal-head"><b>New Visit</b><button class="btn" onclick="closeModal('visitModal')">×</button></div><div class="modal-body">
+<div class="modal" id="visitModal">
+<div class="modal-card">
+<div class="modal-head">
+<div>
+<b>New Visit / สร้าง Visit สำหรับทีม</b>
+<div class="subtitle">สร้างครั้งเดียว ระบบแยก Visit ให้ช่างแต่ละคนอัตโนมัติ</div>
+</div>
+<button class="btn" onclick="closeModal('visitModal')">×</button>
+</div>
+<div class="modal-body">
 <div class="form-grid">
-<div class="field"><label>Technician</label><select><option>Janeny</option><option>Jeans</option></select></div><div class="field"><label>Function (optional)</label><select><option>FN-PM-OL3151-01</option><option>None</option></select></div>
-<div class="field span2"><label>Machines (หลายเครื่องได้)</label><select multiple size="3"><option selected>OL3151 | 1011-007</option><option selected>OL2875 | 1008-002</option></select></div>
-<div class="field"><label>Date</label><input type="date" value="2027-01-20"></div><div class="field"><label>Location</label><input value="Customer Site, Pathum Thani"></div>
-<div class="field"><label>Service Trip</label><select onchange="toggleOtherVehicle(this)"><option>Use existing trip TRIP-20270120-01</option><option>Create new trip</option></select></div>
+<div class="field span2">
+<label>Technicians / ช่างผู้ไปหน้างาน (เลือกหลายคน)</label>
+<div class="multi-box" id="techMulti">
+<span class="tag">Janeny <button onclick="removeTag(this)" type="button">×</button></span>
+<span class="tag">Jeans <button onclick="removeTag(this)" type="button">×</button></span>
+<span class="tag">Technician C <button onclick="removeTag(this)" type="button">×</button></span>
+<input id="techSearch" onfocus="showTechOptions()" oninput="filterTechOptions()" placeholder="พิมพ์ชื่อช่างเพื่อค้นหา..."/>
 </div>
-<h4>Shared Vehicle Usage / ใช้ร่วมกับหลาย Visit</h4>
+<div class="typeahead-menu" id="techOptions">
+<div onclick="addTech('Janeny')">Janeny</div>
+<div onclick="addTech('Jeans')">Jeans</div>
+<div onclick="addTech('Technician C')">Technician C</div>
+<div onclick="addTech('Technician D')">Technician D</div>
+</div>
+</div>
+<div class="field">
+<label>Function / ใบงาน</label>
+<select id="visitFunction" onchange="prefillFromFunction()">
+<option value="FN-PM-OL3151-01">FN-PM-OL3151-01 • PM</option>
+<option value="FN-CM-0815">FN-CM-0815 • CM</option>
+<option value="">ไม่มี Function</option>
+</select>
+</div>
+<div class="field">
+<label>Date / วันที่</label>
+<input type="date" value="2027-01-20"/>
+</div>
+<div class="field span2">
+<label>Machines / เครื่องที่ให้บริการ</label>
+<div class="multi-box" id="machineMulti">
+<span class="tag machine-tag" data-machine="OL3151">OL3151 <small>1011-007</small> <button onclick="removeTag(this)" type="button">×</button></span>
+<span class="tag machine-tag" data-machine="OL2875">OL2875 <small>1008-002</small> <button onclick="removeTag(this)" type="button">×</button></span>
+<input id="machineSearchInput" onfocus="showMachineOptions()" oninput="filterMachineOptions()" placeholder="ค้นหา Serial / Machine No. / Model..."/>
+</div>
+<div class="typeahead-menu" id="machineOptions">
+<div data-search="OL3151 1011-007 VARIOVAC Optimus GSE" onclick="addMachine('OL3151','1011-007','VARIOVAC Optimus')">
+<b>OL3151</b> | 1011-007 | VARIOVAC Optimus <small>บริษัท จีเอสวีฯ</small>
+</div>
+<div data-search="OL2875 1008-002 VARIOVAC Thermoform GSE" onclick="addMachine('OL2875','1008-002','VARIOVAC Thermoform')">
+<b>OL2875</b> | 1008-002 | VARIOVAC Thermoform <small>บริษัท จีเอสวีฯ</small>
+</div>
+<div data-search="OL0203 1005-004 VARIOVAC Optimus old machine GSE" onclick="addMachine('OL0203','1005-004','VARIOVAC Optimus')">
+<b>OL0203</b> | 1005-004 | VARIOVAC Optimus <small>บริษัท จีเอสวีฯ</small>
+</div>
+</div>
+<div class="subtitle" style="margin-top:6px">ถ้าเลือก Function ระบบเติมเครื่องที่ผูกกับ Function ให้อัตโนมัติ และยังเพิ่ม/เอาออกได้ตามงานจริง</div>
+</div>
+<div class="field span2">
+<label>Location / สถานที่</label>
+<input value="Customer Site, Pathum Thani"/>
+</div>
+</div>
+<div class="card travel-card" style="margin-top:14px">
+<div class="hd">
+<div>
+<h3>Travel / การเดินทาง</h3>
+<div class="subtitle">เลือกง่าย ๆ ว่าทีมเดินทางด้วยกันหรือแยกเดินทาง</div>
+</div>
+</div>
+<div class="bd">
+<div class="travel-choice">
+<label class="travel-option active">
+<input checked="" name="travelMode" onchange="toggleTravelMode()" type="radio" value="together"/>
+<span><b>ไปด้วยกัน</b><small>สร้าง Service Trip เดียว แล้วแชร์ให้ Visit ของช่างทุกคน</small></span>
+</label>
+<label class="travel-option">
+<input name="travelMode" onchange="toggleTravelMode()" type="radio" value="separate"/>
+<span><b>แยกเดินทาง</b><small>แต่ละคน/แต่ละกลุ่มสามารถมี Trip ของตัวเองภายหลัง</small></span>
+</label>
+</div>
+<div id="sharedTripFields" style="margin-top:12px">
 <div class="vehicle-row">
-<div class="field"><label>Vehicle</label><select id="vehicleSelect" onchange="toggleVehicleOther()"><option>1กข-1234</option><option>2กค-5678</option><option>อื่น ๆ</option></select></div>
-<div class="field"><label>Odometer Start</label><input id="odoStart" type="number" value="125000" oninput="calcKm()"></div>
-<div class="field"><label>Odometer End</label><input id="odoEnd" type="number" value="125180" oninput="calcKm()"></div>
-<div class="field"><label>Distance</label><input id="odoKm" value="180 km" readonly></div>
-<div class="field"><label>Fuel / Toll / Other</label><input value="1200 / 160 / 0"></div>
+<div class="field">
+<label>Vehicle / รถ</label>
+<select id="vehicleSelect" onchange="toggleVehicleOther()">
+<option>1กข-1234 • Service Van</option>
+<option>2กค-5678 • Pickup</option>
+<option>อื่น ๆ</option>
+</select>
 </div>
-<div id="otherVehicle" class="field" style="display:none;margin-top:10px"><label>รายละเอียดรถอื่น ๆ</label><input placeholder="รถส่วนตัว / รถเช่า / ทะเบียน"></div>
-<div class="note" style="margin-top:12px">Visit แต่ละคน Check-in/out ของตัวเอง แต่ช่างที่ไปคันเดียวกันสามารถแชร์ Service Trip ชุดเดียวกัน เพื่อไม่ให้ KM/ค่าใช้จ่ายถูกนับซ้ำ</div>
-</div><div class="modal-foot"><button class="btn primary" onclick="closeModal('visitModal');alert('Demo: Visit created and linked to machines + shared trip')">Create Visit</button></div></div></div>
+<div class="field">
+<label>Odometer Start / ไมล์เริ่ม</label>
+<input id="odoStart" oninput="calcKm()" type="number" value="125000"/>
+</div>
+<div class="field">
+<label>Odometer End / ไมล์สิ้นสุด</label>
+<input id="odoEnd" oninput="calcKm()" placeholder="กรอกหลังจบงาน" type="number"/>
+</div>
+<div class="field">
+<label>Distance / ระยะทาง</label>
+<input id="odoKm" readonly="" value="-"/>
+</div>
+<div class="field">
+<label>Travel Expense</label>
+<input placeholder="กรอกหลังจบงาน"/>
+</div>
+</div>
+<div class="field" id="otherVehicle" style="display:none;margin-top:10px">
+<label>รายละเอียดรถอื่น ๆ</label>
+<input placeholder="รถส่วนตัว / รถเช่า / ทะเบียนรถ"/>
+</div>
+<div class="note" style="margin-top:10px">
+              ตอนสร้าง Visit กรอกแค่รถ + ไมล์เริ่มต้นก่อนก็ได้ • ไมล์สิ้นสุด / น้ำมัน / ทางด่วน / อื่น ๆ ค่อยบันทึกหลังจบงาน
+            </div>
+</div>
+<div class="note" id="separateTripNote" style="display:none;margin-top:12px">
+            ระบบจะสร้าง Visit แยกให้ช่างทุกคนก่อน โดยยังไม่ผูก Service Trip กลาง จากนั้นแต่ละคนหรือแต่ละกลุ่มค่อยเพิ่ม Trip ของตัวเองได้
+          </div>
+</div>
+</div>
+<div class="visit-preview">
+<b>เมื่อกด Create Visits ระบบจะสร้าง:</b>
+<div>Visit #1 → Janeny</div>
+<div>Visit #2 → Jeans</div>
+<div>Visit #3 → Technician C</div>
+<small>ทุก Visit ใช้ Function + Machines ชุดเดียวกัน แต่แต่ละคน Check-in / Check-out ของตัวเอง</small>
+</div>
+</div>
+<div class="modal-foot">
+<button class="btn" onclick="closeModal('visitModal')">Cancel</button>
+<button class="btn primary" onclick="createTeamVisits()">Create Visits for Team / สร้าง Visit ให้ทีม</button>
+</div>
+</div>
+</div>
 
 <script>
 const titles={opp:'Sales / Opportunities',quotes:'Sales / Sales Quotes','machine-list':'Machine Register / Machine List',register:'Machine Register / Detail',functions:'Operations / Function',visits:'Activities / Visit','service-report':'Reports / Service Trip','vehicle-master':'Meta / Vehicle Master','pm-my':'Machine / My PM'};
@@ -773,8 +851,87 @@ function openPmDetail(){document.getElementById('pmDetail').style.display='block
 function createPmFunction(btn){btn.textContent='FN-PM-OL3151-02';btn.className='link';alert('Function created for PM #2. Visits can now be created under this Function.')}
 function confirmDoc(id){const r=document.getElementById(id);r.classList.add('confirmed');r.querySelector('.right').innerHTML='<span class="badge green">Confirmed & saved to ERP</span>';const fn=r.querySelector('b').textContent;document.getElementById('docConfirmed').insertAdjacentHTML('beforeend','<tr><td>AI Classified</td><td>'+fn+'</td><td>Supplier Email</td><td>Service Admin</td></tr>')}
 function openFunctionModal(){document.getElementById('functionModal').classList.add('show')} function openVisitModal(){document.getElementById('visitModal').classList.add('show')} function newFunctionFromMachine(){openFunctionModal()}
-function calcKm(){const a=+document.getElementById('odoStart').value||0,b=+document.getElementById('odoEnd').value||0;document.getElementById('odoKm').value=Math.max(0,b-a)+' km'}
-function toggleVehicleOther(){document.getElementById('otherVehicle').style.display=document.getElementById('vehicleSelect').value==='อื่น ๆ'?'block':'none'}
+
+
 function exportServiceCsv(){const rows=[...document.querySelectorAll('#serviceReportTable tr')].map(tr=>[...tr.children].map(td=>'"'+td.innerText.replaceAll('"','""')+'"').join(','));const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='service_trip_report.csv';a.click();URL.revokeObjectURL(a.href)}
+
+function showTechOptions(){document.getElementById('techOptions')?.classList.add('show')}
+function filterTechOptions(){
+  const q=(document.getElementById('techSearch')?.value||'').toLowerCase();
+  document.querySelectorAll('#techOptions>div').forEach(x=>x.style.display=x.innerText.toLowerCase().includes(q)?'':'none');
+  showTechOptions();
+}
+function addTech(name){
+  const box=document.getElementById('techMulti');
+  const exists=[...box.querySelectorAll('.tag')].some(x=>x.innerText.replace('×','').trim()===name);
+  if(!exists){
+    const tag=document.createElement('span'); tag.className='tag'; tag.innerHTML=name+' <button type="button" onclick="removeTag(this)">×</button>';
+    box.insertBefore(tag,box.querySelector('input'));
+  }
+  document.getElementById('techOptions')?.classList.remove('show');
+  document.getElementById('techSearch').value='';
+  updateVisitPreview();
+}
+function removeTag(btn){btn.closest('.tag')?.remove();updateVisitPreview()}
+function showMachineOptions(){document.getElementById('machineOptions')?.classList.add('show')}
+function filterMachineOptions(){
+  const q=(document.getElementById('machineSearchInput')?.value||'').toLowerCase();
+  document.querySelectorAll('#machineOptions>div').forEach(x=>{
+    const s=(x.dataset.search||x.innerText).toLowerCase(); x.style.display=s.includes(q)?'':'none';
+  });
+  showMachineOptions();
+}
+function addMachine(serial,no,model){
+  const box=document.getElementById('machineMulti');
+  const exists=[...box.querySelectorAll('.machine-tag')].some(x=>x.dataset.machine===serial);
+  if(!exists){
+    const tag=document.createElement('span'); tag.className='tag machine-tag'; tag.dataset.machine=serial;
+    tag.innerHTML=serial+' <small>'+no+'</small> <button type="button" onclick="removeTag(this)">×</button>';
+    box.insertBefore(tag,box.querySelector('input'));
+  }
+  document.getElementById('machineOptions')?.classList.remove('show');
+  document.getElementById('machineSearchInput').value='';
+}
+function prefillFromFunction(){
+  const v=document.getElementById('visitFunction')?.value;
+  if(v==='FN-PM-OL3151-01'){
+    addMachine('OL3151','1011-007','VARIOVAC Optimus');
+    addMachine('OL2875','1008-002','VARIOVAC Thermoform');
+  }
+}
+function toggleTravelMode(){
+  const v=document.querySelector('input[name="travelMode"]:checked')?.value;
+  document.getElementById('sharedTripFields').style.display=v==='together'?'block':'none';
+  document.getElementById('separateTripNote').style.display=v==='separate'?'block':'none';
+}
+function calcKm(){
+  const a=+document.getElementById('odoStart')?.value||0;
+  const end=document.getElementById('odoEnd')?.value;
+  const out=document.getElementById('odoKm');
+  if(!end){if(out) out.value='-';return}
+  const b=+end||0;if(out) out.value=Math.max(0,b-a)+' km';
+}
+function toggleVehicleOther(){
+  const el=document.getElementById('vehicleSelect');
+  document.getElementById('otherVehicle').style.display=(el && el.value==='อื่น ๆ')?'block':'none';
+}
+function updateVisitPreview(){
+  const names=[...document.querySelectorAll('#techMulti .tag')].map(x=>x.innerText.replace('×','').trim());
+  const p=document.querySelector('.visit-preview');
+  if(!p) return;
+  const rows=names.map((n,i)=>'<div>Visit #'+(i+1)+' → '+n+'</div>').join('');
+  p.innerHTML='<b>เมื่อกด Create Visits ระบบจะสร้าง:</b>'+rows+'<small>ทุก Visit ใช้ Function + Machines ชุดเดียวกัน แต่แต่ละคน Check-in / Check-out ของตัวเอง</small>';
+}
+function createTeamVisits(){
+  const names=[...document.querySelectorAll('#techMulti .tag')].map(x=>x.innerText.replace('×','').trim());
+  if(!names.length){alert('กรุณาเลือกช่างอย่างน้อย 1 คน');return}
+  const together=document.querySelector('input[name="travelMode"]:checked')?.value==='together';
+  closeModal('visitModal');
+  alert('Created '+names.length+' Visits\n'+names.join(', ')+'\n'+(together?'Shared Service Trip created automatically':'Visits created without shared trip'));
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#techMulti')&&!e.target.closest('#techOptions')) document.getElementById('techOptions')?.classList.remove('show');
+  if(!e.target.closest('#machineMulti')&&!e.target.closest('#machineOptions')) document.getElementById('machineOptions')?.classList.remove('show');
+});
 </script>
 </body></html>
