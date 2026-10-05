@@ -257,7 +257,7 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 </section>
 <section class="page" id="opp-detail">
 <div class="page-title">
-<div><h1>Opportunity: REG - OL3151</h1><div class="subtitle">OPP #15602 • Machine • Sales information + Service handover fields</div></div>
+<div><h1>Opportunity: REG - OL3151</h1><div class="subtitle">OPP #15602 • Machine • Customer requirements + Supplier RFQ + Final handover</div></div>
 <div class="right"><span class="badge green">WIN</span><button class="btn">Save</button><button class="btn ai" onclick="runAiOpp()">AI Check</button><button class="btn primary" onclick="openFinalModal()">Final Quotation</button></div>
 </div>
 <div class="card">
@@ -278,47 +278,51 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 </div>
 </div>
 <div class="card">
-<div class="hd"><h3>Machine &amp; Installation Requirements / ข้อมูลที่ Sales ยืนยันเพื่อส่ง Service</h3><span class="badge purple">Service handover</span></div>
+<div class="hd"><h3>Customer &amp; Machine Requirements / ความต้องการลูกค้าและข้อมูลเครื่อง</h3><span class="badge purple">OPP Master Requirement</span></div>
 <div class="bd form-grid">
 <div class="field"><label>Machine</label><input value="Thermoform"/></div>
 <div class="field"><label>Brand / Manufacturer</label><input value="VARIOVAC"/></div>
-<div class="field"><label>Model</label><input value="Optimus"/></div>
-<div class="field"><label>Serial Number / S/N</label><input value="OL3151"/></div>
+<div class="field"><label>Preferred / Proposed Model</label><input value="Optimus"/></div>
+<div class="field"><label>Project / Machine Ref.</label><input value="OL3151"/></div>
 <div class="field"><label>Product</label><input id="oppProduct" value="Ready meal / sausage"/></div>
 <div class="field"><label>Target Capacity</label><input id="oppCapacity" value="ประมาณ 500 kg/hr"/></div>
-<div class="field"><label>Final Speed</label><input id="oppSpeed" value="12 packs/min"/></div>
+<div class="field"><label>Required Speed</label><input id="oppSpeed" value="12 packs/min"/></div>
 <div class="field"><label>Pack</label><input id="oppPack" value="Vacuum pack / Thermoform pack"/></div>
 <div class="field"><label>Forming Depth</label><input id="oppDepth" value="80 mm"/></div>
-<div class="field"><label>Final Vacuum</label><input id="oppVacuum" value="≤ 10 mbar"/></div>
+<div class="field"><label>Vacuum Requirement</label><input id="oppVacuum" value="≤ 10 mbar"/></div>
 <div class="field"><label>Printer / Labeler</label><input id="oppPrinter" value="Labeler EF + CAB printer 1 set"/></div>
 <div class="field"><label>Printing Position</label><input id="oppPrintPos" value="Top film / ด้านบนแพ็ก"/></div>
 <div class="field span2"><label>Printing Requirement</label><textarea>พิมพ์ Lot, MFG, EXP และ Barcode บน Top film ตามตำแหน่งที่ลูกค้ากำหนด</textarea></div>
 <div class="field span2"><label>Options / Accessories</label><textarea>Labeler EF 1 ชุด, CAB printer 1 set, อุปกรณ์ติดตั้งที่เกี่ยวข้องตามใบเสนอราคา</textarea></div>
 </div>
 </div>
+<div class="card" style="border-left:4px solid #8b5cf6">
+<div class="hd"><div><h3>Requirement Flow / ข้อมูลชุดนี้ถูกใช้ต่ออย่างไร</h3><div class="subtitle">กรอก Requirement ที่ OPP เพียงชุดเดียว • RFQ ดึงไปใช้ • หลัง Supplier ตอบ Sales ยืนยันค่าที่ขายจริง • Final แล้วจึงสร้าง Service Handover Snapshot</div></div><span class="badge purple">Single Source</span></div>
+<div class="bd"><div class="sales-flow-strip"><span>Customer Requirement</span><b>→</b><span>Supplier RFQ</span><b>→</b><span>Supplier Proposal</span><b>→</b><span>Sales Confirmed</span><b>→</b><span>Final Quote</span><b>→</b><span>Service Snapshot</span></div><div class="note" style="margin-top:10px"><b>หลักการ:</b> RFQ ไม่ให้ Sales กรอกข้อมูล Requirement ซ้ำ แต่ดึงจาก OPP ชุดนี้อัตโนมัติ ส่วนค่าที่ Supplier เสนอใหม่ เช่น Model / Film Width / Die Size จะถูกนำมาเทียบและให้ Sales ยืนยันก่อน Final</div></div>
+</div>
 <div class="card readiness">
-<div class="hd"><div><h3>Final Readiness Check / ตรวจข้อมูลก่อน Final Quotation</h3><div class="subtitle">Final แล้ว Machine Register จะเก็บ Sales Requirement Snapshot ณ เวลานั้น</div></div><span class="badge green">Ready 8/8</span></div>
+<div class="hd"><div><h3>Final Sales Requirement / Service Handover Snapshot</h3><div class="subtitle">ส่วนนี้เกิดเมื่อกด Final Quotation เท่านั้น • เป็นค่าที่ขายจริงและส่งต่อไป Machine Register</div></div><span class="badge green">Ready 8/8</span></div>
 <div class="bd">
 <div class="grid4">
 <div class="ready-item"><b>Machine</b><span>VARIOVAC Optimus</span><small>Required</small></div>
 <div class="ready-item"><b>Product / Pack</b><span>Ready meal / Vacuum pack</span><small>Required</small></div>
-<div class="ready-item"><b>Final Speed</b><span>12 packs/min</span><small>Required</small></div>
-<div class="ready-item"><b>Capacity</b><span>500 kg/hr</span><small>Required</small></div>
+<div class="ready-item"><b>Final Speed</b><span>12 packs/min</span><small>Sales Confirmed</small></div>
+<div class="ready-item"><b>Capacity</b><span>500 kg/hr</span><small>Sales Confirmed</small></div>
 <div class="ready-item"><b>Forming Depth</b><span>80 mm</span><small>Confirmed</small></div>
 <div class="ready-item"><b>Final Vacuum</b><span>≤ 10 mbar</span><small>Confirmed</small></div>
 <div class="ready-item"><b>Printer</b><span>Labeler EF + CAB</span><small>Confirmed</small></div>
 <div class="ready-item"><b>Printing Position</b><span>Top film</span><small>Confirmed</small></div>
 </div>
-<div class="note" style="margin-top:12px"><b>Rule:</b> หลัง Final ค่าใน Machine จะไม่ sync ตาม OPP อัตโนมัติ หาก OPP เปลี่ยนให้ใช้ Compare with latest OPP แล้วเลือกอัปเดตเฉพาะ field</div>
+<div class="note" style="margin-top:12px"><b>Rule:</b> Snapshot นี้ล็อกตาม Final Quotation และไม่ sync ตาม OPP อัตโนมัติ หากมีการเปลี่ยนหลัง Final ต้อง Compare / Approve ก่อนอัปเดต Machine Register</div>
 </div>
 </div>
 <div class="card" id="opp-rfq-card">
 <div class="hd">
 <div>
 <h3>Supplier RFQ / ขอราคา Supplier</h3>
-<div class="subtitle">OPP เป็นศูนย์กลางฝั่ง Sales: Requirement → AI Check → Approve → Send Supplier → Response</div>
+<div class="subtitle">ดึง Customer &amp; Machine Requirements จาก OPP อัตโนมัติ → AI Check → Approve → Send Supplier → Response → Compare</div>
 </div>
-<button class="btn primary" onclick="go('rfq');openRfqDraft()">+ Create RFQ</button>
+<button class="btn primary" onclick="go('rfq');openRfqDraft()">+ Create RFQ from OPP</button>
 </div>
 <div class="bd">
 <table>
@@ -478,7 +482,7 @@ Updated 1/2026
 <div class="hd">
 <div>
 <h3>1. Project and Contacts / ข้อมูลโครงการและผู้ติดต่อ</h3>
-<div class="subtitle">ดึงจาก OPP ให้ก่อน และให้ Sales ตรวจทาน</div>
+<div class="subtitle">ดึงจาก OPP Master Requirement ให้อัตโนมัติ • Sales ตรวจทาน ไม่ต้องกรอกซ้ำ</div>
 </div>
 <span class="badge green">Auto-filled from OPP</span>
 </div>
@@ -492,7 +496,7 @@ Updated 1/2026
 </div>
 </div>
 <div class="card">
-<div class="hd"><h3>2. Products and Packaging Requirements / สินค้าและข้อกำหนดการแพ็ก</h3><span class="badge purple">RFQ Form</span></div>
+<div class="hd"><h3>2. Products and Packaging Requirements / สินค้าและข้อกำหนดการแพ็ก</h3><span class="badge green">Synced from OPP</span></div>
 <div class="bd">
 <div class="rfq-product">
 <div class="hd mini"><h3>Product 1</h3><span class="badge green">Complete</span></div>
@@ -557,6 +561,10 @@ Updated 1/2026
 <div class="field"><label>Budget / Currency</label><input value="THB / Budget under review"/></div>
 <div class="field span4"><label>Remarks</label><textarea>Customer requires same concept as previous machine. Trade-in old machine OL0203 is being considered. Please confirm suitable machine, final format, utilities and delivery lead time.</textarea></div>
 </div>
+</div>
+<div class="card">
+<div class="hd"><div><h3>Requirement Compare / เปรียบเทียบก่อน Sales ยืนยัน</h3><div class="subtitle">ตัวอย่างหลัง Supplier ตอบกลับ: AI ช่วยเทียบ Customer Need กับ Supplier Proposed แต่ Sales เป็นผู้ยืนยันค่าที่จะขายจริง</div></div><span class="badge purple">AI Compare</span></div>
+<div class="bd"><table><thead><tr><th>Requirement</th><th>OPP / Customer Need</th><th>Supplier Proposed</th><th>Sales Confirmed</th></tr></thead><tbody><tr><td>Speed</td><td>12 packs/min</td><td>12 packs/min</td><td><span class="badge green">✓ 12 packs/min</span></td></tr><tr><td>Capacity</td><td>ประมาณ 500 kg/hr</td><td>480–520 kg/hr</td><td><span class="badge green">✓ 500 kg/hr target</span></td></tr><tr><td>Forming Depth</td><td>80 mm</td><td>Max 85 mm</td><td><span class="badge green">✓ 80 mm</span></td></tr><tr><td>Machine Model</td><td>Preferred: Optimus</td><td>Optimus</td><td><span class="badge green">✓ Optimus</span></td></tr><tr><td>Film Width</td><td>ยังไม่ระบุ</td><td>420 mm</td><td><span class="badge amber">Need Sales Confirm</span></td></tr></tbody></table></div>
 </div>
 <div class="card" id="aiReviewCard">
 <div class="hd">
