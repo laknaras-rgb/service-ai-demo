@@ -56,6 +56,19 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 .travel-choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.travel-option{display:flex;gap:10px;border:1px solid #dbe3eb;border-radius:10px;padding:12px;cursor:pointer;background:#fff}.travel-option:has(input:checked){border-color:#f97316;background:#fff7ed}.travel-option span{display:flex;flex-direction:column;gap:3px}.travel-option small{color:#6b7280}
 .visit-preview{margin-top:14px;border:1px dashed #cbd5e1;border-radius:10px;padding:12px;background:#fbfdff;font-size:12px}.visit-preview div{padding:2px 0}.visit-preview small{display:block;margin-top:6px;color:#667085}
 @media(max-width:760px){.travel-choice{grid-template-columns:1fr}.typeahead-menu{min-width:260px;max-width:90vw}}
+
+.rfq-steps{display:flex;align-items:center;gap:8px;overflow:auto;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:14px}
+.rfq-step{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;color:#7b8794;white-space:nowrap}
+.rfq-step span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:2px solid #d4dbe4;background:#fff;font-size:10px}
+.rfq-step.active{color:#d95f02}.rfq-step.active span{border-color:#f97316;background:#fff3e8;color:#d95f02}
+.rfq-step.done{color:#188447}.rfq-step.done span{border-color:#22c55e;background:#ebfaf0;color:#188447}
+.rfq-arrow{color:#c0c8d2}
+.rfq-product{border:1px solid #e5e7eb;border-radius:10px;padding:12px}.hd.mini{padding:0 0 10px;border:0}
+.ai-finding{border-left:4px solid #cbd5e1;border-radius:7px;padding:9px 10px;margin:7px 0;background:#f8fafc;font-size:12px}
+.ai-finding.amber{border-left-color:#f59e0b;background:#fffaf0}.ai-finding.red{border-left-color:#ef4444;background:#fff5f5}.ai-finding.green{border-left-color:#22c55e;background:#f3fff7}
+.ai-summary-box{border:1px solid #ddd6fe;background:#faf8ff;border-radius:10px;padding:12px;font-size:12px}
+.ai-summary-box p{margin:7px 0 0;line-height:1.55}
+.attachment-chips{display:flex;gap:7px;flex-wrap:wrap}.attachment-chips span{background:#f3f6f9;border:1px solid #dde4eb;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:700}
 </style>
 </head>
 <body>
@@ -65,7 +78,7 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 <div class="menu">
 <div class="group-label">Sales</div>
 <button class="subbtn active" data-page="opp">Opportunities</button>
-<button class="subbtn" data-page="quotes">Sales Quotes</button>
+<button class="subbtn" data-page="quotes">Sales Quotes</button><button class="subbtn" data-page="rfq">Supplier RFQ</button>
 <div class="group-label">Activities</div>
 <button class="subbtn" data-page="visits">Visit</button>
 <div class="group-label">Operations</div>
@@ -138,6 +151,34 @@ table{width:100%;border-collapse:collapse} th{background:#f7f9fb;font-size:11px;
 <div class="note" style="margin-top:12px"><b>Rule:</b> หลัง Final ค่าใน Machine จะไม่ sync ตาม OPP อัตโนมัติ หาก OPP เปลี่ยนให้ใช้ Compare with latest OPP แล้วเลือกอัปเดตเฉพาะ field</div>
 </div>
 </div>
+
+<div class="card" id="opp-rfq-card">
+<div class="hd">
+<div>
+<h3>Supplier RFQ / ขอราคา Supplier</h3>
+<div class="subtitle">OPP เป็นศูนย์กลางฝั่ง Sales: Requirement → AI Check → Approve → Send Supplier → Response</div>
+</div>
+<button class="btn primary" onclick="go('rfq');openRfqDraft()">+ Create RFQ</button>
+</div>
+<div class="bd">
+<table>
+<thead>
+<tr><th>RFQ</th><th>Supplier</th><th>AI Check</th><th>Approval</th><th>Sent</th><th>Response</th><th></th></tr>
+</thead>
+<tbody>
+<tr>
+<td><b>RFQ-2026-015</b><br/><small>OPP #15602</small></td>
+<td>VARIOVAC</td>
+<td><span class="badge green">95% Ready</span></td>
+<td><span class="badge green">Approved</span></td>
+<td>05/10/2026</td>
+<td><span class="badge amber">Waiting</span></td>
+<td><button class="btn" onclick="go('rfq');showRfqList();openExistingRfq()">Open</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div class="card">
 <div class="hd"><h3>Opportunity Note / Description</h3><span class="badge gray">Sales Note</span></div>
 <div class="bd"><textarea style="width:100%;min-height:560px">9/11/2025
@@ -197,6 +238,267 @@ Updated 1/2026
 <tr><td><b>#2095</b></td><td>REG - OL3151</td><td>บริษัท จีเอสวีฯ</td><td><span class="badge green">Final</span></td><td><button class="btn" onclick="go('machine-list')">View Machine Created</button></td></tr>
 </tbody></table></div></div>
 </section>
+<section class="page" id="rfq">
+<div class="page-title">
+<div>
+<h1>Supplier RFQ / ขอราคา Supplier</h1>
+<div class="subtitle">Sales Requirement → AI Review → Human Approval → Email Supplier → Supplier Response</div>
+</div>
+<div class="right">
+<button class="btn" onclick="showRfqList()">RFQ List</button>
+<button class="btn primary" onclick="openRfqDraft()">+ New RFQ</button>
+</div>
+</div>
+<div id="rfqListView">
+<div class="grid4">
+<div class="stat"><small>Draft</small><b>1</b></div>
+<div class="stat"><small>Waiting Approval</small><b>1</b></div>
+<div class="stat"><small>Sent</small><b>4</b></div>
+<div class="stat"><small>Waiting Supplier Reply</small><b>2</b></div>
+</div>
+<div class="card" style="margin-top:14px">
+<div class="hd">
+<h3>RFQ List</h3>
+<input placeholder="ค้นหา RFQ / OPP / Customer / Supplier..." style="min-width:340px;border:1px solid #cfd8e3;border-radius:8px;padding:8px 10px"/>
+</div>
+<div class="bd">
+<table>
+<thead>
+<tr><th>RFQ</th><th>OPP</th><th>Customer</th><th>Supplier</th><th>AI Readiness</th><th>Status</th><th>Last Update</th><th></th></tr>
+</thead>
+<tbody>
+<tr>
+<td><b>RFQ-2026-015</b></td>
+<td>REG - OL3151</td>
+<td>บริษัท จีเอสวีฯ</td>
+<td>VARIOVAC</td>
+<td><span class="badge green">95%</span></td>
+<td><span class="badge amber">Waiting Supplier Reply</span></td>
+<td>05/10/2026 10:35</td>
+<td><button class="btn" onclick="openExistingRfq()">Open</button></td>
+</tr>
+<tr>
+<td><b>RFQ-2026-016</b></td>
+<td>OPP #15644</td>
+<td>บริษัท ABC Foods</td>
+<td>VARIOVAC</td>
+<td><span class="badge amber">78%</span></td>
+<td><span class="badge gray">Draft</span></td>
+<td>05/10/2026 09:20</td>
+<td><button class="btn" onclick="openRfqDraft()">Open</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="rfqDraftView" style="display:none">
+<div class="snapshot">
+<div>
+<b>RFQ-2026-015 • VARIOVAC Quotation Request</b>
+<small>Linked OPP: REG - OL3151 (#15602) • Customer: บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด</small>
+</div>
+<div class="right">
+<span class="badge blue" id="rfqStatusBadge">Draft</span>
+<button class="btn" onclick="showRfqList()">← Back to List</button>
+</div>
+</div>
+<div class="rfq-steps">
+<div class="rfq-step active" data-rfq-step="1"><span>1</span>Prepare</div>
+<div class="rfq-arrow">→</div>
+<div class="rfq-step" data-rfq-step="2"><span>2</span>AI Review</div>
+<div class="rfq-arrow">→</div>
+<div class="rfq-step" data-rfq-step="3"><span>3</span>Approval</div>
+<div class="rfq-arrow">→</div>
+<div class="rfq-step" data-rfq-step="4"><span>4</span>Email Supplier</div>
+<div class="rfq-arrow">→</div>
+<div class="rfq-step" data-rfq-step="5"><span>5</span>Response</div>
+</div>
+<div class="card">
+<div class="hd">
+<div>
+<h3>1. Project and Contacts / ข้อมูลโครงการและผู้ติดต่อ</h3>
+<div class="subtitle">ดึงจาก OPP ให้ก่อน และให้ Sales ตรวจทาน</div>
+</div>
+<span class="badge green">Auto-filled from OPP</span>
+</div>
+<div class="bd form-grid">
+<div class="field span2"><label>Customer / Project</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด / Thermoform Project"/></div>
+<div class="field"><label>OPP No.</label><input value="15602"/></div>
+<div class="field"><label>Customer No.</label><input value="CUST-00158"/></div>
+<div class="field"><label>Date</label><input type="date" value="2026-10-05"/></div>
+<div class="field"><label>Ruampat Sales Contact</label><input value="Darat Charansirirungkarn"/></div>
+<div class="field span2"><label>Email</label><input value="sales@ruampat.com"/></div>
+</div>
+</div>
+<div class="card">
+<div class="hd"><h3>2. Products and Packaging Requirements / สินค้าและข้อกำหนดการแพ็ก</h3><span class="badge purple">RFQ Form</span></div>
+<div class="bd">
+<div class="rfq-product">
+<div class="hd mini"><h3>Product 1</h3><span class="badge green">Complete</span></div>
+<div class="form-grid">
+<div class="field span2"><label>Product / Description</label><input id="rfqProduct" value="Ready meal / sausage"/></div>
+<div class="field"><label>Condition</label><select><option>Dry</option><option selected="">Sauce / liquid</option></select></div>
+<div class="field"><label>Temperature</label><input value="4-8 °C"/></div>
+<div class="field span2"><label>Application</label><input value="Vacuum"/></div>
+<div class="field span2"><label>Film</label><input value="Flexible"/></div>
+<div class="field"><label>Opening</label><input value="Easy peel"/></div>
+<div class="field"><label>Hanging hole</label><select><option>No</option><option>Yes</option></select></div>
+<div class="field"><label>Portion W × L × H</label><input value="180 × 120 × 45 mm"/></div>
+<div class="field"><label>Finished Pack W × L × H</label><input value="200 × 140 × 55 mm"/></div>
+<div class="field"><label>Layers</label><input value="1"/></div>
+<div class="field"><label>Total pcs / pack</label><input value="1"/></div>
+<div class="field"><label>Orientation</label><input value="Lengthwise"/></div>
+<div class="field"><label>Net weight</label><input value="500 g"/></div>
+<div class="field"><label>Output</label><input id="rfqOutput" value="720 packs/h"/></div>
+<div class="field"><label>Suggested format</label><input value="Format 4.1"/></div>
+<div class="field"><label>Die size</label><input id="rfqDie" value=""/></div>
+<div class="field"><label>Drawing ref.</label><input value="DRAW-2095-A"/></div>
+</div>
+</div>
+<details style="margin-top:10px">
+<summary><b>+ Product 2</b></summary>
+<div class="note" style="margin-top:8px">ใช้เมื่อ OPP นี้ขอราคาเครื่องสำหรับหลาย Product / Format</div>
+</details>
+<details style="margin-top:8px">
+<summary><b>+ Product 3</b></summary>
+</details>
+</div>
+</div>
+<div class="card">
+<div class="hd"><h3>3. Machine Reference and Installation / ข้อมูลอ้างอิงเครื่องและติดตั้ง</h3></div>
+<div class="bd form-grid">
+<div class="field"><label>Suggested Machine Model</label><input id="rfqModel" value="VARIOVAC Optimus"/></div>
+<div class="field"><label>Film Width if Known</label><input id="rfqFilmWidth" placeholder="Need confirmation"/></div>
+<div class="field"><label>Installation Area W × L</label><input value="6 × 12 m"/></div>
+<div class="field"><label>Hours per Day</label><input value="16 h/day"/></div>
+<div class="field span2"><label>Coding / Labelling</label><input value="Print on film + Sticker label"/></div>
+<div class="field span2"><label>Print Content</label><input value="Lot, MFG, EXP, Barcode"/></div>
+</div>
+</div>
+<div class="card">
+<div class="hd"><h3>4. Attachments and Requested Proposal Scope / ไฟล์แนบและขอบเขตที่ขอ Supplier</h3></div>
+<div class="bd">
+<div class="grid4">
+<label class="ready-item"><b>TOR</b><span><input checked="" type="checkbox"/> Attached</span></label>
+<label class="ready-item"><b>Product / Pack Photos</b><span><input checked="" type="checkbox"/> Attached</span></label>
+<label class="ready-item"><b>Arrangement Sketch</b><span><input checked="" type="checkbox"/> Attached</span></label>
+<label class="ready-item"><b>Site Layout</b><span><input id="siteLayoutCheck" type="checkbox"/> Missing</span></label>
+</div>
+<div class="note" style="margin-top:12px">
+          ขอ Supplier ส่งกลับ: Quotation, Format Drawing, Machine Drawing, Brochure พร้อม Included/Excluded Tooling, Options, Services, Utilities, Lead Time, Warranty และประเด็นที่ต้องยืนยัน
+        </div>
+</div>
+</div>
+<div class="card">
+<div class="hd"><h3>5. Customer Timing, Budget and Remarks / กำหนดการ งบประมาณ และหมายเหตุ</h3></div>
+<div class="bd form-grid">
+<div class="field"><label>Required Machine Operation Date</label><input type="date" value="2027-02-01"/></div>
+<div class="field"><label>Budget / Currency</label><input value="THB / Budget under review"/></div>
+<div class="field span4"><label>Remarks</label><textarea>Customer requires same concept as previous machine. Trade-in old machine OL0203 is being considered. Please confirm suitable machine, final format, utilities and delivery lead time.</textarea></div>
+</div>
+</div>
+<div class="card" id="aiReviewCard">
+<div class="hd">
+<div>
+<h3>AI RFQ Review / AI ตรวจความครบและความสอดคล้อง</h3>
+<div class="subtitle">AI ช่วยตรวจ แต่ไม่เดาค่า Technical ที่ไม่มีข้อมูล</div>
+</div>
+<button class="btn ai" onclick="runRfqAiCheck()">✦ Run AI Check</button>
+</div>
+<div class="bd">
+<div class="grid4">
+<div class="stat"><small>Readiness</small><b id="rfqReadiness">78%</b></div>
+<div class="stat"><small>Missing</small><b id="rfqMissing">2</b></div>
+<div class="stat"><small>Conflict</small><b id="rfqConflict">1</b></div>
+<div class="stat"><small>Need Confirmation</small><b id="rfqConfirm">2</b></div>
+</div>
+<div id="rfqAiFindings" style="margin-top:12px">
+<div class="ai-finding amber"><b>Need confirmation:</b> Film width ยังไม่มีข้อมูล</div>
+<div class="ai-finding amber"><b>Need confirmation:</b> Die size ยังไม่มีข้อมูล</div>
+<div class="ai-finding red"><b>Conflict:</b> Output 720 packs/h = 12 packs/min ซึ่งตรงกับ OPP แต่ควรให้ Sales ยืนยันหน่วยก่อนส่ง</div>
+<div class="ai-finding amber"><b>Missing attachment:</b> Site Layout</div>
+</div>
+<div class="ai-summary-box" style="margin-top:12px">
+<b>AI Supplier Summary</b>
+<p id="rfqAiSummary">Customer requires a VARIOVAC thermoforming solution for ready meal / sausage, target 12 packs/min, vacuum application, with Labeler EF + CAB printing on top film. Please confirm suitable machine model, format/die size, film width, final utilities and lead time.</p>
+</div>
+<div class="right" style="margin-top:12px">
+<button class="btn primary" id="submitApprovalBtn" onclick="submitRfqApproval()">Submit for Approval / ส่งอนุมัติ</button>
+</div>
+</div>
+</div>
+<div class="card" id="approvalCard" style="display:none">
+<div class="hd"><h3>Approval / การอนุมัติก่อนส่ง Supplier</h3><span class="badge amber">Waiting Approval</span></div>
+<div class="bd">
+<div class="grid3">
+<div class="note"><b>Prepared by</b><br/>Sales Owner: Darat</div>
+<div class="note"><b>AI Check</b><br/><span id="approvalReadiness">95% Ready</span></div>
+<div class="note"><b>Approver</b><br/>Sales Manager / Authorized Approver</div>
+</div>
+<div class="note" style="margin-top:12px">Approver ตรวจเฉพาะ Requirement Summary, AI Findings, Attachments และ Supplier ก่อนอนุมัติ</div>
+<div class="right" style="margin-top:12px">
+<button class="btn" onclick="rejectRfq()">Request Changes / ขอแก้ไข</button>
+<button class="btn primary" onclick="approveRfq()">Approve RFQ / อนุมัติ</button>
+</div>
+</div>
+</div>
+<div class="card" id="emailCard" style="display:none">
+<div class="hd">
+<div><h3>Email Supplier / ส่งอีเมลหา Supplier</h3><div class="subtitle">AI Draft → Human Review → Send</div></div>
+<span class="badge green">Approved</span>
+</div>
+<div class="bd form-grid">
+<div class="field span2"><label>To</label><input value="sales@variovac.com"/></div>
+<div class="field span2"><label>CC</label><input value="sales-owner@ruampat.com; sales-manager@ruampat.com"/></div>
+<div class="field span4"><label>Subject</label><input value="RFQ – GSE – Thermoforming Machine – OPP #15602"/></div>
+<div class="field span4"><label>Email Draft</label><textarea style="min-height:180px">Dear VARIOVAC team,
+
+Please find attached our quotation request for the following project.
+
+Customer: บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด
+Application: Vacuum thermoforming for ready meal / sausage
+Required output: 12 packs/min
+Coding/Labelling: Labeler EF + CAB printer on top film
+
+Please provide quotation together with format drawing, machine drawing, brochure, utilities, lead time, warranty, included/excluded tooling and any points requiring confirmation.
+
+Best regards,
+RuamPat Sales Team</textarea></div>
+<div class="field span4"><label>Attachments</label>
+<div class="attachment-chips">
+<span>RFQ-2026-015.pdf</span><span>TOR.pdf</span><span>Product_Photos.zip</span><span>Arrangement_Sketch.pdf</span>
+</div>
+</div>
+</div>
+<div class="bd" style="border-top:1px solid #edf1f5">
+<div class="right">
+<button class="btn">Preview Email</button>
+<button class="btn primary" onclick="sendRfqEmail()">Send to Supplier / ส่งอีเมล</button>
+</div>
+</div>
+</div>
+<div class="card" id="responseCard" style="display:none">
+<div class="hd">
+<div><h3>Supplier Response / เอกสารตอบกลับ Supplier</h3><div class="subtitle">AI ตรวจ Email Reply และจัดประเภทไฟล์ แต่ต้อง Human Confirm ก่อนผูกเข้า OPP/Machine</div></div>
+<button class="btn ai" onclick="simulateSupplierReply()">✦ Check Supplier Reply</button>
+</div>
+<div class="bd">
+<table>
+<thead><tr><th>Expected Document</th><th>Detected</th><th>File</th><th>AI Confidence</th><th>Status</th></tr></thead>
+<tbody id="supplierReplyRows">
+<tr><td>Quotation</td><td>—</td><td>—</td><td>—</td><td><span class="badge gray">Waiting</span></td></tr>
+<tr><td>Format Drawing</td><td>—</td><td>—</td><td>—</td><td><span class="badge gray">Waiting</span></td></tr>
+<tr><td>Machine Drawing</td><td>—</td><td>—</td><td>—</td><td><span class="badge gray">Waiting</span></td></tr>
+<tr><td>Utility Requirement</td><td>—</td><td>—</td><td>—</td><td><span class="badge gray">Waiting</span></td></tr>
+<tr><td>Brochure</td><td>—</td><td>—</td><td>—</td><td><span class="badge gray">Waiting</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
 <section class="page" id="machine-list">
 <div class="page-title"><div><h1>Machine Register / ทะเบียนเครื่อง</h1><div class="subtitle">รายการเครื่องทั้งหมด • Machine Register เป็นศูนย์รวมประวัติ ไม่ใช่ทางเดียวในการสร้างงาน</div></div><div class="right"><button class="btn">Refresh</button><button class="btn primary">+ Add Machine</button></div></div>
 <div class="grid4">
@@ -646,7 +948,6 @@ Updated 1/2026
 </section>
 <section class="page" id="visits">
 <div class="page-title"><div><h1>Activities → Visit</h1><div class="subtitle">Visit สร้างได้จากหน้า Visit โดยตรง • ค้น Machine ด้วย Serial/Machine No. • เก็บ Machine ID หลังบ้าน</div></div><button class="btn primary" onclick="openVisitModal()">+ New Visit</button></div>
-
 <div class="card">
 <div class="hd">
 <h3>Visit List / รายการ Visit</h3>
@@ -665,7 +966,6 @@ Updated 1/2026
 </table>
 </div>
 </div>
-
 </section>
 <section class="page" id="service-report">
 <div class="page-title"><div><h1>Service Trip Report</h1><div class="subtitle">Filter ตาม รถ / ลูกค้า / ช่าง / PM-CM / เครื่องจักร และ Export Excel/CSV</div></div><button class="btn primary" onclick="exportServiceCsv()">Export Excel / CSV</button></div>
@@ -698,7 +998,6 @@ Updated 1/2026
 <div class="form-grid"><div class="field"><label>Customer</label><select><option>บริษัท จีเอสวีฯ</option></select></div><div class="field"><label>Job Type</label><select><option>PM</option><option>CM / Repair</option><option>Installation</option></select></div><div class="field span2"><label>Machines (เลือกได้หลายเครื่อง)</label><select multiple="" size="3"><option selected="">OL3151 | 1011-007 | VARIOVAC Optimus</option><option selected="">OL2875 | 1008-002 | VARIOVAC Thermoform</option><option>OL0203 | Old Machine</option></select></div><div class="field span4"><label>Problem / Job Description</label><textarea>PM รอบเดียวกันที่ลูกค้าเดียวกัน ทำ 2 เครื่อง</textarea></div></div>
 <div class="note" style="margin-top:12px">หน้าจอค้นด้วย Serial / Machine No. แต่หลังบ้านเก็บ Machine IDs แบบ many-to-many</div>
 </div><div class="modal-foot"><button class="btn primary" onclick="closeModal('functionModal');alert('Demo: Function created and linked to 2 machines')">Create Function</button></div></div></div>
-
 <div class="modal" id="visitModal">
 <div class="modal-card">
 <div class="modal-head">
@@ -834,9 +1133,8 @@ Updated 1/2026
 </div>
 </div>
 </div>
-
 <script>
-const titles={opp:'Sales / Opportunities',quotes:'Sales / Sales Quotes','machine-list':'Machine Register / Machine List',register:'Machine Register / Detail',functions:'Operations / Function',visits:'Activities / Visit','service-report':'Reports / Service Trip','vehicle-master':'Meta / Vehicle Master','pm-my':'Machine / My PM'};
+const titles={opp:'Sales / Opportunities',quotes:'Sales / Sales Quotes','machine-list':'Machine Register / Machine List',register:'Machine Register / Detail',functions:'Operations / Function',visits:'Activities / Visit','service-report':'Reports / Service Trip','vehicle-master':'Meta / Vehicle Master','pm-my':'Machine / My PM',rfq:'Sales / Supplier RFQ'};
 function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id)?.classList.add('active');document.querySelectorAll('.subbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.getElementById('crumb').textContent=titles[id]||id;window.scrollTo(0,0)}
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
 function openMachine(sn){go('register');document.getElementById('machineTitle').textContent='Machine Register — '+sn;machinePanel('overview')}
@@ -933,5 +1231,91 @@ document.addEventListener('click',function(e){
   if(!e.target.closest('#techMulti')&&!e.target.closest('#techOptions')) document.getElementById('techOptions')?.classList.remove('show');
   if(!e.target.closest('#machineMulti')&&!e.target.closest('#machineOptions')) document.getElementById('machineOptions')?.classList.remove('show');
 });
+
+function showRfqList(){
+  const a=document.getElementById('rfqListView'),b=document.getElementById('rfqDraftView');
+  if(a)a.style.display='block'; if(b)b.style.display='none';
+}
+function openRfqDraft(){
+  const a=document.getElementById('rfqListView'),b=document.getElementById('rfqDraftView');
+  if(a)a.style.display='none'; if(b)b.style.display='block';
+  setRfqStep(1);
+  window.scrollTo(0,0);
+}
+function openExistingRfq(){
+  openRfqDraft();
+  document.getElementById('approvalCard').style.display='block';
+  document.getElementById('emailCard').style.display='block';
+  document.getElementById('responseCard').style.display='block';
+  document.getElementById('rfqStatusBadge').textContent='Waiting Supplier Reply';
+  document.getElementById('rfqStatusBadge').className='badge amber';
+  setRfqStep(5);
+}
+function setRfqStep(n){
+  document.querySelectorAll('.rfq-step').forEach((x,i)=>{
+    x.classList.remove('active','done');
+    if(i+1<n)x.classList.add('done'); else if(i+1===n)x.classList.add('active');
+  });
+}
+function runRfqAiCheck(){
+  const film=(document.getElementById('rfqFilmWidth')?.value||'').trim();
+  const die=(document.getElementById('rfqDie')?.value||'').trim();
+  const site=document.getElementById('siteLayoutCheck')?.checked;
+  let missing=0,confirm=0,conflict=0;
+  const findings=[];
+  if(!film){confirm++;findings.push('<div class="ai-finding amber"><b>Need confirmation:</b> Film width ยังไม่มีข้อมูล — AI จะไม่เดาค่า</div>')}
+  if(!die){confirm++;findings.push('<div class="ai-finding amber"><b>Need confirmation:</b> Die size ยังไม่มีข้อมูล — ให้ Sales/Supplier ยืนยัน</div>')}
+  if(!site){missing++;findings.push('<div class="ai-finding amber"><b>Missing attachment:</b> Site Layout ยังไม่ได้แนบ</div>')}
+  const out=(document.getElementById('rfqOutput')?.value||'').toLowerCase();
+  if(out.includes('720')){conflict++;findings.push('<div class="ai-finding red"><b>Unit check:</b> 720 packs/h เท่ากับ 12 packs/min ซึ่งสอดคล้องกับ OPP แต่ควรยืนยันหน่วยก่อนส่ง Supplier</div>')}
+  if(missing===0&&confirm===0&&conflict===0) findings.push('<div class="ai-finding green"><b>Ready:</b> ไม่พบข้อมูลขาดหรือข้อขัดแย้งที่ต้องตรวจเพิ่ม</div>');
+  const score=Math.max(60,100-(missing*8+confirm*6+conflict*4));
+  document.getElementById('rfqReadiness').textContent=score+'%';
+  document.getElementById('rfqMissing').textContent=missing;
+  document.getElementById('rfqConflict').textContent=conflict;
+  document.getElementById('rfqConfirm').textContent=confirm;
+  document.getElementById('rfqAiFindings').innerHTML=findings.join('');
+  document.getElementById('approvalReadiness').textContent=score+'% Ready';
+  document.getElementById('rfqStatusBadge').textContent='AI Checked';
+  document.getElementById('rfqStatusBadge').className='badge purple';
+  setRfqStep(2);
+}
+function submitRfqApproval(){
+  document.getElementById('approvalCard').style.display='block';
+  document.getElementById('rfqStatusBadge').textContent='Waiting Approval';
+  document.getElementById('rfqStatusBadge').className='badge amber';
+  setRfqStep(3);
+  document.getElementById('approvalCard').scrollIntoView({behavior:'smooth'});
+}
+function rejectRfq(){
+  document.getElementById('approvalCard').style.display='none';
+  document.getElementById('rfqStatusBadge').textContent='Changes Requested';
+  document.getElementById('rfqStatusBadge').className='badge red';
+  setRfqStep(2);
+  document.getElementById('aiReviewCard').scrollIntoView({behavior:'smooth'});
+}
+function approveRfq(){
+  document.getElementById('emailCard').style.display='block';
+  document.getElementById('rfqStatusBadge').textContent='Approved';
+  document.getElementById('rfqStatusBadge').className='badge green';
+  setRfqStep(4);
+  document.getElementById('emailCard').scrollIntoView({behavior:'smooth'});
+}
+function sendRfqEmail(){
+  document.getElementById('responseCard').style.display='block';
+  document.getElementById('rfqStatusBadge').textContent='Waiting Supplier Reply';
+  document.getElementById('rfqStatusBadge').className='badge amber';
+  setRfqStep(5);
+  alert('Prototype: RFQ email sent to supplier. Timeline updated and waiting for supplier reply.');
+  document.getElementById('responseCard').scrollIntoView({behavior:'smooth'});
+}
+function simulateSupplierReply(){
+  document.getElementById('supplierReplyRows').innerHTML=
+  '<tr><td>Quotation</td><td>Yes</td><td>VV_Quote_OL3151.pdf</td><td>99%</td><td><button class="btn primary">Confirm</button></td></tr>'+
+  '<tr><td>Format Drawing</td><td>Yes</td><td>OL3151_Format_Drawing.pdf</td><td>97%</td><td><button class="btn primary">Confirm</button></td></tr>'+
+  '<tr><td>Machine Drawing</td><td>Yes</td><td>Optimus_GA_OL3151.pdf</td><td>96%</td><td><button class="btn primary">Confirm</button></td></tr>'+
+  '<tr><td>Utility Requirement</td><td>Yes</td><td>OL3151_Final_Utility.pdf</td><td>95%</td><td><button class="btn primary">Confirm</button></td></tr>'+
+  '<tr><td>Brochure</td><td>No</td><td>—</td><td>—</td><td><span class="badge amber">Missing</span></td></tr>';
+}
 </script>
 </body></html>
