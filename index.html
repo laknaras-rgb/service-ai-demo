@@ -185,6 +185,7 @@ tr:hover td{background:#fbfdff}
 @media(max-width:720px){.pm-report-hero{display:block}.pm-report-actions{justify-content:flex-start;margin-top:12px}.pm-summary-strip,.pm-meter-grid,.pm-photo-grid,.pm-summary-fields,.pm-sign-grid{grid-template-columns:1fr}.pm-check-table{font-size:11px}.pm-check-table .result-cell,.pm-check-table .remark-cell{width:auto}}
 @media print{body{background:#fff}.sidebar,.topbar,.machine-hero,.machine-tabs-v2,.pm-subtabs,.page-title{display:none!important}.app{display:block}.content{padding:0;background:#fff}.pm-report-shell{border:0}.pm-report-actions{display:none}.pm-section{break-inside:avoid}.pm-check-table tr{break-inside:avoid}}
 
+.pm-schedule-help{font-size:11px;color:#64748b;margin:0 0 10px 2px}.pm-schedule-help:before{content:"i";display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1f5f9;color:#64748b;font-size:10px;font-weight:800;margin-right:6px}.pm-link-note{display:block;margin-top:4px;color:#64748b;font-size:10px}
 </style>
 <style>
 .pm-plan-card .hd{align-items:flex-start}
@@ -1186,14 +1187,10 @@ Updated 1/2026
 </div>
 <div class="pm-area" id="pm-schedule">
 <div class="card"><div class="hd"><h3>PM Schedule / รอบ PM</h3><button class="btn primary">+ Create PM Round</button></div><div class="bd">
-<div class="pm-function-rule">
-<div><b>PM ↔ Function ↔ Visit</b><span>สร้าง PM Round ใน Machine Register ก่อน • เมื่อใกล้วันทำงานค่อยกด Create Function • Visit จะสร้างอยู่ใต้ Function และผูกกลับมาที่ PM Round นี้</span></div>
-<span class="badge b-purple">Option B</span>
-</div>
-
-<table><thead><tr><th>Round</th><th>Plan</th><th>Technician</th><th>Due Date</th><th>Actual</th><th>Function</th><th>Status</th></tr></thead><tbody>
-<tr><td><button class="mini-link" onclick="openPmReport()"><b>#1</b></button></td><td>VARIOVAC THERMOFORM</td><td>Janeny, Jeans</td><td>20/01/2027</td><td>20/01/2027</td><td><button class="mini-link" onclick="openMachineTab('m-service')">FN-PM-OL3151-01</button></td><td><span class="badge b-amber">In Progress</span><br/><button class="mini-link" onclick="openPmReport()">View PM Report</button></td></tr>
-<tr><td><b>#2</b></td><td>VARIOVAC THERMOFORM</td><td>—</td><td>20/04/2027</td><td>—</td><td><button class="btn pm-create-function" onclick="createFunctionForPm(this, 'PM #2')">+ Create Function</button><small class="pm-link-note">สร้างตอนจะลงงานจริง</small></td><td><span class="badge b-blue">Ready to Schedule</span></td></tr>
+<div class="pm-schedule-help">PM Round อยู่ใต้ Machine ก่อน • เมื่อพร้อมลงงานค่อยสร้าง Function และ Visit จากรอบนั้น</div>
+<table><thead><tr><th>Round</th><th>Plan</th><th>Due Date</th><th>Technician</th><th>Function / Visit</th><th>Status</th><th>Action</th></tr></thead><tbody>
+<tr><td><button class="mini-link" onclick="openPmReport()"><b>#1</b></button></td><td>VARIOVAC THERMOFORM</td><td>20/01/2027</td><td>Janeny, Jeans</td><td><button class="mini-link" onclick="openMachineTab('m-service')">FN-PM-OL3151-01</button><small class="pm-link-note">Visit #1 • Check-in completed</small></td><td><span class="badge b-amber">In Progress</span></td><td><button class="mini-link" onclick="openPmReport()">View</button></td></tr>
+<tr><td><b>#2</b></td><td>VARIOVAC THERMOFORM</td><td>20/04/2027</td><td>—</td><td><button class="btn pm-create-function" onclick="createFunctionForPm(this, 'PM #2')">+ Create Function</button><small class="pm-link-note">ยังไม่มี Function / Visit</small></td><td><span class="badge b-gray">Planned</span></td><td><button class="mini-link" onclick="openPmReport()">View</button></td></tr>
 </tbody></table>
 </div></div></div>
 <div class="pm-area" id="pm-survey">
