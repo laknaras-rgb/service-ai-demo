@@ -37,6 +37,46 @@ table{width:100%;border-collapse:collapse;font-size:13px} th,td{padding:11px;bor
 .health{display:grid;grid-template-columns:1fr 1fr;gap:18px}.healthbox{border:1px solid #ddd;border-radius:7px;padding:16px}.healthbox h3{font-size:17px;margin:0 0 18px}.connect{background:#35a7ce;color:#fff;border:0;border-radius:6px;padding:11px;width:100%;font-weight:700}.assess{background:#ff8b24;color:#fff;border:0;border-radius:6px;padding:11px;width:100%;font-weight:700}
 .small-muted{font-size:12px;color:#8793a7}
 @media(max-width:1100px){.shell{grid-template-columns:230px 1fr}.kpis,.grid4{grid-template-columns:repeat(2,1fr)}.health{grid-template-columns:1fr}}
+
+.pm-round{display:none}
+.pm-round.active{display:block}
+.machine-main.hidden{display:none}
+.pm-page{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px}
+.pm-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.pm-title{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
+.pm-status{background:#ff8b24;color:#fff;border-radius:6px;padding:4px 8px;font-size:12px}
+.pm-actions{display:flex;gap:8px}
+.pm-actions .print{background:#fff;border:1px solid #8ca0bf;color:#5c6f8e;border-radius:6px;padding:9px 13px;font-weight:700}
+.pm-actions .savebtn{background:#8ab41c;color:#fff;border:0;border-radius:6px;padding:9px 16px;font-weight:700}
+.pm-actions .approve{background:#8ca5eb;color:#fff;border:0;border-radius:6px;padding:9px 16px;font-weight:700}
+.warn{background:#fff0df;border-left:5px solid #ff9a3b;border-radius:6px;padding:14px 18px;margin-bottom:12px}
+.refgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.refcard{background:#e9edf2;border-radius:7px;padding:16px}
+.refcard h4{margin:0 0 10px;font-size:16px}
+.pmsection{border:1px solid #dedede;border-radius:7px;margin-top:12px}
+.pmsection-h{padding:13px 16px;border-bottom:1px solid #e7e7e7;font-weight:700;display:flex;justify-content:space-between}
+.pmsection-b{padding:16px}
+.survey-steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.stepchip{background:#f2f4f8;border-radius:999px;padding:6px 10px;font-size:12px}
+.survey-table input,.survey-table select{width:100%;padding:7px 8px;border:1px solid #d5dae2;border-radius:5px}
+.survey-table th{background:#f7f9fb}
+.survey-table .group-row td{background:#eef4fb;font-weight:700;color:#50607a}
+.small-note{font-size:11px;color:#778397}
+.checklist-head{display:flex;align-items:center;gap:15px}
+.progress{width:180px;height:14px;background:#eee;border-radius:999px;overflow:hidden}.progress span{display:block;width:0;height:100%;background:#8ab41c}
+.checklist-row{display:grid;grid-template-columns:28px 1fr 210px 110px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid #eee}
+.checklist-row input[type=text]{padding:8px;border:1px solid #ddd;border-radius:5px}
+.orange-tag{background:#ff8b24;color:#fff;border-radius:5px;padding:4px 7px;font-size:11px}
+.uploadbox{border:2px dashed #93a4ba;border-radius:6px;padding:18px;text-align:center;color:#71809a}
+.summarygrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.summarygrid textarea{width:100%;min-height:90px;border:1px solid #d8dce4;border-radius:6px;padding:10px}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.42);display:none;align-items:center;justify-content:center;z-index:50}
+.modal-bg.open{display:flex}
+.modal{width:min(980px,92vw);max-height:86vh;overflow:auto;background:#fff;border-radius:8px;padding:20px}
+.modal-top{display:flex;justify-content:space-between;align-items:center}.modal-close{border:1px solid #b8c2d4;background:#fff;border-radius:50%;width:38px;height:38px;font-size:20px}
+.report{font-size:13px;color:#222}.report h2{margin:8px 0 2px}.report-line{height:3px;background:#3366ff;margin:10px 0 16px}.report-info{display:grid;grid-template-columns:160px 1fr 120px 1fr;gap:8px 14px}.report table{font-size:12px}.report .oktxt{color:#1c8a45;font-weight:700}.report .bad{color:#d72828;font-weight:700}.report-sign{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:40px}.sig{border-top:1px solid #777;text-align:center;padding-top:8px}
+@media(max-width:1000px){.refgrid,.summarygrid{grid-template-columns:1fr}.checklist-row{grid-template-columns:28px 1fr}.checklist-row>*:nth-child(n+3){grid-column:2}.report-info{grid-template-columns:130px 1fr}}
+
 </style>
 </head>
 <body>
@@ -60,7 +100,7 @@ table{width:100%;border-collapse:collapse;font-size:13px} th,td{padding:11px;bor
   <button class="nav">⌁ Profile</button><button class="nav">◫ Meta Data <span class="chev">⌄</span></button><button class="nav">♙ Manage Users</button><button class="nav">⊞ Warehouse</button><button class="nav">⚙ Configs</button>
 </aside>
 
-<main class="main">
+<main class="main"><div id="machineMain" class="machine-main">
 <section class="panel machine-head">
   <div class="machine-title"><span class="back">←</span>Machine No. 1001-007 <span class="active-b">Active</span></div>
   <div class="head-actions"><button class="btn blue">✎ แก้ไข</button> <button class="btn orange">🔧 จัดการ PM</button></div>
@@ -155,8 +195,15 @@ table{width:100%;border-collapse:collapse;font-size:13px} th,td{padding:11px;bor
 
   <div id="pmschedule" class="tabcontent">
     <div style="text-align:right"><button class="greenbtn">＋ สร้างรอบ PM</button></div>
-    <p>แผน PM ทั้งหมด 0 รอบ</p>
-    <table><thead><tr><th>ครั้งที่</th><th>ประเภท PM</th><th>แผน (Plan)</th><th>ช่างผู้รับผิดชอบ</th><th>วันที่กำหนด</th><th>วันที่จริง</th><th>สถานะ</th></tr></thead><tbody><tr><td colspan="7" class="empty">ยังไม่มีรอบ PM</td></tr></tbody></table>
+    <p>แผน PM ทั้งหมด 6 รอบ</p>
+    <table>
+      <thead><tr><th>ครั้งที่</th><th>ประเภท PM</th><th>แผน (Plan)</th><th>ช่างผู้รับผิดชอบ</th><th>วันที่กำหนด</th><th>วันที่จริง</th><th>สถานะ</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><b>#1</b></td><td>PM - PM ประจำไตรมาส</td><td>VARIOVAC THERMOFORM CHECKLISTS</td><td>Janeny, Jeans</td><td>2026-07-30</td><td>2026-07-11</td><td><span class="active-b">Completed</span></td><td><button class="roundbtn" onclick="openPmRound(1)">◉</button></td></tr>
+        <tr><td><b>#2</b></td><td>PM - PM ประจำไตรมาส</td><td>VARIOVAC THERMOFORM CHECKLISTS</td><td>Janeny, Jeans</td><td>2026-08-30</td><td>-</td><td><span class="pm-status">In Progress</span></td><td><button class="roundbtn" onclick="openPmRound(2)">◉</button></td></tr>
+        <tr><td><b>#3</b></td><td>PM - PM ประจำไตรมาส</td><td>VARIOVAC THERMOFORM CHECKLISTS</td><td>Janeny, Jeans</td><td>2026-09-29</td><td>-</td><td><span class="badge" style="background:#35a7ce;color:#fff">Scheduled</span></td><td><button class="roundbtn" onclick="openPmRound(3)">◉</button></td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div id="spare" class="tabcontent">
@@ -208,8 +255,63 @@ table{width:100%;border-collapse:collapse;font-size:13px} th,td{padding:11px;bor
     </div>
   </div>
 </section>
+</div>
+<div id="pmRoundPage" class="pm-round"></div>
 </main>
 </div>
+
+<div id="printModal" class="modal-bg">
+  <div class="modal">
+    <div class="modal-top"><h3>พิมพ์ใบ PM</h3><button class="modal-close" onclick="closePrint()">×</button></div>
+    <div style="text-align:right;margin-bottom:10px"><button class="btn" style="background:#d94f70">▣ ดาวน์โหลด PDF</button></div>
+    <div class="report">
+      <h2>ใบรายงานผลการทำ PM (Preventive Maintenance Report)</h2>
+      <div class="small-muted">1011-007 — รอบที่ #2 (PM - PM ประจำไตรมาส)</div>
+      <div class="report-line"></div>
+      <div class="report-info">
+        <b>เครื่องจักร</b><span>VARIOVAC Optimus 45+25, OL2406 MP</span><b>Serial</b><span>OL2406</span>
+        <b>ลูกค้า</b><span>บริษัท อาหารเบทเทอร์ จำกัด</span><b>สถานที่</b><span>-</span>
+        <b>ประเภท PM</b><span>PM ประจำไตรมาส</span><b>แผน</b><span>VARIOVAC THERMOFORM CHECKLISTS</span>
+        <b>วันที่กำหนด</b><span>2026-08-30</span><b>วันที่ทำจริง</b><span>2026-08-11</span>
+        <b>ช่างผู้ปฏิบัติงาน</b><span>Janeny, Jeans</span>
+      </div>
+
+      <h3 style="color:#345ce0;margin-top:22px">Machine Survey / ค่าพารามิเตอร์ก่อน–หลัง PM</h3>
+      <table>
+        <thead><tr><th>#</th><th>รายการ</th><th>ก่อน PM</th><th>หลัง PM</th><th>หน่วย</th><th>หมายเหตุ</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Power Supply</td><td>3 Phase / 400V / 28A</td><td>3 Phase / 400V / 27A</td><td>-</td><td>-</td></tr>
+          <tr><td>2</td><td>Voltage R-S / S-T / R-T / Ground</td><td>401 / 400 / 402 / 0.8</td><td>400 / 400 / 401 / 0.6</td><td>V</td><td>Stable</td></tr>
+          <tr><td>3</td><td>Program / Product</td><td>Program 12 / Sausage</td><td>Program 12 / Sausage</td><td>-</td><td>-</td></tr>
+          <tr><td>4</td><td>Alarm</td><td>2 ครั้ง</td><td>0 ครั้ง</td><td>ครั้ง</td><td>Cleared</td></tr>
+          <tr><td>5</td><td>เสียง / การสั่นผิดปกติ</td><td>พบเสียงบริเวณ chain</td><td>ปกติ</td><td>-</td><td>Adjusted</td></tr>
+          <tr><td>6</td><td>Operator Report / Alarm History</td><td>Vacuum ช้า</td><td>ปกติ</td><td>-</td><td>-</td></tr>
+          <tr><td>7</td><td>Forming Heating Element</td><td>185</td><td>185</td><td>°C</td><td>-</td></tr>
+          <tr><td>8</td><td>Vacuum Time to 5 mbar</td><td>9.1</td><td>7.0</td><td>sec</td><td>ดีขึ้น 2.1 sec</td></tr>
+          <tr><td>9</td><td>Sealing Heating Element</td><td>178</td><td>178</td><td>°C</td><td>-</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color:#345ce0;margin-top:22px">PM Checklist (33/33 ทำแล้ว)</h3>
+      <table>
+        <thead><tr><th>รายการ</th><th>ผลตรวจ</th><th>หมายเหตุ</th></tr></thead>
+        <tbody>
+          <tr><td>สภาพโครงสร้างเครื่องจักรโดยรวม</td><td class="oktxt">✓ ผ่าน</td><td>-</td></tr>
+          <tr><td>ความตึงของโซ่</td><td class="oktxt">✓ ผ่าน</td><td>ปรับตั้งแล้ว</td></tr>
+          <tr><td>Clamp สภาพของตัวจับยึด</td><td class="oktxt">✓ ผ่าน</td><td>-</td></tr>
+          <tr><td>...</td><td>...</td><td>...</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:22px">สรุปผลการ PM</h3>
+      <p><b>ปัญหาที่พบก่อน PM:</b> Vacuum ช้า / chain มีเสียง</p>
+      <p><b>ผลการดำเนินการ:</b> ปรับตั้ง chain และตรวจระบบ vacuum</p>
+      <p><b>สรุปผลรวม:</b> เครื่องทำงานปกติหลัง PM</p>
+      <div class="report-sign"><div class="sig">ช่างผู้ปฏิบัติงาน / วันที่</div><div class="sig">ลงชื่อลูกค้าผู้ตรวจรับงาน / วันที่</div></div>
+    </div>
+  </div>
+</div>
+
 <script>
 function toggle(id){const x=document.getElementById(id);if(x)x.classList.toggle('open')}
 function showTab(id,btn){
@@ -221,6 +323,101 @@ const items=[
 'สภาพโครงสร้างเครื่องจักรโดยรวม','ความตึงของโซ่','Clamp สภาพของตัวจับยึด','สภาพของเพลาใบมีด','สภาพใบมีดตัดขวาง','ใบมีดตัดตามยาว','หน้าจอแสดงผล','Emergency sw ใช้งานได้ปกติทุกจุด','ระบบ Safety ใช้งานได้ปกติทุกจุด','ท่อลมและสายอยู่ในสภาพปกติ ไม่รั่ว','ตรวจสอบปริมาณน้ำมันหล่อลื่นโซ่','อัดจาระบีในส่วนที่มีการเคลื่อนที่','ชุดโรลเลอร์ฟิล์มบน ฟิล์มล่าง หมุนได้ปกติ','ชุดต่อฟิล์มบน Top affixing ปกติหรือไม่','สปริงชุดคลายฟิล์มบนและล่าง ปกติหรือไม่','สภาพถุงลมเบรคฟิล์ม','Air cylinder ไม่มีลมรั่ว','Air cylinder sensor ปกติหรือไม่ โดยการใช้แมนวล','ความสะอาดชุดกรองคาร์บอน และชุดกรองละเอียด เปลี่ยนหากไม่สามารถล้างได้','Motor Vacuum ไม่มีเสียงดังผิดปกติ','ระดับน้ำมันฟิลเตอร์','ตรวจสอบระดับน้ำหล่อเย็นของคูลลิ่ง และอุณหภูมิของน้ำหล่อเย็นขณะทำงาน','Lift ชุดยกแม่พิมพ์ขึ้นรูป ขึ้นลงได้ปกติ','เช็ครบบลมและตรวจเช็คว่ามีน้ำในระบบหรือไม่','ตรวจเช็คและทำความสะอาด Silencer','ตรวจเช็คและทำความสะอาด Top sealing die','ตรวจเช็คชุด O-ring ชุด Die','ตรวจเช็คระดับน้ำของเครื่องจักร','ความสะอาดตู้คอนโทรล','ถังดูดสูญญากาศเก็บเศษฟิล์ม','Outfeed Conveyor สายพานลำเลียงออก','การปรับระดับ Lifting system','Sound absorber จุดต้น Forming/Sealing'
 ];
 document.getElementById('pmRows').innerHTML=items.map(i=>`<div class="check-row"><span class="ok">✓</span><input type="text" value="${i}"><span class="trash">♲</span></div>`).join('');
+
+function openPmRound(round){
+  document.getElementById('machineMain').classList.add('hidden');
+  const page=document.getElementById('pmRoundPage');
+  page.classList.add('active');
+  const status=round===1?'Completed':round===2?'In Progress':'Scheduled';
+  const actual=round===1?'2026-07-11':round===2?'':'';
+  page.innerHTML=`
+  <div class="pm-page">
+    <div class="pm-top">
+      <div class="pm-title"><span class="back" onclick="closePmRound()" style="cursor:pointer">←</span> งาน PM รอบ #${round} — 1011-007 <span class="pm-status">${status}</span></div>
+      <div class="pm-actions">
+        <button class="print" onclick="openPrint()">▣ พิมพ์ใบ PM</button>
+        <button class="savebtn">✓ บันทึก</button>
+        <button class="approve">➤ ขอ Approve</button>
+      </div>
+    </div>
+
+    <div class="warn"><b>ข้อมูลยังไม่ครบ (4)</b><br>
+      • ยังไม่ได้กรอกวันที่จริงที่ทำ PM<br>
+      • Machine Survey ยังไม่ครบทุกข้อ<br>
+      • มีรายการ Checklist ที่ยังไม่ได้ทำ<br>
+      • ยังไม่ได้กรอกสรุปผลการ PM
+    </div>
+
+    <div class="pmsection"><div class="pmsection-h">ที่ตั้งเครื่องจักร (Machine Reference)<span>−</span></div><div class="pmsection-b">
+      <div class="refgrid">
+        <div class="refcard"><h4>⚙ VARIOVAC Optimus 45+25, OL2406 MP</h4><div>Machine No.: <b>1011-007</b></div><div>Serial: <b>OL2406</b></div><div>อายุ: <b>28 เดือน</b></div></div>
+        <div class="refcard"><h4>⌖ ที่ตั้ง</h4><div>ลูกค้า: บริษัท อาหารเบทเทอร์ จำกัด</div><div>สถานที่: -</div><div>อาคาร/ชั้น: -</div></div>
+        <div class="refcard"><h4>♙ ผู้ติดต่อ Onsite</h4><div>ชื่อ: -</div><div>เบอร์: -</div></div>
+      </div>
+    </div></div>
+
+    <div class="pmsection"><div class="pmsection-h">ข้อมูลการ PM<span>−</span></div><div class="pmsection-b">
+      <div class="grid4">
+        <div class="field"><label>ประเภท PM</label><input value="PM ประจำไตรมาส" readonly></div>
+        <div class="field"><label>แผน (Plan)</label><input value="VARIOVAC THERMOFORM CHECKLISTS" readonly></div>
+        <div class="field"><label>วันที่กำหนด</label><input value="2026-08-30" readonly></div>
+        <div class="field"><label>วันที่ทำจริง *</label><input type="date" value="${actual}"></div>
+      </div>
+    </div></div>
+
+    <div class="pmsection">
+      <div class="pmsection-h"><span>Machine Survey / ค่าพารามิเตอร์ก่อน–หลัง PM</span><span class="orange-tag">เพิ่มใหม่</span></div>
+      <div class="pmsection-b">
+        <div class="small-note">เก็บเป็น Structured Data ของ PM รอบนี้ เพื่อเปรียบเทียบ Before / After และทำ Trend ในอนาคต</div>
+        <div class="survey-steps"><span class="stepchip">1–2 Electrical Baseline</span><span class="stepchip">3–6 Operating Observation</span><span class="stepchip">7–9 Performance Before / After</span></div>
+        <table class="survey-table">
+          <thead><tr><th style="width:45px">#</th><th>รายการตรวจสอบ</th><th>ก่อน PM</th><th>หลัง PM</th><th style="width:90px">หน่วย</th><th>หมายเหตุ</th></tr></thead>
+          <tbody>
+            <tr class="group-row"><td colspan="6">Electrical Baseline</td></tr>
+            <tr><td>1</td><td>Power Supply (Phase / Volt / Amp)</td><td><input placeholder="เช่น 3P / 400V / 28A"></td><td><input placeholder="หลัง PM"></td><td>-</td><td><input></td></tr>
+            <tr><td>2</td><td>Voltage R-S / S-T / R-T / Ground</td><td><input placeholder="401 / 400 / 402 / 0.8"></td><td><input placeholder="หลัง PM"></td><td>V</td><td><input></td></tr>
+            <tr class="group-row"><td colspan="6">Operating Observation</td></tr>
+            <tr><td>3</td><td>Program No. / Product ที่ผลิต</td><td><input placeholder="Program / Product"></td><td><input></td><td>-</td><td><input></td></tr>
+            <tr><td>4</td><td>Alarm ระหว่าง Observe</td><td><input placeholder="Code / จำนวนครั้ง"></td><td><input placeholder="หลัง PM"></td><td>ครั้ง</td><td><input></td></tr>
+            <tr><td>5</td><td>เสียง / การสั่นผิดปกติ</td><td><select><option>ไม่พบ</option><option>พบ</option></select></td><td><select><option>ปกติ</option><option>ยังพบ</option></select></td><td>-</td><td><input placeholder="ตำแหน่ง / รายละเอียด"></td></tr>
+            <tr><td>6</td><td>Operator Report / Alarm History</td><td><input placeholder="อาการที่แจ้ง"></td><td><input placeholder="ผลหลังดำเนินการ"></td><td>-</td><td><input></td></tr>
+            <tr class="group-row"><td colspan="6">Performance Before / After</td></tr>
+            <tr><td>7</td><td>Forming Heating Element</td><td><input type="number"></td><td><input type="number"></td><td>°C</td><td><input></td></tr>
+            <tr><td>8</td><td>Vacuum Time to 5 mbar</td><td><input type="number" step="0.1"></td><td><input type="number" step="0.1"></td><td>sec</td><td><input placeholder="ระบบคำนวณ delta ได้ภายหลัง"></td></tr>
+            <tr><td>9</td><td>Sealing Heating Element</td><td><input type="number"></td><td><input type="number"></td><td>°C</td><td><input></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="pmsection"><div class="pmsection-h"><div class="checklist-head"><span>PM Checklist</span><div class="progress"><span></span></div><span>0/33 ทำแล้ว</span><span class="orange-tag">ต้องระบุอีก 33</span></div><span>−</span></div>
+      <div class="pmsection-b">
+        <div class="notice" style="background:#edf1f5;border-left:0">ⓘ ติ๊ก = ทำแล้ว • ถ้ารายการใดทำไม่ได้จริง ให้ใส่หมายเหตุ อธิบายเหตุผล แล้วจึงปิดงานได้</div>
+        ${items.slice(0,12).map(i=>`<div class="checklist-row"><input type="checkbox"><span>${i}</span><input type="text" placeholder="เหตุผลที่ทำไม่ได้ / หมายเหตุ"><span class="orange-tag">ต้องระบุหมายเหตุ</span></div>`).join('')}
+        <div class="small-note">Prototype แสดงตัวอย่าง 12 รายการจาก Checklist เดิม 33 รายการ</div>
+      </div>
+    </div>
+
+    <div class="pmsection"><div class="pmsection-h">รูปภาพ Before / After<span>−</span></div><div class="pmsection-b"><div class="grid2"><div><b>📷 Before (ก่อน PM)</b><div class="uploadbox">⇧ คลิกเพื่ออัปโหลด (เพิ่มได้หลายรูป)</div></div><div><b>📷 After (หลัง PM)</b><div class="uploadbox">⇧ คลิกเพื่ออัปโหลด (เพิ่มได้หลายรูป)</div></div></div></div></div>
+
+    <div class="pmsection"><div class="pmsection-h">อะไหล่ที่ใช้ในการ PM<span>−</span></div><div class="pmsection-b"><table><thead><tr><th>บาร์โค้ด</th><th>ชื่ออะไหล่</th><th>จำนวน</th><th>หน่วย</th></tr></thead><tbody><tr><td colspan="4" class="empty">ยังไม่มีรายการ</td></tr></tbody></table><div style="color:#249fd3;font-weight:700">＋ เพิ่มอะไหล่</div></div></div>
+
+    <div class="pmsection"><div class="pmsection-h">วัสดุสิ้นเปลือง / Accessories ที่ใช้<span>−</span></div><div class="pmsection-b"><table><thead><tr><th>บาร์โค้ด</th><th>รายการ</th><th>จำนวน</th><th>หน่วย</th></tr></thead><tbody><tr><td colspan="4" class="empty">ยังไม่มีรายการ</td></tr></tbody></table><div style="color:#249fd3;font-weight:700">＋ เพิ่มรายการ</div></div></div>
+
+    <div class="pmsection"><div class="pmsection-h">สรุปผลการ PM<span>−</span></div><div class="pmsection-b"><div class="summarygrid"><div><b>บันทึกก่อน PM (ปัญหาที่พบ)</b><textarea></textarea></div><div><b>บันทึกหลัง PM (ผลการดำเนินการ)</b><textarea></textarea></div></div><div style="margin-top:12px"><b>สรุปผลรวม *</b><textarea style="width:100%;min-height:90px;border:1px solid #d8dce4;border-radius:6px;padding:10px"></textarea></div></div></div>
+
+    <div class="pmsection"><div class="pmsection-h">เอกสารที่ลูกค้าเซ็น<span>−</span></div><div class="pmsection-b"><div class="uploadbox">⇧ คลิกเพื่ออัปโหลดเอกสารที่ลูกค้าเซ็น (รูปภาพ หรือ PDF)</div></div></div>
+  </div>`;
+  window.scrollTo(0,0);
+}
+function closePmRound(){
+  document.getElementById('pmRoundPage').classList.remove('active');
+  document.getElementById('machineMain').classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+function openPrint(){document.getElementById('printModal').classList.add('open')}
+function closePrint(){document.getElementById('printModal').classList.remove('open')}
+
 </script>
 </body>
 </html>
