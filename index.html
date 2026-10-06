@@ -1,164 +1,226 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RuamPat ERP - Master Requirement Prototype</title><style>
-:root{--bg:#eef4f8;--card:#fff;--line:#dfe6ec;--text:#2f3742;--muted:#76808c;--brand:#f47a22;--ok:#1d8a4a;--warn:#bd6b11}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--text)}
-.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{background:#fff;border-right:1px solid var(--line);padding:18px 0;position:sticky;top:0;height:100vh}
-.logo{padding:5px 20px 18px;font-weight:900;color:var(--brand);font-size:20px}.group{font-size:10px;color:#9aa2ab;text-transform:uppercase;padding:15px 20px 5px}
-.nav{width:100%;border:0;background:#fff;padding:10px 20px;text-align:left;cursor:pointer;color:#56606b}.nav:hover,.nav.active{background:#fff4ea;color:#c85d13;border-left:4px solid var(--brand)}
-.main{min-width:0}.top{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 24px;font-weight:700}.content{padding:22px;max-width:1450px}
-.page{display:none}.page.active{display:block}.title{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:15px}.title h1{margin:0;font-size:24px}.sub{color:var(--muted);font-size:12px;margin-top:4px}
-.card{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:14px}.hd{padding:13px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.hd h3{margin:0;font-size:15px}.bd{padding:16px}
-.btn{border:1px solid var(--line);background:#fff;padding:8px 11px;border-radius:7px;font-weight:700;cursor:pointer}.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
-.badge{display:inline-flex;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:800;background:#f1f3f5}.green{background:#e9f8ef;color:#16713a}.orange{background:#fff2e8;color:#c85d13}.gray{background:#f0f2f4;color:#66707b}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.field label{display:block;font-size:11px;font-weight:800;color:#5f6872;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:8px;border:1px solid #cfd8e1;border-radius:7px;background:#fff}.field textarea{min-height:70px}
-.flow{display:flex;align-items:center;overflow:auto;padding:8px 2px}.step{min-width:112px;text-align:center}.dot{width:28px;height:28px;border-radius:50%;border:2px solid #cdd5dd;display:grid;place-items:center;margin:auto;font-size:10px;font-weight:900}.step.done .dot{border-color:#28a05a;background:#eaf8ef;color:#1d7c45}.step.current .dot{border-color:var(--brand);background:#fff3e8;color:#c85d13}.step b{display:block;font-size:11px;margin-top:5px}.step small{display:block;font-size:9px;color:#8a939d;margin-top:2px}.line{height:2px;background:#d7dee5;min-width:24px;flex:1}.line.done{background:#28a05a}
-table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:9px 10px;border-bottom:1px solid #e7ecf0;text-align:left;vertical-align:top}th{background:#f8fafb;color:#5d6670}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px}.tab{border:1px solid var(--line);background:#fff;padding:7px 10px;border-radius:7px;font-size:11px;font-weight:800;cursor:pointer}.tab.active{background:#fff1e6;border-color:#f5b17f;color:#c75e13}
-.panel{display:none}.panel.active{display:block}.workrow{display:grid;grid-template-columns:80px 1fr 160px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #edf0f2}.tag{font-size:9px;font-weight:900;padding:4px 6px;border-radius:6px;text-align:center}.auto{background:#eef6ff;color:#2c6eaa}.check{background:#ecf8f0;color:#247244}.input{background:#fff2e8;color:#c75e13}.upload{background:#f5efff;color:#6742a5}.sign{background:#fff0f0;color:#9a4545}
-.notice{padding:11px 13px;background:#fff8e8;border:1px solid #f4dfa0;border-radius:8px;font-size:12px;color:#725516}.linked{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.box{border:1px solid var(--line);border-radius:8px;padding:11px}.box small{display:block;color:var(--muted);margin-top:4px}
-@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.grid2,.grid3,.grid4,.linked{grid-template-columns:1fr}.workrow{grid-template-columns:70px 1fr}.workrow>div:last-child{grid-column:2}}
-</style></head><body>
-<div class="app">
-<aside class="side">
-<div class="logo">RuamPat ERP <small style="display:block;font-size:10px;color:#8a939d">Service Integration Prototype</small></div>
-<div class="group">Sales</div>
-<button class="nav active" onclick="go('opp-list',this)">Opportunities</button>
-<button class="nav" onclick="go('rfq',this)">Supplier RFQ</button>
-<button class="nav" onclick="go('quotes',this)">Sales Quotes</button>
-<div class="group">Operations</div>
-<button class="nav" onclick="go('functions',this)">Functions</button>
-<button class="nav" onclick="go('visits',this)">Visit</button>
-<div class="group">Machine</div>
-<button class="nav" onclick="go('machines',this)">Machine List</button>
-<button class="nav" onclick="go('my-pm',this)">งาน PM ของฉัน</button>
-<button class="nav" onclick="go('pm-master',this)">แผน PM กลาง</button>
-<div class="group">Report / Master</div>
-<button class="nav" onclick="go('service-report',this)">Service Report</button>
-<button class="nav" onclick="go('vehicle',this)">Vehicle Master</button>
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RuamPat ERP - Machine Register Current Baseline</title>
+<style>
+:root{
+  --bg:#edf4fb; --card:#fff; --line:#dfe5eb; --text:#53565c; --muted:#7a8392;
+  --blue:#5576dc; --blue2:#8ca5eb; --green:#86b61f; --orange:#ff8b24; --cyan:#35a7ce;
+}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--text)}
+.top{height:86px;background:#eef4ff;display:flex;align-items:center;border-bottom:1px solid #dce4ef;padding:0 46px;position:sticky;top:0;z-index:5}
+.rplogo{font-weight:900;font-size:48px;line-height:1;color:#ef6c22;letter-spacing:-7px}
+.rplogo span{color:#777}.brand{font-size:25px;color:#df1818;margin-left:12px}.hamb{font-size:28px;margin-left:70px}
+.top-right{margin-left:auto;display:flex;gap:18px;align-items:center}.bell{font-size:30px;position:relative}.bell em{position:absolute;right:-8px;top:-9px;background:#d94f70;color:#fff;font-size:11px;font-style:normal;border-radius:50%;padding:4px 7px}.avatar{width:48px;height:48px;border-radius:50%;background:#a5c6da}
+.shell{display:grid;grid-template-columns:278px 1fr;min-height:calc(100vh - 86px)}
+.sidebar{background:#fff;border-right:1px solid #d9dce3;padding:8px 0;height:calc(100vh - 86px);overflow:auto;position:sticky;top:86px}
+.nav,.sub{display:flex;align-items:center;gap:12px;width:100%;border:0;background:#fff;color:#555;text-align:left;cursor:pointer}
+.nav{padding:10px 20px;font-size:15px}.nav .chev{margin-left:auto}.sub{padding:10px 20px 10px 44px;font-size:14px}
+.sub.active{background:#dff3ff}.subwrap{display:none}.subwrap.open{display:block}.nav:hover,.sub:hover{background:#f6f8fb}
+.main{padding:14px;min-width:0}.panel{background:#fff;border:1px solid var(--line);border-radius:8px;margin-bottom:12px}
+.machine-head{padding:20px 18px}.machine-title{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700}.back{font-size:30px;color:#5277de;margin-right:12px}.active-b{background:var(--green);color:#fff;border-radius:6px;padding:4px 9px;font-size:13px}
+.head-actions{float:right;margin-top:-40px}.btn{border:0;border-radius:7px;padding:10px 16px;color:#fff;font-weight:700;cursor:pointer}.btn.blue{background:var(--cyan)}.btn.orange{background:var(--orange)}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:30px}.kpi{background:#e9edf2;border-radius:7px;text-align:center;padding:14px}.kpi b{display:block;font-size:28px;color:#47a3d4}.kpi:nth-child(3) b,.kpi:nth-child(4) b{color:#ff8a23}.kpi:nth-child(5) b{color:#7b5dd6}.kpi:nth-child(6) b{color:#2eaf92}.kpi small{font-size:12px;color:#73809b}
+.section{padding:16px}.section-title{font-weight:700;font-size:17px;display:flex;justify-content:space-between;margin-bottom:18px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 18px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 18px}
+.field label{display:block;font-size:13px;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid #d8dce4;border-radius:6px;padding:10px 12px;background:#fff;color:#777;font-size:14px}.field textarea{min-height:92px}
+.tabsbar{background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 18px;margin-top:12px}.tabs{display:flex;gap:32px;overflow:auto;border-bottom:1px solid #ddd}.tab{border:0;background:transparent;padding:16px 0;font-weight:700;color:#6b6b6b;white-space:nowrap;cursor:pointer}.tab.active{color:#4f6de2;border-bottom:2px solid #4f6de2}
+.tabcontent{display:none;padding:16px 0}.tabcontent.active{display:block}
+.notice{background:#e7f6fb;border-left:5px solid #72c9e6;padding:18px 22px;border-radius:6px}.right{float:right}
+.pm-toolbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:12px}.outline{border:1px solid #8ba2c8;background:#fff;color:#667a9a;padding:8px 12px;border-radius:6px;font-weight:700}.save{background:#b7d27b;color:#fff;border:0;padding:9px 16px;border-radius:6px;font-weight:700}
+.pm-group{border:1px solid #dedede;border-radius:7px;padding:14px}.pm-head{display:flex;align-items:center;gap:12px;font-weight:700}.pm-head input{width:70px;padding:8px;border:1px solid #ddd;border-radius:5px}.check-row{display:grid;grid-template-columns:25px 1fr 30px;gap:10px;align-items:center;margin:11px 0}.check-row input[type=text]{width:100%;padding:9px;border:1px solid #ddd;border-radius:6px}.ok{color:#8eb51c}.trash{color:#f04a66}
+table{width:100%;border-collapse:collapse;font-size:13px} th,td{padding:11px;border-bottom:1px solid #e4e4e4;text-align:left} th{font-weight:700}.empty{text-align:center;color:#8794ad;padding:28px}
+.greenbtn{background:#8ab41c;color:#fff;border:0;border-radius:6px;padding:9px 13px;font-weight:700}.bluebtn{background:#4e70df;color:#fff;border:0;border-radius:6px;padding:9px 13px;font-weight:700}
+.attach-actions{display:flex;gap:8px}.roundbtn{width:34px;height:34px;border-radius:50%;border:2px solid #5478ef;background:#fff;color:#5478ef}
+.editor{border:1px solid #ddd}.toolbar{padding:9px;border-bottom:1px solid #ddd}.editarea{height:260px}.commentbtn{display:block;margin:10px 0 0 auto;background:#5576dc;color:#fff;border:0;border-radius:6px;padding:9px 16px;font-weight:700}
+.health{display:grid;grid-template-columns:1fr 1fr;gap:18px}.healthbox{border:1px solid #ddd;border-radius:7px;padding:16px}.healthbox h3{font-size:17px;margin:0 0 18px}.connect{background:#35a7ce;color:#fff;border:0;border-radius:6px;padding:11px;width:100%;font-weight:700}.assess{background:#ff8b24;color:#fff;border:0;border-radius:6px;padding:11px;width:100%;font-weight:700}
+.small-muted{font-size:12px;color:#8793a7}
+@media(max-width:1100px){.shell{grid-template-columns:230px 1fr}.kpis,.grid4{grid-template-columns:repeat(2,1fr)}.health{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="rplogo">R<span>P</span></div><div class="brand">RuamPat ERP</div><div class="hamb">☰</div>
+  <div class="top-right"><div class="bell">♧<em>2</em></div><div class="avatar"></div></div>
+</header>
+<div class="shell">
+<aside class="sidebar">
+  <button class="nav">⌂ Dashboard</button>
+  <button class="nav" onclick="toggle('cal')">▣ Calendar <span class="chev">⌄</span></button><div id="cal" class="subwrap"><button class="sub">My Calendar</button><button class="sub">Event Calendar</button><button class="sub">Team Calendar</button></div>
+  <button class="nav">▥ Feed</button>
+  <button class="nav" onclick="toggle('act')">▣ Activities <span class="chev">⌄</span></button><div id="act" class="subwrap"><button class="sub">Appointments</button><button class="sub">Tasks</button><button class="sub">Phone Calls</button><button class="sub">E-Mails</button><button class="sub">Visit</button></div>
+  <button class="nav" onclick="toggle('sales')">$ Sales <span class="chev">⌄</span></button><div id="sales" class="subwrap"><button class="sub">Target</button><button class="sub">Leads</button><button class="sub">Customers</button><button class="sub">Accounts</button><button class="sub">Opportunities</button><button class="sub">Sales Quotes</button></div>
+  <button class="nav" onclick="toggle('prod')">⌘ Products <span class="chev">⌄</span></button><div id="prod" class="subwrap"><button class="sub">Product Package</button><button class="sub">Product Set</button><button class="sub">Product List</button></div>
+  <button class="nav">▤ Reports</button>
+  <button class="nav">▦ Stock Management <span class="chev">⌄</span></button>
+  <button class="nav">↪ Functions</button>
+  <button class="nav" onclick="toggle('machine')">⚙ Machine Register <span class="chev">⌃</span></button>
+  <div id="machine" class="subwrap open"><button class="sub active">Machine List</button><button class="sub">งาน PM ของฉัน</button><button class="sub">แผน PM กลาง</button></div>
+  <button class="nav">⌁ Profile</button><button class="nav">◫ Meta Data <span class="chev">⌄</span></button><button class="nav">♙ Manage Users</button><button class="nav">⊞ Warehouse</button><button class="nav">⚙ Configs</button>
 </aside>
+
 <main class="main">
-<div class="top">ERP / <span id="crumb" style="margin-left:6px">Opportunities</span></div>
-<div class="content">
-
-<section class="page active" id="opp-list">
-<div class="title"><div><h1>Opportunities</h1><div class="sub">Sales ใช้ Requirement กลางชุดเดียว → RFQ → Quote → Final/WIN</div></div><button class="btn primary" onclick="go('opp-detail')">Open OL3151</button></div>
-<div class="card"><div class="hd"><h3>Opportunity List</h3></div><div class="bd"><table><thead><tr><th>OPP</th><th>Name</th><th>Customer</th><th>Stage</th><th>RFQ</th><th>Quote</th></tr></thead><tbody><tr onclick="go('opp-detail')" style="cursor:pointer"><td>#15602</td><td><b>REG - OL3151</b></td><td>GSB</td><td><span class="badge green">WIN</span></td><td><span class="badge green">Complete</span></td><td>#2095</td></tr></tbody></table></div></div>
+<section class="panel machine-head">
+  <div class="machine-title"><span class="back">←</span>Machine No. 1001-007 <span class="active-b">Active</span></div>
+  <div class="head-actions"><button class="btn blue">✎ แก้ไข</button> <button class="btn orange">🔧 จัดการ PM</button></div>
+  <div class="kpis">
+    <div class="kpi"><b>-</b><small>อายุ (เดือน)</small></div>
+    <div class="kpi"><b>0</b><small>PM ที่ผ่านมา</small></div>
+    <div class="kpi"><b>-</b><small>Grade</small></div>
+    <div class="kpi"><b>0</b><small>ชั่วโมงสะสม</small></div>
+    <div class="kpi"><b>-</b><small>PM ถัดไป</small></div>
+    <div class="kpi"><b>-</b><small>ชม./วัน (ผลิต)</small></div>
+  </div>
 </section>
 
-<section class="page" id="opp-detail">
-<div class="title"><div><h1>Opportunity: REG - OL3151</h1><div class="sub">OPP #15602 • Customer & Machine Requirements</div></div><div><button class="btn" onclick="modal('AI checks missing requirement fields')">AI Check</button> <button class="btn primary" onclick="modal('Final Readiness → existing Final flow + Requirement Snapshot')">Final / WIN</button></div></div>
-<div class="card"><div class="hd"><h3>Sales Flow</h3></div><div class="bd"><div class="flow">
-<div class="step done"><div class="dot">✓</div><b>Opportunity</b><small>Customer need</small></div><div class="line done"></div>
-<div class="step done"><div class="dot">✓</div><b>Supplier RFQ</b><small>Supplier proposal</small></div><div class="line done"></div>
-<div class="step done"><div class="dot">✓</div><b>Sales Quote</b><small>Quotation</small></div><div class="line done"></div>
-<div class="step done"><div class="dot">✓</div><b>Final / WIN</b><small>Snapshot</small></div><div class="line done"></div>
-<div class="step current"><div class="dot">5</div><b>Machine Register</b><small>Service handover</small></div>
-</div></div></div>
-<div class="card"><div class="hd"><h3>Customer & Machine Requirements</h3><span class="badge orange">Master Requirement</span></div><div class="bd grid3">
-<div class="field"><label>Product</label><input value="Ready meal / sausage"></div>
-<div class="field"><label>Target Capacity</label><input value="500 kg/hr"></div>
-<div class="field"><label>Required / Final Speed</label><input value="10 cycles/min"></div>
-<div class="field"><label>Pack / Application</label><input value="Thermoform vacuum pack"></div>
-<div class="field"><label>Forming Depth</label><input value="80 mm"></div>
-<div class="field"><label>Vacuum Requirement</label><input value="Pending confirmation"></div>
-<div class="field"><label>Printer / Labeler</label><input value="VARIOLABEL EF + printer"></div>
-<div class="field"><label>Printing Position</label><input value="Top film"></div>
-<div class="field"><label>Location</label><input value="ปทุมธานี"></div>
-</div></div>
-<div class="notice"><b>Final/WIN:</b> คง Function + Task + Machine Register + PM + Spare BOM ของระบบเดิม และเพิ่ม Final Requirement Snapshot เพื่อส่ง Service</div>
+<section class="panel section">
+  <div class="section-title">General Information <span>−</span></div>
+  <div class="grid4">
+    <div class="field"><label>Serial Number</label><input value="OL3151" readonly></div>
+    <div class="field"><label>ชื่อเครื่องจักร</label><input value="VARIOVAC Optimus OL50 OL3151" readonly></div>
+    <div class="field"><label>Model</label><input value="Optimus" readonly></div>
+    <div class="field"><label>Brand</label><input value="Variovac" readonly></div>
+    <div class="field"><label>ปีที่ผลิต</label><input value="2026" readonly></div>
+    <div class="field"><label>วันที่ส่งมอบ</label><input type="date"></div>
+    <div class="field"><label>วันหมดประกัน</label><input type="date"></div>
+    <div class="field"><label>สถานะ</label><select><option>Active</option></select></div>
+    <div class="field"><label>ผู้รับผิดชอบ</label><select><option>เลือกผู้รับผิดชอบ</option></select></div>
+    <div class="field"><label>เบอร์ติดต่อ</label><input value="-"></div>
+  </div>
 </section>
 
-<section class="page" id="rfq">
-<div class="title"><div><h1>Supplier RFQ</h1><div class="sub">อยู่ก่อน Sales Quotes และดึง Requirement จาก OPP อัตโนมัติ</div></div><button class="btn primary">+ New RFQ</button></div>
-<div class="card"><div class="hd"><h3>RFQ — OL3151</h3><span class="badge green">Supplier replied</span></div><div class="bd grid2">
-<div><div class="notice"><b>Auto from OPP</b><br>Product • Capacity • Speed • Pack • Forming Depth • Printer/Labeler</div></div>
-<div class="field"><label>Supplier Proposed Model</label><input value="VARIOVAC Optimus"></div>
-<div class="field"><label>Lead Time</label><input value="Supplier reply"></div>
-<div class="field"><label>Drawing / Utility</label><input value="Attached"></div>
-<div class="field"><label>Supplier Response</label><textarea>Proposal + technical clarification</textarea></div>
-<div class="field"><label>AI Compare</label><textarea>Compare Supplier proposal against OPP requirement</textarea></div>
-</div></div>
+<section class="panel section">
+  <div class="section-title">Installation Location <span>−</span></div>
+  <div class="grid4">
+    <div class="field"><label>ลูกค้า</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล จำกัด" readonly></div>
+    <div class="field"><label>Account (Target)</label><input value="บริษัท จีเอสวี อินเตอร์เนชั่นแนล"></div>
+    <div class="field"><label>Lead หลัก (Main Lead)</label><select><option>วีณา -</option></select></div>
+    <div class="field"><label>ชื่อสถานที่ (Site/Location Name)</label><input></div>
+    <div class="field"><label>อาคาร (Building)</label><input></div>
+    <div class="field"><label>ชั้น (Floor)</label><input></div>
+    <div class="field"><label>พื้นที่ (Area)</label><input></div>
+    <div class="field"><label>ผู้ติดต่อ Onsite</label><input></div>
+    <div class="field"><label>เบอร์ Onsite</label><input></div>
+    <div class="field" style="grid-column:span 2"><label>ที่อยู่</label><textarea></textarea></div>
+    <div class="field" style="grid-column:span 2"><label>Google Location</label><input></div>
+  </div>
 </section>
 
-<section class="page" id="quotes">
-<div class="title"><div><h1>Sales Quotes</h1><div class="sub">Flow เดิมของระบบ + Final Readiness</div></div></div>
-<div class="card"><div class="bd"><table><thead><tr><th>Quote</th><th>OPP</th><th>Customer</th><th>Status</th><th>Final</th></tr></thead><tbody><tr><td>#2095</td><td>#15602</td><td>GSB</td><td><span class="badge green">Approved</span></td><td><button class="btn primary" onclick="modal('Final Readiness: check requirement → finalize → create/reuse Function → Task → Machine(s) → PM → BOM → Snapshot')">Final / WIN</button></td></tr></tbody></table></div></div>
+<section class="panel section">
+  <div class="section-title">Technical Specifications <span>−</span></div>
+  <div class="grid4">
+    <div class="field"><label>กำลังไฟ (kW)</label><input></div><div class="field"><label>แรงดันไฟฟ้า</label><input></div>
+    <div class="field"><label>น้ำหนัก (kg)</label><input></div><div class="field"><label>ขนาด (LxWxH mm)</label><input></div>
+    <div class="field"><label>PM ทุกๆ (เดือน/ครั้ง)</label><input></div><div class="field"><label>ชั่วโมงผลิตต่อวัน</label><input></div>
+    <div class="field"><label>แรงดันลม (bar)</label><input></div><div class="field"><label>โฟลว์ลม (ลิตร/ชม.)</label><input></div>
+    <div class="field"><label>ใช้ลม (ลิตร/นาที)</label><input></div>
+  </div>
 </section>
 
-<section class="page" id="machines">
-<div class="title"><div><h1>Machine Register</h1><div class="sub">ทะเบียนกลางของเครื่อง • คลิกเครื่องเพื่อดู Sales + Service history</div></div></div>
-<div class="card"><div class="bd"><table><thead><tr><th>Machine</th><th>Serial</th><th>Customer</th><th>Current Phase</th><th>PM</th></tr></thead><tbody><tr onclick="go('machine-detail')" style="cursor:pointer"><td><b>OL3151</b></td><td>OL3151</td><td>GSB</td><td><span class="badge orange">Installation</span></td><td>Plan copied</td></tr></tbody></table></div></div>
+<section class="panel section">
+  <div class="section-title">หมายเหตุ <span>−</span></div>
+  <div class="field"><textarea></textarea></div>
 </section>
 
-<section class="page" id="machine-detail">
-<div class="title"><div><h1>Machine OL3151</h1><div class="sub">Machine Master • Sales → Installation → Service → PM</div></div><span class="badge green">Linked to OPP #15602</span></div>
-<div class="tabs">
-<button class="tab active" onclick="showPanel('m-overview',this)">Overview</button>
-<button class="tab" onclick="showPanel('m-install',this)">Installation & Commissioning</button>
-<button class="tab" onclick="showPanel('m-handover',this)">Acceptance & Handover</button>
-<button class="tab" onclick="showPanel('m-service',this)">Service</button>
-<button class="tab" onclick="showPanel('m-pm',this)">PM / After Sales</button>
+<section class="tabsbar">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('overview',this)">Overview</button>
+    <button class="tab" onclick="showTab('pmprogram',this)">PM Program</button>
+    <button class="tab" onclick="showTab('pmschedule',this)">PM Schedule</button>
+    <button class="tab" onclick="showTab('spare',this)">Spare Parts</button>
+    <button class="tab" onclick="showTab('history',this)">Maintenance History</button>
+    <button class="tab" onclick="showTab('attach',this)">Attachments</button>
+    <button class="tab" onclick="showTab('conversation',this)">Conversation</button>
+    <button class="tab" onclick="showTab('feed',this)">Feed</button>
+    <button class="tab" onclick="showTab('health',this)">Machine Health</button>
+  </div>
+
+  <div id="overview" class="tabcontent active">
+    <div class="grid2">
+      <div class="panel section" style="margin:0"><div class="section-title">Production vs อายุเครื่อง</div><p>อายุเครื่อง <span class="right"><b>- เดือน</b></span></p><div style="height:20px;background:#eee;border-radius:6px"></div><p class="small-muted">0% ของอายุขัย 10 ปี</p><p>ชั่วโมงสะสม <span class="right"><b>0 ชม.</b></span></p><div style="height:20px;background:#eee;border-radius:6px"></div><p class="small-muted">0% ของขีดจำกัด 50,000 ชม.</p></div>
+      <div class="panel section" style="margin:0"><div class="section-title">การแจ้งเตือน</div><div class="notice">ⓘ &nbsp; ยังไม่มีกำหนด PM ถัดไป<br><span class="small-muted">สร้างรอบ PM ได้ที่แท็บ "PM Schedule"</span></div></div>
+    </div>
+  </div>
+
+  <div id="pmprogram" class="tabcontent">
+    <div class="pm-toolbar"><button class="outline">⟳ เลือก / เปลี่ยนแผน PM</button><button class="save">✓ บันทึก</button></div>
+    <div class="pm-group">
+      <div class="pm-head">☷ <input style="width:280px" value="VARIOVAC THERMOFORM CHECKLIST"> PM ทุกๆ <input value="1"> เดือน <span class="right">−</span></div>
+      <div style="margin:18px 0 8px;font-weight:700">📁 เงื่อนไขการตรวจสอบสภาพเครื่อง <span class="right" style="color:#7ca600">＋ เพิ่มรายการ</span></div>
+      <div id="pmRows"></div>
+      <div style="color:#249fd3;font-weight:700;margin-top:14px">＋ เพิ่มหัวข้อใหญ่</div>
+    </div>
+  </div>
+
+  <div id="pmschedule" class="tabcontent">
+    <div style="text-align:right"><button class="greenbtn">＋ สร้างรอบ PM</button></div>
+    <p>แผน PM ทั้งหมด 0 รอบ</p>
+    <table><thead><tr><th>ครั้งที่</th><th>ประเภท PM</th><th>แผน (Plan)</th><th>ช่างผู้รับผิดชอบ</th><th>วันที่กำหนด</th><th>วันที่จริง</th><th>สถานะ</th></tr></thead><tbody><tr><td colspan="7" class="empty">ยังไม่มีรอบ PM</td></tr></tbody></table>
+  </div>
+
+  <div id="spare" class="tabcontent">
+    <div style="text-align:right"><button class="greenbtn">＋ เพิ่มอะไหล่</button></div>
+    <p><b>อะไหล่ประจำเครื่อง</b> <span class="small-muted">(ตั้งต้นจากชุดสินค้า/Product Set แก้ไขได้)</span></p>
+    <table><thead><tr><th>บาร์โค้ด</th><th>ชื่อรายการ</th><th>จำนวน</th><th>ชม./วัน ที่ใช้จริง</th><th>อายุคงเหลือ</th><th>แหล่งที่มา</th></tr></thead><tbody><tr><td colspan="6" class="empty">ยังไม่มีอะไหล่ประจำเครื่อง</td></tr></tbody></table>
+    <div style="text-align:right;margin-top:10px"><button class="greenbtn">▣ บันทึก</button></div>
+    <p style="margin-top:30px"><b>ประวัติการเบิกใช้อะไหล่ PM</b> <span class="small-muted">(บันทึกจากหน้าทำ PM)</span></p>
+    <table><thead><tr><th>ประเภท</th><th>บาร์โค้ด</th><th>ชื่อรายการ</th><th>จำนวน</th><th>รอบ PM</th><th>วันที่</th></tr></thead><tbody><tr><td colspan="6" class="empty">ยังไม่มีการเบิกใช้อะไหล่/วัสดุในการ PM</td></tr></tbody></table>
+  </div>
+
+  <div id="history" class="tabcontent">
+    <table><thead><tr><th>วันที่</th><th>ประเภท</th><th>ช่าง</th><th>Grade</th><th>ผล</th><th>สรุปผล</th></tr></thead><tbody><tr><td colspan="6" class="empty">ยังไม่มีประวัติการ PM ที่เสร็จสิ้น</td></tr></tbody></table>
+  </div>
+
+  <div id="attach" class="tabcontent">
+    <div class="panel section" style="margin:0"><div class="section-title">Attachments (1) <span>Add⌄</span></div>
+      <table><thead><tr><th>รูปภาพ</th><th>ชื่อไฟล์</th><th>Note</th><th>ชนิด</th><th>วัน-เวลาที่สร้าง</th><th>ผู้สร้าง</th><th>Action</th></tr></thead>
+      <tbody><tr><td>-</td><td>Delivery note no. 40193680 (GSB-OL3151).pdf</td><td></td><td>Local File</td><td>06/10/69 10:53</td><td>Aran Preechawong</td><td><div class="attach-actions"><button class="roundbtn">↓</button><button class="roundbtn">◉</button><button class="roundbtn">✎</button></div></td></tr></tbody></table>
+    </div>
+  </div>
+
+  <div id="conversation" class="tabcontent">
+    <div class="panel section" style="margin:0"><div class="section-title">Conversation (0)</div>
+      <div class="editor"><div class="toolbar">Normal &nbsp;&nbsp; Sans Serif &nbsp;&nbsp; Normal &nbsp;&nbsp; <b>B</b> &nbsp; <i>I</i> &nbsp; <u>U</u> &nbsp; ☷ &nbsp; ☰ &nbsp; 🔗 &nbsp; 🖼</div><div class="editarea"></div></div>
+      <button class="commentbtn">Comment</button><div class="empty">There are no messages yet.</div>
+    </div>
+  </div>
+
+  <div id="feed" class="tabcontent">
+    <div class="panel section" style="margin:0"><div class="section-title">Feed (0) <span>More⌄</span></div>
+      <table><thead><tr><th>วัน-เวลา</th><th>Description</th></tr></thead><tbody><tr><td><input style="width:100%;padding:8px;border:1px solid #ddd;border-radius:5px" placeholder="เลือกวันที่"></td><td><input style="width:100%;padding:8px;border:1px solid #ddd;border-radius:5px"></td></tr></tbody></table>
+    </div>
+  </div>
+
+  <div id="health" class="tabcontent">
+    <div class="health">
+      <div class="healthbox"><h3>⌁ เชื่อมต่อ API จากผู้ผลิต / Vendor <span class="active-b" style="background:#d94f70">Disconnected</span></h3>
+        <div class="field"><label>Vendor / Brand</label><select><option></option></select></div><br>
+        <div class="field"><label>Endpoint URL</label><input value="https://api.haas-automation.com/v1/machine"></div><br>
+        <div class="field"><label>API Key / Token</label><input></div><br>
+        <div class="field"><label>Machine / Serial ID (ในระบบ Vendor)</label><input value="OL3151"></div><br>
+        <button class="connect">⚡ ทดสอบการเชื่อมต่อ</button>
+      </div>
+      <div class="healthbox"><h3>♡ ประเมินสุขภาพเครื่องจักรด้วยตนเอง</h3>
+        <div class="grid2"><div class="field"><label>การสั่นสะเทือน (mm/s)</label><input value="2.1"></div><div class="field"><label>อุณหภูมิ (°C)</label><input value="42"></div><div class="field"><label>ระดับเสียง (dB)</label><input value="68"></div><div class="field"><label>แรงดันน้ำมัน (bar)</label><input value="4.8"></div><div class="field"><label>น้ำหล่อเย็น (%)</label><input value="85"></div><div class="field"><label>ชั่วโมง Spindle</label><input value="8500"></div><div class="field"><label>Axis Backlash (µm)</label><input value="4.0"></div><div class="field"><label>วันนับจาก Calibration ล่าสุด</label><input value="45"></div></div><br>
+        <button class="assess">▥ ประเมินสุขภาพเครื่องจักร</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 </div>
-<div class="panel active" id="m-overview">
-<div class="linked">
-<div class="box"><b>Opportunity</b><small>REG - OL3151 #15602</small></div>
-<div class="box"><b>Winning Quote</b><small>#2095</small></div>
-<div class="box"><b>Functions</b><small>Installation / PM / CM</small></div>
-<div class="box"><b>Machine Attachments</b><small>Single source of truth</small></div>
-</div>
-<div class="card" style="margin-top:14px"><div class="hd"><h3>Sales Requirement Snapshot</h3><span class="badge green">Final Snapshot</span></div><div class="bd grid3"><div class="field"><label>Speed</label><input readonly value="10 cycles/min"></div><div class="field"><label>Pack</label><input readonly value="Thermoform"></div><div class="field"><label>Printer / Labeler</label><input readonly value="EF + printer"></div></div></div>
-</div>
-
-<div class="panel" id="m-install">
-<div class="card"><div class="hd"><h3>Installation & Commissioning — Working Form</h3><span class="badge orange">In Progress</span></div><div class="bd">
-<div class="workrow"><span class="tag auto">AUTO</span><div><b>Machine / Customer / Serial</b><div class="sub">ดึงจาก Machine Register</div></div><div>OL3151 • GSB</div></div>
-<div class="workrow"><span class="tag auto">AUTO</span><div><b>Installation Documents</b><div class="sub">ไฟล์จริงอยู่ Machine Attachments กลาง</div></div><button class="btn">View 6 files</button></div>
-<div class="workrow"><span class="tag check">CHECK</span><div><b>Site / Utility readiness</b><div class="sub">Pass / Fail / N/A + Remark</div></div><button class="btn">Open Checklist</button></div>
-<div class="workrow"><span class="tag check">CHECK</span><div><b>Machine Installation Checklist</b></div><button class="btn">Open Form</button></div>
-<div class="workrow"><span class="tag upload">UPLOAD</span><div><b>Installation Photos</b><div class="sub">Before / During / After / Nameplate / Utility / Issue</div></div><button class="btn">Add Photos</button></div>
-<div class="workrow"><span class="tag input">INPUT</span><div><b>Commissioning / Test Run</b><div class="sub">Actual speed / vacuum / product / pack quality</div></div><button class="btn">Open Test Form</button></div>
-<div class="workrow"><span class="tag check">CHECK</span><div><b>Training / Safety</b></div><button class="btn">Open Training</button></div>
-</div></div>
-</div>
-
-<div class="panel" id="m-handover">
-<div class="card"><div class="hd"><h3>Customer Acceptance & Handover</h3><button class="btn primary">Open Full Handover Form</button></div><div class="bd">
-<div class="workrow"><span class="tag auto">AUTO</span><div><b>General machine information</b></div><div>Ready</div></div>
-<div class="workrow"><span class="tag input">INPUT</span><div><b>Utility actual values / Test Run</b></div><div>Technician</div></div>
-<div class="workrow"><span class="tag check">CHECK</span><div><b>Overall quality / Installation detail / Documents</b></div><div>Checklist</div></div>
-<div class="workrow"><span class="tag upload">UPLOAD</span><div><b>Drawing / Installation Photos</b><div class="sub">เลือกจาก Machine Attachment / Installation evidence</div></div><div>Select</div></div>
-<div class="workrow"><span class="tag sign">SIGN</span><div><b>Customer / Service / Sales Sign-off</b></div><div>Pending</div></div>
-</div></div>
-</div>
-
-<div class="panel" id="m-service">
-<div class="card"><div class="hd"><h3>Service History</h3><button class="btn primary">+ Create Function</button></div><div class="bd"><table><thead><tr><th>Date</th><th>Type</th><th>Function</th><th>Visits</th><th>Parts</th></tr></thead><tbody><tr><td>15/10/26</td><td>Installation</td><td>FN-INS-OL3151-01</td><td>3 technicians</td><td>-</td></tr><tr><td>20/01/27</td><td>PM</td><td>FN-PM-OL3151-01</td><td>2</td><td>Seal Kit x1</td></tr></tbody></table></div></div>
-</div>
-
-<div class="panel" id="m-pm">
-<div class="card"><div class="hd"><h3>PM / After Sales</h3></div><div class="bd">
-<div class="linked"><div class="box"><b>PM Program</b><small>Copy from Master • Customize per machine</small></div><div class="box"><b>PM Schedule</b><small>1/2/3/6 months</small></div><div class="box"><b>Machine Survey</b><small>Before / After structured data</small></div><div class="box"><b>Spare Parts</b><small>Machine / Used-Replaced / Quote-Purchase</small></div></div>
-</div></div>
-</div>
-</section>
-
-<section class="page" id="functions">
-<div class="title"><div><h1>Functions</h1><div class="sub">ยังใช้งานเป็นหน้าแยกได้ • เพิ่ม Machine link</div></div><button class="btn primary">+ Function</button></div>
-<div class="card"><div class="bd"><table><thead><tr><th>Function</th><th>Type</th><th>Machines</th><th>Visits</th></tr></thead><tbody><tr><td>FN-PM-OL3151-01</td><td>PM</td><td>OL3151, OL2875</td><td>3</td></tr></tbody></table></div></div>
-</section>
-
-<section class="page" id="visits">
-<div class="title"><div><h1>Visit</h1><div class="sub">แต่ละช่าง Check-in/out ของตัวเอง • ผูก Function + Machine(s)</div></div><button class="btn primary">+ Visit</button></div>
-<div class="card"><div class="bd"><table><thead><tr><th>Technician</th><th>Function</th><th>Machines</th><th>Check-in</th><th>Check-out</th><th>Trip</th></tr></thead><tbody><tr><td>Janeny</td><td>FN-PM-OL3151-01</td><td>OL3151, OL2875</td><td>09:05</td><td>16:40</td><td>Shared Van Trip</td></tr><tr><td>Jeans</td><td>FN-PM-OL3151-01</td><td>OL3151, OL2875</td><td>09:08</td><td>16:35</td><td>Shared Van Trip</td></tr></tbody></table></div></div>
-</section>
-
-<section class="page" id="my-pm"><div class="title"><div><h1>งาน PM ของฉัน</h1><div class="sub">แสดง Serial No. เพื่อระบุเครื่องชัดเจน</div></div></div><div class="card"><div class="bd">PM Round #1 • OL3151 • GSB • Due 20/01/2027</div></div></section>
-<section class="page" id="pm-master"><div class="title"><div><h1>แผน PM กลาง</h1><div class="sub">Template กลาง → Copy ไปเครื่อง → Customize เฉพาะเครื่อง</div></div></div><div class="card"><div class="bd">VARIOVAC THERMOFORM CHECKLIST • 33 items</div></div></section>
-<section class="page" id="service-report"><div class="title"><div><h1>Service Report</h1><div class="sub">Date / Vehicle / Customer / Technician / PM-CM / Machine • Export Excel</div></div></div></section>
-<section class="page" id="vehicle"><div class="title"><div><h1>Vehicle Master</h1><div class="sub">ทะเบียนรถ Service + Other vehicle</div></div></div></section>
-</div></main></div>
 <script>
-function go(id,el){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('crumb').textContent=el?el.textContent.trim():id;window.scrollTo(0,0)}
-function showPanel(id,el){const p=el.closest('.page');p.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));p.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));p.querySelector('#'+id).classList.add('active');el.classList.add('active')}
-function modal(msg){alert(msg)}
-</script></body></html>
+function toggle(id){const x=document.getElementById(id);if(x)x.classList.toggle('open')}
+function showTab(id,btn){
+ document.querySelectorAll('.tabcontent').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active'); btn.classList.add('active');
+}
+const items=[
+'สภาพโครงสร้างเครื่องจักรโดยรวม','ความตึงของโซ่','Clamp สภาพของตัวจับยึด','สภาพของเพลาใบมีด','สภาพใบมีดตัดขวาง','ใบมีดตัดตามยาว','หน้าจอแสดงผล','Emergency sw ใช้งานได้ปกติทุกจุด','ระบบ Safety ใช้งานได้ปกติทุกจุด','ท่อลมและสายอยู่ในสภาพปกติ ไม่รั่ว','ตรวจสอบปริมาณน้ำมันหล่อลื่นโซ่','อัดจาระบีในส่วนที่มีการเคลื่อนที่','ชุดโรลเลอร์ฟิล์มบน ฟิล์มล่าง หมุนได้ปกติ','ชุดต่อฟิล์มบน Top affixing ปกติหรือไม่','สปริงชุดคลายฟิล์มบนและล่าง ปกติหรือไม่','สภาพถุงลมเบรคฟิล์ม','Air cylinder ไม่มีลมรั่ว','Air cylinder sensor ปกติหรือไม่ โดยการใช้แมนวล','ความสะอาดชุดกรองคาร์บอน และชุดกรองละเอียด เปลี่ยนหากไม่สามารถล้างได้','Motor Vacuum ไม่มีเสียงดังผิดปกติ','ระดับน้ำมันฟิลเตอร์','ตรวจสอบระดับน้ำหล่อเย็นของคูลลิ่ง และอุณหภูมิของน้ำหล่อเย็นขณะทำงาน','Lift ชุดยกแม่พิมพ์ขึ้นรูป ขึ้นลงได้ปกติ','เช็ครบบลมและตรวจเช็คว่ามีน้ำในระบบหรือไม่','ตรวจเช็คและทำความสะอาด Silencer','ตรวจเช็คและทำความสะอาด Top sealing die','ตรวจเช็คชุด O-ring ชุด Die','ตรวจเช็คระดับน้ำของเครื่องจักร','ความสะอาดตู้คอนโทรล','ถังดูดสูญญากาศเก็บเศษฟิล์ม','Outfeed Conveyor สายพานลำเลียงออก','การปรับระดับ Lifting system','Sound absorber จุดต้น Forming/Sealing'
+];
+document.getElementById('pmRows').innerHTML=items.map(i=>`<div class="check-row"><span class="ok">✓</span><input type="text" value="${i}"><span class="trash">♲</span></div>`).join('');
+</script>
+</body>
+</html>
