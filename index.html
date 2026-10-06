@@ -83,16 +83,23 @@ button.btn:active{transform:translateY(1px)}
 .page-transition{animation:fadeIn .16s ease-out}
 @keyframes fadeIn{from{opacity:.45;transform:translateY(2px)}to{opacity:1;transform:none}}
 </style>
-
 <style>
 .install-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.install-photo-card{border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#fff}.install-photo-card.issue{border-color:#fdba74;background:#fffaf6}.install-photo-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px}.install-photo-head b{font-size:13px}.install-photo-head span{font-size:10px;font-weight:800;color:#c65b00;background:#fff2e8;padding:4px 7px;border-radius:999px}.install-photo-placeholder{min-height:110px;border:1px dashed #cbd5e1;border-radius:9px;background:#f8fafc;display:grid;place-items:center;text-align:center;color:#64748b;padding:12px;font-size:12px}.install-photo-placeholder small{display:block;margin-top:5px}.install-photo-card textarea{width:100%;min-height:64px;margin-top:9px;border:1px solid #d1d5db;border-radius:8px;padding:8px;resize:vertical}@media(max-width:1100px){.install-photo-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.install-photo-grid{grid-template-columns:1fr}}
 </style>
-
 <style>
 .handover-progress{display:flex;align-items:center;gap:8px;overflow:auto;white-space:nowrap;margin:0 0 14px}.handover-progress span{background:#fff;border:1px solid #dbe3eb;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800}.handover-progress b{color:#f97316}.handover-form input:not([type=checkbox]),.handover-form textarea{max-width:100%}.handover-checks{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px}.handover-checks label{font-size:12px;line-height:1.4}.handover-photo-grid,.signature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.signature-pad{min-height:105px;border:1px dashed #cbd5e1;border-radius:10px;background:#f8fafc;display:grid;place-items:center;text-align:center;color:#64748b;padding:12px;margin:9px 0}.warranty-box p,.warranty-caution{font-size:12px;line-height:1.65}.handover-actions{position:sticky;bottom:10px;display:flex;justify-content:flex-end;gap:8px;background:rgba(255,255,255,.96);border:1px solid #e5e7eb;border-radius:12px;padding:10px;margin-top:14px;box-shadow:0 8px 24px rgba(15,23,42,.08)}@media(max-width:900px){.handover-checks,.handover-photo-grid,.signature-grid{grid-template-columns:1fr}}
 @media print{body *{visibility:hidden!important}#handoverPrint,#handoverPrint *{visibility:visible!important}#handoverPrint{position:absolute;left:0;top:0;width:100%}.handover-actions{display:none!important}.card{break-inside:avoid}}
 </style>
-</head>
+<style>
+.install-ref-banner{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:11px 13px;color:#9a5a10;font-size:12px;margin-bottom:12px}
+.install-spec-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.install-spec{border:1px solid #e5e7eb;border-radius:10px;padding:11px;background:#fff}.install-spec small{display:block;color:#6b7280;font-size:10px;margin-bottom:4px}.install-spec b{font-size:13px;color:#25313c}.install-spec em{display:block;font-style:normal;color:#9a5a10;font-size:10px;margin-top:5px}
+.readiness-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}.readiness-item{display:flex;gap:9px;align-items:flex-start;border:1px solid #edf0f2;border-radius:9px;padding:10px;background:#fff}.readiness-item input{margin-top:2px;accent-color:#f47a22}.readiness-item b{display:block;font-size:12px}.readiness-item small{display:block;color:#6b7280;font-size:10px;margin-top:3px;line-height:1.4}
+.warning-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.warning-card{border:1px solid #e5e7eb;border-radius:10px;padding:12px;background:#fff}.warning-card b{display:block;font-size:12px;margin-bottom:5px}.warning-card p{margin:0;color:#6b7280;font-size:11px;line-height:1.5}.warning-card .warn-icon{font-size:18px;margin-bottom:6px}.warning-card label{display:flex;gap:7px;align-items:flex-start;margin-top:8px;font-size:11px;font-weight:700}.warning-card input{accent-color:#f47a22}
+.ack-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ack-box{border:1px solid #e5e7eb;border-radius:10px;padding:12px;background:#fafafa}.ack-box label{display:block;font-size:11px;font-weight:800;color:#475569;margin-bottom:5px}.ack-box input{width:100%;padding:8px;border:1px solid #d1d5db;border-radius:7px;margin-bottom:7px}
+@media(max-width:1000px){.install-spec-grid{grid-template-columns:repeat(2,1fr)}.warning-grid{grid-template-columns:1fr 1fr}.readiness-list{grid-template-columns:1fr}}
+@media(max-width:650px){.install-spec-grid,.warning-grid,.ack-grid{grid-template-columns:1fr}}
+</style></head>
 <body>
 <div class="app">
 <aside class="sidebar">
@@ -729,9 +736,43 @@ RuamPat Sales Team</textarea></div>
 <div class="panel" id="p-order"><div class="card"><div class="hd"><h3>Order &amp; Delivery Timeline</h3></div><div class="bd"><table><thead><tr><th>Step</th><th>Status</th><th>Date / Ref</th><th>Remark</th></tr></thead><tbody>
 <tr><td>Order Confirmation</td><td><span class="badge green">Confirmed</span></td><td>OC-OL3151</td><td>AI matched supplier document</td></tr><tr><td>Production</td><td><span class="badge green">Completed</span></td><td>Week 38</td><td>-</td></tr><tr><td>Shipment</td><td><span class="badge amber">In Transit</span></td><td>AWB pending</td><td>Labeler EF delayed</td></tr><tr><td>Thailand / Customs</td><td><span class="badge gray">Pending</span></td><td>-</td><td>-</td></tr>
 </tbody></table></div></div></div>
-<div class="panel" id="p-pre"><div class="grid2"><div class="card"><div class="hd"><h3>Site &amp; Utility</h3></div><div class="bd">
-<label><input checked="" type="checkbox"/> Electrical / ไฟ</label><br/><label><input checked="" type="checkbox"/> Air / ลม</label><br/><label><input type="checkbox"/> Water / น้ำ</label><br/><label><input type="checkbox"/> Space &amp; Access</label>
-</div></div><div class="card"><div class="hd"><h3>Required Documents</h3></div><div class="bd">Final Utility • Electrical Drawing • Pneumatic Drawing • Installation Manual</div></div></div></div>
+<div class="panel" id="p-pre">
+<div class="page-title"><div><h1 style="font-size:21px">Pre-Installation / เตรียมก่อนติดตั้ง</h1><div class="subtitle">ตรวจ Site, Utility, Clearance, Handling และความพร้อมก่อนนำเครื่องเข้าติดตั้ง</div></div></div>
+<div class="card"><div class="hd"><div><h3>Machine Installation Reference / ข้อมูลอ้างอิงสำหรับเตรียมติดตั้ง</h3><div class="subtitle">โครงสร้างข้อมูลอ้างอิงจาก Variovac Installation Information • ต้องยืนยันค่าของ OL3151 จาก Supplier Document ก่อนใช้งานจริง</div></div><span class="badge amber">Reference Template</span></div><div class="bd">
+<div class="install-ref-banner"><b>สำคัญ:</b> ค่าตัวอย่างด้านล่างมาจากแบบฟอร์ม Variovac OL2506 ที่แนบมา ใช้เพื่อกำหนดว่าระบบต้องเก็บข้อมูลอะไร ไม่ถือเป็นค่าของ OL3151 จนกว่าจะ Confirm จาก Supplier</div>
+<div class="install-spec-grid">
+<div class="install-spec"><small>Machine Height</small><b>1680–1780 mm</b><em>Reference OL2506</em></div>
+<div class="install-spec"><small>Machine Width</small><b>831 mm</b><em>Reference OL2506</em></div>
+<div class="install-spec"><small>Machine Length</small><b>6566 mm</b><em>Reference OL2506</em></div>
+<div class="install-spec"><small>Machine Weight</small><b>1596 kg</b><em>Reference OL2506</em></div>
+<div class="install-spec"><small>Minimum Room / Door Height</small><b>1710 mm</b><em>Reference OL2506</em></div>
+<div class="install-spec"><small>Electrical Supply</small><b>3 Phase 400V PE+N 50Hz</b><em>Reference OL2506</em></div>
+<div class="install-spec"><small>Main Fuse / Cable</small><b>50A • 10 mm²</b><em>Reference OL2506</em></div>
+<div class="install-spec"><small>Compressed Air</small><b>6–10 bar • 622 L/min • Tube 12×8 mm</b><em>Reference OL2506</em></div>
+</div>
+</div></div>
+<div class="grid2" style="margin-top:14px">
+<div class="card"><div class="hd"><div><h3>Installation Readiness Checklist / เช็คความพร้อมก่อนติดตั้ง</h3><div class="subtitle">รายการที่ Service ใช้ยืนยันหน้างานก่อนวันติดตั้ง</div></div><span class="badge blue">Site Readiness</span></div><div class="bd readiness-list">
+<label class="readiness-item"><input checked="" type="checkbox"/><span><b>Power supply matches requirement</b><small>แหล่งจ่ายไฟในพื้นที่ตรงกับข้อมูลทางเทคนิค</small></span></label>
+<label class="readiness-item"><input checked="" type="checkbox"/><span><b>Technical / electrical information confirmed</b><small>ข้อมูลทางเทคนิคและไฟฟ้าตรงตามข้อกำหนด</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Unpacking area prepared</b><small>จัดเตรียมพื้นที่แกะลังและตรวจรับเครื่อง</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Installation area prepared</b><small>พื้นที่วางเครื่องพร้อม ระยะรอบเครื่องเพียงพอ</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Door / route clearance checked</b><small>ตรวจความสูงประตูและเส้นทางนำเครื่องเข้า</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Handlift / Forklift / Crane ready</b><small>อุปกรณ์ยกและเคลื่อนย้ายพร้อมใช้งาน</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Tools &amp; accessories ready</b><small>เครื่องมือและอุปกรณ์เสริมที่จำเป็นอยู่ในสภาพดี</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Safety rules reviewed</b><small>ปฏิบัติตามกฎระเบียบด้านความปลอดภัยของพื้นที่</small></span></label>
+</div></div>
+<div class="card"><div class="hd"><h3>Required Documents / เอกสารก่อนติดตั้ง</h3><button class="btn" onclick="machinePanel('docs')">Open Machine Attachments</button></div><div class="bd readiness-list">
+<label class="readiness-item"><input checked="" type="checkbox"/><span><b>Final Utility Requirement</b><small>Confirm จาก Supplier Email / Machine Attachment</small></span></label>
+<label class="readiness-item"><input checked="" type="checkbox"/><span><b>Electrical Drawing</b><small>Drawing ที่ Confirm แล้ว</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Pneumatic Drawing</b><small>ถ้ามีตามรุ่นเครื่อง</small></span></label>
+<label class="readiness-item"><input checked="" type="checkbox"/><span><b>Installation / Operation Manual</b><small>เอกสารอ้างอิงระหว่างติดตั้ง</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Machine / GA Drawing</b><small>ใช้เช็คพื้นที่และตำแหน่งวางเครื่อง</small></span></label>
+<label class="readiness-item"><input type="checkbox"/><span><b>Packing List</b><small>ใช้ตรวจของก่อนนำเข้าพื้นที่ติดตั้ง</small></span></label>
+</div></div>
+</div>
+<div class="card" style="margin-top:14px"><div class="hd"><h3>Readiness Acknowledgement / ผู้ตรวจความพร้อม</h3><span class="badge gray">Before Installation</span></div><div class="bd ack-grid"><div class="ack-box"><label>Service Staff / ช่างเทคนิค</label><input value="Service Team"/><label>Date / วันที่</label><input type="date" value="2026-10-10"/></div><div class="ack-box"><label>Customer / ลูกค้า</label><input placeholder="ผู้ประสานงาน / Engineering"/><label>Date / วันที่</label><input type="date"/></div></div></div>
+</div>
 <div class="panel" id="p-qc"><div class="grid2"><div class="card"><div class="hd"><h3>Receiving &amp; QC</h3></div><div class="bd">
 <label><input checked="" type="checkbox"/> Machine matches ordered specification</label><br/><label><input checked="" type="checkbox"/> Items complete per Packing List</label><br/><label><input checked="" type="checkbox"/> No visible damage</label><br/><label><input type="checkbox"/> Claim required</label>
 </div></div><div class="card"><div class="hd"><h3>Identity</h3></div><div class="bd form-grid" style="grid-template-columns:1fr 1fr"><div class="field"><label>Model</label><input value="Optimus"/></div><div class="field"><label>Serial</label><input value="OL3151"/></div></div></div></div></div>
@@ -745,13 +786,25 @@ RuamPat Sales Team</textarea></div>
 </div></div>
 <div class="card" style="margin-top:14px"><div class="hd"><div><h3>Installation Photo Evidence / รูปภาพการติดตั้ง</h3><div class="subtitle">แนบได้หลายรูปต่อหัวข้อ • ใช้เป็นหลักฐานงานติดตั้งและเลือกไปแสดงใน Handover PDF ได้ภายหลัง</div></div><button class="btn">+ Add Photo Set</button></div><div class="bd">
 <div class="install-photo-grid">
-<div class="install-photo-card"><div class="install-photo-head"><b>Before Installation / ก่อนติดตั้ง</b><span>3 Photos</span></div><div class="install-photo-placeholder">ภาพพื้นที่ / สภาพเครื่องก่อนเริ่มงาน<br><small>+ Add multiple photos</small></div><textarea placeholder="หมายเหตุ เช่น พื้นที่ก่อนวางเครื่อง / จุดที่ต้องแก้ไข"></textarea></div>
-<div class="install-photo-card"><div class="install-photo-head"><b>During Installation / ระหว่างติดตั้ง</b><span>5 Photos</span></div><div class="install-photo-placeholder">ภาพยกเครื่อง / วางเครื่อง / ต่อ Utility<br><small>+ Add multiple photos</small></div><textarea placeholder="หมายเหตุขั้นตอนการติดตั้ง"></textarea></div>
-<div class="install-photo-card"><div class="install-photo-head"><b>After Installation / หลังติดตั้ง</b><span>4 Photos</span></div><div class="install-photo-placeholder">สภาพหลังติดตั้งเสร็จ / Final position<br><small>+ Add multiple photos</small></div><textarea placeholder="หมายเหตุหลังติดตั้ง"></textarea></div>
-<div class="install-photo-card"><div class="install-photo-head"><b>Nameplate / Serial No.</b><span>2 Photos</span></div><div class="install-photo-placeholder">Nameplate + Serial Number<br><small>+ Add multiple photos</small></div><textarea placeholder="Machine No. / Serial / Remark"></textarea></div>
-<div class="install-photo-card"><div class="install-photo-head"><b>Utility Connection / จุดเชื่อมต่อ</b><span>4 Photos</span></div><div class="install-photo-placeholder">ไฟ / ลม / น้ำ / Drain / Network<br><small>+ Add multiple photos</small></div><textarea placeholder="ระบุ Utility หรือจุดที่ต้องติดตาม"></textarea></div>
-<div class="install-photo-card issue"><div class="install-photo-head"><b>Issue / Damage / Claim</b><span>Case Photos</span></div><div class="install-photo-placeholder">ถ่ายจุดผิดปกติ / อะไหล่เสีย / งานแก้ไข<br><small>+ Add before &amp; after photos</small></div><textarea placeholder="Problem / Action / Part replaced / Claim reference"></textarea></div>
+<div class="install-photo-card"><div class="install-photo-head"><b>Before Installation / ก่อนติดตั้ง</b><span>3 Photos</span></div><div class="install-photo-placeholder">ภาพพื้นที่ / สภาพเครื่องก่อนเริ่มงาน<br/><small>+ Add multiple photos</small></div><textarea placeholder="หมายเหตุ เช่น พื้นที่ก่อนวางเครื่อง / จุดที่ต้องแก้ไข"></textarea></div>
+<div class="install-photo-card"><div class="install-photo-head"><b>During Installation / ระหว่างติดตั้ง</b><span>5 Photos</span></div><div class="install-photo-placeholder">ภาพยกเครื่อง / วางเครื่อง / ต่อ Utility<br/><small>+ Add multiple photos</small></div><textarea placeholder="หมายเหตุขั้นตอนการติดตั้ง"></textarea></div>
+<div class="install-photo-card"><div class="install-photo-head"><b>After Installation / หลังติดตั้ง</b><span>4 Photos</span></div><div class="install-photo-placeholder">สภาพหลังติดตั้งเสร็จ / Final position<br/><small>+ Add multiple photos</small></div><textarea placeholder="หมายเหตุหลังติดตั้ง"></textarea></div>
+<div class="install-photo-card"><div class="install-photo-head"><b>Nameplate / Serial No.</b><span>2 Photos</span></div><div class="install-photo-placeholder">Nameplate + Serial Number<br/><small>+ Add multiple photos</small></div><textarea placeholder="Machine No. / Serial / Remark"></textarea></div>
+<div class="install-photo-card"><div class="install-photo-head"><b>Utility Connection / จุดเชื่อมต่อ</b><span>4 Photos</span></div><div class="install-photo-placeholder">ไฟ / ลม / น้ำ / Drain / Network<br/><small>+ Add multiple photos</small></div><textarea placeholder="ระบุ Utility หรือจุดที่ต้องติดตาม"></textarea></div>
+<div class="install-photo-card issue"><div class="install-photo-head"><b>Issue / Damage / Claim</b><span>Case Photos</span></div><div class="install-photo-placeholder">ถ่ายจุดผิดปกติ / อะไหล่เสีย / งานแก้ไข<br/><small>+ Add before &amp; after photos</small></div><textarea placeholder="Problem / Action / Part replaced / Claim reference"></textarea></div>
 </div>
+</div></div>
+
+<div class="card" id="install-warning-training" style="margin-top:14px"><div class="hd"><div><h3>Safety &amp; Operator Training / ข้อควรระวังและการอบรมผู้ใช้งาน</h3><div class="subtitle">ใช้เป็นหัวข้ออบรมระหว่าง Installation &amp; Commissioning • อ้างอิง Warning Point ของ Variovac</div></div><span class="badge amber">Training Evidence</span></div><div class="bd">
+<div class="warning-grid">
+<div class="warning-card"><div class="warn-icon">⚠</div><b>Blade Handling / การเคลื่อนย้ายใบมีด</b><p>ใช้อุปกรณ์เฉพาะสำหรับเคลื่อนย้ายใบมีด และสวมถุงมือกันบาด เนื่องจากใบมีดมีความคมมาก</p><label><input type="checkbox"/> Explained &amp; demonstrated</label></div>
+<div class="warning-card"><div class="warn-icon">🎞</div><b>Bottom Film Loading / การใส่ฟิล์มล่าง</b><p>อธิบายและสาธิตลักษณะการใส่ฟิล์มล่างที่ถูกต้องก่อนเริ่มใช้งานจริง</p><label><input type="checkbox"/> Operator demonstrated</label></div>
+<div class="warning-card"><div class="warn-icon">🎞</div><b>Top Film Loading / การใส่ฟิล์มบน</b><p>อธิบายและสาธิตลักษณะการใส่ฟิล์มบนที่ถูกต้อง รวมถึงแนวฟิล์มและจุดยึด</p><label><input type="checkbox"/> Operator demonstrated</label></div>
+<div class="warning-card"><div class="warn-icon">🧼</div><b>Cleaning Risk Area / จุดเสี่ยงตอนล้างเครื่อง</b><p>ระบุพื้นที่สำคัญและจุดเสี่ยงที่ต้องระวังหลังใช้งานและระหว่างการล้างทำความสะอาด</p><label><input type="checkbox"/> Cleaning points reviewed</label></div>
+<div class="warning-card"><div class="warn-icon">💦</div><b>Water / High Pressure Caution</b><p>อธิบายพื้นที่อุปกรณ์ไฟฟ้า เซนเซอร์ และจุดสำคัญที่ไม่ควรฉีดน้ำแรงดันสูงโดยตรง</p><label><input type="checkbox"/> Customer acknowledged</label></div>
+<div class="warning-card"><div class="warn-icon">🛡</div><b>Safety Rules / กฎความปลอดภัย</b><p>ทบทวน Safety cover, Emergency stop และข้อกำหนดด้านความปลอดภัยก่อนส่งเครื่องให้ลูกค้าใช้งาน</p><label><input type="checkbox"/> Safety check completed</label></div>
+</div>
+<div class="ack-grid" style="margin-top:12px"><div class="ack-box"><label>Service Staff / ผู้สอน</label><input value="Service Team"/><label>Date</label><input type="date" value="2026-10-11"/></div><div class="ack-box"><label>Customer / ผู้รับการอบรมหลัก</label><input placeholder="Customer representative"/><label>Date</label><input type="date"/></div></div>
 </div></div>
 <div class="grid2" style="margin-top:14px">
 <div class="card"><div class="hd"><h3>Sold Requirement vs Actual</h3><span class="badge purple">AI compare</span></div><div class="bd"><table><thead><tr><th>Item</th><th>Sold</th><th>Actual</th><th>Status</th></tr></thead><tbody><tr><td>Final Speed</td><td>12 packs/min</td><td>12 packs/min</td><td><span class="badge green">Match</span></td></tr><tr><td>Forming Depth</td><td>80 mm</td><td>80 mm</td><td><span class="badge green">Match</span></td></tr><tr><td>Printer</td><td>Labeler EF + CAB</td><td>Installed</td><td><span class="badge green">OK</span></td></tr><tr><td>Final Vacuum</td><td>≤ 10 mbar</td><td><input value="8.5 mbar"/></td><td><span class="badge green">Pass</span></td></tr></tbody></table></div></div>
@@ -761,19 +814,24 @@ RuamPat Sales Team</textarea></div>
 <div class="panel" id="p-handover">
 <div class="page-title"><div><h1 style="font-size:21px">Customer Handover / ส่งมอบเครื่องจักร</h1><div class="subtitle">แบบฟอร์มส่งมอบในระบบ • ดึงข้อมูลจาก Machine / Installation และให้ Service ตรวจยืนยันก่อนส่งมอบ</div></div><div class="right"><button class="btn" onclick="window.print()">Preview / Print PDF</button><button class="btn primary" onclick="completeHandover()">Confirm Handover</button></div></div>
 <div class="handover-progress"><span>1 ข้อมูลเครื่อง</span><b>→</b><span>2 Utility &amp; Quality</span><b>→</b><span>3 Test Run &amp; Docs</span><b>→</b><span>4 Installation</span><b>→</b><span>5 Warranty</span><b>→</b><span>6 Sign-off</span></div>
-<div id="handoverPrint" class="handover-form">
+<div class="handover-form" id="handoverPrint">
 <div class="card"><div class="hd"><div><h3>RUAMPAT Co.,Ltd / บริษัท ร่วมพัฒน์ จำกัด</h3><div class="subtitle">Delivery Document / หนังสือส่งมอบงาน</div></div><span class="badge purple">OL3151 • VARIOVAC Optimus</span></div><div class="bd form-grid">
 <div class="field"><label>Product</label><input value="VARIOVAC Optimus 355"/></div><div class="field"><label>Date</label><input type="date" value="2026-10-11"/></div><div class="field span2"><label>Location</label><input value="Customer Site"/></div><div class="field"><label>PO Number</label><input value="PO-OL3151"/></div><div class="field"><label>Installation completed date</label><input type="date" value="2026-10-11"/></div><div class="field"><label>Till</label><input/></div><div class="field"><label>Product Serial</label><input value="OL3151"/></div><div class="field"><label>Model</label><input value="Optimus"/></div><div class="field"><label>Brand</label><input value="VARIOVAC"/></div></div></div>
 <div class="grid2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Utility Requirements / สาธารณูปโภคที่ต้องการ</h3></div><div class="bd"><table><thead><tr><th>#</th><th>Item</th><th>Spec. / Actual</th></tr></thead><tbody>
 <tr><td>1</td><td>POWER SUPPLY (spec)</td><td><input value="3 phase 400 V N+PE"/></td></tr><tr><td>2</td><td>Measurement volt</td><td><input/></td></tr><tr><td>3</td><td>Ground</td><td><input/></td></tr><tr><td>4</td><td>ค่ารอบการทำงานของเครื่องจักร</td><td><input/></td></tr><tr><td>5</td><td>Air Pressure Supply</td><td><input/></td></tr><tr><td>6</td><td>ชั่วโมงการทำงานของ Vacuum Pump</td><td><input/></td></tr><tr><td>7</td><td>Air Pressure ชุดใบมีดตัดขวาง</td><td><input/></td></tr><tr><td>8</td><td>Air Pressure Sealing</td><td><input/></td></tr></tbody></table></div></div>
 <div class="card"><div class="hd"><h3>Overall Quality Check / รายการเช็คสภาพโครงสร้างโดยรวม</h3></div><div class="bd handover-checks">
-<label><input type="checkbox"> สภาพโครงสร้างเครื่องจักรโดยรวม</label><label><input type="checkbox"> ความตึงของโซ่</label><label><input type="checkbox"> Clamp สภาพของตัวจับยึด</label><label><input type="checkbox"> สภาพของเพลาใบมีด</label><label><input type="checkbox"> สภาพใบมีดตัดขวาง</label><label><input type="checkbox"> ใบมีดตัดตามยาว</label><label><input type="checkbox"> หน้าจอแสดงผล</label><label><input type="checkbox"> Emergency sw. และระบบ safety สามารถใช้งานได้ปกติทุกจุด</label><label><input type="checkbox"> ตรวจสอบปริมาณน้ำมันหล่อลื่นโซ่</label><label><input type="checkbox"> สภาพ Sealing Gasket</label><label><input type="checkbox"> Vacuum pump ระดับน้ำมัน และสีของน้ำมัน</label><label><input type="checkbox"> ระบบ Cooling system และระดับน้ำ อยู่ในระดับปกติ</label><label><input type="checkbox"> เครื่องตัดสติ้กเกอร์</label><label><input type="checkbox"> เครื่องปริ้นเตอร์</label></div></div></div>
+<label><input type="checkbox"/> สภาพโครงสร้างเครื่องจักรโดยรวม</label><label><input type="checkbox"/> ความตึงของโซ่</label><label><input type="checkbox"/> Clamp สภาพของตัวจับยึด</label><label><input type="checkbox"/> สภาพของเพลาใบมีด</label><label><input type="checkbox"/> สภาพใบมีดตัดขวาง</label><label><input type="checkbox"/> ใบมีดตัดตามยาว</label><label><input type="checkbox"/> หน้าจอแสดงผล</label><label><input type="checkbox"/> Emergency sw. และระบบ safety สามารถใช้งานได้ปกติทุกจุด</label><label><input type="checkbox"/> ตรวจสอบปริมาณน้ำมันหล่อลื่นโซ่</label><label><input type="checkbox"/> สภาพ Sealing Gasket</label><label><input type="checkbox"/> Vacuum pump ระดับน้ำมัน และสีของน้ำมัน</label><label><input type="checkbox"/> ระบบ Cooling system และระดับน้ำ อยู่ในระดับปกติ</label><label><input type="checkbox"/> เครื่องตัดสติ้กเกอร์</label><label><input type="checkbox"/> เครื่องปริ้นเตอร์</label></div></div></div>
 <div class="grid2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Test Run Product Setting / การติดตั้งทดสอบเครื่อง</h3></div><div class="bd"><table><tbody><tr><td>1. กำลังการผลิต</td><td><input/></td></tr><tr><td>2. จำนวนพนักงานที่ใช้กับเครื่อง</td><td><input/></td></tr><tr><td>3. กำหนดความดันสุญญากาศสำหรับสินค้า 1</td><td><input/></td></tr><tr><td>4. คุณภาพรอยซีลของแพ็คเกจ 1</td><td><input/></td></tr><tr><td>5. กำหนดความดันสุญญากาศสำหรับสินค้า 2</td><td><input/></td></tr><tr><td>6. คุณภาพรอยซีลของแพ็คเกจ 2</td><td><input/></td></tr><tr><td>7. กำหนดความดันสุญญากาศสำหรับสินค้า 3</td><td><input/></td></tr><tr><td>8. คุณภาพรอยซีลของแพ็คเกจ 3</td><td><input/></td></tr></tbody></table></div></div>
-<div class="card"><div class="hd"><div><h3>Attachments / เอกสารแนบ</h3><div class="subtitle">อ้างอิงไฟล์จาก Machine Attachments กลาง ไม่สร้างไฟล์ซ้ำ</div></div><button class="btn" onclick="machinePanel('docs')">Open Machine Attachments</button></div><div class="bd handover-checks"><label><input type="checkbox"> ใบ invoice</label><label><input type="checkbox"> spec การทำงานของเครื่อง</label><label><input type="checkbox"> manual เครื่อง</label><label><input type="checkbox"> เอกสารแนะนำการใช้ และ การบำรุงรักษาเบื้องต้นของเครื่อง</label><label><input type="checkbox"> เอกสาร drawing</label><label><input type="checkbox"> เอกสารแนะนำ service contract</label></div></div></div>
+<div class="card"><div class="hd"><div><h3>Attachments / เอกสารแนบ</h3><div class="subtitle">อ้างอิงไฟล์จาก Machine Attachments กลาง ไม่สร้างไฟล์ซ้ำ</div></div><button class="btn" onclick="machinePanel('docs')">Open Machine Attachments</button></div><div class="bd handover-checks"><label><input type="checkbox"/> ใบ invoice</label><label><input type="checkbox"/> spec การทำงานของเครื่อง</label><label><input type="checkbox"/> manual เครื่อง</label><label><input type="checkbox"/> เอกสารแนะนำการใช้ และ การบำรุงรักษาเบื้องต้นของเครื่อง</label><label><input type="checkbox"/> เอกสาร drawing</label><label><input type="checkbox"/> เอกสารแนะนำ service contract</label></div></div></div>
 <div class="card" style="margin-top:14px"><div class="hd"><h3>Installation details that are correct on the delivery date / รายละเอียดการติดตั้งที่ถูกต้อง ณ วันที่ส่งมอบ</h3></div><div class="bd"><table><thead><tr><th>No.</th><th>Details</th><th>รายละเอียด</th><th>Checked</th></tr></thead><tbody>
-<tr><td>1</td><td>Machine is installed and in standard levelling</td><td>มีการวางเครื่องจักรไว้ตำแหน่งที่ปลอดภัย และ install ได้ระดับ</td><td><input type="checkbox"></td></tr><tr><td>2</td><td>Space behind machine has been left enough for operation, service, and maintenance tasks.</td><td>เหลือพื้นที่ไว้เพียงพอสำหรับการทำงาน การซ่อมบำรุง และการบำรุงรักษา</td><td><input type="checkbox"></td></tr><tr><td>3</td><td>Electrical and compressed air min 6 bar connection is installed.</td><td>มีการติดตั้งจุดเชื่อมต่อไฟฟ้าและอากาศ ไม่ต่ำกว่า 6 บาร์</td><td><input type="checkbox"></td></tr><tr><td>4</td><td>Safety valve is present and closed. The tube is attached with a hose clip.</td><td>มีชุดป้องกันความปลอดภัยสภาพที่ปิดอยู่ มีการติดตั้งท่อ และคลิปหนีบท่อ</td><td><input type="checkbox"></td></tr><tr><td>5</td><td>Gas connection is installed. Safety valve is present and closed.</td><td>มีการติดตั้งจุดเชื่อมท่อก๊าซ มีวาล์วนิรภัย และอยู่ในสภาพที่ปิดอยู่</td><td><input type="checkbox"></td></tr><tr><td>6</td><td>Cooling system is installed or externally connected.</td><td>ชุดหล่อเย็นได้ถูกติดตั้งเรียบร้อย</td><td><input type="checkbox"></td></tr><tr><td>7</td><td>All safety covers closed and side/chain covers installed properly.</td><td>ฝาครอบความปลอดภัยทั้งหมดถูกปิดและติดตั้งอย่างถูกต้อง</td><td><input type="checkbox"></td></tr><tr><td>8</td><td>Trim removal system is installed.</td><td>มีการติดตั้งระบบกำจัดขอบ</td><td><input type="checkbox"></td></tr><tr><td>9</td><td>Bottom and top film have been installed in place.</td><td>มีการติดตั้งฟิล์มด้านล่าง ด้านบนเข้าที่</td><td><input type="checkbox"></td></tr><tr><td>10</td><td>Signal light is installed.</td><td>มีการติดตั้งไฟสัญญาณแล้ว</td><td><input type="checkbox"></td></tr></tbody></table></div></div>
+<tr><td>1</td><td>Machine is installed and in standard levelling</td><td>มีการวางเครื่องจักรไว้ตำแหน่งที่ปลอดภัย และ install ได้ระดับ</td><td><input type="checkbox"/></td></tr><tr><td>2</td><td>Space behind machine has been left enough for operation, service, and maintenance tasks.</td><td>เหลือพื้นที่ไว้เพียงพอสำหรับการทำงาน การซ่อมบำรุง และการบำรุงรักษา</td><td><input type="checkbox"/></td></tr><tr><td>3</td><td>Electrical and compressed air min 6 bar connection is installed.</td><td>มีการติดตั้งจุดเชื่อมต่อไฟฟ้าและอากาศ ไม่ต่ำกว่า 6 บาร์</td><td><input type="checkbox"/></td></tr><tr><td>4</td><td>Safety valve is present and closed. The tube is attached with a hose clip.</td><td>มีชุดป้องกันความปลอดภัยสภาพที่ปิดอยู่ มีการติดตั้งท่อ และคลิปหนีบท่อ</td><td><input type="checkbox"/></td></tr><tr><td>5</td><td>Gas connection is installed. Safety valve is present and closed.</td><td>มีการติดตั้งจุดเชื่อมท่อก๊าซ มีวาล์วนิรภัย และอยู่ในสภาพที่ปิดอยู่</td><td><input type="checkbox"/></td></tr><tr><td>6</td><td>Cooling system is installed or externally connected.</td><td>ชุดหล่อเย็นได้ถูกติดตั้งเรียบร้อย</td><td><input type="checkbox"/></td></tr><tr><td>7</td><td>All safety covers closed and side/chain covers installed properly.</td><td>ฝาครอบความปลอดภัยทั้งหมดถูกปิดและติดตั้งอย่างถูกต้อง</td><td><input type="checkbox"/></td></tr><tr><td>8</td><td>Trim removal system is installed.</td><td>มีการติดตั้งระบบกำจัดขอบ</td><td><input type="checkbox"/></td></tr><tr><td>9</td><td>Bottom and top film have been installed in place.</td><td>มีการติดตั้งฟิล์มด้านล่าง ด้านบนเข้าที่</td><td><input type="checkbox"/></td></tr><tr><td>10</td><td>Signal light is installed.</td><td>มีการติดตั้งไฟสัญญาณแล้ว</td><td><input type="checkbox"/></td></tr></tbody></table></div></div>
 <div class="grid2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Basic Training Attendants / ผู้ที่ได้รับการอบรมเบื้องต้น</h3></div><div class="bd"><div class="field"><input placeholder="1. ชื่อผู้เข้าอบรม"/></div><div class="field"><input placeholder="2. ชื่อผู้เข้าอบรม"/></div><div class="field"><input placeholder="3. ชื่อผู้เข้าอบรม"/></div></div></div><div class="card"><div class="hd"><h3>Note / หมายเหตุ</h3></div><div class="bd"><textarea style="width:100%;min-height:130px"></textarea></div></div></div>
-<div class="card" style="margin-top:14px"><div class="hd"><h3>Machine Drawing / Installation Photos / รูปแบบเครื่องและรูปติดตั้ง</h3></div><div class="bd handover-photo-grid"><div class="signature-pad">MACHINE DRAWING<br><small>ERP / Supplier drawing auto-insert</small></div><div class="signature-pad">INSTALLATION PHOTO 1<br><small>เลือกจาก Installation Photo Evidence</small></div><div class="signature-pad">INSTALLATION PHOTO 2<br><small>เลือกจาก Installation Photo Evidence</small></div></div></div>
+<div class="card" style="margin-top:14px"><div class="hd"><h3>Machine Drawing / Installation Photos / รูปแบบเครื่องและรูปติดตั้ง</h3></div><div class="bd handover-photo-grid"><div class="signature-pad">MACHINE DRAWING<br/><small>ERP / Supplier drawing auto-insert</small></div><div class="signature-pad">INSTALLATION PHOTO 1<br/><small>เลือกจาก Installation Photo Evidence</small></div><div class="signature-pad">INSTALLATION PHOTO 2<br/><small>เลือกจาก Installation Photo Evidence</small></div></div></div>
+
+<div class="card" id="handover-training-ack" style="margin-top:14px"><div class="hd"><div><h3>Training &amp; Safety Acknowledgement / ยืนยันการอบรมและข้อควรระวัง</h3><div class="subtitle">สรุปจาก Installation &amp; Commissioning • ไม่ต้องกรอกรายละเอียด Warning ซ้ำ</div></div><span class="badge green">Linked from Installation</span></div><div class="bd">
+<div class="handover-checks"><label><input checked="" type="checkbox"/> Basic operator training completed / อบรมการใช้งานพื้นฐานแล้ว</label><label><input checked="" type="checkbox"/> Blade handling safety explained / อธิบายความปลอดภัยใบมีดแล้ว</label><label><input checked="" type="checkbox"/> Top &amp; bottom film loading demonstrated / สาธิตการใส่ฟิล์มแล้ว</label><label><input checked="" type="checkbox"/> Cleaning &amp; water-pressure caution explained / อธิบายข้อควรระวังการล้างแล้ว</label><label><input checked="" type="checkbox"/> Emergency / Safety system demonstrated / สาธิตระบบ Safety แล้ว</label><label><input type="checkbox"/> Customer has no pending training questions / ลูกค้าไม่มีหัวข้ออบรมค้าง</label></div>
+<div class="note" style="margin-top:10px">รายละเอียดรูป/หลักฐานการอบรมและ Warning Point เก็บใน <b>Installation &amp; Commissioning</b> ส่วน Handover แสดงเพียงผลยืนยันเพื่อให้เอกสารส่งมอบไม่ยาวและไม่ซ้ำข้อมูล</div>
+</div></div>
 <div class="card" style="margin-top:14px"><div class="hd"><h3>Warranty &amp; Service Agreement / ข้อตกลงการรับประกันและบริการ</h3></div><div class="bd warranty-box"><h4>Special 7 days service after delivery / การบริการหลัง พิเศษ 7 วัน หลังการติดตั้ง</h4><p>WE agreed to support the machine under specifical and test run product list above for 7 days. Within this period if there are any mistake have been done on the software setting caused by utility problem or natural disaster, we are willing to come back to make a new adjustment with no extra charge (not include oversea transportation fee). After that please contact our customer care service.</p><p>ทางบริษัทฯ ยินดีรับประกันการใช้งานตาม Spec การทำงาน และรูปแบบผลิตภัณฑ์ที่ระบุไว้ในเอกสารการส่งมอบ เป็นเวลา 7 วัน หลังจากการส่งมอบเครื่องจักรแล้วเสร็จ ตามเงื่อนไขในเอกสาร</p><h4>Warranty List / รายการรับประกัน</h4><p>Warranty 12 months after installation and commissioning, based on 1-shift machine operation and not including wearing parts. Further details are as separately agreed.</p><p>Warranty ที่มากับเครื่องมีอายุ 12 เดือน หลังการส่งมอบ โดยยึดการทำงาน 1 กะ หรือระยะเวลาเทียบเท่า และไม่รวมอะไหล่สิ้นเปลืองทุกชนิด</p></div></div>
 <div class="card" style="margin-top:14px"><div class="hd"><h3>Caution when using the product under the warranty period / ข้อควรระวังในการใช้สินค้าภายใต้ระยะเวลารับประกัน</h3></div><div class="bd"><ol class="warranty-caution"><li>Inappropriate use of the machine. / ใช้งานเครื่องอย่างไม่ถูกวิธีและเหมาะสม</li><li>Improper assembling, commissioning, operation, and/or maintenance. / การติดตั้ง การใช้งาน และการบำรุงรักษาเครื่องจักรที่ไม่ถูกต้อง</li><li>Operation when safety features are defective or improperly mounted. / ใช้งานในขณะที่ระบบรักษาความปลอดภัยบกพร่องหรือติดตั้งไม่ถูกต้อง</li><li>Instructions regarding transport, assembly, commissioning, service, maintenance or repair are not observed. / ไม่ปฏิบัติตามข้อมูลด้านขนส่ง ติดตั้ง ซ่อมแซม และบำรุงรักษา</li><li>Unauthorized structural/component changes. / เปลี่ยนแปลงโครงสร้างหรือส่วนประกอบโดยไม่ได้รับอนุญาต</li><li>Unauthorized or insufficient control of components. / การควบคุมดูแลไม่เป็นไปตามคำแนะนำ</li><li>Catastrophes, wars, and force majeure. / สงคราม ภัยพิบัติ และเหตุสุดวิสัย</li></ol></div></div>
 <div class="card" style="margin-top:14px"><div class="hd"><h3>Sign-off / ลงนามส่งมอบ</h3></div><div class="bd signature-grid"><div><b>Customer / ลูกค้า</b><div class="signature-pad">Sign here</div><input type="date"/></div><div><b>Service Manager / Ruampat</b><div class="signature-pad">Sign here</div><input type="date"/></div><div><b>Sales Representative / Ruampat</b><div class="signature-pad">Sign here</div><input type="date"/></div></div></div>
@@ -786,14 +844,14 @@ RuamPat Sales Team</textarea></div>
 <tr><td>15/08/2027</td><td>CM / Repair</td><td><span class="link">FN-CM-0815</span></td><td>OL3151</td><td>2 visits</td><td><span class="badge green">Completed</span></td></tr>
 </tbody></table></div></div>
 <div class="card" id="serviceJobDetail"><div class="hd"><h3>Function FN-PM-OL3151-01</h3><span class="badge blue">PM Round #1</span></div><div class="bd">
-<div class="grid3"><div class="note"><b>Machines</b><br/>OL3151 • OL2875</div><div class="note"><b>Customer</b><br/>บริษัท จีเอสวีฯ</div><div class="note"><b>Job Document</b><br/>FM-ENG-010 • Completed</div></div>
+<div class="grid3"><div class="note"><b>Machines</b><br>OL3151 • OL2875</br></div><div class="note"><b>Customer</b><br>บริษัท จีเอสวีฯ</br></div><div class="note"><b>Job Document</b><br>FM-ENG-010 • Completed</br></div></div>
 <h4>Visits under this Function</h4>
 <table><thead><tr><th>Technician</th><th>Visit</th><th>Check-in</th><th>Check-out</th><th>Location</th><th>Trip</th></tr></thead><tbody>
-<tr><td>Janeny</td><td>Visit #1</td><td>09:05</td><td>16:40</td><td>Customer Site</td><td rowspan="3"><span class="link" onclick="showTrip()">TRIP-20270120-01</span><br/><small>รถคันเดียวกัน</small></td></tr>
+<tr><td>Janeny</td><td>Visit #1</td><td>09:05</td><td>16:40</td><td>Customer Site</td><td rowspan="3"><span class="link" onclick="showTrip()">TRIP-20270120-01</span><br><small>รถคันเดียวกัน</small></br></td></tr>
 <tr><td>Jeans</td><td>Visit #2</td><td>09:08</td><td>16:35</td><td>Customer Site</td></tr>
 <tr><td>Technician C</td><td>Visit #3</td><td>09:12</td><td>16:42</td><td>Customer Site</td></tr>
 </tbody></table>
-<div class="service-trip" id="tripBox" style="display:none;margin-top:12px"><b>Shared Service Trip: TRIP-20270120-01</b><div class="vehicle-row" style="margin-top:10px"><div><small>Vehicle</small><br/><b>1กข-1234</b></div><div><small>Odometer Start</small><br/><b>125,000 km</b></div><div><small>Odometer End</small><br/><b>125,180 km</b></div><div><small>Distance</small><br/><b>180 km</b></div><div><small>Expense</small><br/><b>1,360 THB</b></div></div></div>
+<div class="service-trip" id="tripBox" style="display:none;margin-top:12px"><b>Shared Service Trip: TRIP-20270120-01</b><div class="vehicle-row" style="margin-top:10px"><div><small>Vehicle</small><br><b>1กข-1234</b></br></div><div><small>Odometer Start</small><br><b>125,000 km</b></br></div><div><small>Odometer End</small><br><b>125,180 km</b></br></div><div><small>Distance</small><br><b>180 km</b></br></div><div><small>Expense</small><br><b>1,360 THB</b></br></div></div></div>
 </div></div>
 </div>
 <div class="panel" id="p-pm">
@@ -838,36 +896,36 @@ RuamPat Sales Team</textarea></div>
 <tr>
 <td class="no">01</td><td>สภาพโครงสร้างเครื่องจักรโดยรวม</td>
 <td class="center">
-<label class="pill-radio"><input checked="" name="c1" type="radio" value="pass"/>PASS</label>
-<label class="pill-radio"><input name="c1" type="radio" value="fail"/>FAIL</label>
-<label class="pill-radio"><input name="c1" type="radio" value="na"/>N/A</label>
+<label class="pill-radio"><input checked="" name="c1" type="radio" value="pass">PASS</input></label>
+<label class="pill-radio"><input name="c1" type="radio" value="fail">FAIL</input></label>
+<label class="pill-radio"><input name="c1" type="radio" value="na">N/A</input></label>
 </td>
 <td><input placeholder="หมายเหตุ" value=""/></td>
 </tr>
 <tr>
 <td class="no">02</td><td>ความตึงของโซ่</td>
 <td class="center">
-<label class="pill-radio"><input checked="" name="c2" type="radio" value="pass"/>PASS</label>
-<label class="pill-radio"><input name="c2" type="radio" value="fail"/>FAIL</label>
-<label class="pill-radio"><input name="c2" type="radio" value="na"/>N/A</label>
+<label class="pill-radio"><input checked="" name="c2" type="radio" value="pass">PASS</input></label>
+<label class="pill-radio"><input name="c2" type="radio" value="fail">FAIL</input></label>
+<label class="pill-radio"><input name="c2" type="radio" value="na">N/A</input></label>
 </td>
 <td><input placeholder="หมายเหตุ" value=""/></td>
 </tr>
 <tr>
 <td class="no">03</td><td>Clamp สภาพของตัวจับยึด</td>
 <td class="center">
-<label class="pill-radio"><input checked="" name="c3" type="radio" value="pass"/>PASS</label>
-<label class="pill-radio"><input name="c3" type="radio" value="fail"/>FAIL</label>
-<label class="pill-radio"><input name="c3" type="radio" value="na"/>N/A</label>
+<label class="pill-radio"><input checked="" name="c3" type="radio" value="pass">PASS</input></label>
+<label class="pill-radio"><input name="c3" type="radio" value="fail">FAIL</input></label>
+<label class="pill-radio"><input name="c3" type="radio" value="na">N/A</input></label>
 </td>
 <td><input placeholder="หมายเหตุ" value=""/></td>
 </tr>
 <tr>
 <td class="no">04</td><td>สภาพของเพลาใบมีด</td>
 <td class="center">
-<label class="pill-radio"><input checked="" name="c4" type="radio" value="pass"/>PASS</label>
-<label class="pill-radio"><input name="c4" type="radio" value="fail"/>FAIL</label>
-<label class="pill-radio"><input name="c4" type="radio" value="na"/>N/A</label>
+<label class="pill-radio"><input checked="" name="c4" type="radio" value="pass">PASS</input></label>
+<label class="pill-radio"><input name="c4" type="radio" value="fail">FAIL</input></label>
+<label class="pill-radio"><input name="c4" type="radio" value="na">N/A</input></label>
 </td>
 <td><input placeholder="หมายเหตุ" value=""/></td>
 </tr>
@@ -1204,7 +1262,6 @@ RuamPat Sales Team</textarea></div>
 </tbody></table></div></div>
 </section>
 <section class="page" id="pm-my"><div class="page-title"><div><h1>งาน PM ของฉัน</h1><div class="subtitle">เพิ่ม Serial Number ให้ช่างเห็นชัดเจน</div></div></div><div class="card"><div class="bd"><table><thead><tr><th>Due</th><th>Machine No.</th><th>Serial</th><th>Customer</th><th>Plan</th><th>Status</th></tr></thead><tbody><tr><td>20/04/2027</td><td>1011-007</td><td><span class="link" onclick="openMachine('OL3151')">OL3151</span></td><td>บริษัท จีเอสวีฯ</td><td>VARIOVAC THERMOFORM</td><td><span class="badge gray">Planned</span></td></tr></tbody></table></div></div></section>
-
 <section class="page" id="visit-detail">
 <div class="page-title">
 <div>
@@ -1283,7 +1340,6 @@ RuamPat Sales Team</textarea></div>
 </div>
 </div>
 </section>
-
 <section class="page" id="function-detail">
 <div class="page-title">
 <div>
