@@ -13,8 +13,16 @@
 .top{height:86px;background:#edf4ff;border-bottom:1px solid #d7dfeb;display:flex;align-items:center;padding:0 34px;position:sticky;top:0;z-index:10}
 .logo{font-size:31px;font-weight:700;color:#df2b19}.logo b{color:#f36c21}.hamb{margin-left:45px;font-size:28px;color:#555}
 .shell{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 86px)}
-.side{background:#fff;border-right:1px solid #dce3ee;padding:16px 0;position:sticky;top:86px;height:calc(100vh - 86px);overflow:auto}
-.side .item{padding:12px 24px;font-size:16px}.side .item:hover{background:#eef6ff}.side .sec{font-weight:700;color:#5c6170}
+.side{background:#fff;border-right:1px solid #dce3ee;padding:12px 0;position:sticky;top:86px;height:calc(100vh - 86px);overflow:auto}
+.nav{width:100%;border:0;background:#fff;text-align:left;padding:12px 24px;font-size:16px;color:#4d5361;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.nav:hover{background:#eef6ff}
+.nav.active{background:#e8f4fb;color:#2f6f9f;font-weight:700}
+.chev{color:#7b8598}
+.subwrap{display:none;background:#fff}
+.subwrap.open{display:block}
+.sub{width:100%;border:0;background:#fff;text-align:left;padding:10px 24px 10px 46px;font-size:15px;color:#4d5361;cursor:pointer}
+.sub:hover{background:#eef6ff}
+.sub.active{background:#dff2fb;color:#2f6f9f;font-weight:700}
 .main{padding:16px 18px 60px}
 .card{background:#fff;border:1px solid var(--line);border-radius:8px;margin-bottom:14px}
 .head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
@@ -62,12 +70,60 @@ table{width:100%;border-collapse:collapse} th,td{border-bottom:1px solid #e4e8ef
 </div>
 <div class="shell">
   <aside class="side">
-    <div class="item">⌂ Dashboard</div><div class="item">▣ Calendar</div><div class="item">▥ Feed</div>
-    <div class="item">▣ Activities</div><div class="item">$ Sales</div><div class="item">⌘ Products</div>
-    <div class="item">▤ Reports</div><div class="item">▤ Stock Management</div>
-    <div class="item sec">↪ Functions</div><div class="item">⚙ Machine Register</div>
-    <div class="item">♧ Profile</div><div class="item">◉ Meta Data</div><div class="item">♧ Manage Users</div>
-    <div class="item">▦ Warehouse</div><div class="item">⚙ Configs</div>
+    <!-- SIDEBAR LOCK: do not modify unless explicitly requested -->
+    <button class="nav">⌂ Dashboard</button>
+
+    <button class="nav" onclick="toggleNav('calNav')">▣ Calendar <span class="chev">⌄</span></button>
+    <div id="calNav" class="subwrap">
+      <button class="sub">My Calendar</button>
+      <button class="sub">Event Calendar</button>
+      <button class="sub">Team Calendar</button>
+    </div>
+
+    <button class="nav">▥ Feed</button>
+
+    <button class="nav active" onclick="toggleNav('actNav')">▣ Activities <span class="chev">⌄</span></button>
+    <div id="actNav" class="subwrap open">
+      <button class="sub">Appointments</button>
+      <button class="sub">Tasks</button>
+      <button class="sub">Phone Calls</button>
+      <button class="sub">E-Mails</button>
+      <button class="sub">Visit</button>
+    </div>
+
+    <button class="nav" onclick="toggleNav('salesNav')">$ Sales <span class="chev">⌄</span></button>
+    <div id="salesNav" class="subwrap">
+      <button class="sub">Target</button>
+      <button class="sub">Leads</button>
+      <button class="sub">Customers</button>
+      <button class="sub">Accounts</button>
+      <button class="sub">Opportunities</button>
+      <button class="sub">Sales Quotes</button>
+    </div>
+
+    <button class="nav" onclick="toggleNav('prodNav')">⌘ Products <span class="chev">⌄</span></button>
+    <div id="prodNav" class="subwrap">
+      <button class="sub">Product Package</button>
+      <button class="sub">Product Set</button>
+      <button class="sub">Product List</button>
+    </div>
+
+    <button class="nav">▤ Reports</button>
+    <button class="nav">▦ Stock Management <span class="chev">⌄</span></button>
+    <button class="nav">↪ Functions</button>
+
+    <button class="nav" onclick="toggleNav('machineNav')">⚙ Machine Register <span class="chev">⌃</span></button>
+    <div id="machineNav" class="subwrap open">
+      <button class="sub active">Machine List</button>
+      <button class="sub">งาน PM ของฉัน</button>
+      <button class="sub">แผน PM กลาง</button>
+    </div>
+
+    <button class="nav">⌁ Profile</button>
+    <button class="nav">◫ Meta Data <span class="chev">⌄</span></button>
+    <button class="nav">♙ Manage Users</button>
+    <button class="nav">⊞ Warehouse</button>
+    <button class="nav">⚙ Configs</button>
   </aside>
 
   <main class="main">
@@ -192,7 +248,7 @@ table{width:100%;border-collapse:collapse} th,td{border-bottom:1px solid #e4e8ef
       <div class="tabs">
         <button class="tab active" onclick="tab('overview',this)">Overview</button>
         <button class="tab" onclick="tab('products',this)">Products</button>
-        <button class="tab" onclick="tab('machine',this)">Machine Register</button>
+        <button class="tab" onclick="tab('machineTab',this)">Machine Register</button>
         <button class="tab" onclick="tab('activities',this)">Activities</button>
         <button class="tab" onclick="tab('related',this)">Related Items</button>
         <button class="tab" onclick="tab('approval',this)">Approval</button>
@@ -207,7 +263,7 @@ table{width:100%;border-collapse:collapse} th,td{border-bottom:1px solid #e4e8ef
       </div>
       <div id="products" class="tabcontent">Products ของ Function เดิม</div>
 
-      <div id="machine" class="tabcontent">
+      <div id="machineTab" class="tabcontent">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
           <div>
             <b>เครื่องจักรที่เกี่ยวข้องกับใบฟังก์ชั่นนี้</b>
@@ -339,7 +395,9 @@ table{width:100%;border-collapse:collapse} th,td{border-bottom:1px solid #e4e8ef
 function tab(id,btn){
   document.querySelectorAll('.tabcontent').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-  document.getElementById(id).classList.add('active'); btn.classList.add('active');
+  const panel=document.getElementById(id);
+  if(panel) panel.classList.add('active');
+  if(btn) btn.classList.add('active');
 }
 function openLink(){document.getElementById('linkModal').classList.add('open')}
 function closeLink(){document.getElementById('linkModal').classList.remove('open')}
@@ -375,6 +433,10 @@ function calcDistance(){
   const s=Number(document.getElementById('odoStart').value||0);
   const e=Number(document.getElementById('odoEnd').value||0);
   document.getElementById('distance').value=(e>=s?(e-s):0)+' km';
+}
+function toggleNav(id){
+  const el=document.getElementById(id);
+  if(el) el.classList.toggle('open');
 }
 </script>
 </body>
