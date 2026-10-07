@@ -3,441 +3,571 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RuamPat ERP - Function / Machine Link Prototype</title>
+<title>RuamPat ERP - Service Integration Prototype</title>
 <style>
 :root{
-  --bg:#eef5ff; --card:#fff; --line:#dde3ec; --text:#4d5361; --muted:#7b8598;
-  --blue:#5576db; --green:#8bb51b; --orange:#ff8b24; --pink:#f5a1a7;
+ --bg:#eef5ff; --card:#fff; --line:#dce3ee; --text:#4d5361; --muted:#7d8798;
+ --blue:#5576db; --blue2:#2f6f9f; --green:#88b51d; --orange:#ff8b24; --red:#e25358;
+ --soft:#f7f9fc; --sidebar:#fff;
 }
-*{box-sizing:border-box} body{margin:0;font-family:Arial,"Noto Sans Thai",sans-serif;background:var(--bg);color:var(--text)}
-.top{height:86px;background:#edf4ff;border-bottom:1px solid #d7dfeb;display:flex;align-items:center;padding:0 34px;position:sticky;top:0;z-index:10}
-.logo{font-size:31px;font-weight:700;color:#df2b19}.logo b{color:#f36c21}.hamb{margin-left:45px;font-size:28px;color:#555}
-.shell{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 86px)}
-.side{background:#fff;border-right:1px solid #dce3ee;padding:12px 0;position:sticky;top:86px;height:calc(100vh - 86px);overflow:auto}
-.nav{width:100%;border:0;background:#fff;text-align:left;padding:12px 24px;font-size:16px;color:#4d5361;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
-.nav:hover{background:#eef6ff}
-.nav.active{background:#e8f4fb;color:#2f6f9f;font-weight:700}
-.chev{color:#7b8598}
-.subwrap{display:none;background:#fff}
-.subwrap.open{display:block}
-.sub{width:100%;border:0;background:#fff;text-align:left;padding:10px 24px 10px 46px;font-size:15px;color:#4d5361;cursor:pointer}
-.sub:hover{background:#eef6ff}
-.sub.active{background:#dff2fb;color:#2f6f9f;font-weight:700}
-.main{padding:16px 18px 60px}
-.card{background:#fff;border:1px solid var(--line);border-radius:8px;margin-bottom:14px}
-.head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-.head h2{margin:0;font-size:21px}.sub{font-size:13px;color:var(--muted)}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.pad{padding:16px 18px}.field label{display:block;margin-bottom:6px;color:#6b7488}
-.field input,.field select,.field textarea{width:100%;border:1px solid #d7dce4;border-radius:6px;padding:10px 12px;font-size:14px;background:#fff}
-.field textarea{min-height:78px}.pink{background:var(--pink)!important}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Thai",sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+.top{height:88px;background:#edf4ff;border-bottom:1px solid #d9e1ec;display:flex;align-items:center;padding:0 34px;position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:12px;font-size:30px;font-weight:700;color:#db2f20}
+.rp{font-size:34px;font-weight:900;color:#f36c21;letter-spacing:-4px}.rp span{color:#6a6f75}
+.hamb{margin-left:48px;font-size:28px;color:#555}
+.topright{margin-left:auto;display:flex;align-items:center;gap:18px}.bell{font-size:25px}.avatar{width:42px;height:42px;border-radius:50%;background:#d7dde6;display:grid;place-items:center;font-weight:700}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 88px)}
+.side{background:var(--sidebar);border-right:1px solid var(--line);height:calc(100vh - 88px);position:sticky;top:88px;overflow:auto;padding:8px 0}
+.nav,.subnav{width:100%;border:0;background:#fff;text-align:left;color:var(--text);cursor:pointer}
+.nav{padding:11px 20px;font-size:16px;display:flex;justify-content:space-between;align-items:center}
+.subnav{padding:9px 18px 9px 44px;font-size:15px}
+.nav:hover,.subnav:hover{background:#eef6ff}.nav.active,.subnav.active{background:#dff2fb;color:#2f6f9f;font-weight:700}
+.group{display:none}.group.open{display:block}
+.main{padding:16px 18px 60px;overflow:hidden}
+.page{display:none}.page.active{display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:9px;margin-bottom:14px;overflow:hidden}
+.cardhead{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px}
+.cardhead h2,.cardhead h3{margin:0}.cardhead h2{font-size:22px}.cardhead h3{font-size:17px}
+.pad{padding:16px 18px}
+.muted{color:var(--muted);font-size:13px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{border:0;border-radius:7px;padding:10px 14px;font-weight:700;cursor:pointer}
+.btn.blue{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff}.btn.orange{background:var(--orange);color:#fff}.btn.red{background:var(--red);color:#fff}
+.btn.ghost{background:#fff;border:1px solid #bdc8d7;color:#50627f}
+.btn.small{padding:7px 10px;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.stat{background:#fff;border:1px solid #dfe5ee;border-radius:8px;padding:19px;text-align:center}.stat b{display:block;font-size:27px;margin-bottom:6px}.stat span{font-size:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.field label{display:block;margin-bottom:6px;color:#687389}.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid #d5dce7;border-radius:6px;background:#fff}.field textarea{min-height:82px}
+.readonly{background:#f5f7fa!important;color:#596273}
 .tabs{display:flex;gap:26px;padding:0 18px;border-bottom:1px solid var(--line);overflow:auto}
-.tab{padding:14px 0;border:none;background:transparent;font-size:15px;font-weight:700;color:#6e7380;white-space:nowrap;cursor:pointer}
-.tab.active{color:var(--blue);border-bottom:2px solid var(--blue)}
-.tabcontent{display:none;padding:16px 18px}.tabcontent.active{display:block}
-.btn{border:0;border-radius:6px;padding:10px 15px;font-weight:700;cursor:pointer}
-.blue{background:var(--blue);color:#fff}.green{background:var(--green);color:#fff}.ghost{background:#fff;border:1px solid #b9c5d8;color:#50627f}
-.actions{display:flex;gap:8px;justify-content:flex-end}
-table{width:100%;border-collapse:collapse} th,td{border-bottom:1px solid #e4e8ef;padding:11px 9px;text-align:left;font-size:14px} th{background:#f7f9fc}
-.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700}.ok{background:#e8f6df;color:#5d8c16}.info{background:#eef4ff;color:#5576db}
-.notice{background:#f6f8fb;border-left:4px solid #8aa0bd;padding:12px 14px;border-radius:5px;margin:12px 0}
-.refbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.ref{background:#f4f6f9;border:1px solid #dde2ea;border-radius:999px;padding:6px 10px;font-size:12px}
-.modalbg{position:fixed;inset:0;background:rgba(0,0,0,.42);display:none;align-items:center;justify-content:center;z-index:50}.modalbg.open{display:flex}
-.modal{background:#fff;width:min(980px,94vw);max-height:90vh;overflow:auto;border-radius:9px;padding:18px}
-.modal.sm{width:min(760px,94vw)}.mtop{display:flex;justify-content:space-between;align-items:center}.x{border:1px solid #bcc7d8;background:#fff;width:36px;height:36px;border-radius:50%;font-size:20px}
-.searchbox{display:grid;grid-template-columns:1fr auto;gap:8px;margin:12px 0}.searchbox input{padding:10px;border:1px solid #ccd5e2;border-radius:6px}
-.result{border:1px solid #dfe4ec;border-radius:7px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
-.report h2{margin:4px 0}.line{height:3px;background:#3e69ff;margin:10px 0 16px}.report-info{display:grid;grid-template-columns:150px 1fr 150px 1fr;gap:8px 12px}.sign{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:45px}.sig{border-top:1px solid #777;text-align:center;padding-top:8px}
-.link{color:#456ed4;text-decoration:underline;cursor:pointer}
-@media(max-width:1050px){.grid4{grid-template-columns:1fr 1fr}.shell{grid-template-columns:220px 1fr}.report-info{grid-template-columns:120px 1fr}}
-@media(max-width:760px){.shell{grid-template-columns:1fr}.side{display:none}.grid4,.grid2{grid-template-columns:1fr}}
-
-.typebox{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
-.typecard{border:1px solid #dfe5ef;border-radius:8px;padding:12px;background:#fff;cursor:pointer}
-.typecard.active{border:2px solid #5576db;background:#f4f7ff}
-.typecard b{display:block;margin-bottom:4px}
-.conditional{display:none}.conditional.show{display:block}
-.machine-hub{background:#f7f9fc;border:1px solid #dfe4ec;border-radius:8px;padding:14px;margin-top:14px}
-.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
-.flow span{padding:7px 10px;border-radius:999px;background:#eef4ff;border:1px solid #d5def3;font-size:12px}
-.flow i{font-style:normal;color:#99a3b5}
-@media(max-width:900px){.typebox{grid-template-columns:1fr 1fr}}
+.tab{border:0;background:transparent;padding:15px 0;font-weight:700;color:#6d7380;white-space:nowrap;cursor:pointer}.tab.active{color:var(--blue);border-bottom:2px solid var(--blue)}
+.tabpanel{display:none;padding:16px 18px}.tabpanel.active{display:block}
+table{width:100%;border-collapse:collapse}.tablewrap{overflow:auto}
+th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size:14px;white-space:nowrap}th{background:#f7f9fc}
+.link{color:#456ed4;font-weight:700;cursor:pointer}.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700}.ok{background:#e7f6dd;color:#638b16}.warn{background:#fff1dd;color:#a96500}.info{background:#edf3ff;color:#5474d4}.danger{background:#ffe5e5;color:#c44545}
+.notice{background:#f6f8fb;border-left:4px solid #8ca0bd;padding:12px 14px;border-radius:6px;margin:12px 0}.notice.orange{background:#fff7e9;border-left-color:#f1a43b}
+.rowspace{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.search{display:flex;gap:8px}.search input{min-width:250px;padding:10px;border:1px solid #cbd5e3;border-radius:6px}
+.refbar{display:flex;gap:8px;flex-wrap:wrap}.ref{background:#f4f6f9;border:1px solid #dde3eb;border-radius:999px;padding:6px 10px;font-size:12px}
+.timeline{display:flex;gap:12px;align-items:center;overflow:auto;padding:8px 0}.step{min-width:130px;text-align:center}.dot{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;margin:0 auto 6px;border:2px solid #cad3df;background:#fff}.step.done .dot{border-color:#25b65a;color:#25b65a}.step.current .dot{border-color:var(--orange);color:var(--orange)}.bar{height:2px;background:#d8dee8;min-width:42px}
+.section-title{font-weight:700;margin:8px 0 10px}.checkrow{display:grid;grid-template-columns:34px 1fr 280px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #edf0f4}
+.photoarea{border:2px dashed #a8b7cc;border-radius:7px;padding:24px;text-align:center;color:#77869c}
+.typecards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.typecard{border:1px solid #dfe4ec;border-radius:8px;padding:12px;cursor:pointer}.typecard.active{border:2px solid var(--blue);background:#f4f7ff}
+.modalbg{position:fixed;inset:0;background:rgba(0,0,0,.42);display:none;align-items:center;justify-content:center;z-index:60}.modalbg.open{display:flex}.modal{background:#fff;width:min(960px,94vw);max-height:90vh;overflow:auto;border-radius:9px;padding:18px}.modal.sm{width:min(720px,94vw)}
+.mtop{display:flex;justify-content:space-between;align-items:center}.x{width:36px;height:36px;border-radius:50%;border:1px solid #b9c5d8;background:#fff;font-size:20px}
+.report{background:#fff}.report .line{height:3px;background:#3f69f4;margin:10px 0 16px}.reportinfo{display:grid;grid-template-columns:150px 1fr 150px 1fr;gap:8px 12px}.siggrid{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:50px}.sig{border-top:1px solid #777;text-align:center;padding-top:8px}
+.minihub{background:#f7f9fc;border:1px solid #dfe4ec;border-radius:8px;padding:12px}
+@media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:230px 1fr}}
+@media(max-width:760px){.app{grid-template-columns:1fr}.side{display:none}.stats,.grid4,.grid3,.grid2,.typecards{grid-template-columns:1fr}.checkrow{grid-template-columns:28px 1fr}.checkrow input[type=text]{grid-column:2}.reportinfo{grid-template-columns:120px 1fr}}
 </style>
 </head>
 <body>
-<div class="top">
-  <div class="logo"><b>RP</b> RuamPat ERP</div><div class="hamb">☰</div>
-</div>
-<div class="shell">
-  <aside class="side">
-    <!-- SIDEBAR LOCK: do not modify unless explicitly requested -->
-    <button class="nav">⌂ Dashboard</button>
+<header class="top">
+  <div class="brand"><div class="rp">R<span>P</span></div> RuamPat ERP</div>
+  <div class="hamb">☰</div>
+  <div class="topright"><div class="bell">🔔</div><div class="avatar">RP</div></div>
+</header>
 
-    <button class="nav" onclick="toggleNav('calNav')">▣ Calendar <span class="chev">⌄</span></button>
-    <div id="calNav" class="subwrap">
-      <button class="sub">My Calendar</button>
-      <button class="sub">Event Calendar</button>
-      <button class="sub">Team Calendar</button>
-    </div>
+<div class="app">
+<aside class="side">
+  <!-- SIDEBAR LOCKED: do not modify unless explicitly requested -->
+  <button class="nav" onclick="showPage('dashboard')">⌂ Dashboard</button>
+  <button class="nav" onclick="toggleGroup('calendarGroup')">▣ Calendar <span>⌄</span></button>
+  <div id="calendarGroup" class="group">
+    <button class="subnav">My Calendar</button><button class="subnav">Event Calendar</button><button class="subnav">Team Calendar</button>
+  </div>
+  <button class="nav">▥ Feed</button>
+  <button class="nav" onclick="toggleGroup('activityGroup')">▣ Activities <span>⌄</span></button>
+  <div id="activityGroup" class="group open">
+    <button class="subnav">Appointments</button><button class="subnav">Tasks</button><button class="subnav">Phone Calls</button><button class="subnav">E-Mails</button><button class="subnav" onclick="showPage('visit')">Visit</button>
+  </div>
+  <button class="nav" onclick="toggleGroup('salesGroup')">$ Sales <span>⌄</span></button>
+  <div id="salesGroup" class="group">
+    <button class="subnav">Target</button><button class="subnav">Leads</button><button class="subnav">Customers</button><button class="subnav">Accounts</button><button class="subnav">Opportunities</button><button class="subnav">Sales Quotes</button>
+  </div>
+  <button class="nav" onclick="toggleGroup('productGroup')">⌘ Products <span>⌄</span></button>
+  <div id="productGroup" class="group"><button class="subnav">Product Package</button><button class="subnav">Product Set</button><button class="subnav">Product List</button></div>
+  <button class="nav">▤ Reports</button>
+  <button class="nav">▦ Stock Management <span>⌄</span></button>
+  <button class="nav" onclick="showPage('function')">↪ Functions</button>
 
-    <button class="nav">▥ Feed</button>
+  <button class="nav active" onclick="toggleGroup('machineGroup')">⚙ Machine Register <span>⌃</span></button>
+  <div id="machineGroup" class="group open">
+    <button id="navMachineList" class="subnav active" onclick="showPage('machineList')">Machine List</button>
+    <button class="subnav">งาน PM ของฉัน</button>
+    <button class="subnav">แผน PM กลาง</button>
+  </div>
 
-    <button class="nav active" onclick="toggleNav('actNav')">▣ Activities <span class="chev">⌄</span></button>
-    <div id="actNav" class="subwrap open">
-      <button class="sub">Appointments</button>
-      <button class="sub">Tasks</button>
-      <button class="sub">Phone Calls</button>
-      <button class="sub">E-Mails</button>
-      <button class="sub">Visit</button>
-    </div>
+  <button class="nav">⌁ Profile</button>
+  <button class="nav">◫ Meta Data <span>⌄</span></button>
+  <button class="nav">♙ Manage Users</button>
+  <button class="nav">⊞ Warehouse</button>
+  <button class="nav">⚙ Configs</button>
+</aside>
 
-    <button class="nav" onclick="toggleNav('salesNav')">$ Sales <span class="chev">⌄</span></button>
-    <div id="salesNav" class="subwrap">
-      <button class="sub">Target</button>
-      <button class="sub">Leads</button>
-      <button class="sub">Customers</button>
-      <button class="sub">Accounts</button>
-      <button class="sub">Opportunities</button>
-      <button class="sub">Sales Quotes</button>
-    </div>
+<main class="main">
 
-    <button class="nav" onclick="toggleNav('prodNav')">⌘ Products <span class="chev">⌄</span></button>
-    <div id="prodNav" class="subwrap">
-      <button class="sub">Product Package</button>
-      <button class="sub">Product Set</button>
-      <button class="sub">Product List</button>
-    </div>
-
-    <button class="nav">▤ Reports</button>
-    <button class="nav">▦ Stock Management <span class="chev">⌄</span></button>
-    <button class="nav">↪ Functions</button>
-
-    <button class="nav" onclick="toggleNav('machineNav')">⚙ Machine Register <span class="chev">⌃</span></button>
-    <div id="machineNav" class="subwrap open">
-      <button class="sub active">Machine List</button>
-      <button class="sub">งาน PM ของฉัน</button>
-      <button class="sub">แผน PM กลาง</button>
-    </div>
-
-    <button class="nav">⌁ Profile</button>
-    <button class="nav">◫ Meta Data <span class="chev">⌄</span></button>
-    <button class="nav">♙ Manage Users</button>
-    <button class="nav">⊞ Warehouse</button>
-    <button class="nav">⚙ Configs</button>
-  </aside>
-
-  <main class="main">
-    <div class="card">
-      <div class="head">
-        <div>
-          <h2>Function: PM Quarterly — OL3151</h2>
-          <div class="sub">ใบฟังก์ชั่น / ใบงานกลางของ Service</div>
-          <div class="refbar">
-            <span class="ref">Opportunity: REG-OL3151</span>
-            <span class="ref">Sales Quote: SQ-2026-0152</span>
-            <span class="ref">Machine: OL3151</span>
-            <span class="ref">PM Round: #2</span>
-            <span class="ref">Visit: VIS-2026-018</span>
-          </div>
-        </div>
-        <div class="actions">
-          <button class="btn ghost" onclick="openJob()">▣ พิมพ์ใบงาน / Job Document</button>
-          <button class="btn blue">✎ แก้ไข</button>
-        </div>
-      </div>
-
-      <div class="pad">
-        <div class="grid4">
-          <div class="field"><label>ชื่อใบฟังก์ชั่น</label><input value="PM Quarterly — OL3151"></div>
-          <div class="field"><label>Opportunities No.</label><input value="REG - OL3151 (15602)"></div>
-          <div class="field"><label>Sales Quote No.</label><input value="SQ-2026-0152"></div>
-          <div class="field"><label>Operator / ผู้รับผิดชอบ</label><input value="Bob / Janeny"></div>
-        </div>
+<!-- MACHINE LIST -->
+<section id="machineList" class="page active">
+  <div class="card">
+    <div class="cardhead"><h2>⚙ Machine Register</h2></div>
+    <div class="pad">
+      <div class="stats">
+        <div class="stat"><b style="color:#5676da">156</b><span>เครื่องจักรทั้งหมด</span></div>
+        <div class="stat"><b style="color:#80ad1a">149</b><span>Active</span></div>
+        <div class="stat"><b style="color:#f1bc1b">0</b><span>ต้องดูแล</span></div>
+        <div class="stat"><b style="color:#ec5a4e">0</b><span>เกิน PM กำหนด</span></div>
+        <div class="stat"><b style="color:#42a2ce">0</b><span>PM ใน 30 วัน</span></div>
       </div>
     </div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h3>รายการเครื่องจักร</h3></div>
+    <div class="pad">
+      <div class="rowspace">
+        <b>รายการทั้งหมด (156)</b>
+        <div class="actions"><div class="search"><input placeholder="ค้นหา Machine No., Serial, ลูกค้า..."></div><button class="btn green">＋</button><button class="btn blue">↻</button></div>
+      </div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Machine No.</th><th>Serial No.</th><th>ชื่อเครื่องจักร</th><th>ลูกค้า / ที่ตั้ง</th><th>อายุ (เดือน)</th><th>PM ล่าสุด</th><th>PM ถัดไป</th><th>สถานะ</th></tr></thead>
+        <tbody>
+          <tr><td><span class="link" onclick="showPage('machineDetail')">1011-007</span></td><td>OL3151</td><td>VARIOVAC Optimus OL50</td><td>GSB / ปทุมธานี</td><td>2</td><td>-</td><td>30/10/2026</td><td><span class="badge ok">Active</span></td></tr>
+          <tr><td><span class="link">1211-003</span></td><td>22370</td><td>LASKA Grinder WW 130</td><td>Thai Union</td><td>18</td><td>11/07/2026</td><td>11/10/2026</td><td><span class="badge ok">Active</span></td></tr>
+          <tr><td><span class="link">1010-004</span></td><td>OL0123</td><td>VARIOVAC Optimus</td><td>Ruampat Demo</td><td>36</td><td>-</td><td>-</td><td><span class="badge ok">Active</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</section>
 
-    <div class="card">
-      <div class="head"><h2 style="font-size:17px">รายละเอียดลูกค้า</h2><span>−</span></div>
-      <div class="pad grid4">
-        <div class="field"><label>ชื่อ</label><input value="GSB"></div>
-        <div class="field"><label>ชื่อผู้ติดต่อ / ผู้แจ้งเรื่อง</label><input value="คุณติ๋ว"></div>
-        <div class="field"><label>เบอร์โทร</label><input value="08X-XXX-XXXX"></div>
-        <div class="field"><label>ID Line</label><input></div>
-        <div class="field"><label>ที่อยู่ออกบิล</label><textarea></textarea></div>
-        <div class="field"><label>Owner / เจ้าของเรื่อง</label><input value="Ike"></div>
+<!-- MACHINE DETAIL -->
+<section id="machineDetail" class="page">
+  <div class="card">
+    <div class="cardhead">
+      <div><h2>← Machine No. 1011-007 <span class="badge ok">Active</span></h2><div class="muted">Serial OL3151 • VARIOVAC Optimus</div></div>
+      <div class="actions"><button class="btn blue">✎ แก้ไข</button><button class="btn orange" onclick="activateMachineTab('pmSchedule')">🔧 จัดการ PM</button></div>
+    </div>
+    <div class="pad">
+      <div class="stats" style="grid-template-columns:repeat(6,1fr)">
+        <div class="stat"><b>-</b><span>อายุ (เดือน)</span></div><div class="stat"><b>0</b><span>PM ที่ผ่านมา</span></div><div class="stat"><b>-</b><span>Grade</span></div><div class="stat"><b>0</b><span>ชั่วโมงสะสม</span></div><div class="stat"><b>-</b><span>PM ถัดไป</span></div><div class="stat"><b>-</b><span>ชม./วัน (ผลิต)</span></div>
       </div>
     </div>
+  </div>
 
-    <div class="card">
-      <div class="head">
-        <div>
-          <h2 style="font-size:17px">รายละเอียดงาน</h2>
-          <div class="sub">Function สามารถสร้างจาก Functions, Machine Register, PM Schedule หรือ Sales Flow ได้ และต้องกลับมาเป็นใบงาน Record เดียวกัน</div>
-        </div>
-        <span>−</span>
+  <div class="card">
+    <div class="cardhead"><h3>General Information</h3><span>−</span></div>
+    <div class="pad grid4">
+      <div class="field"><label>Serial Number</label><input value="OL3151"></div>
+      <div class="field"><label>ชื่อเครื่องจักร</label><input value="VARIOVAC Optimus OL50 OL3151"></div>
+      <div class="field"><label>Model</label><input value="Optimus"></div>
+      <div class="field"><label>Brand</label><input value="Variovac"></div>
+      <div class="field"><label>ปีที่ผลิต</label><input value="2026"></div>
+      <div class="field"><label>วันที่ส่งมอบ</label><input type="date"></div>
+      <div class="field"><label>วันหมดประกัน</label><input type="date"></div>
+      <div class="field"><label>สถานะ</label><select><option>Active</option><option>Inactive</option></select></div>
+      <div class="field"><label>ผู้รับผิดชอบ</label><select><option>เลือกผู้รับผิดชอบ</option></select></div>
+      <div class="field"><label>เบอร์ติดต่อ</label><input value="-"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Installation Location</h3><span>−</span></div>
+    <div class="pad grid4">
+      <div class="field"><label>ลูกค้า</label><input value="บริษัท จีเอสบี อินเตอร์เนชั่นแนล จำกัด"></div>
+      <div class="field"><label>Account (Target)</label><input value="บริษัท จีเอสบี อินเตอร์เนชั่นแนล จำกัด"></div>
+      <div class="field"><label>Lead หลัก (Main Lead)</label><input value="คุณติ๋ว"></div>
+      <div class="field"><label>ชื่อสถานที่</label><input value="ปทุมธานี"></div>
+      <div class="field"><label>อาคาร</label><input></div><div class="field"><label>ชั้น</label><input></div><div class="field"><label>พื้นที่</label><input></div><div class="field"><label>ผู้ติดต่อ Onsite</label><input value="คุณติ๋ว"></div>
+      <div class="field"><label>เบอร์ Onsite</label><input value="08X-XXX-XXXX"></div><div class="field" style="grid-column:span 2"><label>ที่อยู่</label><textarea></textarea></div><div class="field"><label>Google Location</label><input></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Technical Specifications</h3><span>−</span></div>
+    <div class="pad grid4">
+      <div class="field"><label>กำลังไฟ (kW)</label><input></div><div class="field"><label>แรงดันไฟฟ้า</label><input></div><div class="field"><label>น้ำหนัก (kg)</label><input></div><div class="field"><label>ขนาด (LxWxH mm)</label><input></div>
+      <div class="field"><label>PM ทุกกี่เดือน</label><input></div><div class="field"><label>ชั่วโมงผลิตต่อวัน</label><input></div><div class="field"><label>แรงดันลม (bar)</label><input></div><div class="field"><label>Flow ลม (ลิตร/ชม.)</label><input></div>
+      <div class="field"><label>ใช้น้ำ (ลิตร/นาที)</label><input></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" data-mtab="overview" onclick="activateMachineTab('overview')">Overview</button>
+      <button class="tab" data-mtab="pmProgram" onclick="activateMachineTab('pmProgram')">PM Program</button>
+      <button class="tab" data-mtab="pmSchedule" onclick="activateMachineTab('pmSchedule')">PM Schedule</button>
+      <button class="tab" data-mtab="serviceJobs" onclick="activateMachineTab('serviceJobs')">CM / Service Jobs</button>
+      <button class="tab" data-mtab="spareParts" onclick="activateMachineTab('spareParts')">Spare Parts</button>
+      <button class="tab" data-mtab="history" onclick="activateMachineTab('history')">Maintenance History</button>
+      <button class="tab" data-mtab="attachments" onclick="activateMachineTab('attachments')">Attachments</button>
+      <button class="tab" data-mtab="conversation" onclick="activateMachineTab('conversation')">Conversation</button>
+      <button class="tab" data-mtab="feed" onclick="activateMachineTab('feed')">Feed</button>
+      <button class="tab" data-mtab="health" onclick="activateMachineTab('health')">Machine Health</button>
+    </div>
+
+    <div id="mtab-overview" class="tabpanel active">
+      <div class="grid2">
+        <div class="minihub"><b>Production vs อายุเครื่อง</b><p class="muted">อายุเครื่อง - เดือน</p><div style="height:18px;background:#e8ebf0;border-radius:10px"></div><p class="muted">ชั่วโมงสะสม 0 ชม.</p></div>
+        <div class="minihub"><b>การแจ้งเตือน</b><div class="notice">ยังไม่มีกำหนด PM ถัดไป</div></div>
       </div>
-      <div class="pad">
-        <div class="notice">
-          <b>Source / จุดที่สร้าง:</b> Functions → Create Function
-          <span style="margin:0 8px">หรือ</span>
-          Machine Register → Create PM / CM
-          <span style="margin:0 8px">หรือ</span>
-          PM Schedule → Create / Link Function
-        </div>
+      <div class="notice orange"><b>Sales → Service Handover:</b> Target speed 10 cycles/min • Film/label quality reference OL2875 • Labeller 2 units • Acceptance criteria pending confirm.</div>
+    </div>
 
-        <div class="field">
-          <label>Work Type / ประเภทงาน *</label>
-          <div class="typebox">
-            <div class="typecard active" id="typePM" onclick="setWorkType('PM')"><b>PM</b><span class="sub">Preventive Maintenance</span></div>
-            <div class="typecard" id="typeCM" onclick="setWorkType('CM')"><b>CM</b><span class="sub">Corrective Maintenance</span></div>
-            <div class="typecard" id="typeINSTALL" onclick="setWorkType('INSTALL')"><b>Installation</b><span class="sub">Installation / Commissioning</span></div>
-            <div class="typecard" id="typeOTHER" onclick="setWorkType('OTHER')"><b>Other</b><span class="sub">Training / Inspection / Service</span></div>
-          </div>
+    <div id="mtab-pmProgram" class="tabpanel">
+      <div class="rowspace"><div><b>แผน PM ของเครื่องนี้</b><div class="muted">เลือกจากแผนกลางแล้วปรับหัวข้อ/รายการต่อเครื่องได้</div></div><div class="actions"><button class="btn ghost">↻ เลือก / เปลี่ยนแผน PM</button><button class="btn green">✓ บันทึก</button></div></div>
+      <div class="card" style="margin:0">
+        <div class="cardhead"><h3>VARIOVAC THERMOFORM CHECKLISTS</h3><span>PM ทุก 1 เดือน</span></div>
+        <div class="pad">
+          <div class="section-title">เงื่อนไขการตรวจสอบสภาพเครื่องจักร</div>
+          <div class="checkrow"><span>✓</span><span>สภาพโครงสร้างเครื่องจักรโดยรวม</span><input type="text" placeholder="หมายเหตุ"></div>
+          <div class="checkrow"><span>✓</span><span>ความตึงของโซ่</span><input type="text" placeholder="หมายเหตุ"></div>
+          <div class="checkrow"><span>✓</span><span>Clamp สภาพของตัวจับยึด</span><input type="text" placeholder="หมายเหตุ"></div>
+          <div class="checkrow"><span>✓</span><span>Emergency switch ใช้งานได้ปกติทุกจุด</span><input type="text" placeholder="หมายเหตุ"></div>
+          <div class="checkrow"><span>✓</span><span>ระบบ Safety ใช้งานได้ปกติทุกจุด</span><input type="text" placeholder="หมายเหตุ"></div>
+          <button class="btn ghost" style="margin-top:12px">＋ เพิ่มหัวข้อใหญ่</button>
         </div>
-
-        <div id="pmRefPanel" class="conditional show machine-hub">
-          <b>PM Reference</b>
-          <div class="sub">ถ้าสร้าง Function จากหน้า Functions สามารถเลือก PM Round ของเครื่องภายหลังได้ ไม่บังคับให้สร้างรอบใหม่อัตโนมัติ</div>
-          <div class="grid2" style="margin-top:10px">
-            <div class="field"><label>Linked Machine</label><select><option>OL3151 | 1011-007 | VARIOVAC Optimus</option></select></div>
-            <div class="field"><label>PM Round</label><select><option>PM Round #2 — Due 30/08/2026</option><option>ยังไม่ Link PM Round</option></select></div>
-          </div>
-        </div>
-
-        <div id="cmRefPanel" class="conditional machine-hub">
-          <b>CM Reference</b>
-          <div class="sub">CM ไม่ใช้ PM Round และเมื่อ Save จะกลับไปแสดงใน Machine Register → CM / Repair อัตโนมัติ</div>
-          <div class="grid2" style="margin-top:10px">
-            <div class="field"><label>Linked Machine</label><select><option>OL3151 | 1011-007 | VARIOVAC Optimus</option></select></div>
-            <div class="field"><label>CM Type</label><select><option>CM ซ่อม</option><option>CM เร่งด่วน</option></select></div>
-          </div>
-        </div>
-        <div class="grid4">
-          <div class="field"><label>Theme</label><select><option>Service / PM</option></select></div>
-          <div class="field"><label>จำนวนผู้ทำงาน</label><input value="2"></div>
-          <div class="field"><label>วันที่ร้องขอ</label><input type="date" value="2026-08-28"></div>
-          <div class="field"><label>วันที่กำหนดเสร็จ</label><input type="date" value="2026-08-30"></div>
-          <div class="field"><label>วันที่-เวลาเริ่มงาน</label><input value="2026-08-30 09:00"></div>
-          <div class="field"><label>วันที่-เวลาสิ้นสุด</label><input value="2026-08-30 16:30"></div>
-          <div class="field"><label>ห้อง</label><input></div>
-          <div class="field"><label>ที่อยู่สถานที่จัดงาน</label><input value="GSB Plant"></div>
-          <div class="field"><label>google location</label><input></div>
-          <div class="field"><label>ชื่อผู้เซ็นต์ลายมือ</label><input value="คุณติ๋ว"></div>
-          <div class="field"><label>เบอร์</label><input value="08X-XXX-XXXX"></div>
-          <div class="field"><label>Subject</label><input value="PM Quarterly OL3151"></div>
-          <div class="field"><label>ประเภทงาน (ค่าที่บันทึก)</label><input id="workTypeValue" value="PM" readonly></div>
-          <div class="field"><label>Urgent Status</label><select><option>Normal</option><option>Urgent</option></select></div>
-          <div class="field"><label>สถานะของงาน</label><select><option>In Progress</option><option>Completed</option></select></div>
-          <div class="field"><label>ชื่อผู้รับงาน</label><input value="Bob"></div>
-        </div>
-
-        <div style="margin-top:14px" class="grid2">
-          <div class="field"><label>Service Category</label><select><option>Preventive Maintenance</option></select></div>
-          <div class="field"><label>Incident Category</label><select><option>PM Scheduled</option></select></div>
-        </div>
-
-        <div style="margin-top:14px" class="field"><label>รายละเอียดปัญหา</label><textarea>เข้าทำ PM ตามรอบประจำไตรมาส</textarea></div>
-        <div style="margin-top:14px" class="field"><label>สรุปแนวทางแก้ไข</label><textarea>ตรวจเช็กตาม PM Checklist และ Machine Survey</textarea></div>
-        <div style="margin-top:14px" class="field"><label>ข้อมูลควรรู้ก่อนเข้าหน้างาน</label><textarea>เชื่อมกับ PM Round #2 และเครื่อง OL3151</textarea></div>
-        <div style="margin-top:14px" class="field"><label>ข้อมูลแจ้งลูกค้าเพิ่มเติม</label><textarea></textarea></div>
-        <div style="margin-top:14px" class="field"><label>Note</label><textarea></textarea></div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="tabs">
-        <button class="tab active" onclick="tab('overview',this)">Overview</button>
-        <button class="tab" onclick="tab('products',this)">Products</button>
-        <button class="tab" onclick="tab('machineTab',this)">Machine Register</button>
-        <button class="tab" onclick="tab('activities',this)">Activities</button>
-        <button class="tab" onclick="tab('related',this)">Related Items</button>
-        <button class="tab" onclick="tab('approval',this)">Approval</button>
-        <button class="tab" onclick="tab('stock',this)">Stock</button>
-        <button class="tab" onclick="tab('conversation',this)">Conversation</button>
-        <button class="tab" onclick="tab('feed',this)">Feed</button>
-        <button class="tab" onclick="tab('attachments',this)">Attachments</button>
-      </div>
-
-      <div id="overview" class="tabcontent active">
-        <div class="notice">Function นี้เป็นใบงานกลาง สามารถถูกเปิดจาก PM Schedule, Machine Register, Functions หรือ Visit ได้ แต่ทั้งหมดต้องอ้างอิง Function record เดียวกัน</div>
-      </div>
-      <div id="products" class="tabcontent">Products ของ Function เดิม</div>
-
-      <div id="machineTab" class="tabcontent">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div>
-            <b>เครื่องจักรที่เกี่ยวข้องกับใบฟังก์ชั่นนี้</b>
-            <div class="sub">รองรับ Auto Link จาก PM / OPP / Sales Quote และ Manual Link โดยผู้ใช้</div>
-          </div>
-          <button class="btn green" onclick="openLink()">＋ ผูกเครื่องจักร</button>
-        </div>
-        <table>
-          <thead><tr><th>Machine No.</th><th>Serial No.</th><th>ชื่อเครื่องจักร</th><th>ลูกค้า</th><th>Source</th><th>สถานะ</th><th>Action</th></tr></thead>
-          <tbody id="machineRows">
-            <tr>
-              <td><span class="link">1011-007</span></td>
-              <td>OL3151</td>
-              <td>VARIOVAC Optimus</td>
-              <td>GSB</td>
-              <td><span class="badge info">PM Round #2</span></td>
-              <td><span class="badge ok">Linked</span></td>
-              <td><button class="btn ghost" onclick="alert('เปิด Machine Register OL3151')">เปิด Machine Register</button></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="notice"><b>หลักการ:</b> 1 Function ผูกได้หลายเครื่อง และ Machine Register จะดึง Function นี้ไปแสดงอัตโนมัติใน Service Jobs / ประวัติงานของเครื่อง โดยไม่สร้าง Function ซ้ำ</div>
-        <div class="machine-hub">
-          <b>Reverse Link Preview — สิ่งที่จะเห็นที่ Machine Register OL3151</b>
-          <div class="flow">
-            <span>Machine OL3151</span><i>→</i><span id="reverseType">PM</span><i>→</i><span>Function PM Quarterly — OL3151</span><i>→</i><span>Visit VIS-2026-018</span>
-          </div>
-          <div class="sub">ถ้า Work Type = PM ให้ไปอยู่ PM / Service History และ Link PM Round ได้ • ถ้า Work Type = CM ให้ไปอยู่ CM / Repair • Installation ให้ไปอยู่ Installation / Service History</div>
-        </div>
-      </div>
-
-      <div id="activities" class="tabcontent">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div>
-            <b>Visit / การเข้าหน้างาน</b>
-            <div class="sub">Visit อยู่ใต้ Function และ Prefill Customer + Machine จาก Function อัตโนมัติ</div>
-          </div>
-          <button class="btn green" onclick="openVisit()">＋ สร้าง Visit</button>
-        </div>
-        <table>
-          <thead><tr><th>Visit</th><th>Machine</th><th>Technician</th><th>Check-in</th><th>Check-out</th><th>Vehicle</th><th>Distance</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td><span class="link">VIS-2026-018</span></td><td>OL3151</td><td>Bob</td><td>06/10/26 09:10</td><td>06/10/26 12:30</td><td>1กข 1234</td><td>180 km</td><td><span class="badge ok">Completed</span></td></tr>
-          </tbody>
-        </table>
-        <div class="notice">สร้าง Visit จาก Function → Account/Customer, Contact, Site, Function No. และ Linked Machine ต้อง Prefill อัตโนมัติ เพื่อลดการลืมเลือก Account</div>
-      </div>
-      <div id="related" class="tabcontent">Related Items</div>
-      <div id="approval" class="tabcontent">Approval</div>
-      <div id="stock" class="tabcontent">Stock / Parts Usage</div>
-      <div id="conversation" class="tabcontent">Conversation</div>
-      <div id="feed" class="tabcontent">Feed</div>
-      <div id="attachments" class="tabcontent">Attachments</div>
+    <div id="mtab-pmSchedule" class="tabpanel">
+      <div class="rowspace"><b>แผน PM ทั้งหมด 3 รอบ</b><button class="btn green" onclick="openModal('pmCreateModal')">＋ สร้างรอบ PM</button></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>ครั้งที่</th><th>ประเภท PM</th><th>แผน (Plan)</th><th>ช่างผู้รับผิดชอบ</th><th>วันที่กำหนด</th><th>วันที่จริง</th><th>สถานะ</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="link" onclick="showPage('pmRound')">#1</span></td><td>PM ประจำไตรมาส</td><td>VARIOVAC THERMOFORM CHECKLISTS</td><td>Janeny, Jeans</td><td>2026-07-30</td><td>2026-07-11</td><td><span class="badge ok">Completed</span></td><td>👁 ✎</td></tr>
+          <tr><td><span class="link" onclick="showPage('pmRound')">#2</span></td><td>PM ประจำไตรมาส</td><td>VARIOVAC THERMOFORM CHECKLISTS</td><td>Bob</td><td>2026-08-30</td><td>-</td><td><span class="badge warn">In Progress</span></td><td>👁 ✎</td></tr>
+          <tr><td>#3</td><td>PM ประจำไตรมาส</td><td>VARIOVAC THERMOFORM CHECKLISTS</td><td>Bob</td><td>2026-09-29</td><td>-</td><td><span class="badge info">Scheduled</span></td><td>👁 ✎</td></tr>
+        </tbody>
+      </table></div>
     </div>
-  </main>
-</div>
 
+    <div id="mtab-serviceJobs" class="tabpanel">
+      <div class="rowspace">
+        <div><b>CM / Service Jobs</b><div class="muted">เป็น View ของ Function ที่ Link กับเครื่องนี้ ไม่สร้างใบงานซ้ำ</div></div>
+        <div class="actions"><button class="btn orange" onclick="prepareFunction('CM')">＋ สร้างงาน CM</button><button class="btn ghost" onclick="prepareFunction('PM')">＋ สร้าง Function PM</button></div>
+      </div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Function</th><th>Type</th><th>Problem / Subject</th><th>Technician</th><th>Date</th><th>Status</th><th>Visit</th></tr></thead>
+        <tbody>
+          <tr><td><span class="link" onclick="showPage('function')">FN-CM-004</span></td><td><span class="badge danger">CM</span></td><td>Vacuum pressure abnormal</td><td>Bob</td><td>20/10/2026</td><td><span class="badge warn">In Progress</span></td><td>1</td></tr>
+          <tr><td><span class="link" onclick="showPage('function')">FN-PM-002</span></td><td><span class="badge info">PM</span></td><td>Quarterly PM</td><td>Bob / Janeny</td><td>30/08/2026</td><td><span class="badge ok">Completed</span></td><td>2</td></tr>
+        </tbody>
+      </table></div>
+    </div>
 
-<div id="visitModal" class="modalbg">
-  <div class="modal sm">
-    <div class="mtop"><h3>สร้าง Visit จาก Function</h3><button class="x" onclick="closeVisit()">×</button></div>
-    <div class="notice"><b>Auto Prefill จาก Function</b> — ไม่ให้ช่างเลือก Account ซ้ำถ้า Function มีลูกค้าอยู่แล้ว</div>
-    <div class="grid2">
-      <div class="field"><label>Function</label><input value="PM Quarterly — OL3151" readonly></div>
-      <div class="field"><label>Customer / Account</label><input value="GSB" readonly></div>
-      <div class="field"><label>Contact</label><input value="คุณติ๋ว" readonly></div>
-      <div class="field"><label>Machine</label><select><option>OL3151 | 1011-007</option></select></div>
-      <div class="field"><label>Visit Objective</label><select><option>PM</option><option>CM</option><option>Installation</option><option>Inspection</option><option>Training</option></select></div>
-      <div class="field"><label>Assigned Technician</label><select><option>Bob</option><option>Janeny</option></select></div>
+    <div id="mtab-spareParts" class="tabpanel">
+      <div class="rowspace"><b>อะไหล่ประจำเครื่อง</b><button class="btn green">＋ เพิ่มอะไหล่</button></div>
+      <table><thead><tr><th>บาร์โค้ด</th><th>ชื่อรายการ</th><th>จำนวน</th><th>ชม./วันที่ใช้จริง</th><th>อายุคงเหลือ</th><th>แหล่งที่มา</th></tr></thead><tbody><tr><td colspan="6" style="text-align:center;color:#8a96aa">ยังไม่มีอะไหล่ประจำเครื่อง</td></tr></tbody></table>
+    </div>
+
+    <div id="mtab-history" class="tabpanel">
+      <table><thead><tr><th>วันที่</th><th>ประเภท</th><th>Function</th><th>Visit</th><th>ช่าง</th><th>ผล</th></tr></thead>
+      <tbody><tr><td>06/10/2026</td><td>PM</td><td><span class="link" onclick="showPage('function')">FN-PM-002</span></td><td><span class="link" onclick="showPage('visit')">VIS-2026-018</span></td><td>Bob</td><td>Completed</td></tr></tbody></table>
+    </div>
+
+    <div id="mtab-attachments" class="tabpanel">
+      <div class="rowspace"><div><b>Machine Attachments</b><div class="muted">ไฟล์กลางของเครื่อง: Supplier docs + confirmed installation docs</div></div><button class="btn ghost">Add</button></div>
+      <table><thead><tr><th>Type</th><th>File</th><th>Source</th><th>Confirmed</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Order Confirmation</td><td>VV_OL3151_OrderConfirmation.pdf</td><td>Supplier Email AI</td><td>03/10/2026</td><td>⬇ 👁</td></tr>
+        <tr><td>Utility Requirement</td><td>OL3151_Final_Utility_RevB.pdf</td><td>Supplier Email AI</td><td>04/10/2026</td><td>⬇ 👁</td></tr>
+        <tr><td>Installation Photo</td><td>OL3151_install_after_01.jpg</td><td>Function FN-INST-001</td><td>11/10/2026</td><td>⬇ 👁</td></tr>
+      </tbody></table>
+      <div class="notice">ไฟล์เดียวสามารถถูกแสดงใน Installation & Commissioning ได้โดยใช้ Link/View เดิม ไม่ Copy file ซ้ำ</div>
+    </div>
+
+    <div id="mtab-conversation" class="tabpanel"><div class="field"><label>Conversation</label><textarea style="min-height:220px"></textarea></div><div class="actions"><button class="btn blue">Comment</button></div></div>
+    <div id="mtab-feed" class="tabpanel"><table><thead><tr><th>วัน-เวลา</th><th>Description</th></tr></thead><tbody><tr><td colspan="2" style="text-align:center;color:#8a96aa">ยังไม่มี Feed</td></tr></tbody></table></div>
+
+    <div id="mtab-health" class="tabpanel">
+      <div class="grid2">
+        <div class="minihub"><b>เชื่อมต่อ API จากผู้ผลิต / Vendor</b><p><span class="badge danger">Disconnected</span></p><div class="field"><label>Vendor / Brand</label><select><option>VARIOVAC</option></select></div><div class="field"><label>Machine / Serial ID</label><input value="OL3151"></div><button class="btn blue" style="margin-top:10px;width:100%">⚡ ทดสอบการเชื่อมต่อ</button></div>
+        <div class="minihub"><b>ประเมินสุขภาพเครื่องจักรด้วยตนเอง</b><div class="grid2" style="margin-top:10px"><div class="field"><label>การสั่นสะเทือน</label><input value="2.1"></div><div class="field"><label>อุณหภูมิ</label><input value="42"></div><div class="field"><label>ระดับเสียง</label><input value="68"></div><div class="field"><label>แรงดันน้ำมัน</label><input value="4.8"></div></div><button class="btn orange" style="margin-top:10px;width:100%">ประเมินสุขภาพเครื่องจักร</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PM ROUND DETAIL -->
+<section id="pmRound" class="page">
+  <div class="card">
+    <div class="cardhead">
+      <div><h2>← งาน PM รอบ #2 — 1011-007 <span class="badge warn">In Progress</span></h2><div class="muted">Machine OL3151 • VARIOVAC Optimus</div></div>
+      <div class="actions"><button class="btn ghost" onclick="openModal('pmPrintModal')">▣ พิมพ์ใบ PM</button><button class="btn green">✓ บันทึก</button><button class="btn blue">✈ ขอ Approve</button></div>
+    </div>
+    <div class="pad"><div class="notice orange"><b>ข้อมูลยังไม่ครบ:</b> วันที่ทำ PM / Checklist / สรุปผล ต้องกรอกก่อนปิดงาน</div></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>ที่ตั้งเครื่องจักร (Machine Reference)</h3></div>
+    <div class="pad grid3">
+      <div class="minihub"><b>VARIOVAC Optimus OL50</b><p>Machine No.: 1011-007</p><p>Serial: OL3151</p></div>
+      <div class="minihub"><b>ที่ตั้ง</b><p>ลูกค้า: GSB</p><p>สถานที่: ปทุมธานี</p></div>
+      <div class="minihub"><b>ผู้ติดต่อ Onsite</b><p>คุณติ๋ว</p><p>08X-XXX-XXXX</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>ข้อมูลการ PM</h3></div>
+    <div class="pad grid4"><div class="field"><label>ประเภท PM</label><input class="readonly" value="PM ประจำไตรมาส" readonly></div><div class="field"><label>แผน</label><input class="readonly" value="VARIOVAC THERMOFORM CHECKLISTS" readonly></div><div class="field"><label>วันที่กำหนด</label><input class="readonly" value="2026-08-30" readonly></div><div class="field"><label>วันที่ทำจริง</label><input type="date"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Machine Survey / สำรวจก่อน PM (ข้อ 1–9)</h3><div class="muted">เก็บ Parameter ก่อนทำ Checklist เพื่อใช้ Trend/AI ในอนาคต</div></div>
+    <div class="pad grid3">
+      <div class="field"><label>1. Cycle / Speed ก่อน PM</label><input type="number" placeholder="cycles/min"></div>
+      <div class="field"><label>2. Vacuum / Pressure</label><input type="number"></div>
+      <div class="field"><label>3. Machine Temperature</label><input type="number"></div>
+      <div class="field"><label>4. Air Pressure</label><input type="number"></div>
+      <div class="field"><label>5. Product / Pack Condition</label><select><option>เลือก</option><option>Normal</option><option>Abnormal</option></select></div>
+      <div class="field"><label>6. Film Condition</label><select><option>เลือก</option><option>Normal</option><option>Abnormal</option></select></div>
+      <div class="field"><label>7. Noise / Vibration</label><select><option>เลือก</option><option>Normal</option><option>Abnormal</option></select></div>
+      <div class="field"><label>8. Leak / Utility</label><select><option>เลือก</option><option>Normal</option><option>Abnormal</option></select></div>
+      <div class="field"><label>9. Technician Survey Note</label><input></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>PM Checklist</h3><span class="badge warn">0/5 ทำแล้ว</span></div>
+    <div class="pad">
+      <div class="notice">ติ๊ก = ทำแล้ว • ถ้ารายการใดทำไม่ได้/ไม่ผ่าน ต้องใส่หมายเหตุ</div>
+      <div class="checkrow"><input type="checkbox"><span>สภาพโครงสร้างเครื่องจักรโดยรวม</span><input type="text" placeholder="เหตุผลที่ทำไม่ได้ / หมายเหตุ"></div>
+      <div class="checkrow"><input type="checkbox"><span>ความตึงของโซ่</span><input type="text" placeholder="เหตุผลที่ทำไม่ได้ / หมายเหตุ"></div>
+      <div class="checkrow"><input type="checkbox"><span>Clamp สภาพของตัวจับยึด</span><input type="text" placeholder="เหตุผลที่ทำไม่ได้ / หมายเหตุ"></div>
+      <div class="checkrow"><input type="checkbox"><span>Emergency switch ใช้งานปกติ</span><input type="text" placeholder="เหตุผลที่ทำไม่ได้ / หมายเหตุ"></div>
+      <div class="checkrow"><input type="checkbox"><span>ตรวจเช็กระดับน้ำของเครื่องจักร</span><input type="text" placeholder="เหตุผลที่ทำไม่ได้ / หมายเหตุ"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>รูปภาพ Before / After</h3></div>
+    <div class="pad grid2"><div><b>Before (ก่อน PM)</b><div class="photoarea" style="margin-top:8px">⬆ คลิกเพื่ออัปโหลด (เพิ่มได้หลายรูป)</div></div><div><b>After (หลัง PM)</b><div class="photoarea" style="margin-top:8px">⬆ คลิกเพื่ออัปโหลด (เพิ่มได้หลายรูป)</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>อะไหล่ที่ใช้ในการ PM</h3></div>
+    <div class="pad"><table><thead><tr><th>บาร์โค้ด</th><th>ชื่ออะไหล่</th><th>จำนวน</th><th>หน่วย</th></tr></thead><tbody><tr><td colspan="4" style="text-align:center;color:#8a96aa">ยังไม่มีรายการ</td></tr></tbody></table><button class="btn ghost" style="margin-top:10px">＋ เพิ่มอะไหล่</button></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>สรุปผลการ PM</h3></div>
+    <div class="pad grid2"><div class="field"><label>บันทึกก่อน PM (ปัญหาที่พบ)</label><textarea></textarea></div><div class="field"><label>บันทึกหลัง PM (ผลการดำเนินการ)</label><textarea></textarea></div><div class="field" style="grid-column:1/-1"><label>สรุปผลรวม</label><textarea></textarea></div></div>
+  </div>
+</section>
+
+<!-- FUNCTION DETAIL -->
+<section id="function" class="page">
+  <div class="card">
+    <div class="cardhead">
+      <div><h2 id="functionTitle">Function: PM Quarterly — OL3151</h2><div class="muted">ใบฟังก์ชั่น / ใบงานกลางของ Service</div></div>
+      <div class="actions"><button class="btn ghost" onclick="openModal('jobDocModal')">▣ พิมพ์ใบงาน / Job Document</button><button class="btn blue">✎ แก้ไข</button></div>
+    </div>
+    <div class="pad"><div class="refbar"><span class="ref">Opportunity: REG-OL3151</span><span class="ref">Sales Quote: SQ-2026-0152</span><span class="ref">Machine: OL3151</span><span id="pmRoundRef" class="ref">PM Round: #2</span><span class="ref">Visit: VIS-2026-018</span></div></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>รายละเอียดลูกค้า</h3></div>
+    <div class="pad grid4"><div class="field"><label>ชื่อ</label><input value="GSB"></div><div class="field"><label>ผู้ติดต่อ / ผู้แจ้งเรื่อง</label><input value="คุณติ๋ว"></div><div class="field"><label>เบอร์โทร</label><input value="08X-XXX-XXXX"></div><div class="field"><label>ID Line</label><input></div><div class="field"><label>ที่อยู่ออกบิล</label><textarea></textarea></div><div class="field"><label>Owner / เจ้าของเรื่อง</label><input value="Ike"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><div><h3>รายละเอียดงาน</h3><div class="muted">สร้างได้จาก Functions / Machine Register / PM Schedule แต่กลับมาเป็น Function Record เดียวกัน</div></div></div>
+    <div class="pad">
+      <div class="section-title">Work Type / ประเภทงาน</div>
+      <div class="typecards">
+        <div id="typePM" class="typecard active" onclick="setFunctionType('PM')"><b>PM</b><div class="muted">Preventive Maintenance</div></div>
+        <div id="typeCM" class="typecard" onclick="setFunctionType('CM')"><b>CM</b><div class="muted">Corrective Maintenance</div></div>
+        <div id="typeINSTALL" class="typecard" onclick="setFunctionType('INSTALL')"><b>Installation</b><div class="muted">Installation / Commissioning</div></div>
+        <div id="typeOTHER" class="typecard" onclick="setFunctionType('OTHER')"><b>Other</b><div class="muted">Training / Inspection / Service</div></div>
+      </div>
+
+      <div id="pmFunctionBox" class="minihub" style="margin-top:12px">
+        <div class="grid2"><div class="field"><label>Linked Machine</label><select><option>OL3151 | 1011-007</option></select></div><div class="field"><label>PM Round</label><select><option>PM Round #2 — Due 30/08/2026</option><option>ยังไม่ Link PM Round</option></select></div></div>
+      </div>
+      <div id="cmFunctionBox" class="minihub" style="margin-top:12px;display:none">
+        <div class="grid2"><div class="field"><label>Linked Machine</label><select><option>OL3151 | 1011-007</option></select></div><div class="field"><label>CM Type</label><select><option>CM ซ่อม</option><option>CM เร่งด่วน</option></select></div></div>
+      </div>
+
+      <div class="grid4" style="margin-top:14px">
+        <div class="field"><label>ชื่อใบฟังก์ชั่น</label><input id="functionName" value="PM Quarterly — OL3151"></div>
+        <div class="field"><label>Opportunities No.</label><input value="REG-OL3151 (15602)"></div>
+        <div class="field"><label>Sales Quote No.</label><input value="SQ-2026-0152"></div>
+        <div class="field"><label>Operator / ผู้รับผิดชอบ</label><input value="Bob / Janeny"></div>
+        <div class="field"><label>Work Type</label><input id="functionTypeValue" value="PM" readonly class="readonly"></div>
+        <div class="field"><label>Urgent Status</label><select><option>Normal</option><option>Urgent</option></select></div>
+        <div class="field"><label>สถานะของงาน</label><select><option>In Progress</option><option>Completed</option></select></div>
+        <div class="field"><label>ชื่อผู้รับงาน</label><input value="Bob"></div>
+      </div>
+
+      <div class="field" style="margin-top:14px"><label>รายละเอียดปัญหา / งาน</label><textarea>เข้าทำ PM ตามรอบประจำไตรมาส</textarea></div>
+      <div class="field" style="margin-top:14px"><label>สรุปแนวทางแก้ไข</label><textarea>ตรวจเช็กตาม PM Checklist และ Machine Survey</textarea></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" data-ftab="overview" onclick="activateFunctionTab('overview')">Overview</button>
+      <button class="tab" data-ftab="products" onclick="activateFunctionTab('products')">Products</button>
+      <button class="tab" data-ftab="machine" onclick="activateFunctionTab('machine')">Machine Register</button>
+      <button class="tab" data-ftab="activities" onclick="activateFunctionTab('activities')">Activities</button>
+      <button class="tab" data-ftab="related" onclick="activateFunctionTab('related')">Related Items</button>
+      <button class="tab" data-ftab="approval" onclick="activateFunctionTab('approval')">Approval</button>
+      <button class="tab" data-ftab="stock" onclick="activateFunctionTab('stock')">Stock</button>
+      <button class="tab" data-ftab="conversation" onclick="activateFunctionTab('conversation')">Conversation</button>
+      <button class="tab" data-ftab="feed" onclick="activateFunctionTab('feed')">Feed</button>
+      <button class="tab" data-ftab="attachments" onclick="activateFunctionTab('attachments')">Attachments</button>
+    </div>
+
+    <div id="ftab-overview" class="tabpanel active"><div class="notice">Function = Work Order กลาง • Machine Register = ทะเบียนเครื่อง • Visit = การเข้าหน้างานจริง</div></div>
+    <div id="ftab-products" class="tabpanel">Products ของ Function เดิม</div>
+    <div id="ftab-machine" class="tabpanel">
+      <div class="rowspace"><div><b>เครื่องจักรที่เกี่ยวข้องกับ Function นี้</b><div class="muted">รองรับ Auto Link และ Manual Link</div></div><button class="btn green" onclick="openModal('machineLinkModal')">＋ ผูกเครื่องจักร</button></div>
+      <table><thead><tr><th>Machine No.</th><th>Serial</th><th>Machine</th><th>Customer</th><th>Source</th><th>Status</th></tr></thead>
+      <tbody><tr><td><span class="link" onclick="showPage('machineDetail')">1011-007</span></td><td>OL3151</td><td>VARIOVAC Optimus</td><td>GSB</td><td>PM Round #2</td><td><span class="badge ok">Linked</span></td></tr></tbody></table>
+    </div>
+    <div id="ftab-activities" class="tabpanel">
+      <div class="rowspace"><div><b>Visit / การเข้าหน้างาน</b><div class="muted">Customer + Machine Prefill จาก Function อัตโนมัติ</div></div><button class="btn green" onclick="showPage('visit')">＋ สร้าง Visit</button></div>
+      <table><thead><tr><th>Visit</th><th>Machine</th><th>Technician</th><th>Check-in</th><th>Check-out</th><th>Vehicle</th><th>Distance</th><th>Status</th></tr></thead>
+      <tbody><tr><td><span class="link" onclick="showPage('visit')">VIS-2026-018</span></td><td>OL3151</td><td>Bob</td><td>06/10/26 09:10</td><td>06/10/26 12:30</td><td>1กข 1234</td><td>180 km</td><td><span class="badge ok">Completed</span></td></tr></tbody></table>
+    </div>
+    <div id="ftab-related" class="tabpanel">Related Items</div><div id="ftab-approval" class="tabpanel">Approval</div><div id="ftab-stock" class="tabpanel">Stock / Parts Usage</div><div id="ftab-conversation" class="tabpanel">Conversation</div><div id="ftab-feed" class="tabpanel">Feed</div><div id="ftab-attachments" class="tabpanel">Attachments</div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" class="page">
+  <div class="card">
+    <div class="cardhead"><div><h2>Visit: VIS-2026-018</h2><div class="muted">สร้างจาก Function FN-PM-002</div></div><div class="actions"><button class="btn blue">✎ แก้ไข</button></div></div>
+    <div class="pad">
+      <div class="notice"><b>Auto Prefill:</b> Account / Customer, Contact, Site, Function และ Machine ดึงจาก Function อัตโนมัติ</div>
+      <div class="grid4">
+        <div class="field"><label>Function</label><input class="readonly" value="FN-PM-002" readonly></div>
+        <div class="field"><label>Customer / Account</label><input class="readonly" value="GSB" readonly></div>
+        <div class="field"><label>Contact</label><input class="readonly" value="คุณติ๋ว" readonly></div>
+        <div class="field"><label>Machine</label><select><option>OL3151 | 1011-007</option></select></div>
+        <div class="field"><label>Visit Objective</label><select><option>PM</option><option>CM</option><option>Installation</option><option>Inspection</option><option>Training</option></select></div>
+        <div class="field"><label>Assigned Technician</label><select><option>Bob</option><option>Janeny</option></select></div>
+        <div class="field"><label>Start Date/Time</label><input value="06/10/69 09:30"></div>
+        <div class="field"><label>Due Date/Time</label><input value="06/10/69 17:30"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Check In / Check Out</h3></div>
+    <div class="pad grid2">
+      <div class="minihub"><b style="color:#5576db">Check In</b><p>🕘 06/10/69 15:45</p><p>📍 Lat: 14.092155, Lng: 100.632008 &nbsp; <span class="link">เปิดแผนที่</span></p></div>
+      <div class="minihub"><b style="color:#e25358">Check Out</b><p>🕘 06/10/69 15:46</p><p>📍 Lat: 14.092155, Lng: 100.632008 &nbsp; <span class="link">เปิดแผนที่</span></p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>ข้อมูลการเดินทาง / Vehicle & Travel</h3></div>
+    <div class="pad grid4">
       <div class="field"><label>Vehicle / ทะเบียนรถ</label><select onchange="toggleOtherVehicle(this.value)"><option>1กข 1234 กรุงเทพ</option><option>Other</option></select></div>
-      <div id="otherVehicle" class="field" style="display:none"><label>ทะเบียนรถอื่น</label><input placeholder="กรอกทะเบียนรถ"></div>
+      <div id="otherVehicleField" class="field" style="display:none"><label>ทะเบียนรถอื่น</label><input placeholder="กรอกทะเบียนรถ"></div>
+      <div class="field"><label>Driver</label><select><option>Bob</option></select></div>
       <div class="field"><label>Odometer Start</label><input id="odoStart" type="number" value="125000" oninput="calcDistance()"></div>
       <div class="field"><label>Odometer End</label><input id="odoEnd" type="number" value="125180" oninput="calcDistance()"></div>
-      <div class="field"><label>Distance</label><input id="distance" value="180 km" readonly></div>
+      <div class="field"><label>Distance</label><input id="distance" class="readonly" value="180 km" readonly></div>
       <div class="field"><label>Toll Fee</label><input type="number" value="120"></div>
       <div class="field"><label>Fuel Cost</label><input type="number" value="900"></div>
       <div class="field"><label>Other Travel Cost</label><input type="number" value="0"></div>
-    </div>
-    <div class="actions" style="margin-top:14px"><button class="btn ghost" onclick="closeVisit()">ยกเลิก</button><button class="btn green" onclick="alert('สร้าง Visit แล้ว โดยดึง Customer และ Machine จาก Function อัตโนมัติ');closeVisit()">✓ สร้าง Visit</button></div>
-  </div>
-</div>
-
-<div id="linkModal" class="modalbg">
-  <div class="modal sm">
-    <div class="mtop"><h3>ผูกเครื่องจักรกับ Function</h3><button class="x" onclick="closeLink()">×</button></div>
-    <div class="sub">ค้นจาก Machine No., Serial No., Model, Brand หรือ Customer</div>
-    <div class="searchbox"><input id="q" placeholder="เช่น OL3151, 1011-007, VARIOVAC, GSB"><button class="btn blue" onclick="searchMachines()">ค้นหา</button></div>
-    <div id="results">
-      <div class="result"><div><b>1011-007 | OL3151</b><br><span class="sub">VARIOVAC Optimus • GSB</span></div><button class="btn green" onclick="linkMachine('1011-007','OL3151','VARIOVAC Optimus','GSB')">เลือก</button></div>
-      <div class="result"><div><b>1001-009 | OL2875</b><br><span class="sub">VARIOVAC Optimus • GSB</span></div><button class="btn green" onclick="linkMachine('1001-009','OL2875','VARIOVAC Optimus','GSB')">เลือก</button></div>
+      <div class="field" style="grid-column:1/-1"><label>Travel Remark</label><textarea></textarea></div>
     </div>
   </div>
+</section>
+
+<!-- Dashboard placeholder -->
+<section id="dashboard" class="page"><div class="card"><div class="cardhead"><h2>Dashboard</h2></div><div class="pad">Prototype</div></div></section>
+
+</main>
 </div>
 
-<div id="jobModal" class="modalbg">
-  <div class="modal">
-    <div class="mtop"><h3>พิมพ์ใบงาน / Job Document</h3><button class="x" onclick="closeJob()">×</button></div>
-    <div class="actions"><button class="btn" style="background:#d64f70;color:#fff">▣ ดาวน์โหลด PDF</button></div>
-    <div class="report">
-      <h2>ใบรับแจ้งงานบริการ / Job Document</h2>
-      <div class="sub">FM-ENG-010</div><div class="line"></div>
-      <div class="report-info">
-        <b>Customer company</b><span>GSB</span><b>Informer</b><span>คุณติ๋ว</span>
-        <b>Address</b><span>GSB Plant</span><b>Tel / Email</b><span>08X-XXX-XXXX</span>
-        <b>Date / Time</b><span>30/08/2026 09:00</span><b>Model no.</b><span>OL3151 / VARIOVAC Optimus</span>
-        <b>Type of maintenance</b><span>Preventive Maintenance / PM</span><b>Responsible Staff</b><span>Bob, Janeny</span>
-        <b>Start time</b><span>09:00</span><b>Finished time</b><span>16:30</span>
-      </div>
+<!-- PM CREATE MODAL -->
+<div id="pmCreateModal" class="modalbg"><div class="modal sm">
+  <div class="mtop"><h3>สร้างรอบ PM ใหม่</h3><button class="x" onclick="closeModal('pmCreateModal')">×</button></div>
+  <div class="field"><label>ประเภท PM *</label><select><option>PM ประจำไตรมาส</option><option>PM ประจำปี (ใหญ่)</option></select></div>
+  <div class="field" style="margin-top:12px"><label>แผน (Plan)</label><select><option>VARIOVAC THERMOFORM CHECKLISTS</option></select></div>
+  <div class="grid2" style="margin-top:12px"><div class="field"><label>ทีมช่าง</label><input placeholder="เช่น ทีม A"></div><div class="field"><label>วันที่กำหนด *</label><input type="date"></div></div>
+  <div class="notice">งานซ่อมไม่อยู่ใน “สร้างรอบ PM” — ใช้ CM / Function แทน</div>
+  <div class="actions"><button class="btn ghost" onclick="closeModal('pmCreateModal')">ยกเลิก</button><button class="btn green">✓ บันทึก</button></div>
+</div></div>
 
-      <h3>Problem / Reasons</h3>
-      <p>เข้าทำ PM ตามรอบประจำไตรมาส</p>
-      <h3>Solution / Suggestion</h3>
-      <p>ตรวจเช็กตาม PM Checklist และ Machine Survey</p>
-      <h3>Results after service</h3>
-      <p>เครื่องพร้อมใช้งานหลัง PM</p>
+<!-- MACHINE LINK MODAL -->
+<div id="machineLinkModal" class="modalbg"><div class="modal sm">
+  <div class="mtop"><h3>ผูกเครื่องจักรกับ Function</h3><button class="x" onclick="closeModal('machineLinkModal')">×</button></div>
+  <div class="search" style="margin:12px 0"><input style="width:100%" placeholder="ค้นหา Machine No., Serial, Model, Brand, Customer"></div>
+  <div class="minihub"><div class="rowspace"><div><b>1011-007 | OL3151</b><div class="muted">VARIOVAC Optimus • GSB</div></div><button class="btn green small" onclick="closeModal('machineLinkModal')">เลือก</button></div></div>
+</div></div>
 
-      <table style="margin-top:16px">
-        <thead><tr><th>Linked Machine</th><th>Machine No.</th><th>Serial</th><th>Reference</th></tr></thead>
-        <tbody><tr><td>VARIOVAC Optimus</td><td>1011-007</td><td>OL3151</td><td>PM Round #2</td></tr></tbody>
-      </table>
-
-      <div style="margin-top:20px"><b>Customer Satisfaction:</b> □ Excellent □ Good □ Fair □ Poor</div>
-      <div class="sign"><div class="sig">Customer Signature / Date</div><div class="sig">Staff Signature / Date</div></div>
-    </div>
+<!-- PM PRINT -->
+<div id="pmPrintModal" class="modalbg"><div class="modal">
+  <div class="mtop"><h3>พิมพ์ใบ PM</h3><button class="x" onclick="closeModal('pmPrintModal')">×</button></div>
+  <div class="actions"><button class="btn red">▣ ดาวน์โหลด PDF</button></div>
+  <div class="report">
+    <h2>RP &nbsp; ใบรายงานผลการทำ PM (Preventive Maintenance Report)</h2>
+    <div class="line"></div>
+    <div class="reportinfo"><b>เครื่องจักร</b><span>VARIOVAC Optimus OL50</span><b>Serial</b><span>OL3151</span><b>ลูกค้า</b><span>GSB</span><b>ประเภท PM</b><span>PM ประจำไตรมาส</span><b>วันที่กำหนด</b><span>30/08/2026</span><b>ช่างผู้ปฏิบัติงาน</b><span>Bob / Janeny</span></div>
+    <h3>Machine Survey</h3><table><thead><tr><th>รายการ</th><th>ค่า</th></tr></thead><tbody><tr><td>Cycle / Speed</td><td>10 cycles/min</td></tr><tr><td>Vacuum / Pressure</td><td>Pending</td></tr></tbody></table>
+    <h3>PM Checklist</h3><table><thead><tr><th>รายการ</th><th>ผลตรวจ</th><th>หมายเหตุ</th></tr></thead><tbody><tr><td>สภาพโครงสร้างเครื่องจักรโดยรวม</td><td>✓ ผ่าน</td><td>-</td></tr><tr><td>ความตึงของโซ่</td><td>✓ ผ่าน</td><td>-</td></tr></tbody></table>
+    <div class="siggrid"><div class="sig">Customer Signature / Date</div><div class="sig">Technician Signature / Date</div></div>
   </div>
-</div>
+</div></div>
+
+<!-- JOB DOCUMENT -->
+<div id="jobDocModal" class="modalbg"><div class="modal">
+  <div class="mtop"><h3>พิมพ์ใบงาน / Job Document</h3><button class="x" onclick="closeModal('jobDocModal')">×</button></div>
+  <div class="actions"><button class="btn red">▣ ดาวน์โหลด PDF</button></div>
+  <div class="report">
+    <h2>RP &nbsp; ใบรับแจ้งงานบริการ / Job Document</h2><div class="muted">FM-ENG-010</div><div class="line"></div>
+    <div class="reportinfo"><b>Customer</b><span>GSB</span><b>Informer</b><span>คุณติ๋ว</span><b>Address</b><span>ปทุมธานี</span><b>Tel / Email</b><span>08X-XXX-XXXX</span><b>Model No.</b><span>OL3151 / VARIOVAC Optimus</span><b>Type</b><span id="jobDocType">Preventive Maintenance / PM</span><b>Responsible Staff</b><span>Bob / Janeny</span><b>Start / Finish</b><span>09:00 / 16:30</span></div>
+    <h3>Problem / Reasons</h3><p>เข้าทำ PM ตามรอบประจำไตรมาส</p><h3>Solution / Suggestion</h3><p>ตรวจเช็กตาม PM Checklist และ Machine Survey</p><h3>Results after service</h3><p>เครื่องพร้อมใช้งานหลังดำเนินการ</p>
+    <div class="siggrid"><div class="sig">Customer Signature / Date</div><div class="sig">Staff Signature / Date</div></div>
+  </div>
+</div></div>
 
 <script>
-function tab(id,btn){
-  document.querySelectorAll('.tabcontent').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-  const panel=document.getElementById(id);
-  if(panel) panel.classList.add('active');
-  if(btn) btn.classList.add('active');
+function toggleGroup(id){const el=document.getElementById(id); if(el) el.classList.toggle('open')}
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById(id); if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
 }
-function openLink(){document.getElementById('linkModal').classList.add('open')}
-function closeLink(){document.getElementById('linkModal').classList.remove('open')}
-function openJob(){document.getElementById('jobModal').classList.add('open')}
-function closeJob(){document.getElementById('jobModal').classList.remove('open')}
-function searchMachines(){ alert('Prototype: ค้นหาเครื่องจาก Machine Register'); }
-function linkMachine(no,serial,name,customer){
-  const tbody=document.getElementById('machineRows');
-  const exists=[...tbody.querySelectorAll('tr')].some(r=>r.innerText.includes(serial));
-  if(!exists){
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td><span class="link">${no}</span></td><td>${serial}</td><td>${name}</td><td>${customer}</td><td><span class="badge info">Manual</span></td><td><span class="badge ok">Linked</span></td><td><button class="btn ghost" onclick="alert('เปิด Machine Register ${serial}')">เปิด Machine Register</button></td>`;
-    tbody.appendChild(tr);
-  }
-  closeLink();
-  alert('ผูกเครื่อง '+serial+' กับ Function แล้ว');
+function activateMachineTab(id){
+  document.querySelectorAll('[id^="mtab-"]').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('[data-mtab]').forEach(b=>b.classList.remove('active'));
+  const panel=document.getElementById('mtab-'+id); if(panel) panel.classList.add('active');
+  const btn=document.querySelector('[data-mtab="'+id+'"]'); if(btn) btn.classList.add('active');
 }
-
-function setWorkType(type){
-  ['PM','CM','INSTALL','OTHER'].forEach(t=>{
-    const el=document.getElementById('type'+t);
-    if(el) el.classList.toggle('active',t===type);
-  });
-  document.getElementById('workTypeValue').value = type==='INSTALL' ? 'Installation' : type;
-  document.getElementById('pmRefPanel').classList.toggle('show',type==='PM');
-  document.getElementById('cmRefPanel').classList.toggle('show',type==='CM');
-  document.getElementById('reverseType').innerText = type==='INSTALL' ? 'Installation' : type;
+function activateFunctionTab(id){
+  document.querySelectorAll('[id^="ftab-"]').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('[data-ftab]').forEach(b=>b.classList.remove('active'));
+  const panel=document.getElementById('ftab-'+id); if(panel) panel.classList.add('active');
+  const btn=document.querySelector('[data-ftab="'+id+'"]'); if(btn) btn.classList.add('active');
 }
-function openVisit(){document.getElementById('visitModal').classList.add('open')}
-function closeVisit(){document.getElementById('visitModal').classList.remove('open')}
-function toggleOtherVehicle(v){document.getElementById('otherVehicle').style.display=v==='Other'?'block':'none'}
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+function toggleOtherVehicle(v){document.getElementById('otherVehicleField').style.display=v==='Other'?'block':'none'}
 function calcDistance(){
-  const s=Number(document.getElementById('odoStart').value||0);
-  const e=Number(document.getElementById('odoEnd').value||0);
-  document.getElementById('distance').value=(e>=s?(e-s):0)+' km';
+  const s=Number(document.getElementById('odoStart').value||0), e=Number(document.getElementById('odoEnd').value||0);
+  document.getElementById('distance').value=(e>=s?e-s:0)+' km';
 }
-function toggleNav(id){
-  const el=document.getElementById(id);
-  if(el) el.classList.toggle('open');
+function setFunctionType(type){
+  ['PM','CM','INSTALL','OTHER'].forEach(t=>document.getElementById('type'+t).classList.toggle('active',t===type));
+  document.getElementById('functionTypeValue').value = type==='INSTALL'?'Installation':type;
+  document.getElementById('pmFunctionBox').style.display=type==='PM'?'block':'none';
+  document.getElementById('cmFunctionBox').style.display=type==='CM'?'block':'none';
+  document.getElementById('pmRoundRef').style.display=type==='PM'?'inline-block':'none';
+  const title = type==='CM'?'Function: CM — OL3151':type==='INSTALL'?'Function: Installation — OL3151':type==='OTHER'?'Function: Service — OL3151':'Function: PM Quarterly — OL3151';
+  document.getElementById('functionTitle').innerText=title;
+  document.getElementById('functionName').value=title.replace('Function: ','');
+  document.getElementById('jobDocType').innerText=type==='CM'?'Corrective Maintenance / CM':type==='INSTALL'?'Machine Installation':type==='OTHER'?'Other Service':'Preventive Maintenance / PM';
 }
+function prepareFunction(type){showPage('function'); setFunctionType(type); activateFunctionTab('machine')}
 </script>
 </body>
 </html>
