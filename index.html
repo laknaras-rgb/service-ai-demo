@@ -60,8 +60,35 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 .mtop{display:flex;justify-content:space-between;align-items:center}.x{width:36px;height:36px;border-radius:50%;border:1px solid #b9c5d8;background:#fff;font-size:20px}
 .report{background:#fff}.report .line{height:3px;background:#3f69f4;margin:10px 0 16px}.reportinfo{display:grid;grid-template-columns:150px 1fr 150px 1fr;gap:8px 12px}.siggrid{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:50px}.sig{border-top:1px solid #777;text-align:center;padding-top:8px}
 .minihub{background:#f7f9fc;border:1px solid #dfe4ec;border-radius:8px;padding:12px}
+
+.opp-display-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:34px;row-gap:26px}
+.opp-item span{display:block;color:#72809b;font-size:16px;margin-bottom:5px}
+.opp-item b{color:#111b2d;font-size:15px;line-height:1.35}
+.opp-item mark{padding:2px 8px;border-radius:10px;background:#fff6a8;font-weight:400}
+.status-pill{display:inline-block;background:#5b78d9;color:#fff;border-radius:6px;padding:3px 10px}
+.opp-progress{height:27px;background:#e9edf6;border-radius:5px;position:relative;overflow:hidden;max-width:175px}
+.opp-progress i{position:absolute;inset:0 auto 0 0;background:#5676db}
+.opp-progress em{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:11px;font-style:normal}
+.opp-description{margin-top:28px;max-width:1000px}
+.opp-description>span{display:block;color:#72809b;font-size:16px;margin-bottom:5px}
+.opp-description>div{color:#151c28;font-size:15px;line-height:1.48}
+.email-preview{margin-top:8px;width:330px;min-height:120px;background:#fafafa;border:1px solid #ececec;padding:12px;font-size:10px;color:#555}
+.opp-subcard{border:1px solid #dfe4ec;border-radius:8px;padding:16px;margin-bottom:16px;background:#fff}
+.filter-row input,.filter-row select{width:100%;min-width:130px;padding:10px;border:1px solid #d8dee8;border-radius:6px}
+.pipeline-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 26px}
+.pipe-item{display:flex;flex-direction:column;gap:5px;color:#555}
+.pipe-item>span{font-size:15px}.pipe-item small{font-weight:700;color:#4e5664}
+.pipe-item input[type=date]{border:1px solid #d6dce6;border-radius:6px;padding:10px;width:100%}
+.requirement-block{border-left:4px solid #5b78d9}
+.requirement-flow{display:flex;align-items:center;justify-content:center;gap:8px;overflow:auto;padding:12px 0 2px}
+.requirement-flow>i{height:2px;background:#d8dee8;min-width:35px}
+.req-step{min-width:90px;text-align:center;color:#7b8495;font-size:12px}
+.req-step b{width:30px;height:30px;border-radius:50%;border:2px solid #cbd4e0;display:grid;place-items:center;margin:0 auto 5px;background:#fff}
+.req-step.done b{border-color:#28b564;color:#28b564}.req-step.current b{border-color:#5676db;color:#5676db}
+.req-summary{margin-top:16px;border-top:1px solid #e4e8ef;padding-top:16px}
+
 @media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:230px 1fr}}
-@media(max-width:760px){.app{grid-template-columns:1fr}.side{display:none}.stats,.grid4,.grid3,.grid2,.typecards{grid-template-columns:1fr}.checkrow{grid-template-columns:28px 1fr}.checkrow input[type=text]{grid-column:2}.reportinfo{grid-template-columns:120px 1fr}}
+@media(max-width:760px){.opp-display-grid,.pipeline-grid{grid-template-columns:1fr}.app{grid-template-columns:1fr}.side{display:none}.stats,.grid4,.grid3,.grid2,.typecards{grid-template-columns:1fr}.checkrow{grid-template-columns:28px 1fr}.checkrow input[type=text]{grid-column:2}.reportinfo{grid-template-columns:120px 1fr}}
 </style>
 </head>
 <body>
@@ -516,112 +543,206 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 
 <!-- OPPORTUNITY DETAIL -->
 <section id="opportunityDetail" class="page">
-  <div class="card">
-    <div class="cardhead">
-      <div>
-        <h2>Opportunity: REG - OL3151</h2>
-        <div class="muted">Opp No. 15602 • Customer: GSB • Supplier: VARIOVAC</div>
+
+  <!-- ORIGINAL ERP OPP HEADER / DETAILS -->
+  <div class="card" style="overflow:visible">
+    <div class="cardhead" style="border-bottom:0;padding-bottom:8px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:50px;height:50px;border-radius:50%;background:#ffb1b4;display:grid;place-items:center;font-size:24px;color:#c83939">▣</div>
+        <h2 style="margin:0">Opportunity: REG - OL3151</h2>
       </div>
       <div class="actions">
-        <button class="btn ghost">Done</button>
-        <button class="btn blue">✎ Edit</button>
+        <button class="btn blue" style="background:#98abe8">Done</button>
+        <button class="btn ghost" style="border:0;font-size:20px">✎</button>
+        <button class="btn ghost" style="border:0;font-size:20px">−</button>
       </div>
-    </div>
-
-    <div class="pad grid4">
-      <div class="field"><label>Opportunities No.</label><input value="15602" class="readonly" readonly></div>
-      <div class="field"><label>Name Opportunities / หัวข้อโอกาส</label><input value="REG - OL3151"></div>
-      <div class="field"><label>Type Of Service / ประเภทบริการ</label><input value="machine"></div>
-      <div class="field"><label>Budget / งบประมาณ</label><input value="5,000,000-10,000,000"></div>
-
-      <div class="field"><label>ความสำเร็จ</label><input value="100%"></div>
-      <div class="field"><label>Urgency / ความเร่งด่วน</label><input value="ด่วน"></div>
-      <div class="field"><label>Pipeline Status</label><input value="Registered"></div>
-      <div class="field"><label>Account / Target</label><input value="บริษัท จีเอสบี อินเตอร์เนชั่นแนล จำกัด"></div>
-
-      <div class="field"><label>Owner / เจ้าของ</label><input value="Ike"></div>
-      <div class="field"><label>Location</label><input value="ปทุมธานี"></div>
-      <div class="field"><label>Status</label><input value="WIN"></div>
-      <div class="field"><label>Supplier / ผู้ผลิต</label><input value="VARIOVAC"></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cardhead">
-      <div>
-        <h3>Technical Requirement / เอกสารความต้องการเครื่องจักร</h3>
-        <div class="muted">Phase 1: แนบ Word / Excel / PDF → AI อ่าน → Sales ตรวจ → Confirm → Create Supplier RFQ</div>
-      </div>
-      <span class="badge ok">AI Summary Confirmed</span>
     </div>
 
     <div class="pad">
-      <div class="grid4">
-        <div class="minihub"><b>Requirement File</b><p class="muted">VARIOVAC_Quotation_Request.docx</p></div>
-        <div class="minihub"><b>Supplier / Brand</b><p class="muted">VARIOVAC</p></div>
-        <div class="minihub"><b>AI Status</b><p class="muted">Extracted</p></div>
-        <div class="minihub"><b>Missing Items</b><p class="muted">3 items</p></div>
+      <div class="opp-display-grid">
+        <div class="opp-item"><span>Opportunities No.</span><b>15602</b></div>
+        <div class="opp-item"><span>Name Opportunities / หัวข้อโอกาส</span><b>REG - OL3151</b></div>
+        <div class="opp-item"><span>Type Of Service / ประเภทของบริการ</span><b><mark>machine</mark></b></div>
+        <div class="opp-item"><span>Budget / งบประมาณ</span><b>5,000,000-10,000,000</b></div>
+
+        <div class="opp-item"><span>ความสำเร็จ</span><div class="opp-progress"><i style="width:100%"></i><em>100%</em></div></div>
+        <div class="opp-item"><span>Urgency / ความเร่งด่วน</span><b><mark style="background:#ffec00">ด่วน</mark></b></div>
+        <div class="opp-item"><span>Pipeline Status</span><b>Registered</b></div>
+        <div class="opp-item"><span>Account/Target</span><b>บริษัท จีเอสบี อินเตอร์เนชั่นแนล จำกัด</b></div>
+
+        <div class="opp-item"><span>Lead/Main Customer</span><b>รัตนา -</b></div>
+        <div class="opp-item"><span>Owner / เจ้าของ</span><b>Darat Charansirirungkan</b></div>
+        <div class="opp-item"><span>Assistant 1</span><b>Sawanya Rungrodrasamee</b></div>
+        <div class="opp-item"><span>Assistant 2</span><b>Arunwalee Jedeeya</b></div>
+
+        <div class="opp-item"><span>Operator / ผู้รับผิดชอบ</span><b>Darat Charansirirungkan</b></div>
+        <div class="opp-item"><span>Start Date/Time วันที่เริ่มงาน</span><b>24/11/68 13:01</b></div>
+        <div class="opp-item"><span>Due Date/Time วันเวลาที่จบงาน</span><b style="color:#ef5a46">31/03/69 17:30</b></div>
+        <div class="opp-item"><span>Notification Date/Time วันเวลาที่แจ้งเตือน</span><b>31/03/69 09:00</b></div>
+
+        <div class="opp-item"><span>Location</span><b>-</b></div>
+        <div class="opp-item"><span>Status</span><b><span class="status-pill">WIN</span></b></div>
+        <div class="opp-item"><span>Reason</span><b>ราคา</b></div>
+        <div class="opp-item"><span>Reason Note</span><b>-</b></div>
+
+        <div class="opp-item"><span>สินค้าของลูกค้า</span><b>-</b></div>
+        <div class="opp-item"><span>แหล่งที่มาลูกค้า</span><b>ลูกค้าที่เคยซื้อสินค้าหรือบริการ</b></div>
+        <div class="opp-item"><span>Supplier / ผู้ผลิต</span><b style="color:#607cff">VARIOVAC</b></div>
+        <div class="opp-item"><span>ปัญหาของลูกค้า</span><b>การแพ็ค</b></div>
+
+        <div class="opp-item"><span>Capacity ของลูกค้า</span><b>-</b></div>
+        <div class="opp-item"><span>S/N</span><b>-</b></div>
       </div>
 
-      <div class="actions" style="justify-content:flex-start;margin-top:12px">
-        <button class="btn ghost" onclick="openModal('requirementUploadModal')">⬆ Upload Requirement File</button>
-        <button class="btn blue" onclick="showRequirementSummary()">AI Read & Summary</button>
-        <button class="btn green" onclick="showPage('supplierRfq')">Create Supplier RFQ</button>
+      <div class="opp-description">
+        <span>Description</span>
+        <div>
+          <b>19/11/2025</b><br>
+          Customer would like to order new machine same spec. as OL2875 and they need return it with the old one OL0203.
+          <br><br>
+          <b>24/11/2025</b><br>
+          VV are checking what they can do by the old machine photo from us.
+          <br><br>
+          <b>25/11/2025</b><br>
+          Send photo that VV need.
+          <br><br>
+          <b>22/12/2025</b><br>
+          <div class="email-preview">
+            <b>Email / Supplier clarification</b><br>
+            Final set of what do you think about this machine that they want to trade back?<br>
+            Then I need 2 prices from you. One is the same as what they just bought.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORIGINAL ERP TABS -->
+  <div class="card">
+    <div class="tabs opp-tabs">
+      <button class="tab active" data-otab="overview" onclick="activateOpportunityTab('overview')">Overview</button>
+      <button class="tab" data-otab="related" onclick="activateOpportunityTab('related')">Related Items</button>
+      <button class="tab" data-otab="activities" onclick="activateOpportunityTab('activities')">Activities</button>
+      <button class="tab" data-otab="salesdocs" onclick="activateOpportunityTab('salesdocs')">Sales Documents</button>
+      <button class="tab" data-otab="attachments" onclick="activateOpportunityTab('attachments')">Attachments</button>
+      <button class="tab" data-otab="conversation" onclick="activateOpportunityTab('conversation')">Conversation</button>
+      <button class="tab" data-otab="feed" onclick="activateOpportunityTab('feed')">Feed</button>
+      <button class="tab" data-otab="function" onclick="activateOpportunityTab('function')">ใบฟังก์ชั่น</button>
+    </div>
+
+    <!-- OVERVIEW: ORIGINAL CONTACT + PIPELINE, THEN NEW SALES REQUIREMENT -->
+    <div id="otab-overview" class="tabpanel active">
+      <div class="opp-subcard">
+        <div class="rowspace"><h3 style="margin:0">Contact (0)</h3><span>Add　⌄</span></div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Priority ⇅</th><th>Role ⇅</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr class="filter-row">
+                <td></td>
+                <td><select><option></option></select></td>
+                <td><input></td><td><input></td><td><input></td><td><input></td><td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div id="requirementSummary" class="minihub" style="margin-top:14px">
+      <div class="opp-subcard">
+        <div class="rowspace"><h3 style="margin:0">Pipeline</h3><span>−</span></div>
+        <div class="pipeline-grid">
+          <label class="pipe-item"><span><input type="checkbox"> แนะนำสินค้า</span><small>Due Date</small><input type="date"></label>
+          <label class="pipe-item"><span><input type="checkbox"> ส่งใบเสนอราคา</span><small>Due Date</small><input type="date"></label>
+          <label class="pipe-item"><span><input type="checkbox"> ส่งสเป็ค</span><small>Due Date</small><input type="date"></label>
+          <label class="pipe-item"><span><input type="checkbox"> รอลูกค้าพิจารณา</span><small>Due Date</small><input type="date"></label>
+          <label class="pipe-item"><span><input type="checkbox"> ติดตามลูกค้า</span><small>Due Date</small><input type="date"></label>
+          <label class="pipe-item"><span><input type="checkbox"> นำเสนอ</span><small>Due Date</small><input type="date"></label>
+          <label class="pipe-item"><span><input type="checkbox"> เข้าไปนำเสนอ</span><small>Due Date</small><input type="date"></label>
+        </div>
+      </div>
+
+      <!-- NEW BLOCK: SALES REQUIREMENT, ADDED WITHOUT REPLACING OLD ERP CONTENT -->
+      <div class="opp-subcard requirement-block">
         <div class="rowspace">
-          <div><b>AI Requirement Summary</b><div class="muted">Sales ตรวจและแก้ก่อน Confirm</div></div>
-          <span class="badge info">Confirmed</span>
+          <div>
+            <h3 style="margin:0">Sales Requirement / ข้อมูลความต้องการเครื่องจักร</h3>
+            <div class="muted" style="margin-top:4px">เพิ่มใต้ Overview ของ OPP เดิม เพื่อให้ Sales เก็บ Requirement ก่อนขอราคา Supplier</div>
+          </div>
+          <span class="badge warn">Draft Requirement</span>
         </div>
-        <div class="grid4">
-          <div class="field"><label>Product / Application</label><input value="Thermoforming product • Vacuum"></div>
-          <div class="field"><label>Target Output / Capacity</label><input value="10 cycles/min"></div>
-          <div class="field"><label>Packaging</label><input value="Flexible / Semi-rigid"></div>
-          <div class="field"><label>Machine Reference</label><input value="VARIOVAC Optimus"></div>
 
-          <div class="field"><label>Installation Requirement</label><input value="Site + Utility confirmation"></div>
-          <div class="field"><label>Coding / Labelling</label><input value="2 Labellers / print position pending"></div>
-          <div class="field"><label>Required Operation Date</label><input placeholder="Need confirm"></div>
-          <div class="field"><label>Budget / Currency</label><input value="5,000,000-10,000,000 THB"></div>
+        <div class="notice">
+          <b>แนวทาง Phase 1:</b> ไม่ทำฟอร์ม Supplier ตายตัวตาม VARIOVAC — ให้แนบ Word / Excel / PDF ของ Supplier แล้ว AI อ่านและสรุปเป็นข้อมูลกลางก่อน
         </div>
-        <div class="notice orange">
-          <b>Missing / Need Confirmation:</b> Final Vacuum • Exact Product/Pack Detail • Required Operation Date
+
+        <div class="requirement-flow">
+          <div class="req-step done"><b>1</b><span>Upload Requirement</span></div>
+          <i></i>
+          <div class="req-step current"><b>2</b><span>AI Extract</span></div>
+          <i></i>
+          <div class="req-step"><b>3</b><span>Sales Review</span></div>
+          <i></i>
+          <div class="req-step"><b>4</b><span>Confirm</span></div>
+          <i></i>
+          <div class="req-step"><b>5</b><span>Supplier RFQ</span></div>
+        </div>
+
+        <div class="grid4" style="margin-top:16px">
+          <div class="field"><label>Supplier / Brand</label><select><option>VARIOVAC</option><option>VEMAG</option><option>SUPERVAC</option><option>LASKA</option><option>Other</option></select></div>
+          <div class="field"><label>Requirement File</label><input class="readonly" value="VARIOVAC_Quotation_Request.docx" readonly></div>
+          <div class="field"><label>AI Status</label><input class="readonly" value="Extracted" readonly></div>
+          <div class="field"><label>Last Reviewed By</label><input class="readonly" value="Sales / Pending confirm" readonly></div>
+        </div>
+
+        <div class="actions" style="justify-content:flex-start;margin-top:12px">
+          <button class="btn ghost" onclick="openModal('requirementUploadModal')">⬆ Upload File</button>
+          <button class="btn blue" onclick="document.getElementById('salesReqSummary').style.display='block'">AI Read & Summary</button>
+          <button class="btn green" onclick="document.getElementById('salesReqSummary').style.display='block'">✓ Confirm Requirement</button>
+        </div>
+
+        <div id="salesReqSummary" class="req-summary" style="display:block">
+          <div class="rowspace">
+            <div><b>AI Requirement Summary</b><div class="muted">Sales แก้ไขข้อมูลได้ก่อน Confirm</div></div>
+            <span class="badge info">Extracted</span>
+          </div>
+
+          <div class="grid4">
+            <div class="field"><label>Product / Application</label><input value="Thermoforming / Vacuum pack"></div>
+            <div class="field"><label>Target Speed / Output</label><input value="10 cycles/min"></div>
+            <div class="field"><label>Reference Machine</label><input value="OL2875"></div>
+            <div class="field"><label>Customer Capacity</label><input placeholder="Need confirm"></div>
+
+            <div class="field"><label>Product to Pack</label><input placeholder="Need confirm"></div>
+            <div class="field"><label>Forming Depth</label><input placeholder="Need confirm"></div>
+            <div class="field"><label>Final Vacuum</label><input placeholder="Need confirm"></div>
+            <div class="field"><label>Installation Location</label><input value="ปทุมธานี"></div>
+
+            <div class="field"><label>Labeller</label><input value="2 units"></div>
+            <div class="field"><label>Print Position</label><input placeholder="Pending confirmation"></div>
+            <div class="field"><label>Film / Pack Quality Reference</label><input value="Match OL2875"></div>
+            <div class="field"><label>Acceptance Target</label><input placeholder="Pending customer confirmation"></div>
+          </div>
+
+          <div class="notice orange">
+            <b>Missing / Need Confirmation:</b> Product detail • Forming depth • Final vacuum • Print position • Acceptance criteria
+          </div>
+
+          <div class="actions">
+            <button class="btn ghost">Save Draft</button>
+            <button class="btn green">Confirm Requirement</button>
+            <button class="btn blue" onclick="showPage('supplierRfq')">Create Supplier RFQ →</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="cardhead">
-      <div><h3>Service Handover Fields / ข้อมูลที่จะส่งต่อหลัง Final-WIN</h3><div class="muted">เพิ่มใน OPP แต่ไม่ทำหน้าเดิมรกเกินไป</div></div>
-    </div>
-    <div class="pad grid4">
-      <div class="field"><label>Final Speed</label><input value="10 cycles/min"></div>
-      <div class="field"><label>Capacity</label><input placeholder="Confirmed capacity"></div>
-      <div class="field"><label>Product to Pack</label><input placeholder="Product / application"></div>
-      <div class="field"><label>Forming Depth</label><input placeholder="mm"></div>
-      <div class="field"><label>Final Vacuum</label><input placeholder="Pending confirm"></div>
-      <div class="field"><label>Labeller</label><input value="2 units"></div>
-      <div class="field"><label>Print Position</label><input placeholder="Top film / position"></div>
-      <div class="field"><label>Reason Note</label><input placeholder="Why WIN / key commercial reason"></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="tabs">
-      <button class="tab active">Overview</button>
-      <button class="tab">Related Items</button>
-      <button class="tab">Activities</button>
-      <button class="tab">Sales Documents</button>
-      <button class="tab">Attachments</button>
-      <button class="tab">Conversation</button>
-      <button class="tab">Feed</button>
-      <button class="tab">ใบฟังก์ชั่น</button>
-    </div>
-    <div class="pad">
-      <div class="minihub"><b>Description / Notes เดิมของ OPP</b><p class="muted">คงใช้ timeline/note เดิมของ Sales ไม่ย้ายออก</p></div>
-    </div>
+    <div id="otab-related" class="tabpanel"><div class="opp-subcard">Related Items — ใช้โครงสร้างเดิมของ ERP</div></div>
+    <div id="otab-activities" class="tabpanel"><div class="opp-subcard">Activities — Appointment / Task / Call / Email / Visit เดิมของ ERP</div></div>
+    <div id="otab-salesdocs" class="tabpanel"><div class="opp-subcard">Sales Documents — Sales Quote / Supplier documents ที่เกี่ยวข้อง</div></div>
+    <div id="otab-attachments" class="tabpanel"><div class="opp-subcard">Attachments — ไฟล์แนบ OPP เดิม</div></div>
+    <div id="otab-conversation" class="tabpanel"><div class="opp-subcard">Conversation</div></div>
+    <div id="otab-feed" class="tabpanel"><div class="opp-subcard">Feed</div></div>
+    <div id="otab-function" class="tabpanel"><div class="opp-subcard">ใบฟังก์ชั่นที่เชื่อมกับ Opportunity นี้</div></div>
   </div>
 </section>
 
@@ -847,6 +968,14 @@ function setFunctionType(type){
   document.getElementById('jobDocType').innerText=type==='CM'?'Corrective Maintenance / CM':type==='INSTALL'?'Machine Installation':type==='OTHER'?'Other Service':'Preventive Maintenance / PM';
 }
 function prepareFunction(type){showPage('function'); setFunctionType(type); activateFunctionTab('machine')}
+
+
+function activateOpportunityTab(id){
+  document.querySelectorAll('[id^="otab-"]').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('[data-otab]').forEach(b=>b.classList.remove('active'));
+  const panel=document.getElementById('otab-'+id); if(panel) panel.classList.add('active');
+  const btn=document.querySelector('[data-otab="'+id+'"]'); if(btn) btn.classList.add('active');
+}
 
 function showRequirementSummary(){
   const el=document.getElementById('requirementSummary');
