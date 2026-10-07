@@ -86,7 +86,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   </div>
   <button class="nav" onclick="toggleGroup('salesGroup')">$ Sales <span>⌄</span></button>
   <div id="salesGroup" class="group">
-    <button class="subnav">Target</button><button class="subnav">Leads</button><button class="subnav">Customers</button><button class="subnav">Accounts</button><button class="subnav">Opportunities</button><button class="subnav">Sales Quotes</button>
+    <button class="subnav">Target</button><button class="subnav">Leads</button><button class="subnav">Customers</button><button class="subnav">Accounts</button><button class="subnav" onclick="showPage('opportunityList')">Opportunities</button><button class="subnav" onclick="showPage('supplierRfq')">Supplier RFQ</button><button class="subnav" onclick="showPage('salesQuotes')">Sales Quotes</button>
   </div>
   <button class="nav" onclick="toggleGroup('productGroup')">⌘ Products <span>⌄</span></button>
   <div id="productGroup" class="group"><button class="subnav">Product Package</button><button class="subnav">Product Set</button><button class="subnav">Product List</button></div>
@@ -481,11 +481,290 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   </div>
 </section>
 
+
+<!-- OPPORTUNITY LIST -->
+<section id="opportunityList" class="page">
+  <div class="card">
+    <div class="cardhead">
+      <div><h2>Opportunities</h2><div class="muted">ยึดหน้าตา ERP เดิม • ใช้เป็นจุดเริ่ม Requirement ของ Sales</div></div>
+      <button class="btn green">＋ Add</button>
+    </div>
+    <div class="pad">
+      <div class="rowspace">
+        <b>Opportunity List</b>
+        <div class="search"><input placeholder="ค้นหา Opportunity, Customer, Owner..."></div>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Opp No.</th><th>Name</th><th>Customer</th><th>Supplier</th><th>Stage</th><th>Owner</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="link" onclick="showPage('opportunityDetail')">15602</span></td>
+              <td><b>REG - OL3151</b></td>
+              <td>GSB</td>
+              <td>VARIOVAC</td>
+              <td><span class="badge ok">WIN</span></td>
+              <td>Ike</td>
+              <td><button class="btn ghost small" onclick="showPage('opportunityDetail')">Open</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY DETAIL -->
+<section id="opportunityDetail" class="page">
+  <div class="card">
+    <div class="cardhead">
+      <div>
+        <h2>Opportunity: REG - OL3151</h2>
+        <div class="muted">Opp No. 15602 • Customer: GSB • Supplier: VARIOVAC</div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost">Done</button>
+        <button class="btn blue">✎ Edit</button>
+      </div>
+    </div>
+
+    <div class="pad grid4">
+      <div class="field"><label>Opportunities No.</label><input value="15602" class="readonly" readonly></div>
+      <div class="field"><label>Name Opportunities / หัวข้อโอกาส</label><input value="REG - OL3151"></div>
+      <div class="field"><label>Type Of Service / ประเภทบริการ</label><input value="machine"></div>
+      <div class="field"><label>Budget / งบประมาณ</label><input value="5,000,000-10,000,000"></div>
+
+      <div class="field"><label>ความสำเร็จ</label><input value="100%"></div>
+      <div class="field"><label>Urgency / ความเร่งด่วน</label><input value="ด่วน"></div>
+      <div class="field"><label>Pipeline Status</label><input value="Registered"></div>
+      <div class="field"><label>Account / Target</label><input value="บริษัท จีเอสบี อินเตอร์เนชั่นแนล จำกัด"></div>
+
+      <div class="field"><label>Owner / เจ้าของ</label><input value="Ike"></div>
+      <div class="field"><label>Location</label><input value="ปทุมธานี"></div>
+      <div class="field"><label>Status</label><input value="WIN"></div>
+      <div class="field"><label>Supplier / ผู้ผลิต</label><input value="VARIOVAC"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead">
+      <div>
+        <h3>Technical Requirement / เอกสารความต้องการเครื่องจักร</h3>
+        <div class="muted">Phase 1: แนบ Word / Excel / PDF → AI อ่าน → Sales ตรวจ → Confirm → Create Supplier RFQ</div>
+      </div>
+      <span class="badge ok">AI Summary Confirmed</span>
+    </div>
+
+    <div class="pad">
+      <div class="grid4">
+        <div class="minihub"><b>Requirement File</b><p class="muted">VARIOVAC_Quotation_Request.docx</p></div>
+        <div class="minihub"><b>Supplier / Brand</b><p class="muted">VARIOVAC</p></div>
+        <div class="minihub"><b>AI Status</b><p class="muted">Extracted</p></div>
+        <div class="minihub"><b>Missing Items</b><p class="muted">3 items</p></div>
+      </div>
+
+      <div class="actions" style="justify-content:flex-start;margin-top:12px">
+        <button class="btn ghost" onclick="openModal('requirementUploadModal')">⬆ Upload Requirement File</button>
+        <button class="btn blue" onclick="showRequirementSummary()">AI Read & Summary</button>
+        <button class="btn green" onclick="showPage('supplierRfq')">Create Supplier RFQ</button>
+      </div>
+
+      <div id="requirementSummary" class="minihub" style="margin-top:14px">
+        <div class="rowspace">
+          <div><b>AI Requirement Summary</b><div class="muted">Sales ตรวจและแก้ก่อน Confirm</div></div>
+          <span class="badge info">Confirmed</span>
+        </div>
+        <div class="grid4">
+          <div class="field"><label>Product / Application</label><input value="Thermoforming product • Vacuum"></div>
+          <div class="field"><label>Target Output / Capacity</label><input value="10 cycles/min"></div>
+          <div class="field"><label>Packaging</label><input value="Flexible / Semi-rigid"></div>
+          <div class="field"><label>Machine Reference</label><input value="VARIOVAC Optimus"></div>
+
+          <div class="field"><label>Installation Requirement</label><input value="Site + Utility confirmation"></div>
+          <div class="field"><label>Coding / Labelling</label><input value="2 Labellers / print position pending"></div>
+          <div class="field"><label>Required Operation Date</label><input placeholder="Need confirm"></div>
+          <div class="field"><label>Budget / Currency</label><input value="5,000,000-10,000,000 THB"></div>
+        </div>
+        <div class="notice orange">
+          <b>Missing / Need Confirmation:</b> Final Vacuum • Exact Product/Pack Detail • Required Operation Date
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead">
+      <div><h3>Service Handover Fields / ข้อมูลที่จะส่งต่อหลัง Final-WIN</h3><div class="muted">เพิ่มใน OPP แต่ไม่ทำหน้าเดิมรกเกินไป</div></div>
+    </div>
+    <div class="pad grid4">
+      <div class="field"><label>Final Speed</label><input value="10 cycles/min"></div>
+      <div class="field"><label>Capacity</label><input placeholder="Confirmed capacity"></div>
+      <div class="field"><label>Product to Pack</label><input placeholder="Product / application"></div>
+      <div class="field"><label>Forming Depth</label><input placeholder="mm"></div>
+      <div class="field"><label>Final Vacuum</label><input placeholder="Pending confirm"></div>
+      <div class="field"><label>Labeller</label><input value="2 units"></div>
+      <div class="field"><label>Print Position</label><input placeholder="Top film / position"></div>
+      <div class="field"><label>Reason Note</label><input placeholder="Why WIN / key commercial reason"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active">Overview</button>
+      <button class="tab">Related Items</button>
+      <button class="tab">Activities</button>
+      <button class="tab">Sales Documents</button>
+      <button class="tab">Attachments</button>
+      <button class="tab">Conversation</button>
+      <button class="tab">Feed</button>
+      <button class="tab">ใบฟังก์ชั่น</button>
+    </div>
+    <div class="pad">
+      <div class="minihub"><b>Description / Notes เดิมของ OPP</b><p class="muted">คงใช้ timeline/note เดิมของ Sales ไม่ย้ายออก</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLIER RFQ -->
+<section id="supplierRfq" class="page">
+  <div class="card">
+    <div class="cardhead">
+      <div><h2>Supplier RFQ</h2><div class="muted">Opportunity → Technical Requirement → Supplier RFQ → Supplier Response → Sales Quote</div></div>
+      <button class="btn green">＋ New RFQ</button>
+    </div>
+    <div class="pad">
+      <div class="notice">
+        <b>Auto from Opportunity Requirement:</b> Product • Application • Capacity/Output • Packaging • Installation • Attachments
+        <br>Sales ไม่ต้องกรอก Requirement ซ้ำ
+      </div>
+      <div class="grid4">
+        <div class="field"><label>Opportunity</label><input class="readonly" value="15602 | REG - OL3151" readonly></div>
+        <div class="field"><label>Supplier</label><input value="VARIOVAC"></div>
+        <div class="field"><label>Proposed Model</label><input value="Optimus"></div>
+        <div class="field"><label>Lead Time</label><input placeholder="Supplier response"></div>
+
+        <div class="field"><label>Drawing / Utility</label><input value="Attached / Pending final"></div>
+        <div class="field"><label>Price / Commercial Scope</label><input placeholder="Supplier quote"></div>
+        <div class="field"><label>Warranty</label><input placeholder="Supplier response"></div>
+        <div class="field"><label>Status</label><select><option>Supplier Replied</option><option>Waiting Supplier</option></select></div>
+      </div>
+
+      <div class="field" style="margin-top:14px"><label>Supplier Response / Clarification</label><textarea>Proposal + Technical clarification + included/excluded scope</textarea></div>
+      <div class="field" style="margin-top:14px"><label>AI Compare Supplier Proposal vs Opportunity Requirement</label><textarea>AI comparison result / missing confirmation / mismatch</textarea></div>
+
+      <div class="actions" style="margin-top:14px">
+        <button class="btn ghost">Save Draft</button>
+        <button class="btn blue">Confirm Supplier Response</button>
+        <button class="btn green" onclick="showPage('salesQuotes')">Create Sales Quote</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALES QUOTES -->
+<section id="salesQuotes" class="page">
+  <div class="card">
+    <div class="cardhead">
+      <div><h2>Sales Quotes</h2><div class="muted">คง Final/WIN Flow เดิมของ ERP และเพิ่ม Requirement Readiness + Snapshot</div></div>
+      <button class="btn green">＋ Add</button>
+    </div>
+    <div class="pad">
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Quote No.</th><th>Opportunity</th><th>Customer</th><th>Total</th><th>Status</th><th>Requirement</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="link" onclick="showPage('salesQuoteDetail')">SQ-2026-0152</span></td>
+              <td>REG - OL3151</td>
+              <td>GSB</td>
+              <td>8,500,000 THB</td>
+              <td><span class="badge info">Approved</span></td>
+              <td><span class="badge ok">Ready</span></td>
+              <td><button class="btn ghost small" onclick="showPage('salesQuoteDetail')">Open</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALES QUOTE DETAIL -->
+<section id="salesQuoteDetail" class="page">
+  <div class="card">
+    <div class="cardhead">
+      <div><h2>Sales Quote: SQ-2026-0152</h2><div class="muted">Opportunity REG - OL3151 • GSB</div></div>
+      <div class="actions"><button class="btn ghost">Preview Quote</button><button class="btn green" onclick="openModal('finalReadinessModal')">Final / WIN</button></div>
+    </div>
+    <div class="pad grid4">
+      <div class="field"><label>Quote No.</label><input class="readonly" value="SQ-2026-0152" readonly></div>
+      <div class="field"><label>Opportunity</label><input class="readonly" value="15602 | REG - OL3151" readonly></div>
+      <div class="field"><label>Customer</label><input class="readonly" value="GSB" readonly></div>
+      <div class="field"><label>Supplier</label><input value="VARIOVAC"></div>
+      <div class="field"><label>Total Amount</label><input value="8,500,000 THB"></div>
+      <div class="field"><label>Status</label><input value="Approved"></div>
+      <div class="field"><label>Requirement Summary</label><input value="Confirmed"></div>
+      <div class="field"><label>Machine Qty</label><input value="1"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Final Readiness / สิ่งที่ต้องตรวจก่อน Final</h3></div>
+    <div class="pad">
+      <div class="grid4">
+        <div class="minihub"><b>Technical Requirement</b><p><span class="badge ok">Confirmed</span></p></div>
+        <div class="minihub"><b>Supplier Response</b><p><span class="badge ok">Confirmed</span></p></div>
+        <div class="minihub"><b>Machine / Product Set</b><p><span class="badge ok">Ready</span></p></div>
+        <div class="minihub"><b>Missing Critical Field</b><p><span class="badge warn">1 item</span></p></div>
+      </div>
+      <div class="notice orange">
+        <b>Final/WIN เดิมยังคงอยู่:</b> Finalize Quote → Create/Reuse Function → Task/Assign → Notification → Machine Register → Default PM → Spare BOM
+        <br><b>สิ่งที่เพิ่ม:</b> Final Requirement Snapshot ส่งไป Machine Register โดยไม่เปลี่ยนตาม OPP ย้อนหลังแบบเงียบ ๆ
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- Dashboard placeholder -->
 <section id="dashboard" class="page"><div class="card"><div class="cardhead"><h2>Dashboard</h2></div><div class="pad">Prototype</div></div></section>
 
 </main>
 </div>
+
+
+<!-- REQUIREMENT UPLOAD -->
+<div id="requirementUploadModal" class="modalbg"><div class="modal sm">
+  <div class="mtop"><h3>Upload Technical Requirement</h3><button class="x" onclick="closeModal('requirementUploadModal')">×</button></div>
+  <div class="notice">รองรับ Word / Excel / PDF จาก Supplier/Brand ต่าง ๆ โดยไม่ทำฟอร์มตายตัวตาม VARIOVAC</div>
+  <div class="field"><label>Requirement File</label><input type="file"></div>
+  <div class="field" style="margin-top:12px"><label>Supplier / Brand (optional)</label><select><option>VARIOVAC</option><option>VEMAG</option><option>SUPERVAC</option><option>LASKA</option><option>Other</option></select></div>
+  <div class="actions" style="margin-top:14px"><button class="btn ghost" onclick="closeModal('requirementUploadModal')">Cancel</button><button class="btn blue" onclick="closeModal('requirementUploadModal');showRequirementSummary()">AI Read & Summary</button></div>
+</div></div>
+
+<!-- FINAL READINESS -->
+<div id="finalReadinessModal" class="modalbg"><div class="modal">
+  <div class="mtop"><h3>Final / WIN Readiness</h3><button class="x" onclick="closeModal('finalReadinessModal')">×</button></div>
+  <div class="notice orange">
+    ก่อน Final ให้ตรวจ Requirement สำคัญครบก่อน และยืนยัน Snapshot ที่จะส่ง Service
+  </div>
+  <table>
+    <thead><tr><th>Check</th><th>Status</th><th>Value / Note</th></tr></thead>
+    <tbody>
+      <tr><td>Final Speed</td><td><span class="badge ok">Ready</span></td><td>10 cycles/min</td></tr>
+      <tr><td>Product / Application</td><td><span class="badge ok">Ready</span></td><td>Thermoforming / Vacuum</td></tr>
+      <tr><td>Forming Depth</td><td><span class="badge warn">Need Confirm</span></td><td>-</td></tr>
+      <tr><td>Labeller / Print Position</td><td><span class="badge ok">Ready</span></td><td>2 units / position pending final drawing</td></tr>
+      <tr><td>Location</td><td><span class="badge ok">Ready</span></td><td>ปทุมธานี</td></tr>
+    </tbody>
+  </table>
+  <div class="actions" style="margin-top:14px">
+    <button class="btn ghost" onclick="closeModal('finalReadinessModal')">Back</button>
+    <button class="btn orange" onclick="alert('Prototype: Missing fields should be confirmed before Final')">Review Missing</button>
+    <button class="btn green" onclick="finalWin()">Confirm Final / WIN</button>
+  </div>
+</div></div>
+
 
 <!-- PM CREATE MODAL -->
 <div id="pmCreateModal" class="modalbg"><div class="modal sm">
@@ -568,6 +847,18 @@ function setFunctionType(type){
   document.getElementById('jobDocType').innerText=type==='CM'?'Corrective Maintenance / CM':type==='INSTALL'?'Machine Installation':type==='OTHER'?'Other Service':'Preventive Maintenance / PM';
 }
 function prepareFunction(type){showPage('function'); setFunctionType(type); activateFunctionTab('machine')}
+
+function showRequirementSummary(){
+  const el=document.getElementById('requirementSummary');
+  if(el){ el.style.display='block'; }
+  closeModal('requirementUploadModal');
+}
+function finalWin(){
+  closeModal('finalReadinessModal');
+  alert('Prototype: Final/WIN confirmed. Existing ERP Final flow runs + Requirement Snapshot is created for Machine Register.');
+  showPage('machineDetail');
+  activateMachineTab('overview');
+}
 </script>
 </body>
 </html>
