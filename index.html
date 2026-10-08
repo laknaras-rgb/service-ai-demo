@@ -538,12 +538,64 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
       </table></div>
     </div>
 
+    
     <div id="mtab-spareParts" class="tabpanel">
-      <div class="rowspace"><b>อะไหล่ประจำเครื่อง</b><button class="btn green">＋ เพิ่มอะไหล่</button></div>
-      <table><thead><tr><th>บาร์โค้ด</th><th>ชื่อรายการ</th><th>จำนวน</th><th>ชม./วันที่ใช้จริง</th><th>อายุคงเหลือ</th><th>แหล่งที่มา</th></tr></thead><tbody><tr><td colspan="6" style="text-align:center;color:#8a96aa">ยังไม่มีอะไหล่ประจำเครื่อง</td></tr></tbody></table>
+      <div class="rowspace">
+        <div>
+          <h3 style="margin:0">อะไหล่ประจำเครื่อง <span class="muted" style="font-weight:400">(ตั้งต้นจากชุดสินค้า/Product Set แก้ไขได้)</span></h3>
+        </div>
+        <button class="btn green">＋ เพิ่มอะไหล่</button>
+      </div>
+
+      <div class="tablewrap" style="margin-top:14px">
+        <table>
+          <thead>
+            <tr>
+              <th>บาร์โค้ด</th>
+              <th>ชื่อรายการ</th>
+              <th>จำนวน</th>
+              <th>ชม./วันที่ใช้จริง</th>
+              <th>อายุคงเหลือ</th>
+              <th>แหล่งที่มา</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6" style="text-align:center;color:#9aa5b7;padding:28px 12px">ยังไม่มีอะไหล่ประจำเครื่อง</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="actions" style="margin-top:18px">
+        <button class="btn green">💾 บันทึก</button>
+      </div>
+
+      <div style="margin-top:34px">
+        <h3 style="margin:0 0 12px">ประวัติการเบิกใช้อะไหล่ PM <span class="muted" style="font-weight:400">(บันทึกจากหน้าทำ PM)</span></h3>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ประเภท</th>
+                <th>บาร์โค้ด</th>
+                <th>ชื่อรายการ</th>
+                <th>จำนวน</th>
+                <th>รอบ PM</th>
+                <th>วันที่</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6" style="text-align:center;color:#9aa5b7;padding:28px 12px">ยังไม่มีการเบิกใช้อะไหล่/วัสดุในการ PM</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <div id="mtab-history" class="tabpanel">
+<div id="mtab-history" class="tabpanel">
       <table><thead><tr><th>วันที่</th><th>ประเภท</th><th>Function</th><th>Visit</th><th>ช่าง</th><th>ผล</th></tr></thead>
       <tbody><tr><td>06/10/2026</td><td>PM</td><td><span class="link" onclick="showPage('function')">FN-PM-002</span></td><td><span class="link" onclick="showPage('visit')">VIS-2026-018</span></td><td>Bob</td><td>Completed</td></tr></tbody></table>
     </div>
