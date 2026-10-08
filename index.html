@@ -87,8 +87,21 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 .req-step.done b{border-color:#28b564;color:#28b564}.req-step.current b{border-color:#5676db;color:#5676db}
 .req-summary{margin-top:16px;border-top:1px solid #e4e8ef;padding-top:16px}
 
+
+.ia-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.ia-status-card{border:1px solid #dfe5ee;border-radius:10px;padding:15px;background:#fafcff}
+.ia-status-card span{display:block;color:#6f7c92;font-size:13px}
+.ia-status-card b{display:block;font-size:20px;margin:5px 0;color:#24324a}
+.ia-status-card small{color:#8b95a5}
+.ia-section{border-top:1px solid #e4e8ef;padding-top:18px;margin-top:18px}
+.ia-section h3{margin:0 0 4px}
+.source-note{display:block;margin-top:5px;font-size:11px;color:#2e8b57}
+.source-note.pending{color:#d27a00}
+.ia-checks{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px;margin-top:12px}
+.ia-checks label{padding:10px 12px;border:1px solid #e0e5ed;border-radius:8px;background:#fff}
+
 @media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:230px 1fr}}
-@media(max-width:760px){.opp-display-grid,.pipeline-grid{grid-template-columns:1fr}.app{grid-template-columns:1fr}.side{display:none}.stats,.grid4,.grid3,.grid2,.typecards{grid-template-columns:1fr}.checkrow{grid-template-columns:28px 1fr}.checkrow input[type=text]{grid-column:2}.reportinfo{grid-template-columns:120px 1fr}}
+@media(max-width:760px){.ia-summary,.ia-checks{grid-template-columns:1fr}.opp-display-grid,.pipeline-grid{grid-template-columns:1fr}.app{grid-template-columns:1fr}.side{display:none}.stats,.grid4,.grid3,.grid2,.typecards{grid-template-columns:1fr}.checkrow{grid-template-columns:28px 1fr}.checkrow input[type=text]{grid-column:2}.reportinfo{grid-template-columns:120px 1fr}}
 </style>
 </head>
 <body>
@@ -224,6 +237,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   <div class="card">
     <div class="tabs">
       <button class="tab active" data-mtab="overview" onclick="activateMachineTab('overview')">Overview</button>
+      <button class="tab" data-mtab="installAcceptance" onclick="activateMachineTab('installAcceptance')">Installation & Acceptance</button>
       <button class="tab" data-mtab="pmProgram" onclick="activateMachineTab('pmProgram')">PM Program</button>
       <button class="tab" data-mtab="pmSchedule" onclick="activateMachineTab('pmSchedule')">PM Schedule</button>
       <button class="tab" data-mtab="serviceJobs" onclick="activateMachineTab('serviceJobs')">CM / Service Jobs</button>
@@ -241,6 +255,245 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
         <div class="minihub"><b>การแจ้งเตือน</b><div class="notice">ยังไม่มีกำหนด PM ถัดไป</div></div>
       </div>
       <div class="notice orange"><b>Sales → Service Handover:</b> Target speed 10 cycles/min • Film/label quality reference OL2875 • Labeller 2 units • Acceptance criteria pending confirm.</div>
+    </div>
+
+
+    <div id="mtab-installAcceptance" class="tabpanel">
+      <div class="rowspace">
+        <div>
+          <h3 style="margin:0">Installation & Acceptance Requirement</h3>
+          <div class="muted" style="margin-top:5px">
+            ข้อมูลสำหรับ Sales / Project Owner ยืนยันกับลูกค้าหลังขาย ก่อนส่งต่อทีม Service เพื่อติดตั้ง ทดสอบ และตรวจรับ
+          </div>
+        </div>
+        <span class="badge warn">Gathering Information</span>
+      </div>
+
+      <div class="notice" style="margin-top:14px">
+        <b>หลักการ:</b> ข้อมูลที่มีจาก Opportunity / TOR ดึงมาเป็นค่าเริ่มต้นได้ แต่ข้อมูลหลังขายต้องให้ผู้รับผิดชอบยืนยันกับลูกค้าใหม่
+        และสามารถแก้ไขในหน้านี้ได้โดยไม่ย้อนกลับไปเปลี่ยน Opportunity เดิม
+      </div>
+
+      <div class="ia-summary">
+        <div class="ia-status-card">
+          <span>Source from Sales / OPP</span>
+          <b>2 Confirmed</b>
+          <small>ข้อมูลที่รู้แล้วจากการขาย</small>
+        </div>
+        <div class="ia-status-card">
+          <span>Customer Confirmation</span>
+          <b>6 Pending</b>
+          <small>ข้อมูลที่ต้องถามลูกค้าหลังขาย</small>
+        </div>
+        <div class="ia-status-card">
+          <span>Service Readiness</span>
+          <b>Not Ready</b>
+          <small>ยังไม่พร้อมส่งทีม Service</small>
+        </div>
+      </div>
+
+      <div class="ia-section">
+        <div class="rowspace">
+          <div>
+            <h3>1. Installation Requirement / ข้อมูลการติดตั้ง</h3>
+            <div class="muted">ระบุวิธีติดตั้ง พื้นที่ และเงื่อนไขหน้างานที่ Service ต้องเตรียม</div>
+          </div>
+          <span class="badge info">Mixed Source</span>
+        </div>
+
+        <div class="grid4">
+          <div class="field">
+            <label>Installation Location / จุดติดตั้ง</label>
+            <input value="ปทุมธานี">
+            <small class="source-note">Source: OPP</small>
+          </div>
+          <div class="field">
+            <label>Installation Method / วิธีติดตั้ง</label>
+            <select>
+              <option>Pending Customer Confirmation</option>
+              <option>ติดตั้งเครื่องใหม่</option>
+              <option>แทนเครื่องเดิม</option>
+              <option>ติดตั้งร่วมกับ Line เดิม</option>
+              <option>อื่น ๆ</option>
+            </select>
+            <small class="source-note pending">Source: Customer Confirmation</small>
+          </div>
+          <div class="field">
+            <label>Machine Position / ตำแหน่งเครื่อง</label>
+            <input placeholder="เช่น Line 2 / ข้าง OL2875">
+            <small class="source-note pending">Source: Customer Confirmation</small>
+          </div>
+          <div class="field">
+            <label>Access / Rigging Requirement</label>
+            <input placeholder="Crane / Forklift / Door width / route">
+            <small class="source-note pending">Source: Customer Confirmation</small>
+          </div>
+
+          <div class="field">
+            <label>Utility Ready</label>
+            <select><option>Pending</option><option>Ready</option><option>Not Ready</option></select>
+          </div>
+          <div class="field">
+            <label>Electricity</label>
+            <input placeholder="Voltage / Phase / Amp">
+          </div>
+          <div class="field">
+            <label>Compressed Air</label>
+            <input placeholder="Pressure / Flow">
+          </div>
+          <div class="field">
+            <label>Water / Drain / Other Utility</label>
+            <input placeholder="ถ้ามี">
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:12px">
+          <label>Installation Note / ข้อกำหนดติดตั้งเพิ่มเติม</label>
+          <textarea placeholder="เช่น ต้องหยุด Line เดิมก่อนติดตั้ง, ต้องติดตั้งวันเสาร์, ต้องใช้ Crane จากลูกค้า"></textarea>
+        </div>
+      </div>
+
+      <div class="ia-section">
+        <div class="rowspace">
+          <div>
+            <h3>2. Commissioning / Test Requirement</h3>
+            <div class="muted">กำหนดว่าจะทดสอบเครื่องด้วยอะไร เท่าไร และใช้ Format / อุปกรณ์ใด</div>
+          </div>
+          <span class="badge warn">Needs Customer Input</span>
+        </div>
+
+        <div class="grid4">
+          <div class="field">
+            <label>Test Product / สินค้าสำหรับทดสอบ</label>
+            <input value="ไส้กรอกชนิด A">
+            <small class="source-note pending">Source: Customer Confirmation</small>
+          </div>
+          <div class="field">
+            <label>Test Quantity / ปริมาณทดสอบ</label>
+            <input value="50 kg">
+            <small class="source-note pending">Source: Customer Confirmation</small>
+          </div>
+          <div class="field">
+            <label>Format / Tooling</label>
+            <input value="Format 3.2">
+            <small class="source-note pending">Source: Customer Confirmation</small>
+          </div>
+          <div class="field">
+            <label>Target Speed</label>
+            <input value="10 cycles/min">
+            <small class="source-note">Source: OPP / Sales</small>
+          </div>
+
+          <div class="field">
+            <label>Film / Material</label>
+            <input placeholder="Film type / size / thickness">
+          </div>
+          <div class="field">
+            <label>Label / Sticker Size</label>
+            <input value="5 x 3 inch">
+          </div>
+          <div class="field">
+            <label>Label Position / Print Position</label>
+            <input placeholder="ตำแหน่งติดสติกเกอร์">
+          </div>
+          <div class="field">
+            <label>Joint Equipment</label>
+            <input placeholder="Labeller / Printer / Conveyor / Other">
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:12px">
+          <label>Test Procedure / วิธีการทดสอบ</label>
+          <textarea placeholder="เช่น Run 3 รอบ, ตรวจ Seal ทุก Pack, วัด Speed ต่อเนื่อง 30 นาที"></textarea>
+        </div>
+      </div>
+
+      <div class="ia-section">
+        <div class="rowspace">
+          <div>
+            <h3>3. Acceptance Criteria / เกณฑ์ตรวจรับ</h3>
+            <div class="muted">กำหนดว่าอะไรถือว่า “ผ่าน” เพื่อให้ทีม Service ทดสอบตามเงื่อนไขเดียวกับลูกค้า</div>
+          </div>
+          <span class="badge warn">Pending Final Confirmation</span>
+        </div>
+
+        <div class="grid4">
+          <div class="field">
+            <label>Speed Acceptance</label>
+            <input value="≥ 10 cycles/min">
+          </div>
+          <div class="field">
+            <label>Seal Acceptance</label>
+            <input value="รอยซีลต้องแนบสนิท">
+          </div>
+          <div class="field">
+            <label>Label Acceptance</label>
+            <input value="Sticker 5 x 3 inch ติดตรงตำแหน่งที่กำหนด">
+          </div>
+          <div class="field">
+            <label>Pack Appearance / Quality</label>
+            <input placeholder="เช่น เทียบตัวอย่าง OL2875">
+          </div>
+
+          <div class="field">
+            <label>Customer Acceptance By</label>
+            <input placeholder="ชื่อ / ตำแหน่งผู้ตรวจรับ">
+          </div>
+          <div class="field">
+            <label>Planned Test Date</label>
+            <input type="date">
+          </div>
+          <div class="field">
+            <label>Acceptance Status</label>
+            <select>
+              <option>Pending Confirmation</option>
+              <option>Customer Confirmed</option>
+              <option>Ready for Test</option>
+              <option>Accepted</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Confirmed By</label>
+            <input placeholder="Sales / Project Owner">
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:12px">
+          <label>Other Acceptance Criteria</label>
+          <textarea placeholder="เงื่อนไขอื่น ๆ ที่ลูกค้าจะใช้ในการตรวจรับ"></textarea>
+        </div>
+      </div>
+
+      <div class="ia-section">
+        <div class="rowspace">
+          <div>
+            <h3>4. Confirmation & Handover</h3>
+            <div class="muted">ใช้เป็น Gate ก่อนส่งให้ Service เริ่ม Installation / Commissioning</div>
+          </div>
+        </div>
+
+        <div class="ia-checks">
+          <label><input type="checkbox" checked> Target speed confirmed</label>
+          <label><input type="checkbox"> Test product confirmed</label>
+          <label><input type="checkbox"> Test quantity confirmed</label>
+          <label><input type="checkbox"> Format / tooling confirmed</label>
+          <label><input type="checkbox"> Seal / pack quality criteria confirmed</label>
+          <label><input type="checkbox"> Label / print requirement confirmed</label>
+          <label><input type="checkbox"> Installation / utility confirmed</label>
+          <label><input type="checkbox"> Customer acceptance person confirmed</label>
+        </div>
+
+        <div class="notice orange" style="margin-top:14px">
+          <b>Service Readiness: NOT READY</b><br>
+          ยังมีข้อมูลที่ต้องยืนยันกับลูกค้าก่อนส่งต่อทีม Service
+        </div>
+
+        <div class="actions" style="margin-top:14px">
+          <button class="btn ghost">Save Draft</button>
+          <button class="btn blue">Request Customer Confirmation</button>
+          <button class="btn green">Confirm & Ready for Service</button>
+        </div>
+      </div>
     </div>
 
     <div id="mtab-pmProgram" class="tabpanel">
