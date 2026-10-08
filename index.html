@@ -100,6 +100,15 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 .ia-checks{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px;margin-top:12px}
 .ia-checks label{padding:10px 12px;border:1px solid #e0e5ed;border-radius:8px;background:#fff}
 
+
+.survey-row-wide{display:grid;grid-template-columns:44px 250px 1fr;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid #edf0f5}
+.survey-no{width:34px;height:34px;border-radius:50%;background:#eef3ff;color:#4769d5;font-weight:700;display:grid;place-items:center}
+.survey-label{font-weight:600;padding-top:8px}
+.survey-inputs-four{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.survey-observe-grid{margin-top:10px}
+.survey-compare-table input{width:100%;min-width:110px;padding:9px 10px;border:1px solid #d8dee8;border-radius:6px;background:#fff}
+.survey-compare-table td{vertical-align:middle}
+
 @media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:230px 1fr}}
 @media(max-width:760px){.ia-summary,.ia-checks{grid-template-columns:1fr}.opp-display-grid,.pipeline-grid{grid-template-columns:1fr}.app{grid-template-columns:1fr}.side{display:none}.stats,.grid4,.grid3,.grid2,.typecards{grid-template-columns:1fr}.checkrow{grid-template-columns:28px 1fr}.checkrow input[type=text]{grid-column:2}.reportinfo{grid-template-columns:120px 1fr}}
 </style>
@@ -648,17 +657,100 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   </div>
 
   <div class="card">
-    <div class="cardhead"><h3>Machine Survey / สำรวจก่อน PM (ข้อ 1–9)</h3><div class="muted">เก็บ Parameter ก่อนทำ Checklist เพื่อใช้ Trend/AI ในอนาคต</div></div>
-    <div class="pad grid3">
-      <div class="field"><label>1. Cycle / Speed ก่อน PM</label><input type="number" placeholder="cycles/min"></div>
-      <div class="field"><label>2. Vacuum / Pressure</label><input type="number"></div>
-      <div class="field"><label>3. Machine Temperature</label><input type="number"></div>
-      <div class="field"><label>4. Air Pressure</label><input type="number"></div>
-      <div class="field"><label>5. Product / Pack Condition</label><select><option>เลือก</option><option>Normal</option><option>Abnormal</option></select></div>
-      <div class="field"><label>6. Film Condition</label><select><option>เลือก</option><option>Normal</option><option>Abnormal</option></select></div>
-      <div class="field"><label>7. Noise / Vibration</label><select><option>เลือก</option><option>Normal</option><option>Abnormal</option></select></div>
-      <div class="field"><label>8. Leak / Utility</label><select><option>เลือก</option><option>Normal</option><option>Abnormal</option></select></div>
-      <div class="field"><label>9. Technician Survey Note</label><input></div>
+    <div class="cardhead">
+      <div>
+        <h3>Machine Survey / สำรวจก่อน PM (ข้อ 1–9)</h3>
+        <div class="muted">อ้างอิง FM-ENG-013-5 Rev.01 • เก็บค่าตามฟอร์มจริง และแยกค่าก่อน/หลัง PM เฉพาะรายการที่ฟอร์มกำหนด</div>
+      </div>
+    </div>
+    <div class="pad">
+      <div class="notice" style="margin-bottom:14px">
+        ข้อ 1–2 = ข้อมูลไฟฟ้า • ข้อ 3–6 = สำรวจ/Observe ก่อน PM • ข้อ 7–9 = บันทึก <b>ค่าก่อน PM</b> และ <b>ค่าหลัง PM</b> เพื่อเทียบผล
+      </div>
+
+      <div class="section-title">ข้อมูลพื้นฐาน / Electrical Information</div>
+      <div class="survey-row-wide">
+        <div class="survey-no">1</div>
+        <div class="survey-label">Power Supply (spec)</div>
+        <div class="survey-inputs-four">
+          <div class="field"><label>Phase</label><input placeholder="Phase"></div>
+          <div class="field"><label>Volt</label><input type="number" placeholder="Volt"></div>
+          <div class="field"><label>Amp</label><input type="number" placeholder="A"></div>
+          <div class="field"><label>Remark</label><input placeholder="หมายเหตุ"></div>
+        </div>
+      </div>
+      <div class="survey-row-wide">
+        <div class="survey-no">2</div>
+        <div class="survey-label">ค่าระหว่างเฟส / Ground</div>
+        <div class="survey-inputs-four">
+          <div class="field"><label>R-S (Volt)</label><input type="number"></div>
+          <div class="field"><label>S-T (Volt)</label><input type="number"></div>
+          <div class="field"><label>R-T (Volt)</label><input type="number"></div>
+          <div class="field"><label>Ground (Ohm)</label><input type="number"></div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:18px">สำรวจเครื่อง / Observe ก่อน PM</div>
+      <div class="grid2 survey-observe-grid">
+        <div class="field"><label>3. Program no. / ชื่อ Program</label><input placeholder="Program no. / ชื่อ"></div>
+        <div class="field"><label>สินค้าที่ผลิต</label><input placeholder="Product ที่กำลังผลิต"></div>
+        <div class="field"><label>4. Alarm ระหว่าง Observe (รหัส / ครั้ง)</label><input placeholder="เช่น E01 / 2 ครั้ง"></div>
+        <div class="field"><label>5. เสียง / การสั่นผิดปกติ (จุดไหน)</label><input placeholder="ระบุจุดหรืออาการ"></div>
+        <div class="field" style="grid-column:1/-1"><label>6. อาการที่ Operator แจ้ง / Alarm history ตั้งแต่ PM ครั้งก่อน</label><textarea placeholder="บันทึกอาการหรือประวัติ Alarm จาก Operator"></textarea></div>
+      </div>
+
+      <div class="section-title" style="margin-top:18px">ค่าก่อน PM / ค่าหลัง PM</div>
+      <div class="tablewrap survey-compare-table">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:52px">ข้อ</th>
+              <th>รายการ</th>
+              <th style="width:170px">หน่วย / เกณฑ์</th>
+              <th style="width:175px">ค่าก่อน PM</th>
+              <th style="width:175px">ค่าหลัง PM</th>
+              <th style="width:220px">Remark</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>7</b></td>
+              <td>Heating element ชุดฟอร์ม — ความสม่ำเสมอของอุณหภูมิ</td>
+              <td>ΔT heater (°C, IR)</td>
+              <td><input type="number" step="0.1" placeholder="ก่อน PM"></td>
+              <td><input type="number" step="0.1" placeholder="หลัง PM"></td>
+              <td><input placeholder="หมายเหตุ"></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>เวลาดึงสุญญากาศถึง 5 mBar Final Vacuum</td>
+              <td>วินาที (sec)</td>
+              <td><input type="number" step="0.1" placeholder="ก่อน PM"></td>
+              <td><input type="number" step="0.1" placeholder="หลัง PM"></td>
+              <td><input placeholder="หมายเหตุ"></td>
+            </tr>
+            <tr>
+              <td><b>9</b></td>
+              <td>Heating element ชุดซีล — ความสม่ำเสมอของอุณหภูมิ</td>
+              <td>ΔT heater (°C, IR)</td>
+              <td><input type="number" step="0.1" placeholder="ก่อน PM"></td>
+              <td><input type="number" step="0.1" placeholder="หลัง PM"></td>
+              <td><input placeholder="หมายเหตุ"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid2" style="margin-top:12px">
+        <div>
+          <b>รูปประกอบค่าก่อน PM (ข้อ 7–9)</b>
+          <div class="photoarea" style="margin-top:8px">⬆ รูปก่อน PM / IR / Vacuum Test</div>
+        </div>
+        <div>
+          <b>รูปประกอบค่าหลัง PM (ข้อ 7–9)</b>
+          <div class="photoarea" style="margin-top:8px">⬆ รูปหลัง PM / IR / Vacuum Test</div>
+        </div>
+      </div>
     </div>
   </div>
 
