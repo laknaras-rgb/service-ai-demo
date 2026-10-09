@@ -478,8 +478,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 
         <div class="actions" style="margin-top:14px">
           <button class="btn ghost">Save Draft<small class="ia-th-caption">บันทึกฉบับร่าง</small></button>
-          <button class="btn blue">Request Customer Confirmation<small class="ia-th-caption">ขอให้ลูกค้ายืนยัน</small></button>
-          <button class="btn green">Confirm & Ready for Service<small class="ia-th-caption">ยืนยันและพร้อมส่งต่อ Service</small></button>
+          <button type="button" class="btn green" onclick="iaOpenServiceHandover()">Confirm & Ready for Service<small class="ia-th-caption">ยืนยันและพร้อมส่งต่อ Service</small></button>
         </div>
       </div>
     </div>
@@ -1348,6 +1347,44 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  const cards=get('#ia-product-cards');
  if(cards&&window.MutationObserver)new MutationObserver(refresh).observe(cards,{childList:true,subtree:false});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refresh);else refresh();
+})();
+</script>
+
+<div id="ia-service-handover-modal" class="ia-handover-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="ia-service-handover-title" onclick="if(event.target===this)iaCloseServiceHandover()">
+ <div class="ia-handover-dialog">
+  <div class="ia-handover-top"><div><h3 id="ia-service-handover-title">ส่งต่องานให้ทีม Service</h3><p>เลือกผู้ที่ต้องการแจ้งเตือนหลังยืนยันข้อมูล Installation & Acceptance</p></div><button type="button" class="ia-handover-x" onclick="iaCloseServiceHandover()" aria-label="ปิด">✕</button></div>
+  <label class="ia-handover-search-label" for="ia-service-search">ค้นหาพนักงาน</label><input id="ia-service-search" class="ia-handover-search" placeholder="ค้นหาชื่อหรือหน้าที่..." oninput="iaFilterServiceRecipients(this.value)">
+  <div class="ia-handover-selectall"><label><input type="checkbox" id="ia-service-selectall" onchange="iaToggleAllServiceRecipients(this.checked)"> เลือกทั้งหมดที่แสดง</label><span id="ia-service-count">เลือกแล้ว 0 คน</span></div>
+  <div id="ia-service-recipient-list" class="ia-handover-people"></div>
+  <label class="ia-handover-search-label" for="ia-service-note">ข้อความเพิ่มเติมถึงทีม Service (ไม่บังคับ)</label><textarea id="ia-service-note" class="ia-handover-note" placeholder="เช่น รบกวนตรวจสอบ Drawing และนัดหมายติดตั้ง"></textarea>
+  <div id="ia-service-feedback" class="ia-handover-feedback" aria-live="polite"></div>
+  <div class="ia-handover-bottom"><button type="button" class="btn ghost" onclick="iaCloseServiceHandover()">ยกเลิก</button><button type="button" class="btn green" onclick="iaConfirmServiceHandover()">ยืนยันส่งต่อและแจ้งเตือน (จำลอง)</button></div>
+  <div class="ia-handover-disclaimer">เว็บจำลอง: ยังไม่ส่งการแจ้งเตือนจริง และยังไม่บันทึกลงฐานข้อมูล</div>
+ </div>
+</div>
+<style id="ia-handover-styles">
+.ia-handover-overlay{position:fixed;inset:0;background:#10223bb8;z-index:99998;align-items:center;justify-content:center;padding:18px}
+.ia-handover-dialog{background:white;border-radius:13px;max-width:570px;width:100%;max-height:92vh;overflow:auto;padding:22px;box-shadow:0 22px 60px #0f172a40;color:#334155}
+.ia-handover-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.ia-handover-top h3{font-size:19px;margin:0 0 5px}.ia-handover-top p{font-size:13px;color:#64748b;margin:0 0 16px}.ia-handover-x{border:0;background:#f1f5f9;border-radius:6px;padding:7px 11px;cursor:pointer}
+.ia-handover-search-label{font-size:13px;font-weight:600;display:block;margin:10px 0 6px}.ia-handover-search,.ia-handover-note{width:100%;border:1px solid #cbd5e1;border-radius:7px;padding:10px;font:inherit;box-sizing:border-box}.ia-handover-note{min-height:66px;resize:vertical}
+.ia-handover-selectall{display:flex;justify-content:space-between;gap:8px;margin:13px 0 8px;font-size:13px}.ia-handover-selectall span{color:#64748b}
+.ia-handover-people{border:1px solid #dbe3ed;border-radius:9px;overflow:auto;max-height:265px}.ia-handover-person{display:flex;gap:11px;align-items:center;padding:12px;border-bottom:1px solid #edf2f7;cursor:pointer}.ia-handover-person:last-child{border-bottom:0}.ia-handover-person:hover{background:#f8fafc}.ia-handover-person strong{display:block;font-size:14px}.ia-handover-person small{color:#64748b;font-size:12px}.ia-handover-avatar{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:#e8efff;color:#315ac6;font-weight:700}
+.ia-handover-feedback{min-height:20px;font-size:13px;margin-top:9px}.ia-handover-bottom{display:flex;justify-content:flex-end;gap:9px;margin-top:10px;flex-wrap:wrap}.ia-handover-disclaimer{font-size:11px;color:#64748b;margin-top:12px}
+</style>
+<script id="ia-handover-script">
+(()=>{
+ const people=[{id:'svc01',name:'ช่าง Service A',role:'Service Engineer'},{id:'svc02',name:'ช่าง Service B',role:'Installation / Commissioning'},{id:'svc03',name:'หัวหน้าทีม Service',role:'Service Supervisor'},{id:'svc04',name:'ผู้ประสานงาน Service',role:'Service Coordinator'}];
+ const chosen=new Set();let query='';
+ const modal=()=>document.getElementById('ia-service-handover-modal');
+ const visible=()=>people.filter(p=>(p.name+' '+p.role).toLowerCase().includes(query));
+ const render=()=>{const list=document.getElementById('ia-service-recipient-list');if(!list)return;list.innerHTML=visible().map(p=>`<label class="ia-handover-person"><input type="checkbox" data-ia-recipient="${p.id}" ${chosen.has(p.id)?'checked':''} onchange="iaSetServiceRecipient('${p.id}',this.checked)"><span class="ia-handover-avatar">S</span><span><strong>${p.name}</strong><small>${p.role}</small></span></label>`).join('')||'<div style="padding:15px;color:#64748b">ไม่พบรายชื่อ</div>';document.getElementById('ia-service-count').textContent='เลือกแล้ว '+chosen.size+' คน';const v=visible();document.getElementById('ia-service-selectall').checked=v.length>0&&v.every(p=>chosen.has(p.id));};
+ window.iaOpenServiceHandover=()=>{modal().style.display='flex';document.getElementById('ia-service-feedback').textContent='';render();};
+ window.iaCloseServiceHandover=()=>{modal().style.display='none';};
+ window.iaFilterServiceRecipients=v=>{query=v.trim().toLowerCase();render();};
+ window.iaSetServiceRecipient=(id,yes)=>{if(yes)chosen.add(id);else chosen.delete(id);render();};
+ window.iaToggleAllServiceRecipients=yes=>{visible().forEach(p=>yes?chosen.add(p.id):chosen.delete(p.id));render();};
+ window.iaConfirmServiceHandover=()=>{const msg=document.getElementById('ia-service-feedback');if(!chosen.size){msg.style.color='#b45309';msg.textContent='กรุณาเลือกผู้รับแจ้งเตือนอย่างน้อย 1 คน';return;}const names=people.filter(p=>chosen.has(p.id)).map(p=>p.name).join(', ');msg.style.color='#15803d';msg.textContent='จำลองการส่งต่อสำเร็จ — ผู้รับแจ้งเตือน: '+names+' (ยังไม่มีการแจ้งเตือนจริง)';};
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal().style.display==='flex')window.iaCloseServiceHandover();});
 })();
 </script>
 </body>
