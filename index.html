@@ -282,15 +282,14 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
       </div>
 
       <div class="notice" style="margin-top:14px">
-        <b>หลักการ:</b> ข้อมูลที่มีจาก Opportunity / TOR ดึงมาเป็นค่าเริ่มต้นได้ แต่ข้อมูลหลังขายต้องให้ผู้รับผิดชอบยืนยันกับลูกค้าใหม่
-        และสามารถแก้ไขในหน้านี้ได้โดยไม่ย้อนกลับไปเปลี่ยน Opportunity เดิม
+        <b>หลักการ:</b> Sales / Project Owner กรอกและยืนยันข้อมูลการติดตั้ง การทดสอบ และเกณฑ์ตรวจรับกับลูกค้าโดยตรงใน Machine Register เพื่อส่งต่อให้ทีม Service
       </div>
 
       <div class="ia-summary">
         <div class="ia-status-card">
-          <span>Source from Sales / OPP</span>
+          <span>Requirement Confirmation</span>
           <b>2 Confirmed</b>
-          <small>ข้อมูลที่รู้แล้วจากการขาย</small>
+          <small>ข้อมูลที่ยืนยันแล้วในหน้านี้</small>
         </div>
         <div class="ia-status-card">
           <span>Customer Confirmation</span>
@@ -310,14 +309,14 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
             <h3>1. Installation Requirement / ข้อมูลการติดตั้ง</h3>
             <div class="muted">ระบุวิธีติดตั้ง พื้นที่ และเงื่อนไขหน้างานที่ Service ต้องเตรียม</div>
           </div>
-          <span class="badge info">Mixed Source</span>
+          <span class="badge info">Sales / Customer Input</span>
         </div>
 
         <div class="grid4">
           <div class="field">
             <label>Installation Location / จุดติดตั้ง</label>
             <input value="ปทุมธานี">
-            <small class="source-note">Source: OPP</small>
+            <small class="source-note">Sales / Customer Confirmation</small>
           </div>
           <div class="field">
             <label>Installation Method / วิธีติดตั้ง</label>
@@ -359,6 +358,9 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
           </div>
         </div>
 
+        <div class="grid4" style="margin-top:12px"><div class="field"><label>Printer / มีเครื่องพิมพ์หรือไม่</label><select id="ia-printer" onchange="document.getElementById('ia-printer-detail').style.display=this.value==='yes'?'block':'none'"><option value="pending">รอยืนยัน</option><option value="yes">มี</option><option value="no">ไม่มี</option></select></div><div class="field" id="ia-printer-detail" style="display:none"><label>Printer Detail / รายละเอียดเครื่องพิมพ์</label><input placeholder="ยี่ห้อ / รุ่น / ตำแหน่งติดตั้ง"></div></div>
+        <div class="field" style="margin-top:16px"><label>Installation Documents / ไฟล์ประกอบการติดตั้ง (เฉพาะ Requirement นี้)</label><div class="muted">Sales แนบ Machine Dimension Drawing, Layout, รูปหน้างาน และเอกสารอื่น ๆ แยกจากแท็บ Attachments หลัก</div><input type="file" id="ia-install-files" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.dwg,.dxf,.xlsx,.xls,.docx" onchange="iaShowInstallFiles(this)"><div id="ia-install-file-list" class="muted" style="margin-top:8px">ยังไม่มีไฟล์ที่เลือก</div><small>Prototype: แสดงไฟล์ที่เลือกเท่านั้น ยังไม่อัปโหลดเข้าฐานข้อมูลจริง</small></div>
+        <div class="field" style="margin-top:12px"><label>Dimension Drawing / Revision / หมายเหตุไฟล์</label><input placeholder="เช่น OL3151 Drawing Rev.02 — จาก Sales"></div>
         <div class="field" style="margin-top:12px">
           <label>Installation Note / ข้อกำหนดติดตั้งเพิ่มเติม</label>
           <textarea placeholder="เช่น ต้องหยุด Line เดิมก่อนติดตั้ง, ต้องติดตั้งวันเสาร์, ต้องใช้ Crane จากลูกค้า"></textarea>
@@ -371,8 +373,8 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
         <button type="button" class="ia-add-product" onclick="iaAddProduct()">＋ เพิ่ม Product สำหรับทดสอบ</button>
       </div>
       <div class="ia-section" id="ia-acceptance-section">
-        <div class="rowspace"><div><h3>3. Acceptance Criteria / เกณฑ์ตรวจรับ</h3><div class="muted">เกณฑ์ตรวจรับแยกตาม Product และเชื่อมกับชุดข้อมูลการทดสอบด้านบน</div></div><span class="badge warn">Pending Final Confirmation</span></div>
-        <div id="ia-acceptance-cards"></div>
+        <div class="rowspace"><div><h3>3. Acceptance Criteria / เกณฑ์ตรวจรับ</h3><div class="muted">เกณฑ์ตรวจรับรวมหนึ่งชุดต่อเครื่องจักร — รายละเอียดรอ Sales / ผู้เกี่ยวข้องยืนยัน</div></div><span class="badge warn">Pending Final Confirmation</span></div>
+        <div class="grid4" style="margin-top:14px"><div class="field"><label>Speed Acceptance</label><input placeholder="รอยืนยัน"></div><div class="field"><label>Seal Acceptance</label><input placeholder="รอยืนยัน"></div><div class="field"><label>Label Acceptance</label><input placeholder="รอยืนยัน"></div><div class="field"><label>Pack Appearance / Quality</label><input placeholder="รอยืนยัน"></div></div>
         <div class="grid4" style="margin-top:14px">
           <div class="field"><label>Customer Acceptance By</label><input placeholder="ชื่อ / ตำแหน่งผู้ตรวจรับ"></div>
           <div class="field"><label>Planned Test Date</label><input type="date"></div>
@@ -1197,19 +1199,20 @@ function finalWin(){
 <script id="ia-product-script">
 (function(){
 let nextId=2;
-const records=[{id:1,open:true,name:'ไส้กรอกชนิด A',qty:'50',unit:'kg',format:'Format 3.2',speed:'10',film:'pending',filmSupplier:'',filmType:'',filmSize:'',filmThickness:'',labelSize:'5 x 3 inch',labelPosition:'',joint:'',procedure:'',speedAcceptance:'≥ 10 cycles/min',sealAcceptance:'รอยซีลต้องแนบสนิท',labelAcceptance:'Sticker 5 x 3 inch ติดตรงตำแหน่งที่กำหนด',packAcceptance:'',otherAcceptance:''}];
+const records=[{id:1,open:true,name:'ไส้กรอกชนิด A',qty:'50',unit:'kg',format:'Format 3.2',speed:'10',film:'pending',filmSupplier:'',filmType:'',filmSize:'',filmThickness:'',solid:'pending',solidDetail:'',labelSize:'5 x 3 inch',labelPosition:'',joint:'',procedure:'',speedAcceptance:'≥ 10 cycles/min',sealAcceptance:'รอยซีลต้องแนบสนิท',labelAcceptance:'Sticker 5 x 3 inch ติดตรงตำแหน่งที่กำหนด',packAcceptance:'',otherAcceptance:''}];
 const esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const field=(r,k,label,placeholder='')=>`<div class="field"><label>${label}</label><input value="${esc(r[k])}" placeholder="${esc(placeholder)}" oninput="iaSet(${r.id},'${k}',this.value)"></div>`;
 const textarea=(r,k,label,placeholder='')=>`<div class="field" style="margin-top:12px"><label>${label}</label><textarea placeholder="${esc(placeholder)}" oninput="iaSet(${r.id},'${k}',this.value)">${esc(r[k])}</textarea></div>`;
 function draw(){let host=document.getElementById('ia-product-cards'),accept=document.getElementById('ia-acceptance-cards');if(!host||!accept)return;
-host.innerHTML=records.map((r,i)=>`<div class="ia-product-card"><div class="ia-product-head" onclick="iaToggle(${r.id})"><div><strong>▣ Product ${i+1} — ${esc(r.name||'ยังไม่ระบุสินค้า')}</strong><small>${esc([r.qty?(r.qty+' '+r.unit):'',r.format,r.speed?(r.speed+' cycles/min'):''].filter(Boolean).join(' · ')||'รอกรอกข้อมูล')}</small></div><span>${r.open?'▲ ย่อ':'▼ ขยาย'}</span></div>${r.open?`<div class="ia-product-body"><div class="grid4">${field(r,'name','Test Product / สินค้าสำหรับทดสอบ')}${field(r,'qty','Test Quantity / ปริมาณทดสอบ')}${`<div class="field"><label>Unit / หน่วย</label><select onchange="iaSet(${r.id},'unit',this.value)">${['kg','pcs','packs'].map(u=>`<option ${r.unit===u?'selected':''}>${u}</option>`).join('')}</select></div>`}${field(r,'format','Format / Tooling')}${field(r,'speed','Target Speed (cycles/min)')}</div><div style="margin-top:15px;font-weight:600">Film / Material — ฟิล์มที่ใช้ทดลอง</div><div class="ia-film-choices">${[['ours','Film เรา (RuamPat)'],['other','Film เจ้าอื่น'],['pending','ยังไม่ยืนยัน']].map(([v,l])=>`<label><input type="radio" name="film_${r.id}" value="${v}" ${r.film===v?'checked':''} onchange="iaSet(${r.id},'film',this.value)"> ${l}</label>`).join('')}</div><div class="grid4">${r.film==='other'?field(r,'filmSupplier','Film Supplier / ชื่อผู้ผลิตฟิล์ม'):''}${field(r,'filmType','Film Type / ประเภทฟิล์ม')}${field(r,'filmSize','Film Size / ขนาดฟิล์ม')}${field(r,'filmThickness','Thickness / ความหนา')}${field(r,'labelSize','Label / Sticker Size')}${field(r,'labelPosition','Label Position / Print Position')}${field(r,'joint','Joint Equipment')}</div>${textarea(r,'procedure','Test Procedure / วิธีการทดสอบ','เช่น Run 3 รอบ, ตรวจ Seal ทุก Pack, วัด Speed ต่อเนื่อง 30 นาที')}<div class="ia-card-actions"><button type="button" class="ia-remove" onclick="iaRemove(${r.id})" ${records.length===1?'disabled':''}>ลบ Product นี้</button></div></div>`:''}</div>`).join('');
-accept.innerHTML=records.map((r,i)=>`<div class="ia-acceptance-card"><div class="ia-acceptance-body"><h4>Product ${i+1} — ${esc(r.name||'ยังไม่ระบุสินค้า')}</h4><div class="muted">เกณฑ์ตรวจรับเฉพาะ Product นี้</div><div class="grid4">${field(r,'speedAcceptance','Speed Acceptance')}${field(r,'sealAcceptance','Seal Acceptance')}${field(r,'labelAcceptance','Label Acceptance')}${field(r,'packAcceptance','Pack Appearance / Quality')}</div>${textarea(r,'otherAcceptance','Other Product Acceptance Criteria')}</div></div>`).join('');}
-window.iaSet=function(id,key,value){let r=records.find(x=>x.id===id);if(!r)return;r[key]=value;if(['film','name','qty','unit','format','speed'].includes(key)){if(key==='film')draw();else{let heads=document.querySelectorAll('.ia-product-head strong');let subtitles=document.querySelectorAll('.ia-product-head small');let i=records.indexOf(r);if(heads[i])heads[i].textContent=`▣ Product ${i+1} — ${r.name||'ยังไม่ระบุสินค้า'}`;if(subtitles[i])subtitles[i].textContent=[r.qty?(r.qty+' '+r.unit):'',r.format,r.speed?(r.speed+' cycles/min'): ''].filter(Boolean).join(' · ');let h=document.querySelectorAll('.ia-acceptance-card h4')[i];if(h)h.textContent=`Product ${i+1} — ${r.name||'ยังไม่ระบุสินค้า'}`;}}};
+host.innerHTML=records.map((r,i)=>`<div class="ia-product-card"><div class="ia-product-head" onclick="iaToggle(${r.id})"><div><strong>▣ Product ${i+1} — ${esc(r.name||'ยังไม่ระบุสินค้า')}</strong><small>${esc([r.qty?(r.qty+' '+r.unit):'',r.format,r.speed?(r.speed+' cycles/min'):''].filter(Boolean).join(' · ')||'รอกรอกข้อมูล')}</small></div><span>${r.open?'▲ ย่อ':'▼ ขยาย'}</span></div>${r.open?`<div class="ia-product-body"><div class="grid4">${field(r,'name','Test Product / สินค้าสำหรับทดสอบ')}${field(r,'qty','Test Quantity / ปริมาณทดสอบ')}${`<div class="field"><label>Unit / หน่วย</label><select onchange="iaSet(${r.id},'unit',this.value)">${['kg','pcs','packs'].map(u=>`<option ${r.unit===u?'selected':''}>${u}</option>`).join('')}</select></div>`}${field(r,'format','Format / Tooling')}${field(r,'speed','Target Speed (cycles/min)')}${`<div class="field"><label>Solid Content in Package / ของแข็งใน Package</label><select onchange="iaSet(${r.id},'solid',this.value)">${[['pending','รอยืนยัน'],['yes','มี'],['no','ไม่มี']].map(([v,l])=>`<option value="${v}" ${r.solid===v?'selected':''}>${l}</option>`).join('')}</select></div>`}${r.solid==='yes'?field(r,'solidDetail','ระบุของแข็งใน Package / Solid Object (เช่น ไม้เสียบไส้กรอก)'):''}</div><div style="margin-top:15px;font-weight:600">Film / Material — ฟิล์มที่ใช้ทดลอง</div><div class="ia-film-choices">${[['ours','Film เรา (RuamPat)'],['other','Film เจ้าอื่น'],['pending','ยังไม่ยืนยัน']].map(([v,l])=>`<label><input type="radio" name="film_${r.id}" value="${v}" ${r.film===v?'checked':''} onchange="iaSet(${r.id},'film',this.value)"> ${l}</label>`).join('')}</div><div class="grid4">${r.film==='other'?field(r,'filmSupplier','Film Supplier / ชื่อผู้ผลิตฟิล์ม'):''}${field(r,'filmType','Film Type / ประเภทฟิล์ม')}${field(r,'filmSize','Film Size / ขนาดฟิล์ม')}${field(r,'filmThickness','Thickness / ความหนา')}${field(r,'labelSize','Label / Sticker Size')}${field(r,'labelPosition','Label Position / Print Position')}${field(r,'joint','Joint Equipment')}</div>${textarea(r,'procedure','Test Procedure / วิธีการทดสอบ','เช่น Run 3 รอบ, ตรวจ Seal ทุก Pack, วัด Speed ต่อเนื่อง 30 นาที')}<div class="ia-card-actions"><button type="button" class="ia-remove" onclick="iaRemove(${r.id})" ${records.length===1?'disabled':''}>ลบ Product นี้</button></div></div>`:''}</div>`).join('');
+accept.innerHTML='';}
+window.iaSet=function(id,key,value){let r=records.find(x=>x.id===id);if(!r)return;r[key]=value;if(['film','name','qty','unit','format','speed'].includes(key)){if(key==='film')draw();else{let heads=document.querySelectorAll('.ia-product-head strong');let subtitles=document.querySelectorAll('.ia-product-head small');let i=records.indexOf(r);if(heads[i])heads[i].textContent=`▣ Product ${i+1} — ${r.name||'ยังไม่ระบุสินค้า'}`;if(subtitles[i])subtitles[i].textContent=[r.qty?(r.qty+' '+r.unit):'',r.format,r.speed?(r.speed+' cycles/min'): ''].filter(Boolean).join(' · ');}}};
 window.iaToggle=function(id){let r=records.find(x=>x.id===id);if(r){r.open=!r.open;draw();}};
-window.iaAddProduct=function(){records.forEach(x=>x.open=false);records.push({id:nextId++,open:true,name:'',qty:'',unit:'kg',format:'',speed:'',film:'pending',filmSupplier:'',filmType:'',filmSize:'',filmThickness:'',labelSize:'',labelPosition:'',joint:'',procedure:'',speedAcceptance:'',sealAcceptance:'',labelAcceptance:'',packAcceptance:'',otherAcceptance:''});draw();};
+window.iaAddProduct=function(){records.forEach(x=>x.open=false);records.push({id:nextId++,open:true,name:'',qty:'',unit:'kg',format:'',speed:'',film:'pending',filmSupplier:'',filmType:'',filmSize:'',filmThickness:'',solid:'pending',solidDetail:'',labelSize:'',labelPosition:'',joint:'',procedure:'',speedAcceptance:'',sealAcceptance:'',labelAcceptance:'',packAcceptance:'',otherAcceptance:''});draw();};
 window.iaRemove=function(id){if(records.length<2)return;let i=records.findIndex(x=>x.id===id);if(i>=0){records.splice(i,1);draw();}};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',draw);else draw();
 })();
+window.iaShowInstallFiles=function(input){const el=document.getElementById('ia-install-file-list');if(el)el.textContent=input.files.length?Array.from(input.files).map(f=>f.name).join(' • '):'ยังไม่มีไฟล์ที่เลือก';};
 </script>
 </body>
 </html>
