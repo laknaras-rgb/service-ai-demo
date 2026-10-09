@@ -133,6 +133,12 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 <style id="ia-product-style">
 .ia-product-card,.ia-acceptance-card{border:1px solid #dbe3f0;border-radius:9px;margin:12px 0;overflow:hidden;background:#fff}.ia-product-head{padding:13px 15px;background:#f4f7fc;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}.ia-product-head strong{color:#314561}.ia-product-head small{display:block;color:#74849a;margin-top:4px}.ia-product-body,.ia-acceptance-body{padding:15px}.ia-add-product{width:100%;padding:12px;border:1px dashed #5275d8;color:#315ac0;background:#f5f8ff;border-radius:8px;cursor:pointer;font-weight:600}.ia-remove{border:1px solid #f0c4c4;background:white;color:#b93838;padding:7px 12px;border-radius:6px;cursor:pointer}.ia-film-choices{display:flex;flex-wrap:wrap;gap:14px;padding:8px 0}.ia-film-choices label{display:flex;gap:5px;align-items:center;cursor:pointer}.ia-product-card .grid4,.ia-acceptance-card .grid4{margin-top:12px}.ia-card-actions{display:flex;justify-content:flex-end;margin-top:12px}.ia-acceptance-card h4{margin:0 0 7px;color:#314561}.ia-acceptance-card .muted{font-size:12px}
 </style>
+<style id="ia-th-captions">
+.ia-th-caption{display:block;font-size:11px;line-height:1.35;color:#778397;font-weight:400;margin-top:2px;}
+.ia-checks label{display:flex;align-items:flex-start;gap:7px;}
+.ia-checks label input{margin-top:4px;flex-shrink:0;}
+.ia-handover-section .actions .ia-th-caption{color:inherit;opacity:.8;}
+</style>
 </head>
 <body>
 <header class="top">
@@ -394,12 +400,12 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
       </div>
       <div class="ia-section" id="ia-acceptance-section">
         <div class="rowspace"><div><h3>3. Acceptance Criteria / เกณฑ์ตรวจรับ</h3><div class="muted">เกณฑ์ตรวจรับรวมหนึ่งชุดต่อเครื่องจักร — รายละเอียดรอ Sales / ผู้เกี่ยวข้องยืนยัน</div></div><span class="badge warn">Pending Final Confirmation</span></div>
-        <div class="grid4" style="margin-top:14px"><div class="field"><label>Speed Acceptance</label><input placeholder="รอยืนยัน"></div><div class="field"><label>Seal Acceptance</label><input placeholder="รอยืนยัน"></div><div class="field"><label>Label Acceptance</label><input placeholder="รอยืนยัน"></div><div class="field"><label>Pack Appearance / Quality</label><input placeholder="รอยืนยัน"></div></div>
+        <div class="grid4" style="margin-top:14px"><div class="field"><label>Speed Acceptance<small class="ia-th-caption">เกณฑ์ความเร็ว</small></label><input placeholder="รอยืนยัน"></div><div class="field"><label>Seal Acceptance<small class="ia-th-caption">เกณฑ์รอยซีล</small></label><input placeholder="รอยืนยัน"></div><div class="field"><label>Label Acceptance<small class="ia-th-caption">เกณฑ์ฉลาก</small></label><input placeholder="รอยืนยัน"></div><div class="field"><label>Pack Appearance / Quality<small class="ia-th-caption">ลักษณะและคุณภาพบรรจุภัณฑ์</small></label><input placeholder="รอยืนยัน"></div></div>
         <div class="grid4" style="margin-top:14px">
-          <div class="field"><label>Customer Acceptance By</label><input placeholder="ชื่อ / ตำแหน่งผู้ตรวจรับ"></div>
-          <div class="field"><label>Planned Test Date</label><input type="date"></div>
-          <div class="field"><label>Acceptance Status</label><select><option>Pending Confirmation</option><option>Customer Confirmed</option><option>Ready for Test</option><option>Accepted</option></select></div>
-          <div class="field"><label>Confirmed By</label><input placeholder="Sales / Project Owner"></div>
+          <div class="field"><label>Customer Acceptance By<small class="ia-th-caption">ผู้ตรวจรับฝ่ายลูกค้า</small></label><input placeholder="ชื่อ / ตำแหน่งผู้ตรวจรับ"></div>
+          <div class="field"><label>Planned Test Date<small class="ia-th-caption">วันที่วางแผนทดสอบ</small></label><input type="date"></div>
+          <div class="field"><label>Acceptance Status<small class="ia-th-caption">สถานะการตรวจรับ</small></label><select><option>Pending Confirmation</option><option>Customer Confirmed</option><option>Ready for Test</option><option>Accepted</option></select></div>
+          <div class="field"><label>Confirmed By<small class="ia-th-caption">ผู้ยืนยันข้อมูล</small></label><input placeholder="Sales / Project Owner"></div>
         </div>
         <div class="field" style="margin-top:12px"><label>Other Acceptance Criteria / เงื่อนไขรวมเพิ่มเติม</label><textarea placeholder="เกณฑ์ตรวจรับเพิ่มเติมที่ใช้ร่วมกันทุก Product"></textarea></div>
       </div>
@@ -413,14 +419,14 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
         </div>
 
         <div class="ia-checks">
-          <label><input type="checkbox" checked> Target speed confirmed</label>
-          <label><input type="checkbox"> Test product confirmed</label>
-          <label><input type="checkbox"> Test quantity confirmed</label>
-          <label><input type="checkbox"> Format / tooling confirmed</label>
-          <label><input type="checkbox"> Seal / pack quality criteria confirmed</label>
-          <label><input type="checkbox"> Label / print requirement confirmed</label>
-          <label><input type="checkbox"> Installation / utility confirmed</label>
-          <label><input type="checkbox"> Customer acceptance person confirmed</label>
+          <label><input type="checkbox" checked> <span>Target speed confirmed<small class="ia-th-caption">ยืนยันความเร็วเป้าหมาย</small></span></label>
+          <label><input type="checkbox"> <span>Test product confirmed<small class="ia-th-caption">ยืนยันสินค้าสำหรับทดสอบ</small></span></label>
+          <label><input type="checkbox"> <span>Test quantity confirmed<small class="ia-th-caption">ยืนยันปริมาณที่ใช้ทดสอบ</small></span></label>
+          <label><input type="checkbox"> <span>Format / tooling confirmed<small class="ia-th-caption">ยืนยันฟอร์แมต / ชุดอุปกรณ์</small></span></label>
+          <label><input type="checkbox"> <span>Seal / pack quality criteria confirmed<small class="ia-th-caption">ยืนยันเกณฑ์คุณภาพซีลและแพ็ก</small></span></label>
+          <label><input type="checkbox"> <span>Label / print requirement confirmed<small class="ia-th-caption">ยืนยันข้อกำหนดฉลาก / การพิมพ์</small></span></label>
+          <label><input type="checkbox"> <span>Installation / utility confirmed<small class="ia-th-caption">ยืนยันข้อมูลติดตั้ง / ระบบสาธารณูปโภค</small></span></label>
+          <label><input type="checkbox"> <span>Customer acceptance person confirmed<small class="ia-th-caption">ยืนยันผู้ตรวจรับของลูกค้า</small></span></label>
         </div>
 
         <div class="notice orange" style="margin-top:14px">
@@ -429,9 +435,9 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
         </div>
 
         <div class="actions" style="margin-top:14px">
-          <button class="btn ghost">Save Draft</button>
-          <button class="btn blue">Request Customer Confirmation</button>
-          <button class="btn green">Confirm & Ready for Service</button>
+          <button class="btn ghost">Save Draft<small class="ia-th-caption">บันทึกฉบับร่าง</small></button>
+          <button class="btn blue">Request Customer Confirmation<small class="ia-th-caption">ขอให้ลูกค้ายืนยัน</small></button>
+          <button class="btn green">Confirm & Ready for Service<small class="ia-th-caption">ยืนยันและพร้อมส่งต่อ Service</small></button>
         </div>
       </div>
     </div>
