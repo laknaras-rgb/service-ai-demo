@@ -180,7 +180,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   <button class="nav">▥ Feed</button>
   <button class="nav" onclick="toggleGroup('activityGroup')">▣ Activities <span>⌄</span></button>
   <div id="activityGroup" class="group open">
-    <button class="subnav">Appointments</button><button class="subnav">Tasks</button><button class="subnav">Phone Calls</button><button class="subnav">E-Mails</button><button class="subnav" onclick="showPage('visit')">Visit</button>
+    <button class="subnav">Appointments</button><button class="subnav">Tasks</button><button class="subnav">Phone Calls</button><button class="subnav">E-Mails</button><button class="subnav" onclick="showPage('visitList')">Visit</button>
   </div>
   <button class="nav" onclick="toggleGroup('salesGroup')">$ Sales <span>⌄</span></button>
   <div id="salesGroup" class="group">
@@ -831,7 +831,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
       <tbody><tr><td><span class="link" onclick="showPage('machineDetail')">1011-007</span></td><td>OL3151</td><td>VARIOVAC Optimus</td><td>GSB</td><td>PM Round #2</td><td><span class="badge ok">Linked</span></td></tr></tbody></table>
     </div>
     <div id="ftab-activities" class="tabpanel">
-      <div class="rowspace"><div><b>Visit / การเข้าหน้างาน</b><div class="muted">Customer + Machine Prefill จาก Function อัตโนมัติ</div></div><button class="btn green" onclick="showPage('visit')">＋ สร้าง Visit</button></div>
+      <div class="rowspace"><div><b>Visit / การเข้าหน้างาน</b><div class="muted">Customer + Machine Prefill จาก Function อัตโนมัติ</div></div><button class="btn green" onclick="openNewVisit()">＋ สร้าง Visit</button></div>
       <table><thead><tr><th>Visit</th><th>Machine</th><th>Technician</th><th>Check-in</th><th>Check-out</th><th>Vehicle</th><th>Distance</th><th>Status</th></tr></thead>
       <tbody><tr><td><span class="link" onclick="showPage('visit')">VIS-2026-018</span></td><td>OL3151</td><td>Bob</td><td>06/10/26 09:10</td><td>06/10/26 12:30</td><td>1กข 1234</td><td>180 km</td><td><span class="badge ok">Completed</span></td></tr></tbody></table>
     </div>
@@ -839,10 +839,25 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   </div>
 </section>
 
+<!-- VISIT LIST: standalone entry point -->
+<section id="visitList" class="page">
+  <div class="card">
+    <div class="cardhead"><div><h2>Visit / รายการเข้าหน้างาน</h2><div class="muted">ดูรายการ Visit ทั้งหมด แล้วคลิกเพื่อดูรายละเอียด • หนึ่ง Visit ต่อผู้ปฏิบัติงาน</div></div><button class="btn green" onclick="openNewVisit()">＋ เพิ่ม Visit</button></div>
+    <div class="pad">
+      <div class="rowspace" style="gap:12px;flex-wrap:wrap"><b>Visit List</b><div class="search"><input id="visitListSearch" placeholder="ค้นหาเลข Visit, ลูกค้า, เครื่อง, ช่าง..." oninput="filterVisitRows()"></div></div>
+      <div class="tablewrap"><table><thead><tr><th>Visit No.</th><th>วันที่</th><th>Customer</th><th>Function</th><th>Machine</th><th>Objective</th><th>Technician</th><th>Status</th><th></th></tr></thead><tbody id="visitListBody">
+        <tr><td><span class="link" onclick="openExistingVisit()">VIS-2026-018</span></td><td>06/10/2026</td><td>GSB</td><td>FN-PM-002</td><td>OL3151</td><td>PM</td><td>Bob</td><td><span class="badge ok">Completed</span></td><td><button class="btn ghost small" onclick="openExistingVisit()">ดูรายละเอียด</button></td></tr>
+        <tr><td><span class="link" onclick="openExistingVisit()">VIS-2026-019</span></td><td>06/10/2026</td><td>GSB</td><td>FN-PM-002</td><td>OL3151</td><td>PM</td><td>Janeny</td><td><span class="badge">In Progress</span></td><td><button class="btn ghost small" onclick="openExistingVisit()">ดูรายละเอียด</button></td></tr>
+      </tbody></table></div>
+      <div class="muted" style="margin-top:12px">ข้อมูลตัวอย่างสำหรับแสดงขั้นตอนการทำงาน • รายการ VIS-2026-019 ใช้หน้ารายละเอียดตัวอย่างเดียวกันใน Prototype</div>
+    </div>
+  </div>
+</section>
+
 <!-- VISIT -->
 <section id="visit" class="page">
   <div class="card">
-    <div class="cardhead"><div><h2>Visit: VIS-2026-018</h2><div class="muted">สร้างจาก Function FN-PM-002</div></div><div class="actions"><button class="btn blue">✎ แก้ไข</button></div></div>
+    <div class="cardhead"><div><button class="btn ghost small" onclick="showPage('visitList')" style="margin-bottom:8px">← กลับรายการ Visit</button><h2 id="visitDetailHeading">Visit: VIS-2026-018</h2><div class="muted" id="visitDetailSource">สร้างจาก Function FN-PM-002</div></div><div class="actions"><button class="btn blue">✎ แก้ไข</button></div></div>
     <div class="pad">
       <div class="notice"><b>Auto Prefill:</b> Account / Customer, Contact, Site, Function และ Machine ดึงจาก Function อัตโนมัติ</div>
       <div class="grid4">
@@ -1206,6 +1221,20 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 
 <script>
 function toggleGroup(id){const el=document.getElementById(id); if(el) el.classList.toggle('open')}
+function openExistingVisit(){
+  document.getElementById('visitDetailHeading').textContent='Visit: VIS-2026-018';
+  document.getElementById('visitDetailSource').textContent='สร้างจาก Function FN-PM-002';
+  showPage('visit');
+}
+function openNewVisit(){
+  document.getElementById('visitDetailHeading').textContent='เพิ่ม Visit ใหม่ (ตัวอย่าง)';
+  document.getElementById('visitDetailSource').textContent='เลือก Function เพื่อเชื่อมข้อมูล Customer, Machine และผู้รับผิดชอบ';
+  showPage('visit');
+}
+function filterVisitRows(){
+  const q=(document.getElementById('visitListSearch')?.value||'').toLocaleLowerCase();
+  document.querySelectorAll('#visitListBody tr').forEach(r=>r.style.display=r.textContent.toLocaleLowerCase().includes(q)?'':'none');
+}
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const el=document.getElementById(id); if(el) el.classList.add('active');
