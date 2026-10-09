@@ -139,6 +139,14 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 .ia-checks label input{margin-top:4px;flex-shrink:0;}
 .ia-handover-section .actions .ia-th-caption{color:inherit;opacity:.8;}
 </style>
+<style>
+.ia-doc-list{border:1px solid #dce4f0;border-radius:9px;padding:13px;background:#f8fafc}
+.ia-doc-item{display:flex;align-items:center;gap:12px;padding:10px;background:white;border:1px solid #e2e8f0;border-radius:8px;margin-top:8px}
+.ia-doc-thumb{width:52px;height:52px;flex:0 0 52px;border-radius:7px;background:#edf2fa;display:flex;align-items:center;justify-content:center;font-size:25px;overflow:hidden}
+.ia-doc-thumb img{width:100%;height:100%;object-fit:cover}
+.ia-doc-info{flex:1;min-width:0}.ia-doc-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.ia-doc-actions button{border:1px solid #cbd5e1;border-radius:5px;background:white;padding:6px 10px;color:#334155;cursor:pointer}
+@media(max-width:650px){.ia-doc-item{flex-wrap:wrap}.ia-doc-actions{width:100%;justify-content:flex-end}}
+</style>
 </head>
 <body>
 <header class="top">
@@ -405,7 +413,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 
         <div class="grid4" style="margin-top:12px"><div class="field"><label>Printer / มีเครื่องพิมพ์หรือไม่</label><select id="ia-printer" onchange="document.getElementById('ia-printer-detail').style.display=this.value==='yes'?'block':'none'"><option value="pending">รอยืนยัน</option><option value="yes">มี</option><option value="no">ไม่มี</option></select></div><div class="field" id="ia-printer-detail" style="display:none"><label>Printer Detail / รายละเอียดเครื่องพิมพ์</label><input placeholder="ยี่ห้อ / รุ่น / ตำแหน่งติดตั้ง"></div></div>
         <div class="grid4" style="margin-top:12px"><div class="field"><label>Other Accessories / มีอุปกรณ์เสริมอื่น?</label><select id="ia-other-accessories" onchange="document.getElementById('ia-other-accessories-detail').style.display=this.value==='yes'?'block':'none'"><option value="pending">รอยืนยัน</option><option value="yes">มี</option><option value="no">ไม่มี</option></select></div><div class="field" id="ia-other-accessories-detail" style="display:none"><label>Accessory Details / ระบุอุปกรณ์เสริม</label><input placeholder="เช่น สายพานลำเลียง / เครื่องชั่ง / อุปกรณ์ต่อพ่วง"></div></div>
-        <div class="field" style="margin-top:16px"><label>Installation Documents / ไฟล์ประกอบการติดตั้ง (เฉพาะ Requirement นี้)</label><div class="muted">Sales แนบ Machine Dimension Drawing, Layout, รูปหน้างาน และเอกสารอื่น ๆ แยกจากแท็บ Attachments หลัก</div><input type="file" id="ia-install-files" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.dwg,.dxf,.xlsx,.xls,.docx" onchange="iaShowInstallFiles(this)"><div id="ia-install-file-list" class="muted" style="margin-top:8px">ยังไม่มีไฟล์ที่เลือก</div><small>Prototype: แสดงไฟล์ที่เลือกเท่านั้น ยังไม่อัปโหลดเข้าฐานข้อมูลจริง</small></div>
+        <div class="field" style="margin-top:16px"><label>Installation Documents / ไฟล์ประกอบการติดตั้ง (เฉพาะ Requirement นี้)</label><div class="muted">Sales แนบ Machine Dimension Drawing, Layout, รูปหน้างาน และเอกสารอื่น ๆ แยกจากแท็บ Attachments หลัก</div><input type="file" id="ia-install-files" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.dwg,.dxf,.xlsx,.xls,.docx" onchange="iaShowInstallFiles(this)"><div id="ia-install-file-list" style="margin-top:12px"></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px"><button type="button" onclick="iaSaveInstallFiles()" style="background:#5271dd;color:white;border:0;border-radius:6px;padding:9px 15px;cursor:pointer">บันทึกไฟล์แนบ (จำลอง)</button><span id="ia-install-save-status" class="muted">ตัวอย่างไฟล์ที่บันทึกแล้วแสดงด้านล่าง</span></div><div id="ia-install-saved-list" class="ia-doc-list" style="margin-top:12px"></div><small>เว็บจำลอง: ไฟล์ที่เลือกและบันทึกจะแสดงในหน้านี้ชั่วคราว ไม่ได้อัปโหลดเข้าฐานข้อมูลจริง และจะหายเมื่อรีเฟรช</small></div>
         <div class="field" style="margin-top:12px"><label>Dimension Drawing / Revision / หมายเหตุไฟล์</label><input placeholder="เช่น OL3151 Drawing Rev.02 — จาก Sales"></div>
         <div class="field" style="margin-top:12px">
           <label>Installation Note / ข้อกำหนดติดตั้งเพิ่มเติม</label>
@@ -1259,7 +1267,28 @@ window.iaAddProduct=function(){records.forEach(x=>x.open=false);records.push({id
 window.iaRemove=function(id){if(records.length<2)return;let i=records.findIndex(x=>x.id===id);if(i>=0){records.splice(i,1);draw();}};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',draw);else draw();
 })();
-window.iaShowInstallFiles=function(input){const el=document.getElementById('ia-install-file-list');if(el)el.textContent=input.files.length?Array.from(input.files).map(f=>f.name).join(' • '):'ยังไม่มีไฟล์ที่เลือก';};
+(function(){
+ const samples=[
+ {name:'OL3151_Machine_Dimension_Rev02.pdf',type:'application/pdf',size:2457600,example:true,kind:'Drawing',date:'09/10/2026'},
+ {name:'GSB_Installation_Area.jpg',type:'image/jpeg',size:1843200,example:true,kind:'Site Photo',date:'09/10/2026'},
+ {name:'Installation_Layout_OL3151.dwg',type:'application/acad',size:983040,example:true,kind:'Layout',date:'09/10/2026'}
+ ];
+ let pending=[],saved=samples.slice();
+ const safe=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const size=n=>n>=1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';
+ const isImg=f=>/^image\//.test(f.type)||/\.(png|jpe?g|webp)$/i.test(f.name);
+ const badge=f=>isImg(f)?'รูปภาพ':/\.pdf$/i.test(f.name)?'PDF':/\.(dwg|dxf)$/i.test(f.name)?'Drawing':'เอกสาร';
+ const icon=f=>isImg(f)?'🖼️':/\.pdf$/i.test(f.name)?'📕':/\.(dwg|dxf)$/i.test(f.name)?'📐':'📄';
+ const render=()=>{
+  const el=document.getElementById('ia-install-saved-list');if(!el)return;
+  el.innerHTML='<div style="font-weight:650;margin-bottom:9px">ไฟล์ประกอบการติดตั้งที่บันทึกแล้ว <span style="color:#64748b;font-weight:400">('+saved.length+' ไฟล์)</span></div>'+saved.map((f,i)=>`<div class="ia-doc-item"><div class="ia-doc-thumb">${f.url&&isImg(f)?`<img src="${f.url}" alt="Preview">`:icon(f)}</div><div class="ia-doc-info"><div style="font-weight:600;overflow-wrap:anywhere">${safe(f.name)}</div><div style="color:#64748b;font-size:12px;margin-top:3px">${badge(f)} · ${size(f.size)} · ${f.date||'บันทึกในรอบนี้'} ${f.example?'· ตัวอย่าง':''}</div></div><div class="ia-doc-actions">${f.url?`<button type="button" onclick="iaOpenInstallFile(${i})">ดูไฟล์</button>`:`<span style="font-size:12px;color:#64748b">ตัวอย่างการแสดงผล</span>`}<button type="button" onclick="iaRemoveInstallFile(${i})">ลบ</button></div></div>`).join('');
+ };
+ window.iaShowInstallFiles=input=>{pending=Array.from(input.files||[]);const el=document.getElementById('ia-install-file-list');if(el)el.innerHTML=pending.length?'<div style="font-size:13px;color:#2563eb">เลือกไว้ '+pending.length+' ไฟล์ (ยังไม่บันทึก): '+pending.map(f=>safe(f.name)).join(' • ')+'</div>':'';};
+ window.iaSaveInstallFiles=()=>{const msg=document.getElementById('ia-install-save-status');if(!pending.length){if(msg)msg.textContent='กรุณาเลือกไฟล์ก่อนบันทึก';return;}saved.push(...pending.map(f=>({name:f.name,type:f.type,size:f.size,url:URL.createObjectURL(f),date:'บันทึกในรอบนี้'})));pending=[];document.getElementById('ia-install-files').value='';document.getElementById('ia-install-file-list').innerHTML='';if(msg)msg.textContent='บันทึกในเว็บจำลองแล้ว (ไม่ส่งขึ้นเซิร์ฟเวอร์)';render();};
+ window.iaOpenInstallFile=i=>{if(saved[i]?.url)window.open(saved[i].url,'_blank','noopener');};
+ window.iaRemoveInstallFile=i=>{const f=saved.splice(i,1)[0];if(f?.url)URL.revokeObjectURL(f.url);render();};
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
+})();
 </script>
 
 <script id="ia-summary-progress-script">
