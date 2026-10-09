@@ -1025,6 +1025,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
       <button class="tab" data-otab="conversation" onclick="activateOpportunityTab('conversation')">Conversation</button>
       <button class="tab" data-otab="feed" onclick="activateOpportunityTab('feed')">Feed</button>
       <button class="tab" data-otab="function" onclick="activateOpportunityTab('function')">ใบฟังก์ชั่น</button>
+      <button class="tab" data-otab="machine" onclick="activateOpportunityTab('machine')">Machine Register</button>
     </div>
 
     <!-- OVERVIEW: ORIGINAL CONTACT + PIPELINE, THEN NEW SALES REQUIREMENT -->
@@ -1067,6 +1068,13 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
     <div id="otab-conversation" class="tabpanel"><div class="opp-subcard">Conversation</div></div>
     <div id="otab-feed" class="tabpanel"><div class="opp-subcard">Feed</div></div>
     <div id="otab-function" class="tabpanel"><div class="opp-subcard">ใบฟังก์ชั่นที่เชื่อมกับ Opportunity นี้</div></div>
+    <div id="otab-machine" class="tabpanel">
+      <div class="opp-subcard">
+        <div class="rowspace"><div><h3 style="margin:0 0 6px">Machine Register ที่เชื่อมกับ Opportunity</h3><div class="muted">แสดงทะเบียนเครื่องที่สร้างจาก Sales Quote / Final ของ Opportunity นี้ โดยไม่สร้างข้อมูลซ้ำ</div></div></div>
+        <div class="tablewrap" style="margin-top:16px"><table><thead><tr><th>Machine No.</th><th>Serial No.</th><th>ชื่อเครื่องจักร</th><th>ลูกค้า</th><th>สถานะ</th><th>Action</th></tr></thead><tbody><tr><td><strong>OL3151</strong></td><td>รอยืนยัน S/N</td><td>VARIOVAC Thermoforming Machine</td><td>GSB (ตัวอย่างจำลอง)</td><td>เชื่อมกับ Opportunity</td><td><button class="btn" onclick="showPage('machineDetail');activateMachineTab('overview')">เปิดทะเบียนเครื่อง →</button></td></tr></tbody></table></div>
+        <div class="muted" style="margin-top:12px">กรณีมีหลายเครื่อง ให้แสดงหนึ่งแถวต่อหนึ่ง Machine Register และเปิดกลับมายัง Opportunity ต้นทางได้</div>
+      </div>
+    </div>
   </div>
 </section>
 
