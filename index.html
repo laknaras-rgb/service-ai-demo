@@ -919,7 +919,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
     <div class="cardhead"><div><h3>＋ สร้าง Vehicle & Travel</h3><div class="muted">บันทึกข้อมูลการเดินทางครั้งเดียว แล้วเลือกใช้ได้ในหลาย Visit</div></div><button class="btn ghost small" onclick="closeTravelCreator()">✕ ปิด</button></div>
     <div class="pad grid2">
       <div class="field"><label>วันที่เดินทาง</label><input id="newTripDate" type="date" value="2026-10-06"></div>
-      <div class="field"><label>ทะเบียนรถ</label><input id="newTripVehicle" placeholder="เช่น 1กข 1234 กรุงเทพ"></div>
+      <div class="field"><label>ทะเบียนรถ</label><select id="newTripVehicle" onchange="document.getElementById('newTripVehicleOtherWrap').style.display=this.value==='__other__'?'block':'none'"><option value="">-- เลือกทะเบียนรถ --</option><option value="1กข 1234 กรุงเทพ">1กข 1234 กรุงเทพ</option><option value="กข 1234 กรุงเทพ">กข 1234 กรุงเทพ</option><option value="ขค 5678 กรุงเทพ">ขค 5678 กรุงเทพ</option><option value="__other__">อื่น ๆ / กรอกทะเบียนเอง</option></select><div id="newTripVehicleOtherWrap" style="display:none;margin-top:8px"><label>ระบุทะเบียนรถอื่น</label><input id="newTripVehicleOther" placeholder="กรอกทะเบียนรถ เช่น รถส่วนตัว / รถเช่า"></div></div>
       <div class="field"><label>ผู้ขับรถ</label><input id="newTripDriver" placeholder="ชื่อผู้ขับรถ"></div><div class="field"><label>ผู้ร่วมเดินทาง</label><input id="newTripPassengers" placeholder="เช่น Bob, Janeny"></div>
       <div class="field"><label>เลขไมล์เริ่มต้น</label><input id="newTripStart" type="number" min="0" placeholder="125000"></div>
       <div class="field"><label>เลขไมล์สิ้นสุด</label><input id="newTripEnd" type="number" min="0" placeholder="125180"></div>
@@ -1288,7 +1288,7 @@ function openTravelCreator(){document.getElementById('newTripError').textContent
 function closeTravelCreator(){document.getElementById('visitTravelModal').style.display='none'}
 function saveTravelTrip(){
  const val=id=>document.getElementById(id).value.trim(), num=id=>Number(val(id)||0);
- const vehicle=val('newTripVehicle'),date=val('newTripDate'),start=val('newTripStart'),end=val('newTripEnd');
+ const vehicle=val('newTripVehicle')==='__other__'?val('newTripVehicleOther'):val('newTripVehicle'),date=val('newTripDate'),start=val('newTripStart'),end=val('newTripEnd');
  const error=document.getElementById('newTripError');
  if(!date||!vehicle||!val('newTripDriver')||start===''){error.textContent='กรุณาระบุวันที่ ทะเบียนรถ ผู้ขับ และเลขไมล์เริ่มต้น';return}
  if(end!==''&&Number(end)<Number(start)){error.textContent='เลขไมล์สิ้นสุดต้องไม่ต่ำกว่าเลขไมล์เริ่มต้น';return}
