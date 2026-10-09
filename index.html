@@ -112,6 +112,9 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 @media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:230px 1fr}}
 @media(max-width:760px){.ia-summary,.ia-checks{grid-template-columns:1fr}.opp-display-grid,.pipeline-grid{grid-template-columns:1fr}.app{grid-template-columns:1fr}.side{display:none}.stats,.grid4,.grid3,.grid2,.typecards{grid-template-columns:1fr}.checkrow{grid-template-columns:28px 1fr}.checkrow input[type=text]{grid-column:2}.reportinfo{grid-template-columns:120px 1fr}}
 </style>
+<style id="ia-product-style">
+.ia-product-card,.ia-acceptance-card{border:1px solid #dbe3f0;border-radius:9px;margin:12px 0;overflow:hidden;background:#fff}.ia-product-head{padding:13px 15px;background:#f4f7fc;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}.ia-product-head strong{color:#314561}.ia-product-head small{display:block;color:#74849a;margin-top:4px}.ia-product-body,.ia-acceptance-body{padding:15px}.ia-add-product{width:100%;padding:12px;border:1px dashed #5275d8;color:#315ac0;background:#f5f8ff;border-radius:8px;cursor:pointer;font-weight:600}.ia-remove{border:1px solid #f0c4c4;background:white;color:#b93838;padding:7px 12px;border-radius:6px;cursor:pointer}.ia-film-choices{display:flex;flex-wrap:wrap;gap:14px;padding:8px 0}.ia-film-choices label{display:flex;gap:5px;align-items:center;cursor:pointer}.ia-product-card .grid4,.ia-acceptance-card .grid4{margin-top:12px}.ia-card-actions{display:flex;justify-content:flex-end;margin-top:12px}.ia-acceptance-card h4{margin:0 0 7px;color:#314561}.ia-acceptance-card .muted{font-size:12px}
+</style>
 </head>
 <body>
 <header class="top">
@@ -362,115 +365,21 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
         </div>
       </div>
 
-      <div class="ia-section">
-        <div class="rowspace">
-          <div>
-            <h3>2. Commissioning / Test Requirement</h3>
-            <div class="muted">กำหนดว่าจะทดสอบเครื่องด้วยอะไร เท่าไร และใช้ Format / อุปกรณ์ใด</div>
-          </div>
-          <span class="badge warn">Needs Customer Input</span>
-        </div>
-
-        <div class="grid4">
-          <div class="field">
-            <label>Test Product / สินค้าสำหรับทดสอบ</label>
-            <input value="ไส้กรอกชนิด A">
-            <small class="source-note pending">Source: Customer Confirmation</small>
-          </div>
-          <div class="field">
-            <label>Test Quantity / ปริมาณทดสอบ</label>
-            <input value="50 kg">
-            <small class="source-note pending">Source: Customer Confirmation</small>
-          </div>
-          <div class="field">
-            <label>Format / Tooling</label>
-            <input value="Format 3.2">
-            <small class="source-note pending">Source: Customer Confirmation</small>
-          </div>
-          <div class="field">
-            <label>Target Speed</label>
-            <input value="10 cycles/min">
-            <small class="source-note">Source: OPP / Sales</small>
-          </div>
-
-          <div class="field">
-            <label>Film / Material</label>
-            <input placeholder="Film type / size / thickness">
-          </div>
-          <div class="field">
-            <label>Label / Sticker Size</label>
-            <input value="5 x 3 inch">
-          </div>
-          <div class="field">
-            <label>Label Position / Print Position</label>
-            <input placeholder="ตำแหน่งติดสติกเกอร์">
-          </div>
-          <div class="field">
-            <label>Joint Equipment</label>
-            <input placeholder="Labeller / Printer / Conveyor / Other">
-          </div>
-        </div>
-
-        <div class="field" style="margin-top:12px">
-          <label>Test Procedure / วิธีการทดสอบ</label>
-          <textarea placeholder="เช่น Run 3 รอบ, ตรวจ Seal ทุก Pack, วัด Speed ต่อเนื่อง 30 นาที"></textarea>
-        </div>
+      <div class="ia-section" id="ia-product-tests">
+        <div class="rowspace"><div><h3>2. Commissioning / Test Requirement</h3><div class="muted">Sales บันทึก Product ที่ลูกค้าจะใช้ทดสอบ เพิ่มได้หลายชุด และย่อ/ขยายแต่ละชุดได้</div></div><span class="badge warn">Needs Customer Input</span></div>
+        <div id="ia-product-cards"></div>
+        <button type="button" class="ia-add-product" onclick="iaAddProduct()">＋ เพิ่ม Product สำหรับทดสอบ</button>
       </div>
-
-      <div class="ia-section">
-        <div class="rowspace">
-          <div>
-            <h3>3. Acceptance Criteria / เกณฑ์ตรวจรับ</h3>
-            <div class="muted">กำหนดว่าอะไรถือว่า “ผ่าน” เพื่อให้ทีม Service ทดสอบตามเงื่อนไขเดียวกับลูกค้า</div>
-          </div>
-          <span class="badge warn">Pending Final Confirmation</span>
+      <div class="ia-section" id="ia-acceptance-section">
+        <div class="rowspace"><div><h3>3. Acceptance Criteria / เกณฑ์ตรวจรับ</h3><div class="muted">เกณฑ์ตรวจรับแยกตาม Product และเชื่อมกับชุดข้อมูลการทดสอบด้านบน</div></div><span class="badge warn">Pending Final Confirmation</span></div>
+        <div id="ia-acceptance-cards"></div>
+        <div class="grid4" style="margin-top:14px">
+          <div class="field"><label>Customer Acceptance By</label><input placeholder="ชื่อ / ตำแหน่งผู้ตรวจรับ"></div>
+          <div class="field"><label>Planned Test Date</label><input type="date"></div>
+          <div class="field"><label>Acceptance Status</label><select><option>Pending Confirmation</option><option>Customer Confirmed</option><option>Ready for Test</option><option>Accepted</option></select></div>
+          <div class="field"><label>Confirmed By</label><input placeholder="Sales / Project Owner"></div>
         </div>
-
-        <div class="grid4">
-          <div class="field">
-            <label>Speed Acceptance</label>
-            <input value="≥ 10 cycles/min">
-          </div>
-          <div class="field">
-            <label>Seal Acceptance</label>
-            <input value="รอยซีลต้องแนบสนิท">
-          </div>
-          <div class="field">
-            <label>Label Acceptance</label>
-            <input value="Sticker 5 x 3 inch ติดตรงตำแหน่งที่กำหนด">
-          </div>
-          <div class="field">
-            <label>Pack Appearance / Quality</label>
-            <input placeholder="เช่น เทียบตัวอย่าง OL2875">
-          </div>
-
-          <div class="field">
-            <label>Customer Acceptance By</label>
-            <input placeholder="ชื่อ / ตำแหน่งผู้ตรวจรับ">
-          </div>
-          <div class="field">
-            <label>Planned Test Date</label>
-            <input type="date">
-          </div>
-          <div class="field">
-            <label>Acceptance Status</label>
-            <select>
-              <option>Pending Confirmation</option>
-              <option>Customer Confirmed</option>
-              <option>Ready for Test</option>
-              <option>Accepted</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Confirmed By</label>
-            <input placeholder="Sales / Project Owner">
-          </div>
-        </div>
-
-        <div class="field" style="margin-top:12px">
-          <label>Other Acceptance Criteria</label>
-          <textarea placeholder="เงื่อนไขอื่น ๆ ที่ลูกค้าจะใช้ในการตรวจรับ"></textarea>
-        </div>
+        <div class="field" style="margin-top:12px"><label>Other Acceptance Criteria / เงื่อนไขรวมเพิ่มเติม</label><textarea placeholder="เกณฑ์ตรวจรับเพิ่มเติมที่ใช้ร่วมกันทุก Product"></textarea></div>
       </div>
 
       <div class="ia-section">
@@ -1284,6 +1193,23 @@ function finalWin(){
   showPage('machineDetail');
   activateMachineTab('overview');
 }
+</script>
+<script id="ia-product-script">
+(function(){
+let nextId=2;
+const records=[{id:1,open:true,name:'ไส้กรอกชนิด A',qty:'50',unit:'kg',format:'Format 3.2',speed:'10',film:'pending',filmSupplier:'',filmType:'',filmSize:'',filmThickness:'',labelSize:'5 x 3 inch',labelPosition:'',joint:'',procedure:'',speedAcceptance:'≥ 10 cycles/min',sealAcceptance:'รอยซีลต้องแนบสนิท',labelAcceptance:'Sticker 5 x 3 inch ติดตรงตำแหน่งที่กำหนด',packAcceptance:'',otherAcceptance:''}];
+const esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const field=(r,k,label,placeholder='')=>`<div class="field"><label>${label}</label><input value="${esc(r[k])}" placeholder="${esc(placeholder)}" oninput="iaSet(${r.id},'${k}',this.value)"></div>`;
+const textarea=(r,k,label,placeholder='')=>`<div class="field" style="margin-top:12px"><label>${label}</label><textarea placeholder="${esc(placeholder)}" oninput="iaSet(${r.id},'${k}',this.value)">${esc(r[k])}</textarea></div>`;
+function draw(){let host=document.getElementById('ia-product-cards'),accept=document.getElementById('ia-acceptance-cards');if(!host||!accept)return;
+host.innerHTML=records.map((r,i)=>`<div class="ia-product-card"><div class="ia-product-head" onclick="iaToggle(${r.id})"><div><strong>▣ Product ${i+1} — ${esc(r.name||'ยังไม่ระบุสินค้า')}</strong><small>${esc([r.qty?(r.qty+' '+r.unit):'',r.format,r.speed?(r.speed+' cycles/min'):''].filter(Boolean).join(' · ')||'รอกรอกข้อมูล')}</small></div><span>${r.open?'▲ ย่อ':'▼ ขยาย'}</span></div>${r.open?`<div class="ia-product-body"><div class="grid4">${field(r,'name','Test Product / สินค้าสำหรับทดสอบ')}${field(r,'qty','Test Quantity / ปริมาณทดสอบ')}${`<div class="field"><label>Unit / หน่วย</label><select onchange="iaSet(${r.id},'unit',this.value)">${['kg','pcs','packs'].map(u=>`<option ${r.unit===u?'selected':''}>${u}</option>`).join('')}</select></div>`}${field(r,'format','Format / Tooling')}${field(r,'speed','Target Speed (cycles/min)')}</div><div style="margin-top:15px;font-weight:600">Film / Material — ฟิล์มที่ใช้ทดลอง</div><div class="ia-film-choices">${[['ours','Film เรา (RuamPat)'],['other','Film เจ้าอื่น'],['pending','ยังไม่ยืนยัน']].map(([v,l])=>`<label><input type="radio" name="film_${r.id}" value="${v}" ${r.film===v?'checked':''} onchange="iaSet(${r.id},'film',this.value)"> ${l}</label>`).join('')}</div><div class="grid4">${r.film==='other'?field(r,'filmSupplier','Film Supplier / ชื่อผู้ผลิตฟิล์ม'):''}${field(r,'filmType','Film Type / ประเภทฟิล์ม')}${field(r,'filmSize','Film Size / ขนาดฟิล์ม')}${field(r,'filmThickness','Thickness / ความหนา')}${field(r,'labelSize','Label / Sticker Size')}${field(r,'labelPosition','Label Position / Print Position')}${field(r,'joint','Joint Equipment')}</div>${textarea(r,'procedure','Test Procedure / วิธีการทดสอบ','เช่น Run 3 รอบ, ตรวจ Seal ทุก Pack, วัด Speed ต่อเนื่อง 30 นาที')}<div class="ia-card-actions"><button type="button" class="ia-remove" onclick="iaRemove(${r.id})" ${records.length===1?'disabled':''}>ลบ Product นี้</button></div></div>`:''}</div>`).join('');
+accept.innerHTML=records.map((r,i)=>`<div class="ia-acceptance-card"><div class="ia-acceptance-body"><h4>Product ${i+1} — ${esc(r.name||'ยังไม่ระบุสินค้า')}</h4><div class="muted">เกณฑ์ตรวจรับเฉพาะ Product นี้</div><div class="grid4">${field(r,'speedAcceptance','Speed Acceptance')}${field(r,'sealAcceptance','Seal Acceptance')}${field(r,'labelAcceptance','Label Acceptance')}${field(r,'packAcceptance','Pack Appearance / Quality')}</div>${textarea(r,'otherAcceptance','Other Product Acceptance Criteria')}</div></div>`).join('');}
+window.iaSet=function(id,key,value){let r=records.find(x=>x.id===id);if(!r)return;r[key]=value;if(['film','name','qty','unit','format','speed'].includes(key)){if(key==='film')draw();else{let heads=document.querySelectorAll('.ia-product-head strong');let subtitles=document.querySelectorAll('.ia-product-head small');let i=records.indexOf(r);if(heads[i])heads[i].textContent=`▣ Product ${i+1} — ${r.name||'ยังไม่ระบุสินค้า'}`;if(subtitles[i])subtitles[i].textContent=[r.qty?(r.qty+' '+r.unit):'',r.format,r.speed?(r.speed+' cycles/min'): ''].filter(Boolean).join(' · ');let h=document.querySelectorAll('.ia-acceptance-card h4')[i];if(h)h.textContent=`Product ${i+1} — ${r.name||'ยังไม่ระบุสินค้า'}`;}}};
+window.iaToggle=function(id){let r=records.find(x=>x.id===id);if(r){r.open=!r.open;draw();}};
+window.iaAddProduct=function(){records.forEach(x=>x.open=false);records.push({id:nextId++,open:true,name:'',qty:'',unit:'kg',format:'',speed:'',film:'pending',filmSupplier:'',filmType:'',filmSize:'',filmThickness:'',labelSize:'',labelPosition:'',joint:'',procedure:'',speedAcceptance:'',sealAcceptance:'',labelAcceptance:'',packAcceptance:'',otherAcceptance:''});draw();};
+window.iaRemove=function(id){if(records.length<2)return;let i=records.findIndex(x=>x.id===id);if(i>=0){records.splice(i,1);draw();}};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',draw);else draw();
+})();
 </script>
 </body>
 </html>
