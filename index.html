@@ -290,6 +290,26 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
         <div class="minihub"><b>Production vs อายุเครื่อง</b><p class="muted">อายุเครื่อง - เดือน</p><div style="height:18px;background:#e8ebf0;border-radius:10px"></div><p class="muted">ชั่วโมงสะสม 0 ชม.</p></div>
         <div class="minihub"><b>การแจ้งเตือน</b><div class="notice">ยังไม่มีกำหนด PM ถัดไป</div></div>
       </div>
+      <div class="minihub" style="margin:14px 0;padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+          <div><b>Sales Reference / ข้อมูลอ้างอิงการขาย</b><div class="muted" style="margin-top:4px">ข้อมูลอ้างอิงจากรายการ Sales ที่เชื่อมโยงกับเครื่องนี้ (ตัวอย่างในเว็บจำลอง)</div></div>
+          <span class="badge info">Read-only</span>
+        </div>
+        <div class="grid2">
+          <div style="border:1px solid #e1e6ee;border-radius:9px;padding:14px;background:white">
+            <div class="rowspace"><b>Opportunity</b><span class="badge ok">WIN</span></div>
+            <div style="margin-top:9px"><span class="muted">Opportunity No.</span><br><b>15602</b></div>
+            <div style="margin-top:7px"><span class="muted">Project</span><br>REG - OL3151 · GSB</div>
+            <button type="button" class="btn ghost small" style="margin-top:12px" onclick="showPage('opportunityDetail')">View Opportunity ↗</button>
+          </div>
+          <div style="border:1px solid #e1e6ee;border-radius:9px;padding:14px;background:white">
+            <div class="rowspace"><b>Sales Quotes</b><span class="badge info">Linked Quote</span></div>
+            <div style="margin-top:9px"><span class="muted">Quote No.</span><br><b>SQ-2026-0152</b></div>
+            <div style="margin-top:7px"><span class="muted">Status</span><br>Approved · GSB</div>
+            <button type="button" class="btn ghost small" style="margin-top:12px" onclick="showPage('salesQuoteDetail')">View Sales Quote ↗</button>
+          </div>
+        </div>
+      </div>
       <div class="notice orange"><b>Sales → Service Handover:</b> Target speed 10 cycles/min • Film/label quality reference OL2875 • Labeller 2 units • Acceptance criteria pending confirm.</div>
     </div>
 
