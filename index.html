@@ -135,7 +135,7 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   </div>
   <button class="nav" onclick="toggleGroup('salesGroup')">$ Sales <span>⌄</span></button>
   <div id="salesGroup" class="group">
-    <button class="subnav">Target</button><button class="subnav">Leads</button><button class="subnav">Customers</button><button class="subnav">Accounts</button><button class="subnav" onclick="showPage('opportunityList')">Opportunities</button><button class="subnav" onclick="showPage('supplierRfq')">Supplier RFQ</button><button class="subnav" onclick="showPage('salesQuotes')">Sales Quotes</button>
+    <button class="subnav">Target</button><button class="subnav">Leads</button><button class="subnav">Customers</button><button class="subnav">Accounts</button><button class="subnav" onclick="showPage('opportunityList')">Opportunities</button><button class="subnav" onclick="showPage('salesQuotes')">Sales Quotes</button>
   </div>
   <button class="nav" onclick="toggleGroup('productGroup')">⌘ Products <span>⌄</span></button>
   <div id="productGroup" class="group"><button class="subnav">Product Package</button><button class="subnav">Product Set</button><button class="subnav">Product List</button></div>
@@ -1073,42 +1073,6 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
         <div class="rowspace"><div><h3 style="margin:0 0 6px">Machine Register ที่เชื่อมกับ Opportunity</h3><div class="muted">แสดงทะเบียนเครื่องที่สร้างจาก Sales Quote / Final ของ Opportunity นี้ โดยไม่สร้างข้อมูลซ้ำ</div></div></div>
         <div class="tablewrap" style="margin-top:16px"><table><thead><tr><th>Machine No.</th><th>Serial No.</th><th>ชื่อเครื่องจักร</th><th>ลูกค้า</th><th>สถานะ</th><th>Action</th></tr></thead><tbody><tr><td><strong>OL3151</strong></td><td>รอยืนยัน S/N</td><td>VARIOVAC Thermoforming Machine</td><td>GSB (ตัวอย่างจำลอง)</td><td>เชื่อมกับ Opportunity</td><td><button class="btn" onclick="showPage('machineDetail');activateMachineTab('overview')">เปิดทะเบียนเครื่อง →</button></td></tr></tbody></table></div>
         <div class="muted" style="margin-top:12px">กรณีมีหลายเครื่อง ให้แสดงหนึ่งแถวต่อหนึ่ง Machine Register และเปิดกลับมายัง Opportunity ต้นทางได้</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SUPPLIER RFQ -->
-<section id="supplierRfq" class="page">
-  <div class="card">
-    <div class="cardhead">
-      <div><h2>Supplier RFQ</h2><div class="muted">Opportunity → Technical Requirement → Supplier RFQ → Supplier Response → Sales Quote</div></div>
-      <button class="btn green">＋ New RFQ</button>
-    </div>
-    <div class="pad">
-      <div class="notice">
-        <b>Auto from Opportunity Requirement:</b> Product • Application • Capacity/Output • Packaging • Installation • Attachments
-        <br>Sales ไม่ต้องกรอก Requirement ซ้ำ
-      </div>
-      <div class="grid4">
-        <div class="field"><label>Opportunity</label><input class="readonly" value="15602 | REG - OL3151" readonly></div>
-        <div class="field"><label>Supplier</label><input value="VARIOVAC"></div>
-        <div class="field"><label>Proposed Model</label><input value="Optimus"></div>
-        <div class="field"><label>Lead Time</label><input placeholder="Supplier response"></div>
-
-        <div class="field"><label>Drawing / Utility</label><input value="Attached / Pending final"></div>
-        <div class="field"><label>Price / Commercial Scope</label><input placeholder="Supplier quote"></div>
-        <div class="field"><label>Warranty</label><input placeholder="Supplier response"></div>
-        <div class="field"><label>Status</label><select><option>Supplier Replied</option><option>Waiting Supplier</option></select></div>
-      </div>
-
-      <div class="field" style="margin-top:14px"><label>Supplier Response / Clarification</label><textarea>Proposal + Technical clarification + included/excluded scope</textarea></div>
-      <div class="field" style="margin-top:14px"><label>AI Compare Supplier Proposal vs Opportunity Requirement</label><textarea>AI comparison result / missing confirmation / mismatch</textarea></div>
-
-      <div class="actions" style="margin-top:14px">
-        <button class="btn ghost">Save Draft</button>
-        <button class="btn blue">Confirm Supplier Response</button>
-        <button class="btn green" onclick="showPage('salesQuotes')">Create Sales Quote</button>
       </div>
     </div>
   </div>
