@@ -882,8 +882,16 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   </div>
 
   <div class="card">
-    <div class="cardhead"><h3>ข้อมูลการเดินทาง / Vehicle & Travel</h3></div>
-    <div class="pad grid4">
+    <div class="cardhead"><h3>ข้อมูลการเดินทาง / Vehicle & Travel</h3><button type="button" class="btn blue small" onclick="openTravelCreator()">＋ สร้าง Vehicle & Travel</button></div>
+    <div class="pad">
+      <div class="grid2" style="align-items:end;gap:12px;margin-bottom:14px">
+        <div class="field"><label>เลือกรายการเดินทางที่สร้างไว้ (ใช้ร่วมกับ Visit อื่นได้)</label><select id="visitTripSelect" onchange="setVisitTrip(this.value)"><option value="">-- ยังไม่เลือกรายการเดินทาง --</option></select></div>
+        <div><button type="button" class="btn ghost small" onclick="openTravelCreator()">＋ เพิ่มรายการเดินทางใหม่</button></div>
+      </div>
+      <div id="visitTripSummary" style="display:none;background:#f2f7fc;border:1px solid #d9e4f1;border-radius:9px;padding:14px;margin-bottom:12px"></div>
+      <div class="muted" style="margin-bottom:12px">เมื่อเลือก Trip ระบบจะแสดงข้อมูลรถ เลขไมล์ และค่าใช้จ่ายร่วมกัน ส่วน Check-in / Check-out ยังเป็นของ Visit แต่ละคน</div>
+    </div>
+    <div id="visitLegacyTravel" class="pad grid4" style="display:none">
       <div class="field"><label>Vehicle / ทะเบียนรถ</label><select onchange="toggleOtherVehicle(this.value)"><option>1กข 1234 กรุงเทพ</option><option>Other</option></select></div>
       <div id="otherVehicleField" class="field" style="display:none"><label>ทะเบียนรถอื่น</label><input placeholder="กรอกทะเบียนรถ"></div>
       <div class="field"><label>Driver</label><select><option>Bob</option></select></div>
@@ -898,6 +906,26 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
   </div>
 </section>
 
+
+
+<div id="visitTravelModal" style="display:none;position:fixed;inset:0;background:#0b1832aa;z-index:9999;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeTravelCreator()">
+  <div style="width:min(720px,100%);max-height:90vh;overflow:auto;background:white;border-radius:12px;box-shadow:0 15px 50px #172a3b40">
+    <div class="cardhead"><div><h3>＋ สร้าง Vehicle & Travel</h3><div class="muted">บันทึกข้อมูลการเดินทางครั้งเดียว แล้วเลือกใช้ได้ในหลาย Visit</div></div><button class="btn ghost small" onclick="closeTravelCreator()">✕ ปิด</button></div>
+    <div class="pad grid2">
+      <div class="field"><label>วันที่เดินทาง</label><input id="newTripDate" type="date" value="2026-10-06"></div>
+      <div class="field"><label>ทะเบียนรถ</label><input id="newTripVehicle" placeholder="เช่น 1กข 1234 กรุงเทพ"></div>
+      <div class="field"><label>ผู้ขับรถ</label><input id="newTripDriver" placeholder="ชื่อผู้ขับรถ"></div>
+      <div class="field"><label>เลขไมล์เริ่มต้น</label><input id="newTripStart" type="number" min="0" placeholder="125000"></div>
+      <div class="field"><label>เลขไมล์สิ้นสุด</label><input id="newTripEnd" type="number" min="0" placeholder="125180"></div>
+      <div class="field"><label>ค่าทางด่วน (บาท)</label><input id="newTripToll" type="number" min="0" value="0"></div>
+      <div class="field"><label>ค่าน้ำมัน (บาท)</label><input id="newTripFuel" type="number" min="0" value="0"></div>
+      <div class="field"><label>ค่าใช้จ่ายอื่น (บาท)</label><input id="newTripOther" type="number" min="0" value="0"></div>
+      <div class="field" style="grid-column:1/-1"><label>หมายเหตุ</label><textarea id="newTripNote" placeholder="รายละเอียดการเดินทางเพิ่มเติม"></textarea></div>
+      <div id="newTripError" style="grid-column:1/-1;color:#c0392b;font-size:13px"></div>
+      <div style="grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px"><button class="btn ghost" onclick="closeTravelCreator()">ยกเลิก</button><button class="btn blue" onclick="saveTravelTrip()">บันทึกและเลือกใช้กับ Visit นี้</button></div>
+    </div>
+  </div>
+</div>
 
 <!-- OPPORTUNITY LIST -->
 <section id="opportunityList" class="page">
@@ -1220,6 +1248,38 @@ th,td{padding:11px 9px;border-bottom:1px solid #e5e9f0;text-align:left;font-size
 </div></div>
 
 <script>
+
+// Vehicle & Travel prototype: shared Trip records, no backend writes.
+const visitTrips=[{id:'TRIP-2026-018',date:'2026-10-06',vehicle:'1กข 1234 กรุงเทพ',driver:'Bob',start:125000,end:125180,toll:120,fuel:900,other:0,note:'เดินทางร่วมกัน Bob / Janeny'}];
+function refreshVisitTrips(){
+ const sel=document.getElementById('visitTripSelect');if(!sel)return;
+ const previous=sel.value;sel.innerHTML='<option value="">-- ยังไม่เลือกรายการเดินทาง --</option>';
+ visitTrips.forEach(t=>{const opt=document.createElement('option');opt.value=t.id;opt.textContent=`${t.id} | ${t.date} | ${t.vehicle} | ${t.driver}`;sel.appendChild(opt)});
+ if(visitTrips.some(t=>t.id===previous))sel.value=previous;
+}
+function setVisitTrip(id){
+ const t=visitTrips.find(t=>t.id===id), el=document.getElementById('visitTripSummary');if(!el)return;
+ if(!t){el.style.display='none';return;}
+ const distance=t.end>=t.start?t.end-t.start:'รอเลขไมล์สิ้นสุด';
+ el.style.display='block';el.textContent='';
+ const title=document.createElement('strong');title.textContent=`${t.id} · ${t.vehicle}`;el.appendChild(title);
+ const details=document.createElement('div');details.style.cssText='margin-top:7px;line-height:1.9';details.textContent=`วันที่ ${t.date} | ผู้ขับ ${t.driver} | เลขไมล์ ${t.start} → ${t.end} | ระยะทาง ${distance} กม. | ค่าใช้จ่ายรวม ${(t.toll+t.fuel+t.other).toLocaleString('th-TH')} บาท`;el.appendChild(details);
+ const note=document.createElement('div');note.className='muted';note.textContent='Trip นี้เชื่อมกับ Visit ได้หลายรายการ โดยไม่นับค่าเดินทางซ้ำ'+(t.note?' · '+t.note:'');el.appendChild(note);
+}
+function openTravelCreator(){document.getElementById('newTripError').textContent='';document.getElementById('visitTravelModal').style.display='flex'}
+function closeTravelCreator(){document.getElementById('visitTravelModal').style.display='none'}
+function saveTravelTrip(){
+ const val=id=>document.getElementById(id).value.trim(), num=id=>Number(val(id)||0);
+ const vehicle=val('newTripVehicle'),date=val('newTripDate'),start=val('newTripStart'),end=val('newTripEnd');
+ const error=document.getElementById('newTripError');
+ if(!date||!vehicle||!val('newTripDriver')||start===''){error.textContent='กรุณาระบุวันที่ ทะเบียนรถ ผู้ขับ และเลขไมล์เริ่มต้น';return}
+ if(end!==''&&Number(end)<Number(start)){error.textContent='เลขไมล์สิ้นสุดต้องไม่ต่ำกว่าเลขไมล์เริ่มต้น';return}
+ const id='TRIP-2026-'+String(19+visitTrips.length).padStart(3,'0');
+ visitTrips.push({id,date,vehicle,driver:val('newTripDriver'),start:Number(start),end:end===''?Number(start):Number(end),toll:num('newTripToll'),fuel:num('newTripFuel'),other:num('newTripOther'),note:val('newTripNote')});
+ refreshVisitTrips();document.getElementById('visitTripSelect').value=id;setVisitTrip(id);closeTravelCreator();
+}
+
+refreshVisitTrips();
 function toggleGroup(id){const el=document.getElementById(id); if(el) el.classList.toggle('open')}
 function openExistingVisit(){
   document.getElementById('visitDetailHeading').textContent='Visit: VIS-2026-018';
